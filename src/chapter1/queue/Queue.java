@@ -34,7 +34,7 @@ public class Queue<Item> implements Iterable<Item> {
 		return numberOfItems;
 	}
 	
-	// Puts the last item in the last place
+	// adds the item to the end of the linked list
 	public void enqueue(Item item) {
 		Node<Item> oldlast = last;
 		last = new Node<Item>();
@@ -47,16 +47,17 @@ public class Queue<Item> implements Iterable<Item> {
 		numberOfItems++;
 	}
 	
-	// Removes the first element
+	// removes an item from the beginning of the linked list.
 	public Item dequeue() {
 		if (isEmpty()) throw new NoSuchElementException("Queue underflow");
-		Item oldfirst = first.item;
+		Item item = first.item;
 		first = first.next;
 		numberOfItems--;
 		if (isEmpty()) last = null;
-		return oldfirst;
+		return item;
 	}
 	
+	// the iterator supports loops on the linked list.
 	@Override
 	public Iterator<Item> iterator() {
 		return new ListIterator<Item>(first);

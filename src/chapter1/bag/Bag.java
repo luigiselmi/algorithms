@@ -23,8 +23,7 @@ public class Bag<Item> implements Iterable<Item> {
         private Node<Item> next;
     }
 	
-    // Puts the last item in the first position
-    // moving the old first in the next position
+    // Adds the item at the beginning of the linked list
 	public void add(Item item ) {
 		Node<Item> oldFirst = first;
 		first = new Node<Item>();
@@ -40,7 +39,8 @@ public class Bag<Item> implements Iterable<Item> {
 	public int size() {
 		return numberOfItems;
 	}
-
+	
+	// the iterator supports loops on the linked list.
 	@Override
 	public Iterator<Item> iterator() {
 		

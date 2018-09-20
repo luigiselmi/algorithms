@@ -5,7 +5,7 @@ import java.util.NoSuchElementException;
 
 
 /**
- * Implements a LIFO collection.
+ * Implements a Last-In-First-Out (LIFO) collection.
  * It is based on a linked list.
  */
 public class Stack<Item> implements Iterable<Item> {
@@ -48,10 +48,10 @@ public class Stack<Item> implements Iterable<Item> {
 		return numberOfItems;
 	}
     
-	@Override
+    // the iterator supports loops on the linked list.
+    @Override
 	public Iterator<Item> iterator() {
-		// TODO Auto-generated method stub
-		return null;
+		return new ListIterator<Item>(first);
 	}
 	
 	private class ListIterator<Item> implements Iterator<Item> {
