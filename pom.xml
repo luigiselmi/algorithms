@@ -1,0 +1,39 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>it.datiaperti</groupId>
+  <artifactId>algorithms</artifactId>
+  <version>1.0</version>
+  <name>Algorithms</name>
+  <description>Algorithms in Java from Sedgewick's Book</description>
+    <properties>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+      <maven.compiler.source>1.8</maven.compiler.source>
+      <maven.compiler.target>1.8</maven.compiler.target>
+  </properties>
+  <dependencies>
+	<dependency>
+		<groupId>edu.princeton.cs</groupId>
+		<artifactId>algs4</artifactId>
+		<version>1.0.4</version>
+	</dependency>
+</dependencies>
+<build>
+  <plugins>
+    <plugin>
+         <groupId>org.apache.maven.plugins</groupId>
+         <artifactId>maven-compiler-plugin</artifactId>
+         <version>2.3.2</version>
+         <configuration>
+             <source>1.8</source>
+             <target>1.8</target>
+         </configuration>
+     </plugin>
+     </plugins>
+  </build>
+  <repositories>
+    <repository>
+    	<id>algs4-repo</id>
+    	<url>https://dl.bintray.com/algs4/maven/</url>
+    </repository>
+    </repositories>
+</project>
