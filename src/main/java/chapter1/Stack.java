@@ -1,18 +1,19 @@
-package chapter1.bag;
+package chapter1;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+
 /**
- * Implements an unordered collection. Objects cannot be removed.
- * it is based on a linked list.
+ * Implements a Last-In-First-Out (LIFO) collection.
+ * It is based on a linked list.
  */
-public class Bag<Item> implements Iterable<Item> {
-	
-	private Node<Item> first;
+public class Stack<Item> implements Iterable<Item> {
+
+	private Node<Item> first;     // top of stack
 	private int numberOfItems;
 	
-	public Bag() {
+	public Stack() {
 		first = null;
 		numberOfItems = 0;
 	}
@@ -22,28 +23,34 @@ public class Bag<Item> implements Iterable<Item> {
         private Item item;
         private Node<Item> next;
     }
-	
-    // Adds the item at the beginning of the linked list
-	public void add(Item item ) {
-		Node<Item> oldFirst = first;
-		first = new Node<Item>();
-		first.item = item;
-		first.next = oldFirst;
-		numberOfItems++;
-	}
-	
-	public boolean isEmpty() {
+    
+    public void push(Item item) {
+    	Node<Item> oldfirst = first;
+        first = new Node<Item>();
+        first.item = item;
+        first.next = oldfirst;
+        numberOfItems++;
+    }
+    
+    public Item pop() {
+    	if (isEmpty()) throw new NoSuchElementException("Stack underflow");
+    	Item item = first.item;
+    	first = first.next;
+    	numberOfItems--;
+    	return item;
+    }
+    
+    public boolean isEmpty() {
 		return numberOfItems == 0 ? true : false;
 	}
-	
-	public int size() {
+    
+    public int size() {
 		return numberOfItems;
 	}
-	
-	// the iterator supports loops on the linked list.
-	@Override
+    
+    // the iterator supports loops on the linked list.
+    @Override
 	public Iterator<Item> iterator() {
-		
 		return new ListIterator<Item>(first);
 	}
 	

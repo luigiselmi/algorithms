@@ -1,29 +1,35 @@
-package chapter1.queue;
+package chapter1;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-
 /**
- * Implements a FIFO collection.
- * The order is preserved. It is based on a linked list.
+ * Implements an unordered collection. Objects cannot be removed.
+ * it is based on a linked list.
  */
-public class Queue<Item> implements Iterable<Item> {
-
+public class Bag<Item> implements Iterable<Item> {
+	
 	private Node<Item> first;
-	private Node<Item> last;
 	private int numberOfItems;
+	
+	public Bag() {
+		first = null;
+		numberOfItems = 0;
+	}
 	
 	// Linked list class
     private class Node<Item> {
         private Item item;
         private Node<Item> next;
     }
-    
-	public Queue() {
-		first = null;
-		last = null;
-		numberOfItems = 0;
+	
+    // Adds the item at the beginning of the linked list
+	public void add(Item item ) {
+		Node<Item> oldFirst = first;
+		first = new Node<Item>();
+		first.item = item;
+		first.next = oldFirst;
+		numberOfItems++;
 	}
 	
 	public boolean isEmpty() {
@@ -34,32 +40,10 @@ public class Queue<Item> implements Iterable<Item> {
 		return numberOfItems;
 	}
 	
-	// adds the item to the end of the linked list
-	public void enqueue(Item item) {
-		Node<Item> oldlast = last;
-		last = new Node<Item>();
-		last.item = item;
-		last.next = null;
-		if (isEmpty()) 
-			first = last;
-        else 
-        	oldlast.next = last;
-		numberOfItems++;
-	}
-	
-	// removes an item from the beginning of the linked list.
-	public Item dequeue() {
-		if (isEmpty()) throw new NoSuchElementException("Queue underflow");
-		Item item = first.item;
-		first = first.next;
-		numberOfItems--;
-		if (isEmpty()) last = null;
-		return item;
-	}
-	
 	// the iterator supports loops on the linked list.
 	@Override
 	public Iterator<Item> iterator() {
+		
 		return new ListIterator<Item>(first);
 	}
 	
@@ -90,5 +74,5 @@ public class Queue<Item> implements Iterable<Item> {
 		}
 		
 	}
-	
+
 }

@@ -1,4 +1,4 @@
-package chapter1.stack;
+package chapter1;
 
 public class Reverse {
 

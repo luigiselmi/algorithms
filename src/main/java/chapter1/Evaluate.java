@@ -1,4 +1,4 @@
-package chapter1.stack;
+package chapter1;
 /**
  * A simplified version of the Evaluate class from
  * Sedgewick book Algorithms, 4th ed. p.129

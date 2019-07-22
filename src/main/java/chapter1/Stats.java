@@ -1,4 +1,4 @@
-package chapter1.bag;
+package chapter1;
 
 public class Stats {
 

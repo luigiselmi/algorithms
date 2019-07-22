@@ -1,4 +1,4 @@
-package chapter1.queue;
+package chapter1;
 
 public class Fifo {
 

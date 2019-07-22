@@ -1,4 +1,4 @@
-package chapter1.array;
+package chapter1;
 
 import java.util.Arrays;
 
@@ -19,10 +19,12 @@ public class ArrayUtils {
 	 * Finds a value (key) in a sorted array (Binary Search).
 	 */
 	public static int rank(int key, int[] a) { 
-		Arrays.sort(a);
+		//Arrays.sort(a); // doesn't need sort with the recursive implementation
 		return rank(key, a, 0, a.length - 1); 
 	}
-	
+	/**
+	 * Recursive implementation of binary search 
+	 */
 	public static int rank(int key, int[] a, int lo, int hi) { 
 		// Index of key in a[], if present, is not smaller than lo
 		// and not larger than hi.
@@ -37,10 +39,12 @@ public class ArrayUtils {
 		
 		// Initialize an array of integers
 		int [] a = {1, 2, 4, 0, -3, 7};
-		assert a.length == 6 : "ok";
+		assert a.length == 6 : "ok"; // Not enabled by default. Use VM argument "-ea"
 		
 		// Search for a key in an array
-		System.out.println("Key = " + ArrayUtils.rank(4, a));
+		int key = 4;
+		int index = ArrayUtils.rank(key, a);
+		System.out.println("Key = " + key + " Index = " + index);
 		
 		// Element-wise multiplication on an array
 		ArrayUtils.multiplyArray(a, 2);
