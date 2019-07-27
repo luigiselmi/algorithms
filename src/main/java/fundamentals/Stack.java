@@ -10,19 +10,10 @@ import java.util.NoSuchElementException;
  */
 public class Stack<Item> implements Iterable<Item> {
 
-	private Node<Item> first;     // top of stack
-	private int numberOfItems;
-	
 	public Stack() {
 		first = null;
 		numberOfItems = 0;
 	}
-	
-	// Linked list class
-    private class Node<Item> {
-        private Item item;
-        private Node<Item> next;
-    }
     
     public void push(Item item) {
     	Node<Item> oldfirst = first;
@@ -53,7 +44,16 @@ public class Stack<Item> implements Iterable<Item> {
 	public Iterator<Item> iterator() {
 		return new ListIterator<Item>(first);
 	}
+    
+    private Node<Item> first;     // top of stack
+	private int numberOfItems;
 	
+    // Linked list class
+    private class Node<Item> {
+        private Item item;
+        private Node<Item> next;
+    }
+    
 	private class ListIterator<Item> implements Iterator<Item> {
 
 		private Node<Item> current;
