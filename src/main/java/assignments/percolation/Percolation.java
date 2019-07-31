@@ -38,7 +38,7 @@ public class Percolation {
     			uf.union(p, q);
     		}
     		if (col - 1 > 0 && isOpen(row, col - 1)) {
-    			int q = m2a(row, col - 1); // right neighbor
+    			int q = m2a(row, col - 1); // left neighbor
     			uf.union(p, q);
     		}
     		if (col + 1 < n && isOpen(row, col + 1)) {
@@ -92,7 +92,7 @@ public class Percolation {
     	return percolates;
     }
     
-    // map a matrix element (row, col) to 1D array index
+    // map a matrix element (row, col) to a 1D array index
     private int m2a(int row, int col) {
     	return n + row + col + 1;
     }
