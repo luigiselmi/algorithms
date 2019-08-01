@@ -135,7 +135,10 @@ public class Percolation {
     	// Stats
     	double mean = StdStats.mean(thresholds);
     	double stddev = StdStats.stddev(thresholds);
+    	double confidenceLo = mean - 1.96 * stddev / Math.sqrt(T);
+    	double confidenceHi = mean + 1.96 * stddev / Math.sqrt(T);
     	System.out.println("mean = " + mean + "\nstddev = " + stddev);
+    	System.out.println("95% confidence interval = [" + confidenceLo + ", " + confidenceHi + "]");
     	
     }
 }
