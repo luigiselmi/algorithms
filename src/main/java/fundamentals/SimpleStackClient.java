@@ -1,19 +1,29 @@
 package fundamentals;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 public class SimpleStackClient {
 
-	public static void main(String[] args) {
-		Stack<Integer> grades = new Stack<Integer>();
-		grades.push(5);
-		grades.push(4);
-		grades.push(7);
-		grades.push(8);
-		grades.push(6);
+	public static void main(String[] args) throws IOException {
+		Stack<String> grades = new Stack<String>();
+		BufferedReader reader = null;
+		try {
+			reader = new BufferedReader(new InputStreamReader(System.in));
+			String grade;
+			while ( !(grade = reader.readLine()).equals("") ) {
+				grades.push(grade);
+			}
+		}
+		finally {
+			reader.close();
+		}
 		
 		int N = grades.size();
 		
 		// Copy the data in the stack to an array of the same size
-		int [] a = new int [N];
+		String [] a = new String [N];
 				
 		for (int i = 0; i < N; i++)
 			a[i] = grades.pop();
