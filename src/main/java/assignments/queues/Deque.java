@@ -8,14 +8,15 @@ import edu.princeton.cs.algs4.StdIn;
 
 public class Deque<Item> implements Iterable<Item> {
 	
-	private Node<Item> first;
-	private Node<Item> last;
+	private DoubleNode<Item> first;
+	private DoubleNode<Item> last;
 	private int numberOfItems;
 	
 	// Linked list class
-    private class Node<Item> {
+    private class DoubleNode<Item> {
         private Item item;
-        private Node<Item> next;
+        private DoubleNode<Item> next;
+        private DoubleNode<Item> previous;
     }
 
     // construct an empty deque
@@ -38,20 +39,25 @@ public class Deque<Item> implements Iterable<Item> {
     // add the item to the front (as in push() for stacks)
     public void addFirst(Item item) {
     	if (item == null) throw new IllegalArgumentException("item cannot be null.");
-    	Node<Item> oldfirst = first;
-        first = new Node<Item>();
+    	DoubleNode<Item> oldfirst = first;
+        first = new DoubleNode<Item>();
         first.item = item;
         first.next = oldfirst;
+        if (isEmpty())
+        	last = first;
+        else
+        	oldfirst.previous = first;
         numberOfItems++;
     }
 
     // add the item to the back (as in enqueue() for queues)
     public void addLast(Item item) {
     	if (item == null) throw new IllegalArgumentException("item cannot be null.");
-    	Node<Item> oldlast = last;
-		last = new Node<Item>();
+    	DoubleNode<Item> oldlast = last;
+		last = new DoubleNode<Item>();
 		last.item = item;
 		last.next = null;
+		last.previous = oldlast;
 		if (isEmpty()) 
 			first = last;
         else 
@@ -68,10 +74,13 @@ public class Deque<Item> implements Iterable<Item> {
     	return item;
     }
 
-    // remove and return the item from the back (as in dequeue() for queues)
+    // remove and return the item from the back
     public Item removeLast() {
     	if (isEmpty()) throw new NoSuchElementException("Deque underflow");
-    	return null;
+    	Item item = last.item;
+    	last = last.previous;
+    	numberOfItems--;
+    	return item;
     }
 
     // return an iterator over items in order from front to back
@@ -81,9 +90,9 @@ public class Deque<Item> implements Iterable<Item> {
 
     private class ListIterator<Item> implements Iterator<Item> {
 
-		private Node<Item> current;
+		private DoubleNode<Item> current;
 		
-		public ListIterator(Node<Item> first) {
+		public ListIterator(DoubleNode<Item> first) {
 			current = first;
 		}
 		
@@ -110,13 +119,29 @@ public class Deque<Item> implements Iterable<Item> {
     public static void main(String[] args) {
     	Deque<String> dq = new Deque<String>();
     	String s;
+    	// add an item to the top as in stacks' push()
     	while (!(s = StdIn.readString()).equals("-")) {
             dq.addFirst(s);
+        }
+    	
+    	String lastItem = dq.removeLast();
+    	System.out.println("Last item: " + lastItem);
+    	
+    	
+    	while ( !dq.isEmpty() ) {
+    		System.out.println(dq.removeFirst());
+    	}
+    	
+    	/*
+    	// add an item to the bottom as in queues' enqueue()
+    	while (!(s = StdIn.readString()).equals("-")) {
+            dq.addLast(s);
         }
     	
     	while ( !dq.isEmpty() ) {
     		System.out.println(dq.removeFirst());
     	}
+    	*/
     }
 
 }
