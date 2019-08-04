@@ -27,11 +27,13 @@ public class FixedCapacityStack<Item> {
 	
 	public int size() { return N; }
 	
+	// double size of the array when it's full
 	public void push(Item item) { 
 		if (N == a.length) resize(2 * a.length);
 		a[N++] = item; 
 	}
 	
+	// halve size of the array when it's one-quarter full
 	public Item pop() { 
 		Item item = a[--N];
 		a[N] = null; //remove reference to the popped item
