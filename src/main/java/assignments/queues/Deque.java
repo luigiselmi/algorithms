@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import edu.princeton.cs.algs4.StdIn;
+import edu.princeton.cs.algs4.StdOut;
 
 
 public class Deque<Item> implements Iterable<Item> {
@@ -119,29 +120,33 @@ public class Deque<Item> implements Iterable<Item> {
     public static void main(String[] args) {
     	Deque<String> dq = new Deque<String>();
     	String s;
-    	// add an item to the top as in stacks' push()
+    	
+    	// addFirst()
     	while (!(s = StdIn.readString()).equals("-")) {
             dq.addFirst(s);
         }
     	
-    	String lastItem = dq.removeLast();
-    	System.out.println("Last item: " + lastItem);
-    	
-    	
-    	while ( !dq.isEmpty() ) {
-    		System.out.println(dq.removeFirst());
-    	}
-    	
-    	/*
-    	// add an item to the bottom as in queues' enqueue()
+    	// addLast()
     	while (!(s = StdIn.readString()).equals("-")) {
-            dq.addLast(s);
-        }
-    	
-    	while ( !dq.isEmpty() ) {
-    		System.out.println(dq.removeFirst());
+    		dq.addLast(s);
     	}
-    	*/
+    	
+    	// isEmpty()
+    	StdOut.printf("The deque is empty: %s\n", dq.isEmpty());
+    	
+    	// iterator()
+    	for(String word: dq)
+    		StdOut.printf("%s\n", word);
+    	
+    	// removeFirst()
+    	StdOut.printf("First item: %s\n", dq.removeFirst());
+    	
+    	// removeLast()
+    	StdOut.printf("Last item: %s\n", dq.removeLast());
+    	
+    	// size()
+    	StdOut.printf("Size: %s\n", dq.size());
+    	
     }
 
 }
