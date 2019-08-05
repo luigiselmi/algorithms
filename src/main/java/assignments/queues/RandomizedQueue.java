@@ -16,7 +16,6 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     private int last;       // index of next available slot
     
 	// construct an empty randomized queue
-    @SuppressWarnings("unchecked")
 	public RandomizedQueue() {
     	q = (Item[]) new Object[2];
     	first = 0;
@@ -35,7 +34,6 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     }
     
     // resize the underlying array
-    @SuppressWarnings("unchecked")
     private void resize(int capacity) {
         assert capacity >= n;
 		Item[] temp = (Item[]) new Object[capacity];
