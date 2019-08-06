@@ -11,7 +11,12 @@ $ mvn compile
 ```
 
 ### Week 1
-The Java code for the [programming assignment](https://coursera.cs.princeton.edu/algs4/assignments/percolation/specification.php) is in the percolation folder. 
+The Java code for the [programming assignment](https://coursera.cs.princeton.edu/algs4/assignments/percolation/specification.php) is in the percolation folder. You can execute the code using Maven
+
+```
+$ mvn exec:java -Dexec.mainClass="assignments.percolation.PercolationVisualizer" -Dexec.args="resources/percolation/input20.txt"
+```
+
 ### Week 2 
 The Java code for the [programming assignment](https://coursera.cs.princeton.edu/algs4/assignments/queues/specification.php) is in the queues folder. You can execute the code using Maven
 
