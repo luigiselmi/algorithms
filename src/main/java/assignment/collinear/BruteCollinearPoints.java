@@ -8,7 +8,7 @@ import edu.princeton.cs.algs4.StdOut;
 
 public class BruteCollinearPoints {
   
-  Point [] points;
+  Point [] points;   
   int numberOfSegments = 0;
   
   public BruteCollinearPoints(Point[] points) {   // finds all line segments containing 4 points
@@ -20,13 +20,15 @@ public class BruteCollinearPoints {
       if (point == null)
         throw new IllegalArgumentException("No element in the array can be null.");
     
-    for (Point point: points ) {
-      Arrays.sort(points);
-      if ((points[0].compareTo(points[1]) == 0) ||
-          (points[1].compareTo(points[2]) == 0) ||
-          (points[2].compareTo(points[3]) == 0))
-        throw new IllegalArgumentException("All points in the array must be different.");
+    for (int i = 0; i < points.length; i++) {
+      Point p = points[i];
+      for (int j = i + 1; j < points.length; j++) {
+        Point q = points[j];
+        if ( p.compareTo(q) == 0)
+          throw new IllegalArgumentException("All points in the array must be different.");
+      }
     }
+    
      
     this.points = points;
   }
@@ -39,8 +41,8 @@ public class BruteCollinearPoints {
    * The points belong to the same segment if the slope of the segments made of any two points, is the same. 
    * @return
    */
-  public LineSegment[] segments() {               // the line segments containing 4 points
-    LineSegment [] segments = new LineSegment[points.length];                                             
+  public LineSegment[] segments() {               // the line segments containing 4 points                                          
+    LineSegment [] segments = null;
     for (int i = 0; i < points.length; i++) {
       Point p = points[i];
       for (int j = i + 1; j < points.length; j++) {
@@ -53,8 +55,11 @@ public class BruteCollinearPoints {
               Point [] temp = {p,q,r,s};
               Arrays.sort(temp);
               LineSegment segment = new LineSegment(temp[0],temp[temp.length - 1]);
-              if (numberOfSegments < points.length)
-                segments[numberOfSegments++] = segment;
+              if (segments == null)
+                segments = new LineSegment[1];
+              if (numberOfSegments == segments.length)
+                segments = resize(2 * segments.length, segments);  
+              segments[numberOfSegments++] = segment;
             }
           }
         }
@@ -62,6 +67,15 @@ public class BruteCollinearPoints {
     }
     return segments;
   }
+  
+ // Move segments array of size N <= max to a new array of size max.
+ private LineSegment[] resize(int max, LineSegment [] segments) { 
+   LineSegment[] temp = new LineSegment[max];
+   for (int i = 0; i < numberOfSegments; i++)
+    temp[i] = segments[i];
+   segments = temp;
+   return segments;
+ }
   
   public static void main(String[] args) {
 
@@ -87,10 +101,11 @@ public class BruteCollinearPoints {
     // print and draw the line segments
     BruteCollinearPoints collinear = new BruteCollinearPoints(points);
     LineSegment [] segments = collinear.segments();
+    StdOut.printf("Number of segments: %d\n", collinear.numberOfSegments());
     for(int i = 0; i < collinear.numberOfSegments(); i++) {
-        StdOut.println(segments[i]);
-        segments[i].draw();
-        StdDraw.show();
+      StdOut.println(segments[i]);
+      segments[i].draw();
+      StdDraw.show();
     }
     
   }
