@@ -5,10 +5,21 @@ import edu.princeton.cs.algs4.StdDraw;
 import edu.princeton.cs.algs4.StdOut;
 
 public class FastCollinearPoints {
+  
+  Point [] points;
+  int numberOfSegments = 0;
 
-  public FastCollinearPoints(Point[] points)     // finds all line segments containing 4 or more points
-  public           int numberOfSegments()        // the number of line segments
-  public LineSegment[] segments()
+  public FastCollinearPoints(Point[] points) {    // finds all line segments containing 4 or more points
+    
+  }
+  public int numberOfSegments() {        // the number of line segments
+    return numberOfSegments;
+  }
+  public LineSegment[] segments() {
+    LineSegment [] segments = null;
+    
+    return segments;
+  }
   
   public static void main(String[] args) {
 

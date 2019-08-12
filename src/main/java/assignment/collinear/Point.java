@@ -113,10 +113,12 @@ public class Point implements Comparable<Point> {
       Point p1 = new Point(3,1);
       Point p2 = new Point(1,3);
       
-      p0.drawTo(p1);
-      p0.drawTo(p2);
+      LineSegment s01 = new LineSegment(p0,p1);
+      LineSegment s02 = new LineSegment(p0,p2);
+      s01.draw();
+      s02.draw();
     
       StdOut.printf("P1(" + p1.x + "," + p1.y + ") is less than P2(" + p2.x + "," + p2.y + ") ? %d\n",  p1.compareTo(p2));
-      StdOut.printf("Compare slope order P1 and P2: %d\n", p0.slopeOrder().compare(p1, p2));
+      StdOut.printf("Compare slope order P0-P1 and P0-P2: %d\n", p0.slopeOrder().compare(p1, p2));
   }
 }
