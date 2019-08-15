@@ -1,4 +1,4 @@
-package assignment.collinear;
+package assignments.collinear;
 
 import java.util.Arrays;
 
