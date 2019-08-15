@@ -53,8 +53,10 @@ public class Point implements Comparable<Point> {
    */
   public double slopeTo(Point that) {
       if (y == that.y) return 0.0; // horizontal
-      else if (x == that.x) return Double.POSITIVE_INFINITY; // vertical
-      else if ((x == that.x) && (y == that.y)) return Double.NEGATIVE_INFINITY; // (x0,y0) == (x1,y1)
+      else if (x == that.x) {
+        if (y == that.y) return Double.NEGATIVE_INFINITY; // (x0,y0) == (x1,y1)
+        else return Double.POSITIVE_INFINITY; // vertical
+      } 
       else return (that.y - y) / (double)(that.x - x);
   }
 
@@ -84,10 +86,19 @@ public class Point implements Comparable<Point> {
    */
   public Comparator<Point> slopeOrder() {
       return new Comparator<Point>() {
-        public int compare(Point p1, Point p2) {
-          if (slopeTo(p1) == slopeTo(p2)) return 0;
-          else if (slopeTo(p1) < slopeTo(p2)) return -1;
-          else return 1;
+        public int compare(Point q1, Point q2) {
+          if (slopeTo(q1) == slopeTo(q2)) {
+            //StdOut.printf("P(%d,%d) compare %s with %s: %d\n", x, y, q1.toString(), q2.toString(), 0);
+            return 0;
+          }
+          else if (slopeTo(q1) < slopeTo(q2)) {
+            //StdOut.printf("P(%d,%d) compare %s with %s: %d\n", x, y, q1.toString(), q2.toString(), -1);
+            return -1;
+          }
+          else {
+            //StdOut.printf("P(%d,%d) compare %s with %s: %d\n", x, y, q1.toString(), q2.toString(), 1);
+            return 1;
+          }
         }
       };
   }
