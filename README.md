@@ -24,5 +24,12 @@ The Java code for the [programming assignment](https://coursera.cs.princeton.edu
 $ mvn exec:java -Dexec.mainClass="assignments.queues.Permutation" -Dexec.args="8" < resources/queues/distinct.txt
 ```
 
+### Week 3
+The Java code for the [programming assignment](https://coursera.cs.princeton.edu/algs4/assignments/collinear/specification.php) is in the collinear folder. You can execute the code using Maven
+
+```
+$ mvn exec:java -Dexec.mainClass="assignments.collinear.FastCollinearPoints" -Dexec.args="resources/collinear/input8.txt" 
+```
+
 ## Part II
 Part II focuses on graph- and string-processing algorithms.
