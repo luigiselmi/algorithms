@@ -8,8 +8,8 @@ import edu.princeton.cs.algs4.StdOut;
 
 public class FastCollinearPoints {
   
-  Point [] points;
-  int numberOfSegments = 0;
+  private Point [] points;
+  private int numberOfSegments = 0;
 
   public FastCollinearPoints(Point[] points) {    // finds all line segments containing 4 or more points
     if (points == null)
@@ -62,7 +62,7 @@ public class FastCollinearPoints {
         }
         else {
           stop = k;
-        }
+        //}
         
         if (stop > 0 && numAdiacentPoints >= 3) {
           Point [] collinearPoints = new Point[numAdiacentPoints + 1];
@@ -77,7 +77,7 @@ public class FastCollinearPoints {
           if (numberOfSegments > segments.length) segments = resize(numberOfSegments, segments);  
           segments[segments.length - 1] = segment;
           break; // stop after having found all collinear points to p
-        } 
+        } }
       }
     }
     
