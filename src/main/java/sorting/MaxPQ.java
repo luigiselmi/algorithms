@@ -1,5 +1,7 @@
 package sorting;
 
+import java.util.NoSuchElementException;
+
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 
@@ -30,6 +32,8 @@ public class MaxPQ<Key extends Comparable<Key>> {
    * and then swim up through the heap with that key to restore the heap condition
    */
   public void insert(Key v) {
+    // double size of array if necessary
+    if (N == pq.length - 1) resize(2 * pq.length);
     pq[++N] = v;
     swim(N);
   }
@@ -56,6 +60,7 @@ public class MaxPQ<Key extends Comparable<Key>> {
   }
   
   public int size() {
+    if (isEmpty()) throw new NoSuchElementException("The heap is empty.");
     return N;
   }
   
@@ -94,17 +99,25 @@ public class MaxPQ<Key extends Comparable<Key>> {
     Key t = pq[i]; pq[i] = pq[j]; pq[j] = t; 
   }
   
+  // double the size of the heap array
+  private void resize(int capacity) {
+      Key[] temp = (Key[]) new Comparable[capacity];
+      for (int i = 1; i <= N; i++) {
+          temp[i] = pq[i];
+      }
+      pq = temp;
+  }
+  
   public static void main(String[] args) {
-    int N = StdIn.readInt();
-    int maxOperations = StdIn.readInt(); // insertion or deletion
     int numOperations = 0;
-    MaxPQ<String> pq = new MaxPQ<String>(N);
+    int maxOperations = StdIn.readInt(); // insertion or deletion
+    MaxPQ<String> pq = new MaxPQ<String>();
     while (!StdIn.isEmpty() && numOperations < maxOperations) {
       numOperations++;
       String item = StdIn.readString();
       if (!item.equals("-")) pq.insert(item); // insert
       else if (!pq.isEmpty()) StdOut.print(pq.delMax() + " "); // remove max
     }
-    StdOut.println("(" + pq.size() + " left on pq)");
+    StdOut.println("(" + pq.size() + " keys left on the queue)");
   }
 }
