@@ -48,6 +48,7 @@ public class MaxPQ<Key extends Comparable<Key>> {
     exch(1, N--); // Exchange with last item.
     pq[N+1] = null; // Avoid loitering.
     sink(1); // Restore heap property.
+    if (N > 0 && N == pq.length/4) resize(pq.length/2); // halve size of the array when it's one-quarter full
     return max;
   }
   
