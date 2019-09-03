@@ -8,18 +8,18 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 /**
- * A stack (Last In First Out) based on a fixed array.
+ * A stack (Last In First Out) based on an array.
  * Pushes words in a stack and pops it when a "-" is encountered.
  * This examples uses Java Generics instead of a fixed type (String)
  * as elements of the stack.
  */
-public class FixedCapacityStack<Item> {
+public class ResizingCapacityStack<Item> {
 	
 	private Item[] a; // stack entries
 	private int N; // size
 	
 	@SuppressWarnings("unchecked")
-	public FixedCapacityStack(int cap) { 
+	public ResizingCapacityStack(int cap) { 
 		a = (Item[]) new Object[cap]; 
 	}
 	
@@ -33,11 +33,10 @@ public class FixedCapacityStack<Item> {
 		a[N++] = item; 
 	}
 	
-	// halve size of the array when it's one-quarter full
 	public Item pop() { 
 		Item item = a[--N];
 		a[N] = null; //remove reference to the popped item
-		if (N > 0 && N == a.length/4) resize(a.length/2);
+		if (N > 0 && N == a.length/4) resize(a.length/2); // halve size of the array when it's one-quarter full
 		return item; 
 	}
 	
@@ -53,7 +52,7 @@ public class FixedCapacityStack<Item> {
 		
 		List<String> words = readWords();
 		
-		FixedCapacityStack<String> stack = new FixedCapacityStack<String>(100);
+		ResizingCapacityStack<String> stack = new ResizingCapacityStack<String>(100);
 		
 		for(String word: words) {
 			if (! word.equals("-"))
