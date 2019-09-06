@@ -31,5 +31,14 @@ The Java code for the [programming assignment](https://coursera.cs.princeton.edu
 $ mvn exec:java -Dexec.mainClass="assignments.collinear.FastCollinearPoints" -Dexec.args="resources/collinear/input8.txt" 
 ```
 
+### Week 4
+The main topics are priority queues and the heap sort algorithm. A Priority queue is a data structure  that provides two
+main APIs:
+
+* insert
+* remove the maximum
+
+It can be implemented using a stack or a queue but it's more convenient to use a heap- ordered binary tree on top of an array. The heapsort algorithm is an optimal sorting algorithm that can be divided in two phases. In the 1st phase the algorithm builds an heap-ordered binary tree with the maximum value at its root. In the 2nd phase, the root element is repeatedly exchanged with the last one and removed in order to produce a list of ordered elements.      
+
 ## Part II
 Part II focuses on graph- and string-processing algorithms.
