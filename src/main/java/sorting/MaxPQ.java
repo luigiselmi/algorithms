@@ -6,7 +6,7 @@ import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 
 /**
- * A priority queue based on a heap-ordered array.
+ * A priority queue based on a binary heap-ordered array.
  * @author lselmi
  *
  * @param <Key>
@@ -67,7 +67,8 @@ public class MaxPQ<Key extends Comparable<Key>> {
   
   /**
    * Restore the heap order when a child's key's node
-   * is bigger that its parent's key.
+   * is bigger that its parent's key. In a heap, the parent of the
+   * node in position k is in position k/2.
    * @param k
    */
   private void swim(int k) {
@@ -79,7 +80,9 @@ public class MaxPQ<Key extends Comparable<Key>> {
   
   /**
    * Restore heap order when a node's key
-   * is smaller than the one's of its children
+   * is smaller than the one's of its children.
+   * The two children of the node in position
+   * k are in positions 2k and 2k + 1.
    * @param k
    */
   private void sink(int k) {
@@ -91,7 +94,7 @@ public class MaxPQ<Key extends Comparable<Key>> {
       k = j;
     }
   }
-  
+   
   private boolean less(int i, int j) { 
     return pq[i].compareTo(pq[j]) < 0; 
   }
