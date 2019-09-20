@@ -4,7 +4,7 @@ import edu.princeton.cs.algs4.StdOut;
 
 public class Board {
 
-  private int [][] tiles;
+  protected int [][] tiles;
   private int n; // dimension, e.g. n = 3 in a 3x3 matrix
   private int [][] goal = {{1,2,3},{4,5,6},{7,8,0}};
   
@@ -32,7 +32,12 @@ public class Board {
     return n;
   }
 
-  // number of tiles out of place
+  /*
+   *  Hamming distance: number of tiles out of place.
+   *  Instead of using two nested loops here I use
+   *  some modular arithmetics to compute row and column indexes
+   *  It's not really needed but I was curious :)
+   */
   public int hamming() {
     int tilesOutOfPlace = 0;
     for (int i = 0; i < n*n - 1; i++) {
@@ -51,8 +56,26 @@ public class Board {
   // is this board the goal board?
   //public boolean isGoal() {}
 
-  // does this board equal y?
-  //public boolean equals(Object y) {}
+  /*
+   * Two boards are equal if they are have the same size 
+   * and their corresponding tiles are in the same positions.
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
+  public boolean equals(Object y) {
+    if (this == y)
+      return true;
+    if (y == null || getClass() != y.getClass()) 
+      return false;
+    Board boardy = (Board)y;
+    for (int i = 0; i < n*n - 1; i++) {
+      int row = i / n ;
+      int col = (n + i) % n ;
+      int tileValue = tiles[row][col];
+      if (tileValue != boardy.tiles[row][col])
+        return false;
+    }
+    return true;
+  }
 
   // all neighboring boards
   //public Iterable<Board> neighbors() {}
@@ -64,6 +87,7 @@ public class Board {
   public static void main(String[] args) {
     int [][] tiles1 = {{8,1,3},{4,0,2},{7,6,5}};
     int [][] tiles2 = {{0,2,3},{1,5,6},{7,8,4}};
+    int [][] tiles3 = {{0,2,3},{1,5,6},{7,8,4}}; // same as tiles2
     Board b1 = new Board(tiles1);
     Board b2 = new Board(tiles2);
     // print board
@@ -71,5 +95,9 @@ public class Board {
     // compute hamming distance
     StdOut.println(b1.hamming());
     StdOut.println(b2.hamming());
+    // test for equality
+    StdOut.println(b1.equals(b2));
+    Board b3 = new Board(tiles3); // same as b2
+    StdOut.println(b2.equals(b3));
   }
 }
