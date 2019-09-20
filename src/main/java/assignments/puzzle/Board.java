@@ -57,7 +57,7 @@ public class Board {
   //public boolean isGoal() {}
 
   /*
-   * Two boards are equal if they are have the same size 
+   * Two boards are equal if they have the same size 
    * and their corresponding tiles are in the same positions.
    * @see java.lang.Object#equals(java.lang.Object)
    */
@@ -68,6 +68,10 @@ public class Board {
     if (y == null || getClass() != y.getClass()) 
       return false;
     Board boardy = (Board)y;
+    // check size
+    if (boardy.dimension() != this.dimension())
+        return false;
+    // check tiles
     for (int i = 0; i < n*n - 1; i++) {
       int row = i / n ;
       int col = (n + i) % n ;
