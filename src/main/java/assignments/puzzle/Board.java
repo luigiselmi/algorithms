@@ -61,6 +61,7 @@ public class Board {
    * and their corresponding tiles are in the same positions.
    * @see java.lang.Object#equals(java.lang.Object)
    */
+  @Override
   public boolean equals(Object y) {
     if (this == y)
       return true;
