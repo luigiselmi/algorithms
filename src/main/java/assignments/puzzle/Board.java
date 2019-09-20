@@ -104,5 +104,8 @@ public class Board {
     StdOut.println(b1.equals(b2));
     Board b3 = new Board(tiles3); // same as b2
     StdOut.println(b2.equals(b3));
+    int [][] tiles4 = {{0,2,3},{1,5,6}};
+    Board b4 = new Board(tiles4);
+    StdOut.println(b2.equals(b4));
   }
 }
