@@ -4,15 +4,30 @@ import edu.princeton.cs.algs4.StdOut;
 
 public class Board {
 
-  protected int [][] tiles;
-  private int n; // dimension, e.g. n = 3 in a 3x3 matrix
-  private int [][] goal = {{1,2,3},{4,5,6},{7,8,0}};
+  protected int [][] tiles; // n x n matrix
+  private int n; // dimension
+  private int [][] goal; // goal board
   
-  // create a board from an n-by-n array of tiles,
-  // where tiles[row][col] = tile at (row, col)
+  /*
+   * creates a node (board) from an n-by-n array of tiles,
+   */
   public Board(int[][] tiles) {
     this.tiles = tiles;
     this.n = tiles.length;
+    goal = createGoal(n);
+  }
+  
+  /* 
+   * initializes the goal board
+   * e.g. for n = 3 -> {{1,2,3},{4,5,6},{7,8,0}}
+   */
+  protected int [][] createGoal(int n) {
+    int [][] goal = new int [n][n];
+    for (int i = 0; i < n ; i++)
+      for (int j = 0; j < n ; j++)
+        goal[i][j] = n * i + j + 1 ;
+    goal[n-1][n-1] = 0;
+    return goal;
   }
                                          
   // string representation of this board
@@ -54,7 +69,9 @@ public class Board {
   //public int manhattan() {}
 
   // is this board the goal board?
-  //public boolean isGoal() {}
+  public boolean isGoal() {
+    return this.equals(new Board(goal));
+  }
 
   /*
    * Two boards are equal if they have the same size 
@@ -98,14 +115,18 @@ public class Board {
     // print board
     StdOut.println(b1.toString());
     // compute hamming distance
-    StdOut.println(b1.hamming());
-    StdOut.println(b2.hamming());
+    StdOut.println(b1.hamming()); // 5
+    StdOut.println(b2.hamming()); // 2
     // test for equality
-    StdOut.println(b1.equals(b2));
+    StdOut.println(b1.equals(b2)); // false
     Board b3 = new Board(tiles3); // same as b2
-    StdOut.println(b2.equals(b3));
-    int [][] tiles4 = {{0,2,3},{1,5,6}};
+    StdOut.println(b2.equals(b3)); // true
+    int [][] tiles4 = {{0,2},{1,5}};
     Board b4 = new Board(tiles4);
-    StdOut.println(b2.equals(b4));
+    StdOut.println(b2.equals(b4)); // false
+    // test if goal
+    StdOut.println(b1.isGoal()); // false
+    Board goal = new Board(b1.createGoal(3));
+    StdOut.println(goal.isGoal()); // true
   }
 }
