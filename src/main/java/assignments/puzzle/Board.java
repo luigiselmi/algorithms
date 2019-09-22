@@ -1,5 +1,6 @@
 package assignments.puzzle;
 
+import edu.princeton.cs.algs4.Stack;
 import edu.princeton.cs.algs4.StdOut;
 
 public class Board {
@@ -12,8 +13,10 @@ public class Board {
    * creates a node (board) from an n-by-n array of tiles,
    */
   public Board(int[][] tiles) {
-    this.tiles = tiles;
     this.n = tiles.length;
+    if (n < 2 || n > 128)
+      throw new IllegalArgumentException("The dimension n of the puzzle must be between 2 and 128.");
+    this.tiles = tiles;
     goal = createGoal(n);
   }
   
@@ -58,15 +61,36 @@ public class Board {
     for (int i = 0; i < n*n - 1; i++) {
       int row = i / n ;
       int col = (n + i) % n ;
-      int tileValue = tiles[row][col];
-      if (tileValue != goal[row][col])
+      int tile = tiles[row][col];
+      if (tile != goal[row][col])
         tilesOutOfPlace++;
     }
     return tilesOutOfPlace;
   }
 
-  // sum of Manhattan distances between tiles and goal
-  //public int manhattan() {}
+  /*
+   * The Manhattan distance of a board from the goal is 
+   * defined as the sum of the Manhattan distances of 
+   * each tile from the corresponding tile in the goal
+   */
+  public int manhattan() {
+    int manhattanDistance = 0;
+    for (int i = 1; i < n*n + 1 ; i++) {
+      // compute row and column of each tile just to avoid a nested loop
+      int row = (i - 1) / n ; // division module n
+      int col = (n + i - 1) % n ; // remainder
+      int tile = tiles[row][col];
+      if (tile == 0) continue;
+      // compute row and column of the tile in the goal board
+      int grow = (tile - 1) / n ;
+      int gcol = (tile - 1) % n ;
+      int rowDist = Math.abs(grow - row);
+      int colDist = Math.abs(gcol - col);
+      int tileDist = rowDist + colDist;
+      manhattanDistance += tileDist;
+    }
+    return manhattanDistance;
+  }
 
   // is this board the goal board?
   public boolean isGoal() {
@@ -92,41 +116,178 @@ public class Board {
     for (int i = 0; i < n*n - 1; i++) {
       int row = i / n ;
       int col = (n + i) % n ;
-      int tileValue = tiles[row][col];
-      if (tileValue != boardy.tiles[row][col])
+      int tile = tiles[row][col];
+      if (tile != boardy.tiles[row][col])
         return false;
     }
     return true;
   }
 
-  // all neighboring boards
-  //public Iterable<Board> neighbors() {}
+  /*
+   *  All neighboring boards.
+   *  The algorithm looks for row and column of the blank square and then
+   *  swap it with the tiles up, down, left and right.
+   */
+  public Iterable<Board> neighbors() {
+    Stack<Board> neighbors = new Stack<Board>(); // we'll put all the neighbors in a Stack
+    int row0 = 0; // row of the blank square
+    int col0 = 0; // column of the blank square
+    
+    // looks for the blank square
+    for (int i = 0; i < n; i++)
+      for (int j = 0; j < n; j++) 
+        if (tiles[i][j] == 0) {
+          row0 = i;
+          col0 = j;
+          break;
+        }
+    
+    // swap the blank square and its left neighbor
+    if (col0 > 0) {
+      // row and col of left tile
+      int rowL = row0 ;
+      int colL = col0 - 1 ;
+      int [][] tilesL = copyTiles();
+      int temp = tilesL[row0][col0];
+      tilesL[row0][col0] = tilesL[rowL][colL];
+      tilesL[rowL][colL] = temp;
+      Board boardL = new Board(tilesL);
+      neighbors.push(boardL);
+    }
+    
+    // swap the blank square and its right neighbor    
+    if (col0 < n) {
+      // row and col of right tile
+      int rowR = row0 ;
+      int colR = col0 + 1 ;
+      int [][] tilesR = copyTiles();
+      int temp = tilesR[row0][col0];
+      tilesR[row0][col0] = tilesR[rowR][colR];
+      tilesR[rowR][colR] = temp;
+      Board boardR = new Board(tilesR);
+      neighbors.push(boardR);
+    }
+    
+    // swap the blank square and its upper neighbor
+    if (row0 > 0) {
+      // row and col of upper tile
+      int rowU = row0 - 1 ;
+      int colU = col0 ;
+      int [][] tilesU = copyTiles();
+      int temp = tilesU[row0][col0];
+      tilesU[row0][col0] = tilesU[rowU][colU];
+      tilesU[rowU][colU] = temp;
+      Board boardU = new Board(tilesU);
+      neighbors.push(boardU);
+    }
+    
+    // swap the blank square and its lower neighbor
+    if (row0 < n) {
+      // row and col of lower (down) tile
+      int rowD = row0 + 1 ;
+      int colD = col0 ;
+      int [][] tilesD = copyTiles();
+      int temp = tilesD[row0][col0];
+      tilesD[row0][col0] = tilesD[rowD][colD];
+      tilesD[rowD][colD] = temp;
+      Board boardD = new Board(tilesD);
+      neighbors.push(boardD);
+    }
+    
+    return neighbors;
+  }
+  
+  private int [][] copyTiles() {
+    int [][] init = new int [n][n];
+    for (int i = 0; i < n; i++)
+      for (int j = 0; j < n; j++)
+        init[i][j] = tiles[i][j];
+    return init;
+  }
 
-  // a board that is obtained by exchanging any pair of tiles
-  //public Board twin() {}
+  /*
+   *  A board obtained by exchanging any (one) pair of tiles. The 
+   *  algorithm looks for row and column of the blank square, compute
+   *  its one dimensional index, and then compute row and column of the 
+   *  left and right tile and finally swap the two tiles. 
+   */
+  public Board twin() {
+    int [][] twinTiles = new int [n][n];
+    int row0 = 0; // row of the blank square
+    int col0 = 0; // column of the blank square
+    for (int i = 0; i < n; i++)
+      for (int j = 0; j < n; j++) {
+        int tile = tiles[i][j];
+        if (tile == 0) {
+          row0 = i;
+          col0 = j;
+        }
+        twinTiles[i][j] = tile;
+      }
+    // one dimensional index of the blank square 
+    int index0 = n * row0 + col0;
+    int indexL; // index of the tile on the left of the blank square
+    int indexR; // index of the tile on the right of the blank square
+    if (index0 == 0) {
+      indexL = index0 + 1;
+      indexR = indexL + 1;
+    }
+    else if (index0 == n*n - 1) {
+      indexR = index0 - 1;
+      indexL = indexR - 1;
+    }
+    else {
+      indexL = index0 - 1;
+      indexR = index0 + 1;
+    }
+    // row and col tile left
+    int rowL = indexL / n ;
+    int colL = (n + indexL) % n ;
+    // row and col tile right
+    int rowR = indexR / n ;
+    int colR = (n + indexR) % n ;
+    // swap left and right tiles
+    int temp = twinTiles[rowL][colL];
+    twinTiles[rowL][colL] = twinTiles[rowR][colR];
+    twinTiles[rowR][colR] = temp;
+    return new Board(twinTiles);
+  }
 
   // unit testing (not graded)
   public static void main(String[] args) {
     int [][] tiles1 = {{8,1,3},{4,0,2},{7,6,5}};
     int [][] tiles2 = {{0,2,3},{1,5,6},{7,8,4}};
     int [][] tiles3 = {{0,2,3},{1,5,6},{7,8,4}}; // same as tiles2
+    // test validity of input data
+    //Board b0 = new Board(new int [129][129]);
     Board b1 = new Board(tiles1);
     Board b2 = new Board(tiles2);
     // print board
     StdOut.println(b1.toString());
-    // compute hamming distance
-    StdOut.println(b1.hamming()); // 5
-    StdOut.println(b2.hamming()); // 2
+    // compute Hamming distance
+    StdOut.printf("Hamming distance of board " + b1.toString() + "from goal: %d\n", b1.hamming()); // 5
+    StdOut.printf("Hamming distance of board " + b2.toString() + "from goal: %d\n", b2.hamming()); // 2
     // test for equality
-    StdOut.println(b1.equals(b2)); // false
+    StdOut.printf("Board b1 is equal to b2: %s\n", b1.equals(b2)); // false
     Board b3 = new Board(tiles3); // same as b2
-    StdOut.println(b2.equals(b3)); // true
+    StdOut.printf("Board b2 is equal to b3: %s\n", b2.equals(b3)); // true
     int [][] tiles4 = {{0,2},{1,5}};
     Board b4 = new Board(tiles4);
-    StdOut.println(b2.equals(b4)); // false
+    StdOut.printf("The board b2 is equal to b4: %s\n", b2.equals(b4)); // false
     // test if goal
-    StdOut.println(b1.isGoal()); // false
+    StdOut.printf("The board " + b1.toString() + "is a goal: %s\n", b1.isGoal()); // false
     Board goal = new Board(b1.createGoal(3));
-    StdOut.println(goal.isGoal()); // true
+    StdOut.printf("The board " + goal.toString() + "is a goal: %s\n", goal.isGoal()); // true
+    // test Manhattan distance
+    StdOut.printf("The Manhattan distance of board " + b1.toString() + "is %d\n", b1.manhattan());
+    // test twin board
+    Board twin = b1.twin();
+    StdOut.printf("The twin board of " + b1.toString() + "is %s\n", twin.toString());
+    // test neighbors
+    int [][] tiles5 = {{1,0,3},{4,2,5},{7,8,6}};
+    Board b5 = new Board(tiles5);
+    for(Board b: b5.neighbors()) {
+      StdOut.printf("Neighbor %s\n", b.toString());
+    }
   }
 }
