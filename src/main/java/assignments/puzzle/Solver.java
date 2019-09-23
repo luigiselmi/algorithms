@@ -75,12 +75,13 @@ public class Solver {
       }
       else {
         for(Board b: minB.neighbors()) {
-          Node neighbor = new Node();
-          neighbor.moves = minN.moves + 1 ;
-          neighbor.previous = minN;
-          neighbor.board = b;
-          if(! b.equals(previousB)) // critical optimization
+          if(! b.equals(previousB)) {// critical optimization
+            Node neighbor = new Node();
+            neighbor.moves = minN.moves + 1 ;
+            neighbor.previous = minN;
+            neighbor.board = b;
             pq.insert(neighbor);
+          }
         }
       }
     }
