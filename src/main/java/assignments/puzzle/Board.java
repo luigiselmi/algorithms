@@ -265,11 +265,14 @@ public class Board {
     // print board
     StdOut.println(b1.toString());
     // compute Hamming distance
+    assert b1.hamming() == 5 : "error in the hamming() method";
+    assert b2.hamming() == 2 : "error in the hamming() method";
     StdOut.printf("Hamming distance of board " + b1.toString() + "from goal: %d\n", b1.hamming()); // 5
     StdOut.printf("Hamming distance of board " + b2.toString() + "from goal: %d\n", b2.hamming()); // 2
     // test for equality
     StdOut.printf("Board b1 is equal to b2: %s\n", b1.equals(b2)); // false
     Board b3 = new Board(tiles3); // same as b2
+    assert b2.equals(b3) == true : "error in the equals() method";
     StdOut.printf("Board b2 is equal to b3: %s\n", b2.equals(b3)); // true
     int [][] tiles4 = {{0,2},{1,5}};
     Board b4 = new Board(tiles4);

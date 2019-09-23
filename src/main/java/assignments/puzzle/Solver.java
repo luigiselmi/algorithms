@@ -2,22 +2,29 @@ package assignments.puzzle;
 
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.MinPQ;
+import edu.princeton.cs.algs4.Queue;
 import edu.princeton.cs.algs4.StdOut;
 
 public class Solver {
-  
-  private boolean isSolvable = true;
+  private Board puzzle = null;
+  private boolean isSolvable = false;
   private int movesToGoal = 0; 
+  MinPQ<Node> pq; //priority queue
+  Queue<Board> solution = null;
   
   //find a solution to the initial board (using the A* algorithm)
   public Solver(Board initial) {
     if (initial == null)
       throw new IllegalArgumentException("The initial board cannot be null.");
-    solvePuzzle(initial);
+    puzzle = initial;
+    pq = new MinPQ<Node>();
+    solution = new Queue<Board>();
+    solvePuzzle(puzzle);
   }
 
-  // is the initial board solvable? (see below)
+  // is the initial board solvable? 
   public boolean isSolvable() {
+    Board swapPuzzle = puzzle.twin();
     return isSolvable;
   }
 
@@ -27,7 +34,9 @@ public class Solver {
   }
 
   // sequence of boards in a shortest solution
-  //public Iterable<Board> solution() {}
+  public Iterable<Board> solution() {
+    return solution;
+  }
   
   private class Node implements Comparable<Node> {
     private Board board;
@@ -45,32 +54,26 @@ public class Solver {
   }
   
   private void solvePuzzle(Board initB) {
-    
-    // creates the priority queue
-    MinPQ<Node> pq = new MinPQ<Node>();
-    
     // creates initial search node
     Node initN = new Node();
     initN.board = initB;
     initN.moves = 0;
     initN.previous = null;
-    
     boolean isGoal = false;
-    
     // adds the init search node to the priority queue
     pq.insert(initN);
-    
     // solve the puzzle starting from the init board
     Board previousB = null;
     while (!isGoal) {
       Node minN = pq.delMin();
       Board minB = minN.board;
+      solution.enqueue(minB);
       Node previousN = minN.previous;
-      //Board previousB = previousN.board; 
       if (previousN != null )
         previousB = previousN.board;
       if (minB.isGoal()) {
         movesToGoal = minN.moves;
+        isSolvable = true;
         isGoal = true;
       }
       else {
@@ -97,17 +100,15 @@ public class Solver {
         for (int j = 0; j < n; j++)
             tiles[i][j] = in.readInt();
     Board initial = new Board(tiles);
-
     // solve the puzzle
     Solver solver = new Solver(initial);
-
     // print solution to standard output
     if (!solver.isSolvable())
         StdOut.println("No solution possible");
     else {
         StdOut.println("Minimum number of moves = " + solver.moves());
-        //for (Board board : solver.solution())
-        //    StdOut.println(board);
+        for (Board board : solver.solution())
+            StdOut.println(board);
     }
     
   }
