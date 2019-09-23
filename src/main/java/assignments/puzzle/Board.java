@@ -156,7 +156,7 @@ public class Board {
     }
     
     // swap the blank square and its right neighbor    
-    if (col0 < n) {
+    if (col0 < n - 1) {
       // row and col of right tile
       int rowR = row0 ;
       int colR = col0 + 1 ;
@@ -182,7 +182,7 @@ public class Board {
     }
     
     // swap the blank square and its lower neighbor
-    if (row0 < n) {
+    if (row0 < n - 1) {
       // row and col of lower (down) tile
       int rowD = row0 + 1 ;
       int colD = col0 ;
