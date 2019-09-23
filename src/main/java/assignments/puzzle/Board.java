@@ -289,5 +289,13 @@ public class Board {
     for(Board b: b5.neighbors()) {
       StdOut.printf("Neighbor %s\n", b.toString());
     }
+    // test beginning of puzzle
+    int [][] tiles6 = {{0,1,3},{4,2,5},{7,8,6}};
+    Board initNode = new Board(tiles6);
+    StdOut.printf("The Manhattan distance of initial search node: " + initNode.toString() + "is %d\n", initNode.manhattan());
+    for(Board b: initNode.neighbors()) {
+      StdOut.printf("Neighbor of initial search node %s\n", b.toString());
+      StdOut.printf("The Manhattan distance of neighbor " + b.toString() + "is %d\n", b.manhattan());
+    }
   }
 }
