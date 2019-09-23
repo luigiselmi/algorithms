@@ -1,20 +1,91 @@
 package assignments.puzzle;
 
 import edu.princeton.cs.algs4.In;
+import edu.princeton.cs.algs4.MinPQ;
 import edu.princeton.cs.algs4.StdOut;
 
 public class Solver {
+  
+  private boolean isSolvable = true;
+  private int movesToGoal = 0; 
+  
   //find a solution to the initial board (using the A* algorithm)
-  public Solver(Board initial) {}
+  public Solver(Board initial) {
+    if (initial == null)
+      throw new IllegalArgumentException("The initial board cannot be null.");
+    solvePuzzle(initial);
+  }
 
   // is the initial board solvable? (see below)
-  //public boolean isSolvable() {}
+  public boolean isSolvable() {
+    return isSolvable;
+  }
 
   // min number of moves to solve initial board
-  //public int moves() {}
+  public int moves() {
+    return movesToGoal;
+  }
 
   // sequence of boards in a shortest solution
   //public Iterable<Board> solution() {}
+  
+  private class Node implements Comparable<Node> {
+    private Board board;
+    private int moves;
+    private Node previous;
+    @Override
+    public int compareTo(Node object) {
+      int objectDistance = object.board.manhattan();
+      int objectPriority = objectDistance + object.moves;
+      int priority = board.manhattan() + moves;
+      if (priority == objectPriority) return 0;
+      else if (priority < objectPriority) return -1;
+      else return 1;
+    }
+  }
+  
+  private void solvePuzzle(Board initB) {
+    
+    // creates the priority queue
+    MinPQ<Node> pq = new MinPQ<Node>();
+    
+    // creates initial search node
+    Node initN = new Node();
+    initN.board = initB;
+    initN.moves = 0;
+    initN.previous = null;
+    
+    boolean isGoal = false;
+    
+    // adds the init search node to the priority queue
+    pq.insert(initN);
+    
+    // solve the puzzle starting from the init board
+    Board previousB = null;
+    while (!isGoal) {
+      Node minN = pq.delMin();
+      Board minB = minN.board;
+      Node previousN = minN.previous;
+      //Board previousB = previousN.board; 
+      if (previousN != null )
+        previousB = previousN.board;
+      if (minB.isGoal()) {
+        movesToGoal = minN.moves;
+        isGoal = true;
+      }
+      else {
+        for(Board b: minB.neighbors()) {
+          Node neighbor = new Node();
+          neighbor.moves = minN.moves + 1 ;
+          neighbor.previous = minN;
+          neighbor.board = b;
+          if(! b.equals(previousB)) // critical optimization
+            pq.insert(neighbor);
+        }
+      }
+    }
+    
+  }
 
   public static void main(String[] args) {
     // create initial board from file
@@ -30,14 +101,13 @@ public class Solver {
     Solver solver = new Solver(initial);
 
     // print solution to standard output
-    /*
     if (!solver.isSolvable())
         StdOut.println("No solution possible");
     else {
         StdOut.println("Minimum number of moves = " + solver.moves());
-        for (Board board : solver.solution())
-            StdOut.println(board);
+        //for (Board board : solver.solution())
+        //    StdOut.println(board);
     }
-    */
+    
   }
 }
