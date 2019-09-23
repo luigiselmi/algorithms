@@ -111,7 +111,11 @@ public class MaxPQ<Key extends Comparable<Key>> {
       }
       pq = temp;
   }
-  
+  /*
+   * To test the priority queue, write in the command line the number of operations
+   * i.e. additions or removals of keys, you are going to perform and then the keys 
+   * (e.g. characters), one by one. You can remove the root entering a "-" character. 
+   */
   public static void main(String[] args) {
     int numOperations = 0;
     int maxOperations = StdIn.readInt(); // insertion or deletion
