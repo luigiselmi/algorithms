@@ -40,7 +40,7 @@ main APIs:
 
 It can be implemented using a stack or a queue but it's more convenient to use a heap- ordered binary tree on top of an array. The heapsort algorithm is an optimal sorting algorithm that can be divided in two phases. In the 1st phase the algorithm builds an heap-ordered binary tree with the maximum value at its root. In the 2nd phase, the root element is repeatedly exchanged with the last one and removed in order to produce a list of ordered elements. A priority queue can be 
 used to implement the A* algorithm and solve the 8 puzzle and the 15 puzzle finding the least set of tile moves to reach 
-the goal with all the tiles ordered. The Java code for the solver of the puzzles is in the puzzle folder. As usual you can execute the code using Maven
+the goal with all the tiles ordered. The Java code for the [programming assignment](https://coursera.cs.princeton.edu/algs4/assignments/8puzzle/specification.php) and solver of the puzzles is in the puzzle folder. As usual you can execute the code using Maven
 
 ```
 $ mvn exec:java -Dexec.mainClass="assignments.puzzle.Solver" -Dexec.args="resources/puzzle/puzzle04.txt"
