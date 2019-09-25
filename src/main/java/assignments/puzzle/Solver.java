@@ -8,23 +8,20 @@ import edu.princeton.cs.algs4.StdOut;
 public class Solver {
   private Board puzzle = null;
   private boolean isSolvable = false;
-  private int movesToGoal = 0; 
-  MinPQ<Node> pq; //priority queue
-  Queue<Board> solution = null;
+  private int movesToGoal = 0;
+  private Queue<Board> solution = null;
   
   //find a solution to the initial board (using the A* algorithm)
   public Solver(Board initial) {
     if (initial == null)
       throw new IllegalArgumentException("The initial board cannot be null.");
     puzzle = initial;
-    pq = new MinPQ<Node>();
     solution = new Queue<Board>();
     solvePuzzle(puzzle);
   }
 
   // is the initial board solvable? 
   public boolean isSolvable() {
-    Board swapPuzzle = puzzle.twin();
     return isSolvable;
   }
 
@@ -38,48 +35,71 @@ public class Solver {
     return solution;
   }
   
-  private class Node implements Comparable<Node> {
+  private class SearchNode implements Comparable<SearchNode> {
     private Board board;
     private int moves;
-    private Node previous;
+    private SearchNode previous;
+    private int distance;
+    public SearchNode(int distance) {
+      this.distance = distance;
+    }
     @Override
-    public int compareTo(Node object) {
-      int objectDistance = object.board.manhattan();
-      int objectPriority = objectDistance + object.moves;
-      int priority = board.manhattan() + moves;
+    public int compareTo(SearchNode object) {
+      int objectPriority = object.distance + object.moves;
+      int priority = distance + moves;
       if (priority == objectPriority) return 0;
       else if (priority < objectPriority) return -1;
       else return 1;
     }
   }
-  
-  private void solvePuzzle(Board initB) {
-    // creates initial search node
-    Node initN = new Node();
-    initN.board = initB;
+  /*
+   * The algorithm creates two priority queues. One for the puzzle
+   * given by the user, and one for its twin. The 2nd queue allows us 
+   * to check whether the puzzle is solvable or not. 
+   */
+  private void solvePuzzle(Board puzzle) {
+    MinPQ<SearchNode> pq = new MinPQ<SearchNode>(); //priority queue for the puzzle
+    MinPQ<SearchNode> tpq = new MinPQ<SearchNode>(); //priority queue for the twin puzzle
+    // creates the initial search node for the puzzle
+    SearchNode initN = new SearchNode(puzzle.manhattan());
+    initN.board = puzzle;
     initN.moves = 0;
     initN.previous = null;
-    boolean isGoal = false;
+    // creates the initial search node for the twin puzzle
+    Board twin = puzzle.twin();
+    SearchNode initTN = new SearchNode(twin.manhattan());
+    initTN.board = twin;
+    initTN.moves = 0;
+    initTN.previous = null;
+    
+    boolean isPuzzleGoal = false;
+    boolean isTwinGoal = false;
     // adds the init search node to the priority queue
     pq.insert(initN);
+    // adds the init search node to the twin priority queue
+    tpq.insert(initTN);
+    
     // solve the puzzle starting from the init board
     Board previousB = null;
-    while (!isGoal) {
-      Node minN = pq.delMin();
+    Board previousTB = null;
+    while (!(isPuzzleGoal || isTwinGoal)) {
+      // search the puzzle priority queue
+      SearchNode minN = pq.delMin();
       Board minB = minN.board;
       solution.enqueue(minB);
-      Node previousN = minN.previous;
+      SearchNode previousN = minN.previous;
       if (previousN != null )
         previousB = previousN.board;
       if (minB.isGoal()) {
         movesToGoal = minN.moves;
         isSolvable = true;
-        isGoal = true;
+        isPuzzleGoal = true;
+        pq = null;
       }
       else {
         for(Board b: minB.neighbors()) {
           if(! b.equals(previousB)) {// critical optimization
-            Node neighbor = new Node();
+            SearchNode neighbor = new SearchNode(b.manhattan());
             neighbor.moves = minN.moves + 1 ;
             neighbor.previous = minN;
             neighbor.board = b;
@@ -87,6 +107,30 @@ public class Solver {
           }
         }
       }
+      // search the twin priority queue
+      if (! isPuzzleGoal ) {
+        SearchNode minTN = tpq.delMin();
+        Board minTB = minTN.board;
+        SearchNode previousTN = minTN.previous;
+        if (previousTN != null )
+          previousTB = previousTN.board;
+        if (minTB.isGoal()) {
+          movesToGoal = -1;
+          isTwinGoal = true;
+          tpq = null;
+        }
+        else {
+          for(Board b: minTB.neighbors()) {
+            if(! b.equals(previousTB)) {// critical optimization
+              SearchNode neighbor = new SearchNode(b.manhattan());
+              neighbor.moves = minTN.moves + 1 ;
+              neighbor.previous = minTN;
+              neighbor.board = b;
+              tpq.insert(neighbor);
+            }
+          }
+        }
+       }
     }
     
   }

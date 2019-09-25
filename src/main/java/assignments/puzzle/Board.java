@@ -5,7 +5,7 @@ import edu.princeton.cs.algs4.StdOut;
 
 public class Board {
 
-  protected int [][] tiles; // n x n matrix
+  private int [][] tiles; // n x n matrix
   private int n; // dimension
   private int [][] goal; // goal board
   
@@ -24,7 +24,7 @@ public class Board {
    * initializes the goal board
    * e.g. for n = 3 -> {{1,2,3},{4,5,6},{7,8,0}}
    */
-  protected int [][] createGoal(int n) {
+  private int [][] createGoal(int n) {
     int [][] goal = new int [n][n];
     for (int i = 0; i < n ; i++)
       for (int j = 0; j < n ; j++)
