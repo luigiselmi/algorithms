@@ -27,6 +27,13 @@ $ java -cp "lib/algs4.jar;target/classes" searching.WordCounter < resources/sear
 
 executes the *WordCounter* Java class, in the *searching* package, that takes in input a stream from a file (not the file name !) containing text and writes, in the standard output, the number of distinct words and the complete words list. 
 
+It can be useful to execute some of the classes that are provided in the algs4.jar library. As an example
+
+```
+$ java -cp "lib/algs4.jar" edu.princeton.cs.algs4.FrequencyCounter 8 < resources/searching/tinyTale.txt
+```
+
+executes the Java class FrequencyCounter, in the edu.princeton.cs.algs4 package in the algs4.jar library that takes as an argument the minimun length of a word to be counted and a list of words from the input stream fed by a text file.    
 ### Compile and execute using Maven
 You can compile all the Java classes using Maven
 
