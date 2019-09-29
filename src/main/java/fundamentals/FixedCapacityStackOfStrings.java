@@ -8,9 +8,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 /**
- * A stack (Last In First Out) based on a fixed array.
+ * A stack (Last In First Out) based on a fixed capacity array.
  * Pushes words in a stack and pops it when a "-" is encountered.
- *
  */
 public class FixedCapacityStackOfStrings {
 	
@@ -35,7 +34,7 @@ public class FixedCapacityStackOfStrings {
 	
 	public static void main(String[] args) throws IOException {
 		
-		List<String> words = readWords();
+		List<String> words = readWords(args[0]);
 		
 		FixedCapacityStackOfStrings stack = new FixedCapacityStackOfStrings(100);
 		
@@ -48,8 +47,8 @@ public class FixedCapacityStackOfStrings {
 		System.out.println("(" + stack.size() + " left on stack)");
 	}
 	
-	private static List<String> readWords() throws IOException {
-		String filePath = "resources/data.txt";
+	private static List<String> readWords(String path) throws IOException {
+		String filePath = path;
 		List<String> words = Files.lines(Paths.get(filePath), Charset.defaultCharset())
 				.flatMap(line -> Arrays.stream(line.split(" ")))
 				.collect(Collectors.toList());
