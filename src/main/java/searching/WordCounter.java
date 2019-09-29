@@ -17,12 +17,10 @@ public class WordCounter {
   		String key = StdIn.readString();
   		st.put(key, i);
   	}
-		int size = st.size();
-		StdOut.printf("Symbol Table size: %d\n", size);
-		StdOut.println("Distinct words:");
 		for (String s : st.keys())
-		  StdOut.println(s);
-
+		  StdOut.printf("%s ",s);
+		StdOut.println();
+		StdOut.printf("Symbol Table size: %d\n", st.size());
 	}
 
 }
