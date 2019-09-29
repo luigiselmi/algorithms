@@ -3,13 +3,40 @@ Algorithms
 
 This repository contains example Java code based on the online course Algorithms, [Part 1](https://www.coursera.org/learn/algorithms-part1) and [Part 2](https://www.coursera.org/learn/algorithms-part2), taught by Kevin Wayne and Robert Sedgewick and offered by Princeton University on Coursera. The online lessons are based on the book Algorithms, 4th Edition, by the same authors. Additional material is also available from the [book's website](https://algs4.cs.princeton.edu/home/). This repository contains also my submissions to the programming assignments. This is a work in progress, see the assessments to know whether the code passes all the tests for correctness, memory, timing and other metrics. Maven is used to compile and execute the code.
 
-## Part I
-Part I covers elementary data structures, sorting, and searching algorithms. You can compile all the Java classes using Maven
+## Compile and execute
+You can compile and execute the code using Java or Maven.
+
+### Compile and execute with Java
+In order to compile the java source files you have first to create a folder that will contain all the compiled classed. You 
+can organize the folder as with Maven, with a *target* folder and a *classes* sub-folder. From the project root folder execute
+
+```
+$ mkdir -p target/classes 
+
+```
+and after the folders have been created you can compile the project
+
+```
+ javac -cp lib/algs4.jar -d target/classes $(find ./src/main/java -name '*.java')
+ 
+```
+
+In order to execute a Java class, from the project root folder, you need to add the compiled classed and the (algs4.jar)[https://algs4.cs.princeton.edu/code/] java library that can be downloaded from the book's web page.
+
+```
+$ java -cp "../algs4/lib/algs4.jar;target/classes/" fundamentals.StandardInput < resources/searching/tinyTale.txt
+```
+
+### Compile and execute using Maven
+You can compile all the Java classes using Maven
 
 ```
 $ mvn compile
 ```
 
+When the command returns a new "target" folder is created with a subfolder "classes" containing all the compiled java classes. 
+## Part I
+Part I covers elementary data structures, sorting, and searching algorithms. 
 ### Week 1
 The Java code for the [programming assignment](https://coursera.cs.princeton.edu/algs4/assignments/percolation/specification.php) is in the percolation folder. You can execute the code using Maven
 
