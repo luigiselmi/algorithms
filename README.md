@@ -33,7 +33,7 @@ It can be useful to execute some of the classes that are provided in the algs4.j
 $ java -cp "lib/algs4.jar" edu.princeton.cs.algs4.FrequencyCounter 8 < resources/searching/tinyTale.txt
 ```
 
-executes the Java class FrequencyCounter, in the edu.princeton.cs.algs4 package in the algs4.jar library, that takes as an argument the minimun length of a word to be counted, and a list of words from the input stream fed by a text file, and prints the most frequent word with at least that length.     
+executes the Java class FrequencyCounter, in the edu.princeton.cs.algs4 package in the algs4.jar library, that takes as an argument the minimun length of a word to be counted, a list of words from the input stream fed by a text file, and prints the most frequent word with at least that length.     
 ### Compile and execute using Maven
 You can compile all the Java classes using Maven
 
