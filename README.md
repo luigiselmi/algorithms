@@ -14,18 +14,20 @@ can organize the folder as with Maven, with a *target* folder and a *classes* su
 $ mkdir -p target/classes 
 
 ```
-In order to compile the Java code you need the [algs4.jar](https://algs4.cs.princeton.edu/code/) Java library to be added to the classpath. In the example the library is in the *lib* folder. Since the Java compiler doesn't find recursively all the Java files by itself you need to add a bash command
+In order to compile the Java code you need the [algs4.jar](https://algs4.cs.princeton.edu/code/) Java library to be added to the classpath. In the example the library is in the *lib* folder. Since the Java compiler doesn't find recursively all the Java files by itself you need to add a bash find command
 
 ```
- javac -cp lib/algs4.jar -d target/classes $(find ./src/main/java -name '*.java')
+ javac -cp lib/algs4.jar -d target/classes $(find src/main/java -name '*.java')
  
 ```
 
-In order to execute a Java class, from the project root folder, you need to add the compiled classed and the  java library that can be downloaded from the book's web page.
+In order to execute a Java class, from the project root folder, you need to add the compiled classes and the algs4.jar library to the classpath. As an example the command 
 
 ```
-$ java -cp "../algs4/lib/algs4.jar;target/classes/" fundamentals.StandardInput < resources/searching/tinyTale.txt
+$ java -cp "lib/algs4.jar;target/classes" searching.WordCounter < resources/searching/tinyTale.txt
 ```
+
+executes the *WordCounter* Java class, in the *searching* package, that takes in input a stream from a file (not the file name !) containing text and writes, in the standard output, the number of distinct words and the complete words list. 
 
 ### Compile and execute using Maven
 You can compile all the Java classes using Maven
@@ -34,9 +36,11 @@ You can compile all the Java classes using Maven
 $ mvn compile
 ```
 
-When the command returns a new "target" folder is created with a subfolder "classes" containing all the compiled java classes. 
+When the command returns, a new *target* folder is created, as Maven's convention, with a sub-folder *classes* containing all the compiled java classes. Examples of how to execute a Java class using Maven are provided in the following sections. 
+
 ## Part I
 Part I covers elementary data structures, sorting, and searching algorithms. 
+
 ### Week 1
 The Java code for the [programming assignment](https://coursera.cs.princeton.edu/algs4/assignments/percolation/specification.php) is in the percolation folder. You can execute the code using Maven
 
