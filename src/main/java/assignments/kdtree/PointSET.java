@@ -2,6 +2,7 @@ package assignments.kdtree;
 
 import java.util.TreeSet;
 
+import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.Point2D;
 import edu.princeton.cs.algs4.Queue;
 import edu.princeton.cs.algs4.RectHV;
@@ -81,6 +82,31 @@ public class PointSET {
 
   //unit testing of the methods (optional)
   public static void main(String[] args) {
+    // initialize the data structures from file
+    String filename = args[0];
+    In in = new In(filename);
+    PointSET brute = new PointSET();
+    while (!in.isEmpty()) {
+        double x = in.readDouble();
+        double y = in.readDouble();
+        Point2D p = new Point2D(x, y);
+        brute.insert(p);
+    }
     
+    // draw the rectangle
+    double x0 = 0.25, y0 = 0.25;      
+    double x1 = 0.75, y1 = 0.75;      
+    RectHV rect = new RectHV(x0, y0, x1, y1);
+    rect.draw();
+  
+    // draw the points within the rectangle
+    for (Point2D p: brute.range(rect))
+      p.draw();
+    
+    double xc = 0.5, yc = 0.5;
+    Point2D centre = new Point2D(xc, yc);
+    Point2D nearest = brute.nearest(centre);
+    nearest.drawTo(centre);
+  
   }
 }
