@@ -7,28 +7,34 @@ import edu.princeton.cs.algs4.Point2D;
 import edu.princeton.cs.algs4.Queue;
 import edu.princeton.cs.algs4.RectHV;
 import edu.princeton.cs.algs4.StdDraw;
-
+/*
+ * This class represents a data structure where points on a plane 
+ * are ordered in a binary search tree according to their coordinates.
+ * The 2D point that has the lowest y value goes on the left and 
+ * the point with higher y value goes on the right. In case the y 
+ * value is the same for two points they are ordered according to 
+ * their x value. The binary search tree is then used to look for 
+ * points that are within a rectangle or the nearest point to a
+ * given one. This class does not use any techniques, such as gridding,
+ * to reduce the number of evaluation for insertion and searching. 
+ */
 public class PointSET {
   
-  private boolean isEmpty;
-  private int size;
   private TreeSet<Point2D> pointSet = null; 
 
   //construct an empty set of points
   public PointSET() {
     this.pointSet = new TreeSet<Point2D>();
-    this.isEmpty = true;
-    this.size = 0;
   }
   
   //is the set empty?
   public boolean isEmpty() {
-    return this.isEmpty;
+    return this.pointSet.isEmpty();
   }
   
   //number of points in the set
   public int size() {
-    return this.size;
+    return this.pointSet.size();
   }
   
   //add the point to the set (if it is not already in the set)
@@ -52,7 +58,11 @@ public class PointSET {
       StdDraw.point(p.x(), p.y());
   }
   
-  //all points that are inside the rectangle (or on the boundary)
+  /*
+   * All points that are inside the rectangle (or on the boundary)
+   * Check all points in the set to find out whether they lie within
+   * the rectangle (brute force approach)
+   */
   public Iterable<Point2D> range(RectHV rect) {
     Queue<Point2D> insideRect = new Queue<Point2D>();
     if (rect == null)
@@ -63,13 +73,16 @@ public class PointSET {
     return insideRect;
   }
   
-  //a nearest neighbor in the set to point p; null if the set is empty
+  /*
+   * A nearest neighbor in the set to point p; null if the set is empty.
+   * Check all points in the set to find out which is the closest to the
+   * given one (brute force approach).
+   */
   public Point2D nearest(Point2D p) {
     if (p == null)
       throw new IllegalArgumentException("A 2D point cannot be null.");
-    Point2D nearestNeighbor = null;
-    Point2D ceilingPoint = pointSet.ceiling(p); 
-    double minDistance = ceilingPoint.distanceSquaredTo(p);
+    Point2D nearestNeighbor = pointSet.ceiling(p);
+    double minDistance = nearestNeighbor.distanceTo(p);
     for (Point2D point: pointSet) {
       double distance = p.distanceTo(point);
       if (distance < minDistance) {
