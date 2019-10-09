@@ -1,8 +1,11 @@
 package assignments.kdtree;
 
 import java.util.Comparator;
+
+import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.Point2D;
 import edu.princeton.cs.algs4.RectHV;
+import edu.princeton.cs.algs4.StdDraw;
 import edu.princeton.cs.algs4.StdOut;
 
 public class KdTree {
@@ -59,7 +62,7 @@ public class KdTree {
         x.leftBottom  = insert(x.leftBottom, p, ! x.vertical, lbRec);
       }
       else if (cmp > 0) {
-        RectHV rtRec = new RectHV(p.x(), x.point.y(), x.point.x(), x.point.y());
+        RectHV rtRec = new RectHV(x.point.x(), x.rect.ymin(), x.rect.xmax(), x.rect.ymax());
         x.rightTop = insert(x.rightTop, p, ! x.vertical, rtRec);
       }
       else x.point = p;
@@ -115,14 +118,20 @@ public class KdTree {
     }
   }
   
- 
   //draw all points to standard draw
-  /*
   public void draw() {
-    for (Point2D p: pointSet)
-      StdDraw.point(p.x(), p.y());
+    StdDraw.setPenColor(StdDraw.BLACK);
+    StdDraw.setPenRadius(0.01);
+    draw(root);
   }
-  */
+  private void draw(Node x) {
+    x.rect.draw();
+    x.point.draw();
+    Node lb = x.leftBottom;
+    if (lb != null) draw(lb);
+    Node rt = x.rightTop;
+    if (rt != null) draw(rt);
+  }
   /*
    * All points that are inside the rectangle (or on the boundary)
    * Check all points in the set to find out whether they lie within
@@ -166,6 +175,7 @@ public class KdTree {
     KdTree kdtree = new KdTree();
     
     // create some data points
+    
     double x0 = 0.7, y0 = 0.2;    
     Point2D p0 = new Point2D(x0,y0);
     double x1 = 0.5, y1 = 0.4;    
@@ -194,5 +204,19 @@ public class KdTree {
     kdtree.insert(p4);
     StdOut.printf("kd-tree contains p4 ? %s\n", kdtree.contains(p4));
     
+  
+    // initialize the data structures from file
+    /*
+    String filename = args[0];
+    In in = new In(filename);
+    while (!in.isEmpty()) {
+        double x = in.readDouble();
+        double y = in.readDouble();
+        Point2D p = new Point2D(x, y);
+        kdtree.insert(p);
+        StdOut.printf("kd-tree contains %s %s\n", p.toString(), kdtree.contains(p));
+    }
+    */
+    kdtree.draw();
   }
 }
