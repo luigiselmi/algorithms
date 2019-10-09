@@ -118,19 +118,39 @@ public class KdTree {
     }
   }
   
-  //draw all points to standard draw
+  // draws recursively all points and split 
+  // lines to standard draw
   public void draw() {
-    StdDraw.setPenColor(StdDraw.BLACK);
-    StdDraw.setPenRadius(0.01);
     draw(root);
   }
   private void draw(Node x) {
-    x.rect.draw();
-    x.point.draw();
+    drawPointSplit(x);
     Node lb = x.leftBottom;
     if (lb != null) draw(lb);
     Node rt = x.rightTop;
     if (rt != null) draw(rt);
+  }
+  private void drawPointSplit(Node x) {
+    if (x.vertical) {
+      // draw vertical splitting line
+      StdDraw.setPenColor(StdDraw.RED);
+      StdDraw.setPenRadius(); 
+      double ymax = x.rect.ymax();
+      double ymin = x.rect.ymin();
+      StdDraw.line(x.point.x(), ymin, x.point.x(), ymax);
+    }
+    else {
+      // draw horizontal splitting line
+      StdDraw.setPenColor(StdDraw.BLUE);
+      StdDraw.setPenRadius(); 
+      double xmin = x.rect.xmin();
+      double xmax = x.rect.xmax();
+      StdDraw.line(xmin, x.point.y(), xmax, x.point.y());
+    }
+    // draw point
+    StdDraw.setPenColor(StdDraw.BLACK);
+    StdDraw.setPenRadius(0.01);
+    x.point.draw();
   }
   /*
    * All points that are inside the rectangle (or on the boundary)
@@ -175,7 +195,7 @@ public class KdTree {
     KdTree kdtree = new KdTree();
     
     // create some data points
-    
+    /*
     double x0 = 0.7, y0 = 0.2;    
     Point2D p0 = new Point2D(x0,y0);
     double x1 = 0.5, y1 = 0.4;    
@@ -203,10 +223,9 @@ public class KdTree {
     
     kdtree.insert(p4);
     StdOut.printf("kd-tree contains p4 ? %s\n", kdtree.contains(p4));
-    
+    */
   
     // initialize the data structures from file
-    /*
     String filename = args[0];
     In in = new In(filename);
     while (!in.isEmpty()) {
@@ -216,7 +235,7 @@ public class KdTree {
         kdtree.insert(p);
         StdOut.printf("kd-tree contains %s %s\n", p.toString(), kdtree.contains(p));
     }
-    */
+   
     kdtree.draw();
   }
 }
