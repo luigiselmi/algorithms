@@ -1,9 +1,11 @@
 package assignments.kdtree;
 
 import java.util.Comparator;
+import java.util.Iterator;
 
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.Point2D;
+import edu.princeton.cs.algs4.Queue;
 import edu.princeton.cs.algs4.RectHV;
 import edu.princeton.cs.algs4.StdDraw;
 import edu.princeton.cs.algs4.StdOut;
@@ -157,45 +159,59 @@ public class KdTree {
    * Check all points in the set to find out whether they lie within
    * the rectangle (brute force approach)
    */
-  /*
-  public Iterable<Point2D> range(RectHV rect) {
-    Queue<Point2D> insideRect = new Queue<Point2D>();
-    if (rect == null)
+  public Iterable<Point2D> range(RectHV queryRect) {
+    if (queryRect == null)
       throw new IllegalArgumentException("A rectangle cannot be null.");
-    for (Point2D p: pointSet)
-      if (rect.contains(p))
-        insideRect.enqueue(p);
-    return insideRect;
+    Queue<Point2D> points = new Queue<Point2D>();
+    return range(root, queryRect, points);
   }
-  */
+  /*
+   * 1. Check if point in node lies in the query rectangle
+   * 2. Recursively search left/bottom (if any could fall in the rectangle)
+   * 3. Recursively search right/top (if any could fall in the rectangle)
+   */
+  private Iterable<Point2D> range(Node x, RectHV queryRect, Queue<Point2D> points) {
+    if( queryRect.contains(x.point) )
+      points.enqueue(x.point);
+    if (x.leftBottom != null) range(x.leftBottom, queryRect, points);
+    if (x.rightTop != null) range(x.rightTop, queryRect, points);
+  
+    return points;
+  }
+
   /*
    * A nearest neighbor in the set to point p; null if the set is empty.
    * Check all points in the set to find out which is the closest to the
    * given one (brute force approach).
    */
-  /*
-  public Point2D nearest(Point2D p) {
-    if (p == null)
+  public Point2D nearest(Point2D queryPoint) {
+    if (queryPoint == null)
       throw new IllegalArgumentException("A 2D point cannot be null.");
-    Point2D nearestNeighbor = pointSet.ceiling(p);
-    double minDistance = nearestNeighbor.distanceTo(p);
-    for (Point2D point: pointSet) {
-      double distance = p.distanceTo(point);
-      if (distance < minDistance) {
-        minDistance = distance;
-        nearestNeighbor = point;
-      }
-    }
-    return nearestNeighbor;
+    Point2D nearestPoint = root.point;
+    return nearest(root, queryPoint, nearestPoint);
   }
-  */
+  /*
+   * 1. Check distance from point in node to query point
+   * 2. Recursively search left/bottom (if it could contain a closer point)
+   * 3. Recursively search right/top (if it could contain a closer point)
+   */
+  private Point2D nearest(Node x, Point2D queryPoint, Point2D nearestPoint) {
+    double distance2 = x.point.distanceSquaredTo(queryPoint);
+    double minDistance2 = nearestPoint.distanceSquaredTo(queryPoint); 
+    if(distance2 < minDistance2) 
+      nearestPoint = x.point;
+    if (x.leftBottom != null) nearest(x.leftBottom, queryPoint, nearestPoint);
+    if (x.rightTop != null) nearest(x.rightTop, queryPoint, nearestPoint);
+    
+    return nearestPoint;
+  }
+ 
   //unit testing of the methods (optional)
   public static void main(String[] args) {
     // Setup the empty binary search tree
     KdTree kdtree = new KdTree();
     
     // create some data points
-    /*
     double x0 = 0.7, y0 = 0.2;    
     Point2D p0 = new Point2D(x0,y0);
     double x1 = 0.5, y1 = 0.4;    
@@ -211,21 +227,34 @@ public class KdTree {
     // and see if they can be reached
     kdtree.insert(p0);
     StdOut.printf("kd-tree contains p0 ? %s\n", kdtree.contains(p0));
-    
     kdtree.insert(p1);
     StdOut.printf("kd-tree contains p1 ? %s\n", kdtree.contains(p1));
-    
     kdtree.insert(p2);
     StdOut.printf("kd-tree contains p2 ? %s\n", kdtree.contains(p2));
-    
     kdtree.insert(p3);
     StdOut.printf("kd-tree contains p3 ? %s\n", kdtree.contains(p3));
-    
     kdtree.insert(p4);
     StdOut.printf("kd-tree contains p4 ? %s\n", kdtree.contains(p4));
-    */
   
+    // test draw()
+    //kdtree.draw();
+    
+    // test range()
+    double x3a = 0.425, y3a = 0.725;    
+    Point2D p3a = new Point2D(x3a,y3a);
+    //kdtree.insert(p3a);
+    double d = 0.1;
+    RectHV rect03 = new RectHV(x3 - d, y3 - d, x3 + d, y3 + d);
+    Iterable<Point2D> ipoints = kdtree.range(rect03);
+    for(Point2D p: ipoints) {
+      StdOut.printf("Point %s is inside the rectangle.\n", p.toString());
+    }
+    
+    // test nearest neighbor
+    StdOut.printf("The nearest point to %s is %s\n", p3a, kdtree.nearest(p3a));
+    
     // initialize the data structures from file
+    /*
     String filename = args[0];
     In in = new In(filename);
     while (!in.isEmpty()) {
@@ -235,7 +264,6 @@ public class KdTree {
         kdtree.insert(p);
         StdOut.printf("kd-tree contains %s %s\n", p.toString(), kdtree.contains(p));
     }
-   
-    kdtree.draw();
+    */  
   }
 }
