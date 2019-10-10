@@ -188,20 +188,30 @@ public class KdTree {
     if (queryPoint == null)
       throw new IllegalArgumentException("A 2D point cannot be null.");
     Point2D nearestPoint = root.point;
-    return nearest(root, queryPoint, nearestPoint);
+    return nearest(root, queryPoint, nearestPoint, true);
   }
   /*
    * 1. Check distance from point in node to query point
    * 2. Recursively search left/bottom (if it could contain a closer point)
    * 3. Recursively search right/top (if it could contain a closer point)
    */
-  private Point2D nearest(Node x, Point2D queryPoint, Point2D nearestPoint) {
+  private Point2D nearest(Node x, Point2D queryPoint, Point2D nearestPoint, boolean checkRightTopSubTree) {
     double distance2 = x.point.distanceSquaredTo(queryPoint);
     double minDistance2 = nearestPoint.distanceSquaredTo(queryPoint); 
-    if(distance2 < minDistance2) 
+    if(distance2 < minDistance2) {
       nearestPoint = x.point;
-    if (x.leftBottom != null) nearest(x.leftBottom, queryPoint, nearestPoint);
-    if (x.rightTop != null) nearest(x.rightTop, queryPoint, nearestPoint);
+    }
+   
+    // check the left subtree
+    if (x.leftBottom != null && x.leftBottom.rect.contains(queryPoint)) { 
+      checkRightTopSubTree = false;
+      nearest(x.leftBottom, queryPoint, nearestPoint, checkRightTopSubTree);
+    }
+    // check the right subtree
+    if(checkRightTopSubTree)
+      if (x.rightTop != null && x.rightTop.rect.contains(queryPoint)) 
+        nearest(x.rightTop, queryPoint, nearestPoint, checkRightTopSubTree);
+ 
     
     return nearestPoint;
   }
@@ -237,11 +247,12 @@ public class KdTree {
     StdOut.printf("kd-tree contains p4 ? %s\n", kdtree.contains(p4));
   
     // test draw()
-    //kdtree.draw();
+    kdtree.draw();
     
     // test range()
     double x3a = 0.425, y3a = 0.725;    
     Point2D p3a = new Point2D(x3a,y3a);
+    p3a.draw();
     //kdtree.insert(p3a);
     double d = 0.1;
     RectHV rect03 = new RectHV(x3 - d, y3 - d, x3 + d, y3 + d);
@@ -258,11 +269,11 @@ public class KdTree {
     String filename = args[0];
     In in = new In(filename);
     while (!in.isEmpty()) {
-        double x = in.readDouble();
-        double y = in.readDouble();
-        Point2D p = new Point2D(x, y);
-        kdtree.insert(p);
-        StdOut.printf("kd-tree contains %s %s\n", p.toString(), kdtree.contains(p));
+      double x = in.readDouble();
+      double y = in.readDouble();
+      Point2D p = new Point2D(x, y);
+      kdtree.insert(p);
+      StdOut.printf("kd-tree contains %s %s\n", p.toString(), kdtree.contains(p));
     }
     */  
   }
