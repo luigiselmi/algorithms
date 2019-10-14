@@ -1,7 +1,6 @@
 package assignments.kdtree;
 
 import java.util.TreeSet;
-
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.Point2D;
 import edu.princeton.cs.algs4.Queue;
@@ -22,22 +21,22 @@ public class PointSET {
   
   private TreeSet<Point2D> pointSet = null; 
 
-  //construct an empty set of points
+  // construct an empty set of points
   public PointSET() {
     this.pointSet = new TreeSet<Point2D>();
   }
   
-  //is the set empty?
+  // is the set empty?
   public boolean isEmpty() {
     return this.pointSet.isEmpty();
   }
   
-  //number of points in the set
+  // number of points in the set
   public int size() {
     return this.pointSet.size();
   }
   
-  //add the point to the set (if it is not already in the set)
+  // add the point to the set (if it is not already in the set)
   public void insert(Point2D p) {
     if (p == null)
       throw new IllegalArgumentException("A 2D point cannot be null.");
@@ -45,7 +44,7 @@ public class PointSET {
       pointSet.add(p);
   }
 
-  //does the set contain point p?
+  // does the set contain point p?
   public boolean contains(Point2D p) {
     if (p == null)
       throw new IllegalArgumentException("A 2D point cannot be null.");
@@ -82,9 +81,9 @@ public class PointSET {
     if (p == null)
       throw new IllegalArgumentException("A 2D point cannot be null.");
     Point2D nearestNeighbor = pointSet.ceiling(p);
-    double minDistance = nearestNeighbor.distanceTo(p);
+    double minDistance = nearestNeighbor.distanceSquaredTo(p);
     for (Point2D point: pointSet) {
-      double distance = p.distanceTo(point);
+      double distance = p.distanceSquaredTo(point);
       if (distance < minDistance) {
         minDistance = distance;
         nearestNeighbor = point;
@@ -93,7 +92,7 @@ public class PointSET {
     return nearestNeighbor;
   }
 
-  //unit testing of the methods (optional)
+  // unit testing of the methods (optional)
   public static void main(String[] args) {
     // initialize the data structures from file
     String filename = args[0];
