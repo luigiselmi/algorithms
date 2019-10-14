@@ -1,9 +1,6 @@
 package assignments.kdtree;
 
 import java.util.Comparator;
-import java.util.Iterator;
-
-import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.Point2D;
 import edu.princeton.cs.algs4.Queue;
 import edu.princeton.cs.algs4.RectHV;
@@ -30,15 +27,15 @@ public class KdTree {
     }
   }
 
-  //construct an empty set of points
-  public KdTree() {}
+  // construct an empty set of points
+  public KdTree() { }
   
-  //is the set empty?
+  // is the set empty?
   public boolean isEmpty() {
     return size(root) == 0;
   }
   
-  //number of points in the set
+  // number of points in the set
   public int size() {
     return size(root);
   }
@@ -47,7 +44,7 @@ public class KdTree {
     else return x.N;
   }
   
-  //add the point to the set (if it is not already in the set)
+  // add the point to the set (if it is not already in the set)
   public void insert(Point2D p) {
     if (p == null)
       throw new IllegalArgumentException("A 2D point cannot be null.");
@@ -88,7 +85,7 @@ public class KdTree {
     return x;
   }
   
-  //does the set contain point p?
+  // does the set contain point p?
   public boolean contains(Point2D p) {
     if (p == null)
       throw new IllegalArgumentException("A 2D point cannot be null.");
@@ -171,7 +168,7 @@ public class KdTree {
    * 3. Recursively search right/top (if any could fall in the rectangle)
    */
   private Iterable<Point2D> range(Node x, RectHV queryRect, Queue<Point2D> points) {
-    if( queryRect.contains(x.point) )
+    if ( queryRect.contains(x.point) )
       points.enqueue(x.point);
     if (x.leftBottom != null) range(x.leftBottom, queryRect, points);
     if (x.rightTop != null) range(x.rightTop, queryRect, points);
@@ -188,35 +185,46 @@ public class KdTree {
     if (queryPoint == null)
       throw new IllegalArgumentException("A 2D point cannot be null.");
     Point2D nearestPoint = root.point;
-    return nearest(root, queryPoint, nearestPoint, true);
+    return nearest(root, queryPoint, nearestPoint);
   }
   /*
    * 1. Check distance from point in node to query point
    * 2. Recursively search left/bottom (if it could contain a closer point)
    * 3. Recursively search right/top (if it could contain a closer point)
    */
-  private Point2D nearest(Node x, Point2D queryPoint, Point2D nearestPoint, boolean checkRightTopSubTree) {
+  private Point2D nearest(Node x, Point2D queryPoint, Point2D nearestPoint) {
     double distance2 = x.point.distanceSquaredTo(queryPoint);
     double minDistance2 = nearestPoint.distanceSquaredTo(queryPoint); 
-    if(distance2 < minDistance2) {
-      nearestPoint = x.point;
+    boolean checkRightTopSubTree = true;
+    boolean checkLeftBottomSubTree = true;
+    if (distance2 < minDistance2) {
+      nearestPoint = x.point; 
+      if (x.leftBottom != null && x.leftBottom.rect.contains(queryPoint))
+        checkRightTopSubTree = false;
+      else
+        checkLeftBottomSubTree = false;
     }
-   
+    if (distance2 > minDistance2) {
+      if (x.leftBottom != null && x.leftBottom.rect.contains(queryPoint))
+        checkRightTopSubTree = false;
+      else
+        checkLeftBottomSubTree = false;
+    }
+    
+    
     // check the left subtree
-    if (x.leftBottom != null && x.leftBottom.rect.contains(queryPoint)) { 
-      checkRightTopSubTree = false;
-      nearest(x.leftBottom, queryPoint, nearestPoint, checkRightTopSubTree);
+    if (checkLeftBottomSubTree && x.leftBottom != null && x.leftBottom.rect.contains(queryPoint)) { 
+      nearestPoint = nearest(x.leftBottom, queryPoint, nearestPoint);
     }
     // check the right subtree
-    if(checkRightTopSubTree)
-      if (x.rightTop != null && x.rightTop.rect.contains(queryPoint)) 
-        nearest(x.rightTop, queryPoint, nearestPoint, checkRightTopSubTree);
- 
-    
+    if (checkRightTopSubTree && x.rightTop != null && x.rightTop.rect.contains(queryPoint)) {
+      nearestPoint = nearest(x.rightTop, queryPoint, nearestPoint);
+    }
+        
     return nearestPoint;
   }
  
-  //unit testing of the methods (optional)
+  // unit testing of the methods (optional)
   public static void main(String[] args) {
     // Setup the empty binary search tree
     KdTree kdtree = new KdTree();
@@ -250,10 +258,6 @@ public class KdTree {
     kdtree.draw();
     
     // test range()
-    double x3a = 0.425, y3a = 0.725;    
-    Point2D p3a = new Point2D(x3a,y3a);
-    p3a.draw();
-    //kdtree.insert(p3a);
     double d = 0.1;
     RectHV rect03 = new RectHV(x3 - d, y3 - d, x3 + d, y3 + d);
     Iterable<Point2D> ipoints = kdtree.range(rect03);
@@ -262,6 +266,9 @@ public class KdTree {
     }
     
     // test nearest neighbor
+    double x0a = 0.675, y0a = 0.225;    
+    Point2D p3a = new Point2D(x0a,y0a);
+    p3a.draw();
     StdOut.printf("The nearest point to %s is %s\n", p3a, kdtree.nearest(p3a));
     
     // initialize the data structures from file
