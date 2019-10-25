@@ -80,7 +80,32 @@ the goal with all the tiles ordered. The Java code for the [programming assignme
 
 ```
 $ mvn exec:java -Dexec.mainClass="assignments.puzzle.Solver" -Dexec.args="resources/puzzle/puzzle04.txt"
-```      
+```
+
+### Week 5
+The topics of week 5 are balanced search trees and their applications. The [programming assignment](https://coursera.cs.princeton.edu/algs4/assignments/kdtree/specification.php) is about kd-trees and in particular 2d-trees. The Java class KdTreeVisualizer.java computes and draws the 2d-tree that results from the sequence of points clicked by the user in the standard drawing window.
+
+```
+$ mvn exec:java -Dexec.mainClass="assignments.kdtree.KdTreeVisualizer"
+```
+
+The Java class NearestNeighborVisualizer.java reads a sequence of points from a file (specified as a command-line argument) and inserts those points into a 2d-tree. Then, it performs nearest-neighbor queries on the point corresponding to the location of the mouse in the standard drawing window.
+
+```
+$ mvn exec:java -Dexec.mainClass="assignments.kdtree.NearestNeighborVisualizer" -Dexec.args="resources/assignments/kdtree/circle100.txt"
+```
+
+The Java class RangeSearchVisualizer.java reads a sequence of points from a file (specified as a command-line argument) and inserts those points into a 2d-tree. Then, it performs range searches on the axis-aligned rectangles dragged by the user in the standard drawing window.
+
+```
+$ mvn exec:java -Dexec.mainClass="assignments.kdtree.RangeSearchVisualizer" -Dexec.args="resources/assignments/kdtree/circle100.txt"
+```
+
+### Week 6
+This week is about hash tables. There is no programming assignment. 
 
 ## Part II
 Part II focuses on graph- and string-processing algorithms.
+
+### Week 1
+This week is about undirected and directed graph (aka digraphs). The [programming assignment](https://coursera.cs.princeton.edu/algs4/assignments/wordnet/specification.php) is about creating a digraph from the WordNet semantic lexicon and finding specific paths between the synsets (vertices) and computing the relatedness of two nouns. 
