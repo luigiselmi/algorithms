@@ -12,7 +12,7 @@ public class WordNet {
   private Digraph G;
   
   /*
-   * Constructor takes the name of the two input files. 
+   * The constructor takes the name of two input files. 
    * The 1st file contains the synsets. Each synset is made up of three elements
    * the synset id, the synset, and the synset definition, separated by a comma.
    * Each synset can contain more than one noun so that each noun can be associated
