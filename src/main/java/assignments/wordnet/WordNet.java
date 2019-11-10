@@ -1,10 +1,12 @@
 package assignments.wordnet;
 
 import edu.princeton.cs.algs4.Digraph;
+import edu.princeton.cs.algs4.DirectedCycle;
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.Queue;
 import edu.princeton.cs.algs4.ST;
 import edu.princeton.cs.algs4.StdOut;
+import edu.princeton.cs.algs4.Topological;
 
 public class WordNet {
   private ST<String, Queue<Integer>> nounsInvertedIndex;
@@ -41,7 +43,7 @@ public class WordNet {
     
     G = new Digraph(synsetNum);
     In hypernymsIn = new In(hypernyms);
-    for (int i = 0 ; i < synsetNum - 1; i++) {
+    for (int i = 0 ; i < synsetNum; i++) {
       String [] vertices = hypernymsIn.readLine().split(",");
         int v = Integer.parseInt(vertices[0]);
         for (int j = 1; j < vertices.length ; j++) {
@@ -50,7 +52,25 @@ public class WordNet {
         }
     }
     
+    if ( ! isRootedDAG(G) )
+      throw new IllegalArgumentException("The input to the constructor does not correspond to a rooted DAG.");
     
+  }
+  /*
+   * A rooted directed acyclic graph (DAG) has a
+   * (topological) order and only one root, i.e. a vertex 
+   * without outgoing edges.
+   */
+  private boolean isRootedDAG(Digraph G) {
+    boolean hasOrder = new Topological(G).hasOrder();
+    int numberOfVerticesWithoutOutgoingEdges = 0;
+    if (hasOrder) 
+      for (int v = 0; v < G.V(); v++)
+        if (G.outdegree(v) == 0) numberOfVerticesWithoutOutgoingEdges++;  
+    
+    boolean isRootedDAG = hasOrder && (numberOfVerticesWithoutOutgoingEdges == 1);
+    
+    return isRootedDAG;
   }
 
   // returns all WordNet nouns
