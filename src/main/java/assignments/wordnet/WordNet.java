@@ -1,5 +1,6 @@
 package assignments.wordnet;
 
+import edu.princeton.cs.algs4.DepthFirstDirectedPaths;
 import edu.princeton.cs.algs4.Digraph;
 import edu.princeton.cs.algs4.DirectedCycle;
 import edu.princeton.cs.algs4.In;
@@ -12,6 +13,7 @@ public class WordNet {
   private ST<String, Queue<Integer>> nounsInvertedIndex;
   private int synsetNum = 0; // number of synsets
   private Digraph G;
+  private int rootVertex;
   
   /*
    * The constructor takes the name of two input files. 
@@ -57,16 +59,20 @@ public class WordNet {
     
   }
   /*
-   * A rooted directed acyclic graph (DAG) has a
-   * (topological) order and only one root, i.e. a vertex 
-   * without outgoing edges.
+   * A directed graph (digraph) has a (topological) order 
+   * if and only if it is a directed acyclic graph (DAG). 
+   * A DAG is rooted if it has only one root (i.e. a vertex 
+   * without outgoing edges).
    */
   private boolean isRootedDAG(Digraph G) {
     boolean hasOrder = new Topological(G).hasOrder();
     int numberOfVerticesWithoutOutgoingEdges = 0;
     if (hasOrder) 
-      for (int v = 0; v < G.V(); v++)
-        if (G.outdegree(v) == 0) numberOfVerticesWithoutOutgoingEdges++;  
+      for (int v = 0; v < G.V(); v++) 
+        if (G.outdegree(v) == 0) {
+          numberOfVerticesWithoutOutgoingEdges++;  
+          rootVertex = v;
+        }
     
     boolean isRootedDAG = hasOrder && (numberOfVerticesWithoutOutgoingEdges == 1);
     
@@ -89,7 +95,10 @@ public class WordNet {
   public int distance(String nounA, String nounB) {
     if (! this.isNoun(nounA) || ! this.isNoun(nounB))
       throw new IllegalArgumentException("Both nouns must be not null and WordNet nouns.");
-    return 0;
+    Queue<Integer> synsetsA = nounsInvertedIndex.get(nounA);
+    Queue<Integer> synsetB = nounsInvertedIndex.get(nounB);
+    return 0; // not completed
+          
   }
   
   /*
