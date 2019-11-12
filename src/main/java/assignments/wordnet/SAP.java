@@ -31,23 +31,38 @@ public class SAP {
   }
 
   /*
-   * Finds a common ancestor of v and w that participates in a shortest 
-   * ancestral path; -1 if no such path. 
+   * Finds a common ancestor of the input vertices v and w that participates 
+   * in a shortest ancestral path; -1 if no such path. 
+   * A vertex can be the ancestor of itself.
+   * The algorithm checks whether there is a path between any vertex and both
+   * input vertex v and w. If the two paths exist, it will look for a common 
+   * vertex in both paths that can be an ancestor of both v and w.
+   * The algorithm computes the length of the sum of the distances of v and w 
+   * from the candidate ancestor. If the length is less than the previous one
+   * the candidate ancestor is updated.   
    */
   public int ancestor(int v, int w) {
     validateVertex(v);
     validateVertex(w);
     BreadthFirstDirectedPaths bfdpV = new BreadthFirstDirectedPaths(G, v);
     BreadthFirstDirectedPaths bfdpW = new BreadthFirstDirectedPaths(G, w);
+    int commonAncestor = -1;
+    int shortestAncestralDistance = G.E();
     for (int vertex = 0; vertex < G.V(); vertex++)
       if (bfdpV.hasPathTo(vertex) && bfdpW.hasPathTo(vertex)) {
         Iterable<Integer> itV = bfdpV.pathTo(vertex);
         Iterable<Integer> itW = bfdpW.pathTo(vertex);
         for (int ancestorV: itV)
           for (int ancestorW: itW)
-            if (ancestorV == ancestorW) return ancestorW;
+            if (ancestorV == ancestorW) {
+              int ancestralDistance = bfdpV.distTo(ancestorV) + bfdpW.distTo(ancestorW);
+              if (ancestralDistance <shortestAncestralDistance) {
+                shortestAncestralDistance = ancestralDistance; 
+                commonAncestor = ancestorV;
+              }
+            }
       }
-    return -1;
+    return commonAncestor;
   }
 
   // length of shortest ancestral path between any vertex in v and any vertex in w; -1 if no such path
