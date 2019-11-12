@@ -25,9 +25,8 @@ public class SAP {
     int commonAncestor = ancestor(v, w);
     BreadthFirstDirectedPaths bfdpV = new BreadthFirstDirectedPaths(G, v);
     BreadthFirstDirectedPaths bfdpW = new BreadthFirstDirectedPaths(G, w);
-    int distFromV = bfdpV.distTo(commonAncestor);
-    int distFromW = bfdpW.distTo(commonAncestor);
-    return distFromV + distFromW;
+    if (commonAncestor != -1) return bfdpV.distTo(commonAncestor) + bfdpW.distTo(commonAncestor);
+    else return -1;
   }
 
   /*
@@ -70,8 +69,12 @@ public class SAP {
     if (v == null || w == null)
       throw new IllegalArgumentException("The paths must not be null.");
     validateIterables(v, w);
-    
-    return 0; // not completed
+    int commonAncestor = ancestor(v, w);
+    BreadthFirstDirectedPaths bfdpV = new BreadthFirstDirectedPaths(G, v);
+    BreadthFirstDirectedPaths bfdpW = new BreadthFirstDirectedPaths(G, w);
+    int distFromV = bfdpV.distTo(commonAncestor);
+    int distFromW = bfdpW.distTo(commonAncestor);
+    return distFromV + distFromW;
   }
 
   // a common ancestor that participates in shortest ancestral path; -1 if no such path
@@ -79,8 +82,25 @@ public class SAP {
     if (v == null || w == null)
       throw new IllegalArgumentException("The paths must not be null.");
     validateIterables(v, w);
-    
-    return 0; // not completed
+    BreadthFirstDirectedPaths bfdpV = new BreadthFirstDirectedPaths(G, v);
+    BreadthFirstDirectedPaths bfdpW = new BreadthFirstDirectedPaths(G, w);
+    int commonAncestor = -1;
+    int shortestAncestralDistance = G.E();
+    for (int vertex = 0; vertex < G.V(); vertex++)
+      if (bfdpV.hasPathTo(vertex) && bfdpW.hasPathTo(vertex)) {
+        Iterable<Integer> itV = bfdpV.pathTo(vertex);
+        Iterable<Integer> itW = bfdpW.pathTo(vertex);
+        for (int ancestorV: itV)
+          for (int ancestorW: itW)
+            if (ancestorV == ancestorW) {
+              int ancestralDistance = bfdpV.distTo(ancestorV) + bfdpW.distTo(ancestorW);
+              if (ancestralDistance <shortestAncestralDistance) {
+                shortestAncestralDistance = ancestralDistance; 
+                commonAncestor = ancestorV;
+              }
+            }
+      }
+    return commonAncestor;
   }
   
   //throw an IllegalArgumentException unless {@code 0 <= v < V}
