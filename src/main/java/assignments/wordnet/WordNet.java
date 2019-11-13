@@ -98,7 +98,7 @@ public class WordNet {
     return nounsInvertedIndex.get(word) != null;
   }
   
-  // distance between nounA and nounB
+  // length of shortest ancestral path between two nouns
   public int distance(String nounA, String nounB) {
     if (! this.isNoun(nounA) || ! this.isNoun(nounB))
       throw new IllegalArgumentException("Both nouns must be not null and WordNet nouns.");
@@ -133,6 +133,15 @@ public class WordNet {
     for (int synsetId: wn.nounsInvertedIndex.get("zone"))   
       StdOut.printf("synset id for noun \"zone\" is %d\n", synsetId);
     
+    // test shortest ancestral path
+    StdOut.printf("The SAP for \"worm\" and \"bird\" is %s.\n", wn.sap("worm", "bird"));
+    
+    // test distance between nouns
+    StdOut.printf("The distance between the nouns \"worm\" and \"bird\" is %s.\n", wn.distance("worm", "bird"));
+    StdOut.printf("The distance between the nouns \"white_marlin\" and \"mileage\" is %s.\n", wn.distance("white_marlin", "mileage"));
+    StdOut.printf("The distance between the nouns \"Black_Plague\" and \"black_marlin\" is %s.\n", wn.distance("Black_Plague", "black_marlin"));
+    StdOut.printf("The distance between the nouns \"American_water_spaniel\" and \"histology\" is %s.\n", wn.distance("American_water_spaniel", "histology"));
+    StdOut.printf("The distance between the nouns \"Brown_Swiss\" and \"barrel_roll\" is %s.\n", wn.distance("Brown_Swiss", "barrel_roll"));
   }
 
 }
