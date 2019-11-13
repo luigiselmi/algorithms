@@ -108,4 +108,22 @@ This week is about hash tables. There is no programming assignment.
 Part II focuses on graph- and string-processing algorithms.
 
 ### Week 1
-This week is about undirected and directed graph (aka digraphs). The [programming assignment](https://coursera.cs.princeton.edu/algs4/assignments/wordnet/specification.php) is about creating a digraph from the WordNet semantic lexicon and finding specific paths between the synsets (vertices) and computing the relatedness of two nouns. 
+This week is about undirected and directed graph (aka digraphs). The [programming assignment](https://coursera.cs.princeton.edu/algs4/assignments/wordnet/specification.php) is about creating a digraph from the WordNet semantic lexicon and finding specific paths between the synsets (vertices) and computing the relatedness of two nouns. Three Java classes must be implemented for this assignment. The 1st one to be implemented is SAP.java that is used to compute the shortest ancestral path between two vertices. You can use SAP.java, with some test files, executing the Java class and entering pair of integers, that represent two vertices, from the command line
+
+```
+$ mvn exec:java -Dexec.mainClass="assignments.wordnet.SAP" -Dexec.args="resources/assignments/wordnet/digraph1.txt"
+ ```
+ 
+The 2nd Java class to be implemented is WordNet.java that reads two files. The 1st file contains a set of synsets from WordNet, and the 2nd file contains the relationships (hypernyms) between the vertices. You can test the correctness of the implementation by executing its main method.
+
+```
+$ mvn exec:java -Dexec.mainClass="assignments.wordnet.WordNet" -Dexec.args="resources/assignments/wordnet/synsets.txt resources/assignments/wordnet/hypernyms.txt"
+```
+
+Finally the 3rd class, Outcast.java, can be used to measure the semantic distance between words, provided in a file, to return the word that is the least related to the other ones, as in the example where outcast5.txt contains the words "horse" "zebra", "cat", "bear", "table", and Outcast returns correctly the word "table".
+
+```
+$ mvn exec:java -Dexec.mainClass="assignments.wordnet.Outcast" -Dexec.args="resources/assignments/wordnet/synsets.txt resources/assignments/wordnet/hypernyms.txt resources/assignments/wordnet/outcast5.txt"
+```
+
+### Week 2
