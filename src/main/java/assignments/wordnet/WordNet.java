@@ -130,6 +130,8 @@ public class WordNet {
     
     // look for synset ids associated to a noun
     StdOut.printf("Is \"yellowlegs\" a noun ? %s\n", wn.isNoun("yellowlegs"));
+    assert wn.isNoun("yellowlegs");
+    
     for (int synsetId: wn.nounsInvertedIndex.get("zone"))   
       StdOut.printf("synset id for noun \"zone\" is %d\n", synsetId);
     
@@ -138,10 +140,20 @@ public class WordNet {
     
     // test distance between nouns
     StdOut.printf("The distance between the nouns \"worm\" and \"bird\" is %s.\n", wn.distance("worm", "bird"));
+    assert wn.distance("worm", "bird") == 5;
+    
     StdOut.printf("The distance between the nouns \"white_marlin\" and \"mileage\" is %s.\n", wn.distance("white_marlin", "mileage"));
+    assert wn.distance("white_marlin", "mileage") == 23;
+    
     StdOut.printf("The distance between the nouns \"Black_Plague\" and \"black_marlin\" is %s.\n", wn.distance("Black_Plague", "black_marlin"));
+    assert wn.distance("Black_Plague", "black_marlin") == 33;
+    
     StdOut.printf("The distance between the nouns \"American_water_spaniel\" and \"histology\" is %s.\n", wn.distance("American_water_spaniel", "histology"));
+    assert wn.distance("American_water_spaniel", "histology") == 27;
+    
     StdOut.printf("The distance between the nouns \"Brown_Swiss\" and \"barrel_roll\" is %s.\n", wn.distance("Brown_Swiss", "barrel_roll"));
+    assert wn.distance("Brown_Swiss", "barrel_roll") == 29;
+    
   }
 
 }
