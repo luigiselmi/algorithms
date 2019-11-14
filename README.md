@@ -120,7 +120,7 @@ The 2nd Java class to be implemented is WordNet.java that reads two files. The 1
 $ mvn exec:java -Dexec.mainClass="assignments.wordnet.WordNet" -Dexec.args="resources/assignments/wordnet/synsets.txt resources/assignments/wordnet/hypernyms.txt"
 ```
 
-Finally the 3rd class, Outcast.java, can be used to measure the semantic distance between words, provided in a file, to return the word that is the least related to the other ones, as in the example where outcast5.txt contains the words "horse" "zebra", "cat", "bear", "table", and Outcast returns correctly the word "table".
+Finally the 3rd class, Outcast.java, can be used to measure the semantic distance between words, provided in a file, to return the word that is the least related to the other ones, as in the example where outcast5.txt contains the words "horse", "zebra", "cat", "bear", "table", and Outcast returns correctly the word "table".
 
 ```
 $ mvn exec:java -Dexec.mainClass="assignments.wordnet.Outcast" -Dexec.args="resources/assignments/wordnet/synsets.txt resources/assignments/wordnet/hypernyms.txt resources/assignments/wordnet/outcast5.txt"
