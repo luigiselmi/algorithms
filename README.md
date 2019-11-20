@@ -127,3 +127,5 @@ $ mvn exec:java -Dexec.mainClass="assignments.wordnet.Outcast" -Dexec.args="reso
 ```
 
 ### Week 2
+This week is about edge-weighted graph, both undirected and directed, where a weight, or cost, is associated to each edge. The addition of a weight enables the representation of many practical problems where a weight can represent the distance between two edges or some other parameter. The main algorithms discussed with different types of edge-weighted graphs are the minimum spanning tree, Dijkstra's algorithm, Prim's algorithm and Kruskal's algorithm.
+  
