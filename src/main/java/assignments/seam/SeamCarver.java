@@ -22,10 +22,10 @@ public class SeamCarver {
   }
   
   private void initEnery() {
-	  Arrays.fill(energy[0], 1000.0); // first row, y=0
+	  Arrays.fill(energy[0], 1000.0); // top row, y=0
     for (int y = 1; y < H - 1; y++)
       Arrays.fill(energy[y], 1, W - 1, -1.0);
-	  Arrays.fill(energy[H - 1], 1000.0); // last row, y=H-1
+	  Arrays.fill(energy[H - 1], 1000.0); // bottom row, y=H-1
 	  for (int y = 1; y < H - 1; y++) {
 	    energy[y][0] = 1000.0;
 	    energy[y][W - 1] = 1000.0;
@@ -66,6 +66,7 @@ public class SeamCarver {
   
   /*
    * Computes the x-component of the gradient energy function
+   * of a pixel.
    */
   private int energyX(int x, int y) {
     int rgbx2 = picture.getRGB(x + 1, y);
@@ -84,6 +85,7 @@ public class SeamCarver {
   }
   /*
    * Computes the y-component of the gradient energy function
+   * of a pixel.
    */
   private int energyY(int x, int y) {
     int rgby2 = picture.getRGB(x, y + 1);
@@ -106,9 +108,38 @@ public class SeamCarver {
     return null; // to be implemented
   }
 
-  // sequence of indices for vertical seam
+  /*
+   * This methods creates a tree from a (source) pixel in the top row of the image
+   * and computes the shortest path (i.e. minimum total energy) to a (target) pixel 
+   * that is reachable from the source. It repeats the computation for all the W pixels
+   * in the top row and finally returns the path of minimum energy. 
+   */
   public int[] findVerticalSeam() {
-    return null; // to be implemented
+    int [] minEnergyVerticalSeam = null;
+    double totalEnergy = Double.POSITIVE_INFINITY;
+    for (int x = 0; x < W; x++) {
+      int [] vSeam = new int[H]; // stores the row indexes of the minimum energy path
+      vSeam[0] = x;
+      double parentTotalEnergy = energy(x,0); 
+      for (int y = 0; y < H - 1; y++) {
+        double childMinimumTotalEnergy = Double.POSITIVE_INFINITY;
+        for (int j = -1 + vSeam[y]; j < vSeam[y] + 2; j++) {
+          if (j < 0 || j > W - 1) continue;
+          double childTotalEnergy = energy(j,y + 1) + parentTotalEnergy;
+          if (childTotalEnergy < childMinimumTotalEnergy) {
+            childMinimumTotalEnergy = childTotalEnergy; 
+            vSeam[y + 1] = j;
+          }
+        }
+        parentTotalEnergy = childMinimumTotalEnergy;
+      }
+      if (parentTotalEnergy < totalEnergy) {
+        totalEnergy = parentTotalEnergy;
+        minEnergyVerticalSeam = vSeam;
+      }
+    }
+      
+    return minEnergyVerticalSeam;
   }
 
   // remove horizontal seam from current picture
@@ -123,16 +154,23 @@ public class SeamCarver {
       throw new IllegalArgumentException("A seam cannot be null.");
   }
 
-  //  unit testing (optional)
+  //  unit testing 
   public static void main(String[] args) {
     Picture pic = new Picture(args[0]);
     SeamCarver seam = new SeamCarver(pic);
     int width = seam.width();
     int height = seam.height();
+    
+    // energy computation
     for (int y = 0; y < height; y++) {
       for (int x = 0; x < width; x++)
         StdOut.printf("%9.0f ", seam.energy(x, y));
       StdOut.println();
     }
+    
+    // vertical seam
+    int [] vseam = seam.findVerticalSeam();
+    for (int y = 0; y < seam.height(); y++)
+      StdOut.printf("%d\n", vseam[y]);
   }
 }
