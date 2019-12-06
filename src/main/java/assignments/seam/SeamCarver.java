@@ -11,7 +11,6 @@ public class SeamCarver {
   private int H = 0; // height of a picture
   private int W = 0; // width of a picture
   private static final double BORDER_PIXEL_ENERGY = 1000.0;
-  private boolean isTranspose = false; // is the picture a transpose of the original one ?
   
   // create a seam carver object based on the given picture
   public SeamCarver(Picture picture) {
@@ -96,7 +95,7 @@ public class SeamCarver {
     return seam; 
   }
   
-  public void transposePicture() {
+  private void transposePicture() {
     int tPicHeight = picture.width();
     int tPicWidth = picture.height();
     Picture tPic = new Picture(tPicWidth, tPicHeight);
@@ -106,7 +105,6 @@ public class SeamCarver {
     picture = tPic;
     H = tPicHeight;
     W = tPicWidth;
-    isTranspose = true;
   }
 
   /*
@@ -120,7 +118,7 @@ public class SeamCarver {
    */
   public int[] findVerticalSeam() {
     double [][] energy = new double[H][W];
-    //initEnery(energy);
+    //initEnery(energy); 
     int [] minSeam = null; // vertical seam of lowest total energy
     double minTotalEnergy = Double.POSITIVE_INFINITY; // lowest energy
     for (int x = 0; x < W; x++) {
@@ -148,12 +146,14 @@ public class SeamCarver {
     return minSeam;
   }
   /*
-   * Initialize an array to store the pixels' energy. 
+   * Initializes an array to store the pixels' energy in case
+   * the default array initialization cannot be used. Likely this
+   * method doesn't have to be used. 
    */
   private void initEnery(double [][] energy) {
     Arrays.fill(energy[0], 1000.0); // top row, y=0
     for (int y = 1; y < H - 1; y++)
-      Arrays.fill(energy[y], 1, W - 1, -1.0);
+      Arrays.fill(energy[y], 1, W - 1, -1.0); // set non border pixels' energy to -1
     Arrays.fill(energy[H - 1], 1000.0); // bottom row, y=H-1
     for (int y = 1; y < H - 1; y++) {
       energy[y][0] = 1000.0;
@@ -174,16 +174,96 @@ public class SeamCarver {
   public void removeHorizontalSeam(int[] seam) {
     if (seam == null)
       throw new IllegalArgumentException("A seam cannot be null.");
-    if (seam.length > W)
-      throw new IllegalArgumentException("The size of a horizontal seam cannot be bigger than the width of the picture.");
+    if ( ! validHorizontalSeam(seam) )
+      throw new IllegalArgumentException("The seam is not a valid one.");
+    if (picture.height() <= 1)
+      throw new IllegalArgumentException("The height of the picture is <= 1.");
+    shiftImageVertically(seam); 
+  }
+  private void shiftImageVertically(int [] seam) {
+    int tPicWidth = picture.width();
+    int tPicHeight = picture.height() - 1;
+    Picture tPic = new Picture(tPicWidth, tPicHeight);
+    // copy top side
+    for (int col = 0; col < tPicWidth; col++)
+      for (int row = 0; row < seam[col] ; row++)  
+            tPic.setRGB(col, row, picture.getRGB(col, row));
+    // shift bottom side up
+    for (int col = 0; col < tPicWidth; col++)
+      for (int row = seam[col] ; row < tPicHeight; row++)  
+            tPic.setRGB(col, row, picture.getRGB(col, row + 1));
+    picture = tPic;
+    H = tPicHeight;
+    W = tPicWidth;
   }
 
-  // remove vertical seam from current picture
+  /*
+   * Removes a vertical seam from current picture
+   * by shifting its pixels horizontally
+   */
   public void removeVerticalSeam(int[] seam) {
     if (seam == null)
       throw new IllegalArgumentException("A seam cannot be null.");
-    if (seam.length > H)
-      throw new IllegalArgumentException("The size of a vertical seam cannot be bigger than the height of the picture.");
+    if ( ! validVerticalSeam(seam) )
+      throw new IllegalArgumentException("The seam is not a valid one.");
+    if (picture.width() <= 1)
+      throw new IllegalArgumentException("The width of the picture is <= 1.");
+    shiftImageHorizontally(seam);
+  }
+  private void shiftImageHorizontally(int [] seam) {
+    int tPicWidth = picture.width() - 1;
+    int tPicHeight = picture.height();
+    Picture tPic = new Picture(tPicWidth, tPicHeight);
+    // copy left side
+    for (int row = 0; row < tPicHeight; row++)
+      for (int col = 0; col < seam[row] ; col++)  
+            tPic.setRGB(col, row, picture.getRGB(col, row));
+    // shift right side left
+    for (int row = 0; row < tPicHeight; row++)
+      for (int col = seam[row] ; col < tPicWidth; col++)  
+            tPic.setRGB(col, row, picture.getRGB(col + 1, row));
+    picture = tPic;
+    H = tPicHeight;
+    W = tPicWidth;
+  }
+  /*
+   * For a vertical seam, sent by a client application, to be valid its size
+   * must be equal to the height of the picture, and each entry cannot be bigger 
+   * than the width of the picture. Also the difference between
+   * two adjacent entries cannot be more than 1
+   */
+  private boolean validVerticalSeam(int [] seam) {
+    // check size of the seam
+    if (seam.length != H) return false;
+    // check that entries are within range
+    for (int entry: seam)
+      if (entry < 0 || entry > W - 1)
+        return false;
+    // check that difference between adjacent entries are -1, 0, or 1
+    for (int i = 1; i < seam.length; i++)
+      if (seam[i] - seam[i-1] < -1 || seam[i] - seam[i-1] > 1)
+        return false;
+    return true;
+  }
+  /*
+   * For a horizontal seam, sent by a client application, to be valid its size
+   * must be equal to the width of the picture, and each entry cannot be bigger 
+   * than the height of the picture. Also the difference between
+   * two adjacent entries cannot be more than 1
+   */
+  private boolean validHorizontalSeam(int [] seam) {
+    boolean isSeamValid = true;
+    // check size of the seam
+    if (seam.length != W) return false;
+    // check that entries are within range
+    for (int entry: seam)
+      if (entry < 0 || entry > H - 1)
+        return false;
+    // check that the difference between adjacent entries are -1, 0, or 1
+    for (int i = 1; i < seam.length; i++)
+      if (seam[i] - seam[i-1] < -1 || seam[i] - seam[i-1] > 1)
+        isSeamValid = false;
+    return isSeamValid;
   }
 
   //  unit testing 
