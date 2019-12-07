@@ -164,7 +164,7 @@ The main algorithms discussed are Prim's algorithm and Kruskal's algorithm to fi
 and the Dijkstra's algorithm to find the shortest paths from a source vertex to all the other vertices in a directed edge-weighted graph with 
 nonnegative weights. One important class of problems, that can be represented by edge-weighted directed graphs and modeled as shortest-paths 
 problems, is job scheduling. The [programming assignment](https://coursera.cs.princeton.edu/algs4/assignments/seam/specification.php) is about 
-seam-carving, a content-aware image resizing technique. The code in SeamCarver.java provides the API to find horizontal and vertical seams. A vertical
+**seam-carving**, a content-aware image resizing technique. The code in SeamCarver.java provides the API to find horizontal and vertical seams. A vertical
 seam is a path, from the top border to the bottom one, in which each pixel is chosen to have the minimum energy among the adjacent pixels. The same 
 applies for horizontal seams that go from the left border of the image to the right one. The Java class can be used by a client application such 
 as ResizeDemo. As an example the following command removes 100 vertical seams and 50 horizontal seams from an image of 600x300 pixels of a chameleon 
