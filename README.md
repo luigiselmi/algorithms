@@ -129,11 +129,11 @@ $ mvn exec:java -Dexec.mainClass="assignments.kdtree.RangeSearchVisualizer" -Dex
 This week is about hash tables. There is no programming assignment. 
 
 ## Part II
-Part II focuses on graph- and string-processing algorithms.
+Part II focuses on graph and string-processing algorithms.
 
 ### Week 1
 This week is about undirected and directed graph (aka digraphs). The [programming assignment](https://coursera.cs.princeton.edu/algs4/assignments/wordnet/specification.php) 
-is about creating a digraph from the WordNet semantic lexicon and finding specific paths between the synsets (vertices) and computing the relatedness 
+is about creating a digraph from the **WordNet semantic lexicon** and finding specific paths between the synsets (vertices) and computing the relatedness 
 of two nouns. Three Java classes must be implemented for this assignment. The 1st one to be implemented is SAP.java that is used to compute the 
 shortest ancestral path between two vertices. You can use SAP.java, with some test files, executing the Java class and entering pair of integers, 
 that represent two vertices, from the command line
@@ -168,7 +168,7 @@ problems, is job scheduling. The [programming assignment](https://coursera.cs.pr
 seam is a path, from the top border to the bottom one, in which each pixel is chosen to have the minimum energy among the adjacent pixels. The same 
 applies for horizontal seams that go from the left border of the image to the right one. The Java class can be used by a client application such 
 as ResizeDemo. As an example the following command removes 100 vertical seams and 50 horizontal seams from an image of 600x300 pixels of a chameleon 
-so that the image size will be reduced to 500x250 but preserving its main characteristics.   
+so that the image size will be reduced to 500x250 preserving its main characteristics.   
    
 ```
 $ mvn exec:java -Dexec.mainClass="assignments.seam.ResizeDemo" -Dexec.args="resources/assignments/seam/chameleon.png 100 50"
