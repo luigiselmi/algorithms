@@ -145,21 +145,6 @@ public class SeamCarver {
       
     return minSeam;
   }
-  /*
-   * Initializes an array to store the pixels' energy in case
-   * the default array initialization cannot be used. Likely this
-   * method doesn't have to be used. 
-   */
-  private void initEnery(double [][] energy) {
-    Arrays.fill(energy[0], 1000.0); // top row, y=0
-    for (int y = 1; y < H - 1; y++)
-      Arrays.fill(energy[y], 1, W - 1, -1.0); // set non border pixels' energy to -1
-    Arrays.fill(energy[H - 1], 1000.0); // bottom row, y=H-1
-    for (int y = 1; y < H - 1; y++) {
-      energy[y][0] = 1000.0;
-      energy[y][W - 1] = 1000.0;
-    }
-  }
   
   // computes the energy of a pixel if it's not been already computed.
   private double pixelEnergy(double [][] energy, int x, int y) {
