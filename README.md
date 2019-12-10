@@ -6,7 +6,8 @@ and [Part 2](https://www.coursera.org/learn/algorithms-part2), taught by Kevin W
 on Coursera. The online lessons are based on the book Algorithms, 4th Edition, by the same authors. Additional material is also available from 
 the [book's website](https://algs4.cs.princeton.edu/home/). This repository contains also my submissions to the programming assignments. This 
 is a work in progress, see the assessments to know whether the code passes all the tests for correctness, memory, timing and other metrics. 
-Maven is used to compile and execute the code.
+Maven is used to compile and execute the code. The Java files that have been developed as solutions to the assignments are encrypted in order 
+to comply with the Coursera Honor’s Code. Please contact me in case you want to discuss about the assignments.
 
 ## Compile and execute
 You can compile and execute the code using Java or Maven.
