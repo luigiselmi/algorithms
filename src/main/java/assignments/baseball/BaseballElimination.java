@@ -1,7 +1,5 @@
 package assignments.baseball;
 
-import java.util.Arrays;
-
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.ST;
 import edu.princeton.cs.algs4.StdOut;
@@ -75,7 +73,21 @@ public class BaseballElimination {
   public boolean isEliminated(String team) {
     if (team == null || ! teams.contains(team))
       throw new IllegalArgumentException("A team name from the dataset must be specified.");
-    return false; // to be implemented
+    
+    return trivialElimination(team) || nontrivialElimination(team);
+  }
+  private boolean trivialElimination(String team) {
+    boolean teamEliminated = false;
+    int teamWins = w[teams.get(team)];
+    int teamRemaining = r[teams.get(team)];
+    int teamMaxWins = teamWins + teamRemaining;
+    for (int i = 0; i < teams.get(team) || i > teams.get(team); i++)
+      if (w[i] > teamMaxWins) teamEliminated = true;
+    return teamEliminated;
+  }
+  private boolean nontrivialElimination(String team) {
+    boolean teamEliminated = false;
+    return teamEliminated;
   }
   // subset R of teams that eliminates given team; null if not eliminated
   public Iterable<String> certificateOfElimination(String team) {
