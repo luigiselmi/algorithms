@@ -1,5 +1,6 @@
 package assignments.baseball;
 
+import edu.princeton.cs.algs4.FlowNetwork;
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.ST;
 import edu.princeton.cs.algs4.StdOut;
@@ -74,20 +75,67 @@ public class BaseballElimination {
     if (team == null || ! teams.contains(team))
       throw new IllegalArgumentException("A team name from the dataset must be specified.");
     
-    return trivialElimination(team) || nontrivialElimination(team);
+    if (trivialElimination(team))
+      return true;
+    else
+      return nontrivialElimination(team);
   }
+  /*
+   * If the maximum number of games a team x can win is less 
+   * than the number of wins of some other team, then team x 
+   * is trivially eliminated.
+   */
   private boolean trivialElimination(String team) {
     boolean teamEliminated = false;
     int teamWins = w[teams.get(team)];
-    int teamRemaining = r[teams.get(team)];
-    int teamMaxWins = teamWins + teamRemaining;
-    for (int i = 0; i < teams.get(team) || i > teams.get(team); i++)
+    int teamRemainings = r[teams.get(team)];
+    int teamMaxWins = teamWins + teamRemainings;
+    for (int i = 0; i < numberOfTeams; i++) {
+      if (i == teams.get(team)) continue;
       if (w[i] > teamMaxWins) teamEliminated = true;
+    }
     return teamEliminated;
   }
+  /*
+   * If the condition for trivial elimination is not met a team
+   * may still be mathematically eliminated. In order to find which 
+   * team is eliminated we
+   * 1) create a flow network
+   * 2) compute the maxflow and min-cut set
+   * 3) check if there are vertices in the min-cut other than the source.
+   * If all edges in the maxflow that are pointing from the source vertex 
+   * s are full, the team cannot be eliminated.
+   * If some edges pointing from s are not full, the team is eliminated.
+   * The first case, all edges from s are full, is equivalent to a 
+   * min-cut set in which the source vertex is its only member.
+   * The 2nd case, some edges from s are not full, is equivalent to a
+   * min-cut set with other vertices other than the source vertex.
+   */
   private boolean nontrivialElimination(String team) {
     boolean teamEliminated = false;
+    // 1) create a flow network
+    // 2) compute the maxflow and min-cut set
+    // 3) check min-cut set members
+    int numGameVertices = computeNumGameVertices(team);
     return teamEliminated;
+  }
+  private FlowNetwork createFlownetwork(String team) {
+    int numTeamVertices = numberOfTeams - 1;
+    int teamWins = w[teams.get(team)];
+    int teamRemainings = r[teams.get(team)];
+    int teamMaxWins = teamWins + teamRemainings;
+    return null; // to be implemented
+  }
+  private int computeNumGameVertices(String team) {
+    int numGameVertices = 0;
+    for (int row = 0; row < numberOfTeams; row++) {
+      if (row == teams.get(team)) continue;
+      for (int col = row + 1; col < numberOfTeams; col++) { 
+        if (col == teams.get(team)) continue;
+        if (g[row][col] != 0) numGameVertices++;
+      }
+    }
+    return numGameVertices;
   }
   // subset R of teams that eliminates given team; null if not eliminated
   public Iterable<String> certificateOfElimination(String team) {
@@ -100,9 +148,11 @@ public class BaseballElimination {
     for (String team : division.teams()) {
         if (division.isEliminated(team)) {
             StdOut.print(team + " is eliminated by the subset R = { ");
+            /*
             for (String t : division.certificateOfElimination(team)) {
                 StdOut.print(t + " ");
             }
+            */
             StdOut.println("}");
         }
         else {
