@@ -75,10 +75,8 @@ public class BaseballElimination {
     if (team == null || ! teams.contains(team))
       throw new IllegalArgumentException("A team name from the dataset must be specified.");
     
-    if (trivialElimination(team))
-      return true;
-    else
-      return nontrivialElimination(team);
+    return trivialElimination(team) || nontrivialElimination(team);
+     
   }
   /*
    * If the maximum number of games a team x can win is less 
@@ -114,17 +112,21 @@ public class BaseballElimination {
   private boolean nontrivialElimination(String team) {
     boolean teamEliminated = false;
     // 1) create a flow network
+    FlowNetwork G = createFlownetwork(team);
     // 2) compute the maxflow and min-cut set
     // 3) check min-cut set members
-    int numGameVertices = computeNumGameVertices(team);
+    
     return teamEliminated;
   }
   private FlowNetwork createFlownetwork(String team) {
     int numTeamVertices = numberOfTeams - 1;
+    int numGameVertices = computeNumGameVertices(team);
+    int vertices = numTeamVertices + numGameVertices + 2;
+    FlowNetwork G = new FlowNetwork(vertices);
     int teamWins = w[teams.get(team)];
     int teamRemainings = r[teams.get(team)];
     int teamMaxWins = teamWins + teamRemainings;
-    return null; // to be implemented
+    return G; // add flow edges
   }
   private int computeNumGameVertices(String team) {
     int numGameVertices = 0;
