@@ -1,5 +1,7 @@
 package assignments.baseball;
 
+import edu.princeton.cs.algs4.Bag;
+import edu.princeton.cs.algs4.FlowEdge;
 import edu.princeton.cs.algs4.FlowNetwork;
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.ST;
@@ -24,17 +26,19 @@ public class BaseballElimination {
     In in = new In(filename);
     numberOfTeams = in.readInt();
     teams = new ST<String, Integer>();
-    w = new int [numberOfTeams];
-    l = new int [numberOfTeams];
-    r = new int [numberOfTeams];
-    g = new int [numberOfTeams][numberOfTeams];
+    // row=0 and column=0 will not be used but it will be 
+    // easier to handle teams' data.
+    w = new int [numberOfTeams + 1]; 
+    l = new int [numberOfTeams + 1];
+    r = new int [numberOfTeams + 1];
+    g = new int [numberOfTeams + 1][numberOfTeams + 1];
     
-    for (int i = 0; i < numberOfTeams; i++) {
-      teams.put(in.readString(), i);
+    for (int i = 1; i < numberOfTeams + 1; i++) {
+      teams.put(in.readString(), i); // vertex 0 is the source, not a team 
       w[i] = in.readInt();
       l[i] = in.readInt();
       r[i] = in.readInt();
-      for (int j = 0; j < numberOfTeams; j++)
+      for (int j = 1; j < numberOfTeams + 1; j++)
         g[i][j] = in.readInt();
     }
   }
@@ -88,7 +92,7 @@ public class BaseballElimination {
     int teamWins = w[teams.get(team)];
     int teamRemainings = r[teams.get(team)];
     int teamMaxWins = teamWins + teamRemainings;
-    for (int i = 0; i < numberOfTeams; i++) {
+    for (int i = 1; i < numberOfTeams + 1; i++) {
       if (i == teams.get(team)) continue;
       if (w[i] > teamMaxWins) teamEliminated = true;
     }
@@ -112,33 +116,64 @@ public class BaseballElimination {
   private boolean nontrivialElimination(String team) {
     boolean teamEliminated = false;
     // 1) create a flow network
-    FlowNetwork G = createFlownetwork(team);
+    FlowNetwork G = createFlowNetwork(team);
+    StdOut.print(G.toString());
     // 2) compute the maxflow and min-cut set
     // 3) check min-cut set members
     
     return teamEliminated;
   }
-  private FlowNetwork createFlownetwork(String team) {
-    int numTeamVertices = numberOfTeams - 1;
-    int numGameVertices = computeNumGameVertices(team);
-    int vertices = numTeamVertices + numGameVertices + 2;
-    FlowNetwork G = new FlowNetwork(vertices);
+  /*
+   * Creates the flow network. Vertex 0 is the source. Vertices from 
+   * 1 to the number of teams, not including the one that is checked 
+   * for elimination, represent the teams (team vertices). The following 
+   * integers represent the games left (game vertices).  
+   */
+  private FlowNetwork createFlowNetwork(String team) {
+    // game edges from source vertex to game vertices and team vertices
+    Bag<FlowEdge> edges = new Bag<FlowEdge>();
+    ST<String, Integer> markedTeam = new ST<String, Integer>(); 
+    int vertices = numberOfTeams + 1;
+    for (String rteam: teams) {
+      if (rteam.equals(team)) continue;
+      for (String cteam: teams) {
+        if (cteam.equals(team) || cteam.equals(rteam) || markedTeam.contains(cteam)) continue;
+        int gamesLeft = g[teams.get(rteam)][teams.get(cteam)]; // vertices start from 1
+        if (gamesLeft > 0) {
+          FlowEdge sgEdge = new FlowEdge(0,vertices,gamesLeft); // source-game edge
+          FlowEdge gtEdge1 = new FlowEdge(vertices,teams.get(rteam),Double.POSITIVE_INFINITY); // 1st game-team edge
+          FlowEdge gtEdge2 = new FlowEdge(vertices,teams.get(cteam),Double.POSITIVE_INFINITY); // 2nd game-team edge
+          edges.add(sgEdge);
+          edges.add(gtEdge1);
+          edges.add(gtEdge2);
+          vertices++;
+        }
+      }
+      markedTeam.put(rteam, teams.get(rteam));
+    }
+    
+    // team's wins and games left
     int teamWins = w[teams.get(team)];
     int teamRemainings = r[teams.get(team)];
     int teamMaxWins = teamWins + teamRemainings;
-    return G; // add flow edges
-  }
-  private int computeNumGameVertices(String team) {
-    int numGameVertices = 0;
-    for (int row = 0; row < numberOfTeams; row++) {
-      if (row == teams.get(team)) continue;
-      for (int col = row + 1; col < numberOfTeams; col++) { 
-        if (col == teams.get(team)) continue;
-        if (g[row][col] != 0) numGameVertices++;
+    // edges from team vertices to target vertex
+    int targetVertex = teams.get(team); // the team's index is used as target
+    for (String oteam: teams) {
+      if (oteam.equals(team)) continue;
+      int oteamCapacity = teamMaxWins - w[teams.get(oteam)];
+      if (oteamCapacity >= 0) {
+        FlowEdge e = new FlowEdge(teams.get(oteam), targetVertex, oteamCapacity);
+        edges.add(e);
       }
     }
-    return numGameVertices;
+    
+    FlowNetwork G = new FlowNetwork(vertices);
+    for (FlowEdge e: edges)
+      G.addEdge(e);
+    
+    return G; 
   }
+  
   // subset R of teams that eliminates given team; null if not eliminated
   public Iterable<String> certificateOfElimination(String team) {
     if (team == null || ! teams.contains(team))
