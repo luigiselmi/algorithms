@@ -1,0 +1,341 @@
+See the Assessment Guide for information on how to interpret this report.
+
+ASSESSMENT SUMMARY
+
+Compilation:  PASSED
+API:          PASSED
+
+Spotbugs:     PASSED
+PMD:          FAILED (7 warnings)
+Checkstyle:   FAILED (0 errors, 19 warnings)
+
+Correctness:  21/23 tests passed
+Memory:       4/4 tests passed
+Timing:       1/1 tests passed
+
+Aggregate score: 94.78%
+[Compilation: 5%, API: 5%, Spotbugs: 0%, PMD: 0%, Checkstyle: 0%, Correctness: 60%, Memory: 10%, Timing: 20%]
+
+ASSESSMENT DETAILS
+
+The following files were submitted:
+----------------------------------
+8.7K Dec 16 10:28 BaseballElimination.java
+
+
+********************************************************************************
+*  COMPILING                                                                    
+********************************************************************************
+
+
+% javac11 BaseballElimination.java
+*-----------------------------------------------------------
+
+
+================================================================
+
+
+Checking the APIs of your programs.
+*-----------------------------------------------------------
+BaseballElimination:
+
+================================================================
+
+
+********************************************************************************
+*  CHECKING STYLE AND COMMON BUG PATTERNS                                       
+********************************************************************************
+
+
+% spotbugs *.class
+*-----------------------------------------------------------
+
+
+================================================================
+
+
+% pmd .
+*-----------------------------------------------------------
+BaseballElimination.java:11: The private instance (or static) variable 'numberOfTeams' can be made 'final'; it is initialized only in the declaration or constructor. [ImmutableField]
+BaseballElimination.java:12: The private instance (or static) variable 'teams' can be made 'final'; it is initialized only in the declaration or constructor. [ImmutableField]
+BaseballElimination.java:13: The private instance (or static) variable 'invTeams' can be made 'final'; it is initialized only in the declaration or constructor. [ImmutableField]
+BaseballElimination.java:14: The private instance (or static) variable 'w' can be made 'final'; it is initialized only in the declaration or constructor. [ImmutableField]
+BaseballElimination.java:15: The private instance (or static) variable 'l' can be made 'final'; it is initialized only in the declaration or constructor. [ImmutableField]
+BaseballElimination.java:16: The private instance (or static) variable 'r' can be made 'final'; it is initialized only in the declaration or constructor. [ImmutableField]
+BaseballElimination.java:17: The private instance (or static) variable 'g' can be made 'final'; it is initialized only in the declaration or constructor. [ImmutableField]
+PMD ends with 7 warnings.
+
+
+================================================================
+
+
+% checkstyle *.java
+*-----------------------------------------------------------
+[WARN] BaseballElimination.java:15:18: Do not use the letter 'l' as an instance variable name. It is hard to distinguish from the number '1'. [MemberName]
+[WARN] BaseballElimination.java:19:5: '//' or '/*' is not followed by whitespace. [WhitespaceAfter]
+[WARN] BaseballElimination.java:58:25: '!' is followed by whitespace. [NoWhitespaceAfter]
+[WARN] BaseballElimination.java:64:25: '!' is followed by whitespace. [NoWhitespaceAfter]
+[WARN] BaseballElimination.java:70:25: '!' is followed by whitespace. [NoWhitespaceAfter]
+[WARN] BaseballElimination.java:76:43: '!' is followed by whitespace. [NoWhitespaceAfter]
+[WARN] BaseballElimination.java:76:70: '!' is followed by whitespace. [NoWhitespaceAfter]
+[WARN] BaseballElimination.java:82:25: '!' is followed by whitespace. [NoWhitespaceAfter]
+[WARN] BaseballElimination.java:152:43: ',' is not followed by whitespace. [WhitespaceAfter]
+[WARN] BaseballElimination.java:152:52: ',' is not followed by whitespace. [WhitespaceAfter]
+[WARN] BaseballElimination.java:153:51: ',' is not followed by whitespace. [WhitespaceAfter]
+[WARN] BaseballElimination.java:153:68: ',' is not followed by whitespace. [WhitespaceAfter]
+[WARN] BaseballElimination.java:154:51: ',' is not followed by whitespace. [WhitespaceAfter]
+[WARN] BaseballElimination.java:154:68: ',' is not followed by whitespace. [WhitespaceAfter]
+[WARN] BaseballElimination.java:188:25: '!' is followed by whitespace. [NoWhitespaceAfter]
+[WARN] BaseballElimination.java:190:9: '!' is followed by whitespace. [NoWhitespaceAfter]
+[WARN] BaseballElimination.java:190:30: ')' is preceded with whitespace. [ParenPad]
+[WARN] BaseballElimination.java:196:17: The local variable 'R' must start with a lowercase letter and use camelCase. [LocalVariableName]
+[WARN] BaseballElimination.java:200:52: ')' is preceded with whitespace. [ParenPad]
+Checkstyle ends with 0 errors and 19 warnings.
+
+% custom checkstyle checks for BaseballElimination.java
+*-----------------------------------------------------------
+
+
+================================================================
+
+
+********************************************************************************
+*  TESTING CORRECTNESS
+********************************************************************************
+
+Testing correctness of BaseballElimination
+*-----------------------------------------------------------
+Running 23 total tests.
+
+Test 1: check numberOfTeams()
+  * teams4.txt
+  * teams5.txt
+  * teams8.txt
+  * teams10.txt
+  * teams29.txt
+  * teams48.txt
+==> passed
+
+Test 2: check teams()
+  * teams4.txt
+  * teams5.txt
+  * teams8.txt
+  * teams10.txt
+  * teams29.txt
+  * teams48.txt
+==> passed
+
+Test 3: check wins()
+  * teams4.txt
+  * teams5.txt
+  * teams8.txt
+  * teams10.txt
+  * teams29.txt
+  * teams48.txt
+==> passed
+
+Test 4: check losses()
+  * teams4.txt
+  * teams5.txt
+  * teams8.txt
+  * teams10.txt
+  * teams29.txt
+  * teams48.txt
+==> passed
+
+Test 5: check remaining()
+  * teams4.txt
+  * teams5.txt
+  * teams8.txt
+  * teams10.txt
+  * teams29.txt
+  * teams48.txt
+==> passed
+
+Test 6: check against()
+  * teams4.txt
+  * teams5.txt
+  * teams8.txt
+  * teams10.txt
+  * teams29.txt
+  * teams48.txt
+==> passed
+
+Test 7a: check isEliminated() when n = 4
+  * teams4.txt
+  * teams4a.txt
+  * teams4b.txt
+==> passed
+
+Test 7b: check isEliminated() when n = 5
+  * teams5.txt
+  * teams5a.txt
+  * teams5b.txt
+  * teams5c.txt
+==> passed
+
+Test 7c: check isEliminated() when n = 6 to 19
+  * teams7.txt
+  * teams8.txt
+  * teams10.txt
+  * teams12.txt
+  * teams12-allgames.txt
+==> passed
+
+Test 7d: check isEliminated() when n = 20 to 30
+  * teams24.txt
+  * teams29.txt
+  * teams30.txt
+==> passed
+
+Test 7e: check isEliminated() when n = 30 to 50
+  * teams32.txt
+  * teams36.txt
+  * teams42.txt
+  * teams48.txt
+==> passed
+
+Test 8: check that isEliminated() is consistent with certificateOfElimination()
+  * teams4.txt
+  * teams5.txt
+  * teams8.txt
+  * teams10.txt
+  * teams29.txt
+  * teams48.txt
+==> passed
+
+Test 9a: check certificateOfElimination() when n = 4
+  * teams4.txt
+  * teams4a.txt
+  * teams4b.txt
+    - false negative in certificate of elimination for 'Hufflepuff'
+    - student   certificate of elimination = { }
+    - reference certificate of elimination = { Gryffindor }
+
+==> FAILED
+
+Test 9b: check certificateOfElimination() when n = 5
+  * teams5.txt
+  * teams5a.txt
+  * teams5b.txt
+  * teams5c.txt
+==> passed
+
+Test 9c: check certificateOfElimination() when n = 6 to 20
+  * teams7.txt
+  * teams8.txt
+  * teams10.txt
+  * teams12.txt
+  * teams12-allgames.txt
+    - false negative in certificate of elimination for 'Team0'
+    - student   certificate of elimination = { }
+    - reference certificate of elimination = { Team1 }
+
+==> FAILED
+
+Test 9d: check certificateOfElimination() when n = 20 to 30
+  * teams24.txt
+  * teams29.txt
+  * teams30.txt
+==> passed
+
+Test 9e: check certificateOfElimination() when n = 30 to 50
+  * teams32.txt
+  * teams36.txt
+  * teams42.txt
+  * teams48.txt
+==> passed
+
+Test 10: check methods when n = 1
+  * teams1.txt
+  * teams1.txt
+  * teams1.txt
+  * teams1.txt
+  * teams1.txt
+  * teams1.txt
+  * teams1.txt
+==> passed
+
+Test 11: check immutability by calling certificateOfElimination() both before
+         and after calling isEliminated() and verifying that the results match
+  * teams4.txt
+  * teams5.txt
+  * teams29.txt
+==> passed
+
+Test 12: check that certificateOfElimination() returns null for eliminated teams
+  * teams4.txt
+  * teams5.txt
+==> passed
+
+Test 13: check for invalid arguments
+  * teams4.txt
+  * teams5.txt
+==> passed
+
+Test 14: check for dependence on reference equality of strings
+==> passed
+
+Test 15: check that two Baseball objects can be created at the same time
+  * teams4.txt and teams5.txt
+  * teams5.txt and teams7.txt
+==> passed
+
+
+Total: 21/23 tests passed!
+
+
+================================================================
+********************************************************************************
+*  TIMING
+********************************************************************************
+
+Timing BaseballElimination
+*-----------------------------------------------------------
+Running 1 total tests.
+
+    n   constructor isEliminated() + certificateOfElimination()
+----------------------------------------------------------------
+   30       0.01       0.74
+   36       0.01       1.48
+   42       0.00       2.62
+   48       0.00       4.65
+   54       0.00       6.98
+   60       0.00      12.26
+time = 9.77e-07 * n^3.97  (R^2 = 1.00)
+
+Total: 1/1 tests passed!
+
+
+================================================================
+
+
+
+********************************************************************************
+*  MEMORY
+********************************************************************************
+
+Analyzing memory of BaseballElimination
+*-----------------------------------------------------------
+Running 4 total tests.
+
+Student   vertices     = 0.50 n^2 - 0.55 n + 2.37   (R^2 = 1.000)
+Reference vertices     = 0.50 n^2 - 0.50 n + 3.00   (R^2 = 1.000)
+=> passed
+
+Student   edges        = 1.50 n^2 - 3.64 n + 3.12   (R^2 = 1.000)
+Reference edges        = 1.50 n^2 - 3.50 n + 2.00   (R^2 = 1.000)
+=> passed
+
+Student   memory of G  = 176.29 n^2 - 400.41 n + 476.00   (R^2 = 1.000)
+Reference memory of G  = 176.00 n^2 - 384.00 n + 384.00   (R^2 = 1.000)
+=> passed
+
+Student   memory       = 4.00 n^2 + 272.00 n + 464.00   (R^2 = 1.000)
+Reference memory       = 3.99 n^2 + 214.25 n + 396.00   (R^2 = 1.000)
+=> passed
+
+Total: 4/4 tests passed!
+
+
+================================================================
