@@ -175,3 +175,17 @@ pixels of a chameleon so that the image size will be reduced to 500x250 preservi
 $ mvn exec:java -Dexec.mainClass="assignments.seam.ResizeDemo" -Dexec.args="resources/assignments/seam/chameleon.png 100 50"
 ```
   
+### Week 3
+The material of the 3rd week is about network-flow algorithms. These algorithms are of great interest because they can be used to solve optimization
+problems in many different contexts, for instance to find the optimal way to distribute oil through a pipeline network from the oil field to a refinery. 
+A common network-flow algorithm is the Ford-Fulkerson scheme. It is based on a graph whose edges can have two attributes: a capacity and a flow. The
+edge's capacity is a number that specifies the maximum value that can be moved between its vertices, and the flow is the value that is actually used.
+The algorithm is also called **maxflow algorithm** because it solves the problem of finding the best way to distribute a flow from a source through a network to a
+sink so that the flow is maximal given the capacities of the edges. In order to showcase the applicability of the scheme to many different applications, 
+it will be used in the [programming assignment](https://coursera.cs.princeton.edu/algs4/assignments/baseball/specification.php) to solve the [baseball elimination problem](https://en.wikipedia.org/wiki/Maximum_flow_problem#Baseball_elimination).
+As an example, the following command finds which team is mathematically eliminated in a baseball division with 5 teams. 
+
+   
+```
+$ mvn exec:java -Dexec.mainClass="assignments.baseball.BaseballElimination" -Dexec.args="resources/assignments/baseball/teams5.txt"
+```   
