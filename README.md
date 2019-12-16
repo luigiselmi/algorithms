@@ -174,6 +174,8 @@ pixels of a chameleon so that the image size will be reduced to 500x250 preservi
 ```
 $ mvn exec:java -Dexec.mainClass="assignments.seam.ResizeDemo" -Dexec.args="resources/assignments/seam/chameleon.png 100 50"
 ```
+
+![original image](resources/assignments/seam/chameleon.png)
   
 ### Week 3
 The material of the 3rd week is about network-flow algorithms. These algorithms are of great interest because they can be used to solve optimization
