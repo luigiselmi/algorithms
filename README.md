@@ -196,3 +196,18 @@ As an example, the following command finds which team is mathematically eliminat
 ```
 $ mvn exec:java -Dexec.mainClass="assignments.baseball.BaseballElimination" -Dexec.args="resources/assignments/baseball/teams5.txt"
 ```   
+
+## Performances
+### Sorting
+|Algorithm|Running Time|Space|
+|---------|------------|-----|
+
+### Searching
+|Algorithm|Running Time|Space|
+|---------|------------|-----|
+### Graphs
+|Algorithm|Running Time|Space|
+|---------|------------|-----|
+### Strings
+|Algorithm|Running Time|Space|
+|---------|------------|-----|
