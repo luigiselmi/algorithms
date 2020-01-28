@@ -68,7 +68,7 @@ public class BruteForce {
       StringBuffer sb = new StringBuffer(); // replacement for the pattern
       for (int k = 0; k < pat.length(); k++)
         sb.append("-");
-      int index = BruteForce.search(pat, txt);
+      int index = BruteForce.search2(pat, txt);
       boolean patternFound = index < txt.length(); // pattern found in text at least once
       if (patternFound) {
         StdOut.printf("Pattern \"%s\" found in \"%s\" at %d \n", pat, txt, index);
