@@ -1,4 +1,4 @@
-20
+20 5
 Anderson 2
 Brown 3
 Davis 3

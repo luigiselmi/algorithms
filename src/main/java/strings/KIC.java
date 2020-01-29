@@ -3,58 +3,47 @@
  */
 package strings;
 
-import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 
-public class KIC {
+class Record {
+  int key;
+  String name;
+}
 
-  private int N; // number of records
-  private static int R = 5; // alphabet's size
-  private Record [] a;
-  private int [] count = new int[R + 1];
+public class KIC {
   
-  private static class Record {
-    int key;
-    String name;
-  }
-  
-  public KIC(Record [] a) {
-    this.a = a;
-    this.N = a.length;
-  }
-  
-  public Record [] sort() {
-    return distribute(a, index(count()));
+  public Record [] sort(Record [] records, int R) {
+    return distribute(records, index(count(records, R)));
   }
   
   // Compute frequency counts
-  public int [] count() {
-    for (int i = 0; i < N; i++)
-      count[a[i].key + 1]++;
-    return count;
+  private int [] count(Record [] records, int R) {
+    int [] counts = new int[R + 1];
+    for (int i = 0; i < records.length; i++)
+      counts[records[i].key + 1]++;
+    return counts;
   }
  
   // Transform counts to indices
-  public int [] index(int [] count) {
-    for (int r = 0; r < R; r++)
-      count[r+1] += count[r];
-    return count;
+  private int [] index(int [] counts) {
+    for (int r = 0; r < counts.length - 1; r++)
+      counts[r+1] += counts[r];
+    return counts;
   }
   
   // Distribute the records and copy back
-  private Record [] distribute(Record [] a, int [] count) {
-    Record [] aux = new Record[N]; 
+  private Record [] distribute(Record [] records, int [] counts) {
+    int N = records.length;
+    Record [] sorted = new Record[N]; 
     for (int i = 0; i < N; i++)
-      aux[count[a[i].key]++] = a[i];
-      // Copy back.
-      for (int i = 0; i < N; i++)
-      a[i] = aux[i];
-    return a;
+      sorted[counts[records[i].key]++] = records[i];
+    return sorted;
   }
   
   public static void main(String[] args) {
-    int N = StdIn.readInt(); 
+    int N = StdIn.readInt(); // number of records 
+    int R = StdIn.readInt(); // key space size
     Record [] a = new Record[N];
     for (int i = 0; i < N; i++) {
       String name = StdIn.readString();
@@ -65,21 +54,11 @@ public class KIC {
       a[i] = rec;
     }
     
-    KIC counter = new KIC(a);
-    int [] sorted = counter.count();
-    for (int j = 1; j < counter.R + 1; j++)
-      //StdOut.printf("%s %d %s %d \n", sorted[j].name, sorted[j].key, a[j].name, a[j].key);
-      StdOut.printf("%d \n", sorted[j]);
-    StdOut.println();
-    
-    int [] indexed = counter.index(sorted);
-    for (int j = 1; j < counter.R + 1; j++)
-      StdOut.printf("%d \n", indexed[j]);
-    StdOut.println();
-    
-    Record [] as = counter.distribute(a, indexed);
+    KIC counter = new KIC();
+    Record [] sorted  = counter.sort(a, R);
     for (int j = 0; j < N; j++)
-      StdOut.printf("Name: %s, Class: %d \n", as[j].name, as[j].key);
+      StdOut.printf("%-10s %-4d   %-10s %d \n", a[j].name, a[j].key, sorted[j].name, sorted[j].key);
+    StdOut.println();
   }
-
 }
+
