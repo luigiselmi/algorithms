@@ -1,5 +1,7 @@
 /**
- * Key-indexed counting
+ * Key-indexed counting.
+ * This class can be used to read an array of records and order 
+ * them by a key. 
  */
 package strings;
 
