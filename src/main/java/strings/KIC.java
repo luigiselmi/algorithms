@@ -1,7 +1,10 @@
 /**
  * Key-indexed counting.
- * This class can be used to read an array of records and order 
- * them by a key. 
+ * This class can be used to read an array of records and order them by a key.
+ * Execution:
+ * 
+ * $ java -cp "lib/algs4.jar;target/classes" strings.KIC < resources/strings/students_by_section.txt
+ *  
  */
 package strings;
 
