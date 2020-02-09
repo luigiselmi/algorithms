@@ -6,6 +6,10 @@ import edu.princeton.cs.algs4.StdOut;
 public class BruteForce {
 
   /*
+   * Brute-force algorithm for substring search. Given
+   * a text string of length N and a pattern string of length M
+   * the algorithm looks for an occurrence of the pattern in the 
+   * text. The cost is proportional to NM.
    * From Sedgewick's Book p.760
    */
   public static int search(String pat, String txt) {
@@ -22,6 +26,8 @@ public class BruteForce {
   }
   
   /*
+   * Alternate implementation of the brute-force algorithm.
+   * The cost is the same as the other algorithm: NM.
    * From Sedgewick's Book p.761
    */
   public static int search2(String pat, String txt) {
