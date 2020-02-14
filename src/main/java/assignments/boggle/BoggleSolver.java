@@ -1,22 +1,24 @@
 package assignments.boggle;
 
 import edu.princeton.cs.algs4.Bag;
-import edu.princeton.cs.algs4.Graph;
 import edu.princeton.cs.algs4.In;
+import edu.princeton.cs.algs4.SET;
 import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.TST;
 
 public class BoggleSolver {
   
   private TST<Integer> symbolTable;
+  private SET<String> matchedWords;
   boolean[] marked; // visited board's cubes
   
   // Initializes the data structure using the given array of strings as the dictionary.
-  // (You can assume each word in the dictionary contains only the uppercase letters A through Z.)
+  // (You can assume each word in the dictionary contains only the upper case letters A through Z.)
   public BoggleSolver(String[] dictionary) {
     symbolTable = new TST<Integer>();
     for (int i = 0; i < dictionary.length; i++)
       symbolTable.put(dictionary[i], dictionary[i].length());
+    matchedWords = new SET<String>();
   }  
 
   /**
@@ -36,16 +38,30 @@ public class BoggleSolver {
     int cols = board.cols();
     marked = new boolean[rows * cols];
     Bag<Integer>[] graph = computeAdjacents(rows, cols);
-    dfs(board, graph, 0);
-    return symbolTable.keys();
+    StringBuilder word = new StringBuilder();
+    for (int s = 0; s < rows*cols; s++)
+      dfs(board, graph, s, word);
+    return matchedWords;
   }
   
-  private void dfs(BoggleBoard board, Bag<Integer>[] graph, int v) {
+  private void dfs(BoggleBoard board, Bag<Integer>[] graph, int v, StringBuilder word) {
     marked[v] = true;
-    for (int w : graph[v]) 
-      if (!marked[w]) {
-        dfs(board, graph, w);
-      }
+    int col = v % board.cols();
+    int row = (v - col) / board.cols();
+    word.append(board.getLetter(row, col));
+    boolean validString = symbolTable.keysWithPrefix(word.toString()).iterator().hasNext();
+    boolean matchString = symbolTable.keysThatMatch(word.toString()).iterator().hasNext();
+    
+    if (word.length() >= 3 && matchString) 
+      matchedWords.add(word.toString());
+    
+    if (validString)
+      for (int w : graph[v]) 
+        if (!marked[w]) 
+          dfs(board, graph, w, word);
+    
+    marked[v] = false;
+    word.deleteCharAt(word.length() - 1);
   }
   
   /*
@@ -59,11 +75,10 @@ public class BoggleSolver {
    */
   private Bag<Integer>[] computeAdjacents(int rows, int cols) {
     int vertices = rows * cols;
-    //boardVertices = initBoardVertices(rows, cols);
     Bag<Integer>[] adjs = (Bag<Integer>[]) new Bag[vertices];
     for (int v = 0; v < vertices; v++) {
       adjs[v] = new Bag<Integer>();
-      int col = v%cols;
+      int col = v % cols;
       int row = (v - col)/cols;
       // UL adjacent vertex
       if ( row - 1 >= 0 && col - 1 >= 0 ) {
