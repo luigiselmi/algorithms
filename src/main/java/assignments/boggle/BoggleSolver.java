@@ -1,5 +1,7 @@
 package assignments.boggle;
 
+import edu.princeton.cs.algs4.Bag;
+import edu.princeton.cs.algs4.Graph;
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.TST;
@@ -7,6 +9,7 @@ import edu.princeton.cs.algs4.TST;
 public class BoggleSolver {
   
   private TST<Integer> symbolTable;
+  boolean[] marked; // visited board's cubes
   
   // Initializes the data structure using the given array of strings as the dictionary.
   // (You can assume each word in the dictionary contains only the uppercase letters A through Z.)
@@ -29,8 +32,95 @@ public class BoggleSolver {
    * @return all the valid words that can be built using the characters in the board.
    */
   public Iterable<String> getAllValidWords(BoggleBoard board) {
-    //char[][] boardData = board.getLetter(i, j)
+    int rows = board.rows();
+    int cols = board.cols();
+    marked = new boolean[rows * cols];
+    Bag<Integer>[] graph = computeAdjacents(rows, cols);
+    dfs(board, graph, 0);
     return symbolTable.keys();
+  }
+  
+  private void dfs(BoggleBoard board, Bag<Integer>[] graph, int v) {
+    marked[v] = true;
+    for (int w : graph[v]) 
+      if (!marked[w]) {
+        dfs(board, graph, w);
+      }
+  }
+  
+  /*
+   * Computes the adjacent cubes of any cube in the board.
+   * For each cube there can be from 3 up to 8 adjacent cubes:
+   * UL, UM, UR
+   * ML, ML,
+   * BL, BM, BR
+   * Where B stands for bottom, U for up
+   * L for left, R for right and M for middle
+   */
+  private Bag<Integer>[] computeAdjacents(int rows, int cols) {
+    int vertices = rows * cols;
+    //boardVertices = initBoardVertices(rows, cols);
+    Bag<Integer>[] adjs = (Bag<Integer>[]) new Bag[vertices];
+    for (int v = 0; v < vertices; v++) {
+      adjs[v] = new Bag<Integer>();
+      int col = v%cols;
+      int row = (v - col)/cols;
+      // UL adjacent vertex
+      if ( row - 1 >= 0 && col - 1 >= 0 ) {
+        int adjVertex = cols * (row - 1) + (col - 1);
+        adjs[v].add(adjVertex);
+      }
+      // UM adjacent vertex
+      if ( row - 1 >= 0 ) {
+        int adjVertex = cols * (row - 1) + col;
+        adjs[v].add(adjVertex);
+      }
+      // UR adjacent vertex
+      if ( row - 1 >= 0 && col + 1 < cols ) {
+        int adjVertex = cols * (row - 1) + (col + 1);
+        adjs[v].add(adjVertex);
+      }
+      // ML adjacent vertex
+      if ( col - 1 >= 0 ) {
+        int adjVertex = cols * row + (col - 1);
+        adjs[v].add(adjVertex);
+      }
+      // MR adjacent vertex
+      if ( col + 1 < cols ) {
+        int adjVertex = cols * row + (col + 1);
+        adjs[v].add(adjVertex);
+      }
+      // BL adjacent vertex
+      if ( row + 1 < rows && col - 1 >= 0 ) {
+        int adjVertex = cols * (row + 1) + (col - 1);
+        adjs[v].add(adjVertex);
+      }
+      // BM adjacent vertex
+      if ( row + 1 < rows ) {
+        int adjVertex = cols * (row + 1) + col;
+        adjs[v].add(adjVertex);
+      }
+      // BR adjacent vertex
+      if ( row + 1 < rows && col + 1 < cols ) {
+        int adjVertex = cols * (row + 1) + (col + 1);
+        adjs[v].add(adjVertex);
+      }
+    }
+    
+   return adjs;
+  }
+  
+  //index mapping from 2D array to 1D array, e.g. [a][b] -> [c]
+  private int i1d(int cols, int row, int col) {
+    return cols * row + col;
+  }
+  //index mapping from 1D array to 2D array, row, e.g. [c] -> [a][]
+  private int i2dRow(int cols, int i1, int col) {
+    return (i1 - col)/cols;
+  }
+  //index mapping from 1D array to 2D array, column, e.g. [c] -> [][b]
+  private int i2dCol(int cols, int i1) {
+    return i1%cols;
   }
 
   /**
@@ -59,7 +149,7 @@ public class BoggleSolver {
   }
   
   public static void main(String[] args) {
-    /*
+    
     In in = new In(args[0]);
     String[] dictionary = in.readAllStrings();
     BoggleSolver solver = new BoggleSolver(dictionary);
@@ -70,20 +160,7 @@ public class BoggleSolver {
         score += solver.scoreOf(word);
     }
     StdOut.println("Score = " + score);
-    */
-    // index mapping from 2D array to 1D array, e.g. [a][b] -> [c]
-    int cols = 10;
-    int rows = 10;
-    for (int r = 0; r < rows; r++){
-       for (int c = 0; c < cols; c++)
-         StdOut.printf("%d ", cols * r + c);
-      StdOut.println();
-    }
-    // index mapping from 1D array to 2D array
-    int v = 38;
-    int col = v%cols;
-    int row = (v - col)/cols;
-    StdOut.printf("col = %d, row = %d", col, row);
+    
   }
 
 }
