@@ -8,17 +8,21 @@ import edu.princeton.cs.algs4.TST;
 
 public class BoggleSolver {
   
-  private TST<Integer> symbolTable;
-  private SET<String> matchedWords;
+  private TST<Integer> dictionaryTrie;
+  private String [] dictionaryDefensiveCopy;
   private boolean[] marked; // visited board's cubes
   
   // Initializes the data structure using the given array of strings as the dictionary.
   // (You can assume each word in the dictionary contains only the upper case letters A through Z.)
   public BoggleSolver(String[] dictionary) {
-    symbolTable = new TST<Integer>();
-    for (int i = 0; i < dictionary.length; i++)
-      symbolTable.put(dictionary[i], dictionary[i].length());
-    matchedWords = new SET<String>();
+    dictionaryDefensiveCopy = new String[dictionary.length];
+    for (int i = 0; i < dictionaryDefensiveCopy.length; i++)
+      dictionaryDefensiveCopy[i] = dictionary[i];
+    
+    dictionaryTrie = new TST<Integer>();
+    for (int i = 0; i < dictionaryDefensiveCopy.length; i++)
+      dictionaryTrie.put(dictionaryDefensiveCopy[i], dictionaryDefensiveCopy[i].length());
+    
   }  
 
   /**
@@ -34,6 +38,7 @@ public class BoggleSolver {
    * @return all the valid words that can be built using the characters in the board.
    */
   public Iterable<String> getAllValidWords(BoggleBoard board) {
+    SET<String> matchedWords = new SET<String>();
     int rows = board.rows();
     int cols = board.cols();
     int cubes = rows * cols;
@@ -41,32 +46,32 @@ public class BoggleSolver {
     Bag<Integer>[] graph = computeAdjacents(rows, cols);
     StringBuilder word = new StringBuilder();
     for (int s = 0; s < cubes; s++)
-      dfs(board, graph, s, word);
+      dfs(board, graph, s, word, matchedWords);
     return matchedWords;
   }
   
-  private void dfs(BoggleBoard board, Bag<Integer>[] graph, int v, StringBuilder word) {
+  private void dfs(BoggleBoard board, Bag<Integer>[] graph, int v, StringBuilder word, SET<String> matchedWords) {
     marked[v] = true;
     int col = v % board.cols();
     int row = (v - col) / board.cols();
     char letter = board.getLetter(row, col);
     word.append(letter);
     
-    boolean validString = symbolTable.keysWithPrefix(word.toString()).iterator().hasNext();
+    boolean validString = dictionaryTrie.keysWithPrefix(word.toString()).iterator().hasNext();
     if (validString) {
       if (letter == 'Q')
         word.append('U');
-      boolean matchString = symbolTable.keysThatMatch(word.toString()).iterator().hasNext();
+      boolean matchString = dictionaryTrie.keysThatMatch(word.toString()).iterator().hasNext();
       if (word.length() >= 3 && matchString) 
         matchedWords.add(word.toString());
       
       for (int w : graph[v]) 
         if (!marked[w]) 
-          dfs(board, graph, w, word);
+          dfs(board, graph, w, word, matchedWords);
     
     }
     marked[v] = false;
-    if(word.length() > 2 && word.charAt(word.length() - 2) == 'Q')
+    if(word.length() >= 2 && word.charAt(word.length() - 2) == 'Q')
       word.deleteCharAt(word.length() - 1); // remove last 'U'
     word.deleteCharAt(word.length() - 1);
      
@@ -132,40 +137,28 @@ public class BoggleSolver {
     
    return adjs;
   }
-  /*
-  //index mapping from 2D array to 1D array, e.g. [a][b] -> [c]
-  private int i1d(int cols, int row, int col) {
-    return cols * row + col;
-  }
-  //index mapping from 1D array to 2D array, row, e.g. [c] -> [a][]
-  private int i2dRow(int cols, int i1, int col) {
-    return (i1 - col)/cols;
-  }
-  //index mapping from 1D array to 2D array, column, e.g. [c] -> [][b]
-  private int i2dCol(int cols, int i1) {
-    return i1%cols;
-  }
-  */
+  
   /**
    * Returns the score of the given word if it is in the dictionary, zero otherwise.
-   * (You can assume the word contains only the uppercase letters A through Z.)
+   * (You can assume the word contains only the upper case letters A through Z.)
    * @param word
    * @return
    */
   public int scoreOf(String word) {
     int length = word.length();
     int score = 0;
-    if (length == 3 || length == 4)
-      score = 1;
-    else if (length == 5)
-      score = 2;
-    else if (length == 6)
-      score = 3;
-    else if (length == 7)
-      score = 5;
-    else if (length >= 8)
-      score = 11;
-      
+    if (dictionaryTrie.contains(word)) {
+      if (length == 3 || length == 4)
+        score = 1;
+      else if (length == 5)
+        score = 2;
+      else if (length == 6)
+        score = 3;
+      else if (length == 7)
+        score = 5;
+      else if (length >= 8)
+        score = 11;
+    }
     return score;
   }
   
