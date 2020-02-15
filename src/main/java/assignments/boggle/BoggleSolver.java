@@ -10,7 +10,7 @@ public class BoggleSolver {
   
   private TST<Integer> symbolTable;
   private SET<String> matchedWords;
-  boolean[] marked; // visited board's cubes
+  private boolean[] marked; // visited board's cubes
   
   // Initializes the data structure using the given array of strings as the dictionary.
   // (You can assume each word in the dictionary contains only the upper case letters A through Z.)
@@ -36,10 +36,11 @@ public class BoggleSolver {
   public Iterable<String> getAllValidWords(BoggleBoard board) {
     int rows = board.rows();
     int cols = board.cols();
-    marked = new boolean[rows * cols];
+    int cubes = rows * cols;
+    marked = new boolean[cubes];
     Bag<Integer>[] graph = computeAdjacents(rows, cols);
     StringBuilder word = new StringBuilder();
-    for (int s = 0; s < rows*cols; s++)
+    for (int s = 0; s < cubes; s++)
       dfs(board, graph, s, word);
     return matchedWords;
   }
@@ -48,20 +49,27 @@ public class BoggleSolver {
     marked[v] = true;
     int col = v % board.cols();
     int row = (v - col) / board.cols();
-    word.append(board.getLetter(row, col));
+    char letter = board.getLetter(row, col);
+    word.append(letter);
+    
     boolean validString = symbolTable.keysWithPrefix(word.toString()).iterator().hasNext();
-    boolean matchString = symbolTable.keysThatMatch(word.toString()).iterator().hasNext();
-    
-    if (word.length() >= 3 && matchString) 
-      matchedWords.add(word.toString());
-    
-    if (validString)
+    if (validString) {
+      if (letter == 'Q')
+        word.append('U');
+      boolean matchString = symbolTable.keysThatMatch(word.toString()).iterator().hasNext();
+      if (word.length() >= 3 && matchString) 
+        matchedWords.add(word.toString());
+      
       for (int w : graph[v]) 
         if (!marked[w]) 
           dfs(board, graph, w, word);
     
+    }
     marked[v] = false;
+    if(word.length() > 2 && word.charAt(word.length() - 2) == 'Q')
+      word.deleteCharAt(word.length() - 1); // remove last 'U'
     word.deleteCharAt(word.length() - 1);
+     
   }
   
   /*
@@ -74,57 +82,57 @@ public class BoggleSolver {
    * L for left, R for right and M for middle
    */
   private Bag<Integer>[] computeAdjacents(int rows, int cols) {
-    int vertices = rows * cols;
-    Bag<Integer>[] adjs = (Bag<Integer>[]) new Bag[vertices];
-    for (int v = 0; v < vertices; v++) {
+    int cubes = rows * cols;
+    Bag<Integer>[] adjs = new Bag[cubes];
+    for (int v = 0; v < cubes; v++) {
       adjs[v] = new Bag<Integer>();
       int col = v % cols;
       int row = (v - col)/cols;
-      // UL adjacent vertex
+      // UL adjacent cube
       if ( row - 1 >= 0 && col - 1 >= 0 ) {
-        int adjVertex = cols * (row - 1) + (col - 1);
-        adjs[v].add(adjVertex);
+        int adjCube = cols * (row - 1) + (col - 1);
+        adjs[v].add(adjCube);
       }
-      // UM adjacent vertex
+      // UM adjacent cube
       if ( row - 1 >= 0 ) {
-        int adjVertex = cols * (row - 1) + col;
-        adjs[v].add(adjVertex);
+        int adjCube = cols * (row - 1) + col;
+        adjs[v].add(adjCube);
       }
-      // UR adjacent vertex
+      // UR adjacent cube
       if ( row - 1 >= 0 && col + 1 < cols ) {
-        int adjVertex = cols * (row - 1) + (col + 1);
-        adjs[v].add(adjVertex);
+        int adjCube = cols * (row - 1) + (col + 1);
+        adjs[v].add(adjCube);
       }
-      // ML adjacent vertex
+      // ML adjacent cube
       if ( col - 1 >= 0 ) {
-        int adjVertex = cols * row + (col - 1);
-        adjs[v].add(adjVertex);
+        int adjCube = cols * row + (col - 1);
+        adjs[v].add(adjCube);
       }
-      // MR adjacent vertex
+      // MR adjacent cube
       if ( col + 1 < cols ) {
-        int adjVertex = cols * row + (col + 1);
-        adjs[v].add(adjVertex);
+        int adjCube = cols * row + (col + 1);
+        adjs[v].add(adjCube);
       }
-      // BL adjacent vertex
+      // BL adjacent cube
       if ( row + 1 < rows && col - 1 >= 0 ) {
-        int adjVertex = cols * (row + 1) + (col - 1);
-        adjs[v].add(adjVertex);
+        int adjCube = cols * (row + 1) + (col - 1);
+        adjs[v].add(adjCube);
       }
-      // BM adjacent vertex
+      // BM adjacent cube
       if ( row + 1 < rows ) {
-        int adjVertex = cols * (row + 1) + col;
-        adjs[v].add(adjVertex);
+        int adjCube = cols * (row + 1) + col;
+        adjs[v].add(adjCube);
       }
-      // BR adjacent vertex
+      // BR adjacent cube
       if ( row + 1 < rows && col + 1 < cols ) {
-        int adjVertex = cols * (row + 1) + (col + 1);
-        adjs[v].add(adjVertex);
+        int adjCube = cols * (row + 1) + (col + 1);
+        adjs[v].add(adjCube);
       }
     }
     
    return adjs;
   }
-  
+  /*
   //index mapping from 2D array to 1D array, e.g. [a][b] -> [c]
   private int i1d(int cols, int row, int col) {
     return cols * row + col;
@@ -137,7 +145,7 @@ public class BoggleSolver {
   private int i2dCol(int cols, int i1) {
     return i1%cols;
   }
-
+  */
   /**
    * Returns the score of the given word if it is in the dictionary, zero otherwise.
    * (You can assume the word contains only the uppercase letters A through Z.)
@@ -147,19 +155,17 @@ public class BoggleSolver {
   public int scoreOf(String word) {
     int length = word.length();
     int score = 0;
-    if (symbolTable.contains(word)) {
-      if (length == 3 || length == 4)
-        score = 1;
-      else if (length == 5)
-        score = 2;
-      else if (length == 6)
-        score = 3;
-      else if (length == 7)
-        score = 5;
-      else if (length >= 8)
-        score = 11;
-    }
-        
+    if (length == 3 || length == 4)
+      score = 1;
+    else if (length == 5)
+      score = 2;
+    else if (length == 6)
+      score = 3;
+    else if (length == 7)
+      score = 5;
+    else if (length >= 8)
+      score = 11;
+      
     return score;
   }
   
@@ -169,12 +175,15 @@ public class BoggleSolver {
     String[] dictionary = in.readAllStrings();
     BoggleSolver solver = new BoggleSolver(dictionary);
     BoggleBoard board = new BoggleBoard(args[1]);
-    int score = 0;
+    int totalScore = 0;
+    int counter = 0;
     for (String word : solver.getAllValidWords(board)) {
-        StdOut.println(word);
-        score += solver.scoreOf(word);
+      counter++;
+      int score = solver.scoreOf(word);
+      StdOut.printf("%s, score = %d \n", word, score);
+      totalScore += score;
     }
-    StdOut.println("Score = " + score);
+    StdOut.printf("Number of words found: %d, Score = %d",counter, totalScore);
     
   }
 
