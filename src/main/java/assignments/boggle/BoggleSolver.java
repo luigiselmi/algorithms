@@ -5,10 +5,11 @@ import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.SET;
 import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.TST;
+import fundamentals.ThreeSum;
 
 public class BoggleSolver {
   
-  private TST<Integer> dictionary;
+  private final TST<Integer> dictionary;
   private boolean[] marked; // visited board's cubes
   
   // Initializes the data structure using the given array of strings as the dictionary.
@@ -57,18 +58,22 @@ public class BoggleSolver {
     if (validString) {
       if (letter == 'Q')
         word.append('U');
-      boolean matchString = dictionary.keysThatMatch(word.toString()).iterator().hasNext();
-      if (word.length() >= 3 && matchString) 
-        matchedWords.add(word.toString());
+      
+      
+      if ( word.length() >= 3 ) {
+        boolean matchString = dictionary.keysThatMatch(word.toString()).iterator().hasNext();
+        if ( matchString )
+          matchedWords.add(word.toString());
+      }
       
       for (int w : graph[v]) 
         if (!marked[w]) 
-          dfs(board, graph, w, word, matchedWords);
-    
+          dfs(board, graph, w, word, matchedWords);  
     }
+    
     marked[v] = false;
-    if(word.length() >= 2 && word.charAt(word.length() - 2) == 'Q')
-      word.deleteCharAt(word.length() - 1); // remove last 'U'
+    if (word.length() >= 2 && word.charAt(word.length() - 2) == 'Q')
+      word.deleteCharAt(word.length() - 1); // remove last 'U' after a 'Q'
     word.deleteCharAt(word.length() - 1);
      
   }
@@ -88,45 +93,45 @@ public class BoggleSolver {
     for (int v = 0; v < cubes; v++) {
       adjs[v] = new Bag<Integer>();
       int col = v % cols;
-      int row = (v - col)/cols;
+      int row = ( v - col ) / cols;
       // UL adjacent cube
       if ( row - 1 >= 0 && col - 1 >= 0 ) {
-        int adjCube = cols * (row - 1) + (col - 1);
+        int adjCube = cols * ( row - 1 ) + ( col - 1 );
         adjs[v].add(adjCube);
       }
       // UM adjacent cube
       if ( row - 1 >= 0 ) {
-        int adjCube = cols * (row - 1) + col;
+        int adjCube = cols * ( row - 1 ) + col;
         adjs[v].add(adjCube);
       }
       // UR adjacent cube
       if ( row - 1 >= 0 && col + 1 < cols ) {
-        int adjCube = cols * (row - 1) + (col + 1);
+        int adjCube = cols * ( row - 1 ) + ( col + 1 );
         adjs[v].add(adjCube);
       }
       // ML adjacent cube
       if ( col - 1 >= 0 ) {
-        int adjCube = cols * row + (col - 1);
+        int adjCube = cols * row + ( col - 1 );
         adjs[v].add(adjCube);
       }
       // MR adjacent cube
       if ( col + 1 < cols ) {
-        int adjCube = cols * row + (col + 1);
+        int adjCube = cols * row + ( col + 1 );
         adjs[v].add(adjCube);
       }
       // BL adjacent cube
       if ( row + 1 < rows && col - 1 >= 0 ) {
-        int adjCube = cols * (row + 1) + (col - 1);
+        int adjCube = cols * ( row + 1 ) + ( col - 1 );
         adjs[v].add(adjCube);
       }
       // BM adjacent cube
       if ( row + 1 < rows ) {
-        int adjCube = cols * (row + 1) + col;
+        int adjCube = cols * ( row + 1 ) + col;
         adjs[v].add(adjCube);
       }
       // BR adjacent cube
       if ( row + 1 < rows && col + 1 < cols ) {
-        int adjCube = cols * (row + 1) + (col + 1);
+        int adjCube = cols * ( row + 1 ) + ( col + 1 );
         adjs[v].add(adjCube);
       }
     }
@@ -166,13 +171,15 @@ public class BoggleSolver {
     BoggleBoard board = new BoggleBoard(args[1]);
     int totalScore = 0;
     int counter = 0;
+    long start = System.currentTimeMillis();
     for (String word : solver.getAllValidWords(board)) {
       counter++;
       int score = solver.scoreOf(word);
-      StdOut.printf("%s, score = %d \n", word, score);
       totalScore += score;
     }
-    StdOut.printf("Number of words found: %d, Score = %d",counter, totalScore);
+    long stop = System.currentTimeMillis();
+    double timing = (stop - start) / 1000.0;
+    StdOut.printf("Number of words found = %d, Score = %d, Timing = %f (seconds)",counter, totalScore, timing);
     
   }
 
