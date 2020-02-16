@@ -209,6 +209,9 @@ on the graph of cubes with their adjacent neighbors. The Boggle solver can be te
 ```
 $ mvn exec:java -Dexec.mainClass="assignments.boggle.BoggleSolver" -Dexec.args="resources/assignments/boggle/dictionary-algs4.txt resources/assignments/boggle/board4x4.txt"
 ```
+
+that outputs the valid words that have been found using the letters in the given board with their score
+
 ```
 AID, score = 1
 DIE, score = 1
