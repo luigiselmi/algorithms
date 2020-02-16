@@ -209,7 +209,38 @@ on the graph of cubes with their adjacent neighbors. The Boggle solver can be te
 ```
 $ mvn exec:java -Dexec.mainClass="assignments.boggle.BoggleSolver" -Dexec.args="resources/assignments/boggle/dictionary-algs4.txt resources/assignments/boggle/board4x4.txt"
 ```
-
+```
+AID, score = 1
+DIE, score = 1
+END, score = 1
+ENDS, score = 1
+EYE, score = 1
+ONE, score = 1
+ONES, score = 1
+PAID, score = 1
+PAINS, score = 2
+PAT, score = 1
+PATE, score = 1
+SEND, score = 1
+SIDE, score = 1
+SIN, score = 1
+SINE, score = 1
+SIT, score = 1
+SITE, score = 1
+TAT, score = 1
+TIE, score = 1
+TIED, score = 1
+TIN, score = 1
+TINY, score = 1
+TYPE, score = 1
+UNIT, score = 1
+UNITE, score = 2
+UNITED, score = 3
+USE, score = 1
+YET, score = 1
+YOU, score = 1
+Number of words found = 29, Score = 33, Timing = 0.039000 (seconds)
+```
 ## Performances
 ### Sorting
 |Algorithm|Running Time|Space|
