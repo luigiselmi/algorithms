@@ -172,6 +172,7 @@ public class BoggleSolver {
       counter++;
       int score = solver.scoreOf(word);
       totalScore += score;
+      StdOut.printf("%s, score = %d\n", word, score);
     }
     long stop = System.currentTimeMillis();
     double timing = (stop - start) / 1000.0;
