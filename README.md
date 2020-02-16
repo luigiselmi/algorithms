@@ -65,7 +65,7 @@ The Java code for the [programming assignment](https://coursera.cs.princeton.edu
 percolation folder. You can execute the code using Maven
 
 ```
-$ mvn exec:java -Dexec.mainClass="assignments.percolation.PercolationVisualizer" -Dexec.args="resources/percolation/input20.txt"
+$ mvn exec:java -Dexec.mainClass="assignments.percolation.PercolationVisualizer" -Dexec.args="resources/assignments/percolation/input20.txt"
 ```
 
 ### Week 2 
@@ -73,7 +73,7 @@ The Java code for the [programming assignment](https://coursera.cs.princeton.edu
 folder. You can execute the code using Maven
 
 ```
-$ mvn exec:java -Dexec.mainClass="assignments.queues.Permutation" -Dexec.args="8" < resources/queues/distinct.txt
+$ mvn exec:java -Dexec.mainClass="assignments.queues.Permutation" -Dexec.args="8" < resources/assignments/queues/distinct.txt
 ```
 
 ### Week 3
@@ -81,7 +81,7 @@ The Java code for the [programming assignment](https://coursera.cs.princeton.edu
 collinear folder. You can execute the code using Maven
 
 ```
-$ mvn exec:java -Dexec.mainClass="assignments.collinear.FastCollinearPoints" -Dexec.args="resources/collinear/input8.txt" 
+$ mvn exec:java -Dexec.mainClass="assignments.collinear.FastCollinearPoints" -Dexec.args="resources/assignments/collinear/input8.txt" 
 ```
 
 ### Week 4
@@ -99,7 +99,7 @@ set of tile moves to reach the goal with all the tiles ordered. The Java code fo
 and solver of the puzzles is in the puzzle folder. As usual you can execute the code using Maven
 
 ```
-$ mvn exec:java -Dexec.mainClass="assignments.puzzle.Solver" -Dexec.args="resources/puzzle/puzzle04.txt"
+$ mvn exec:java -Dexec.mainClass="assignments.puzzle.Solver" -Dexec.args="resources/assignments/puzzle/puzzle04.txt"
 ```
 
 ### Week 5
