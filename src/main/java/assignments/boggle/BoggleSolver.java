@@ -24,13 +24,8 @@ public class BoggleSolver {
 
   /**
    * Returns the set of all valid words in the given Boggle board, as an Iterable.
-   * Each letter on the board is a vertex. An edge is added from a vertex to all its
-   * adjacent vertices but its parent vertex. The process starts from a source vertex on the 
-   * board and adds edges from all the other vertices. At any step there are Then it is started again from
-   * another vertices so that a word can start with any of the letter in the board avoiding
-   * not adjacent letters, non sequential paths, and die used more than once.
-   * Any path that starts with a letter in the board is a candidate word.
-   * A candidate word is a valid word if it contains at least three letters and is in the dictionary. 
+   * A candidate word is a valid word if it contains at least three adjacent letters 
+   * and is in the dictionary. 
    * @param  a board (i.e. a matrix) of characters
    * @return all the valid words that can be built using the characters in the board.
    */
@@ -57,8 +52,7 @@ public class BoggleSolver {
     boolean validString = dictionary.keysWithPrefix(word.toString()).iterator().hasNext();
     if (validString) {
       if (letter == 'Q')
-        word.append('U');
-      
+        word.append('U');    
       
       if ( word.length() >= 3 ) {
         boolean matchString = dictionary.keysThatMatch(word.toString()).iterator().hasNext();
@@ -80,6 +74,8 @@ public class BoggleSolver {
   
   /*
    * Computes the adjacent cubes of any cube in the board.
+   * Each cube is represented as an integer from 0 to rows*columns
+   * and all its adjacent cubes are added into its adjacency list.
    * For each cube there can be from 3 up to 8 adjacent cubes:
    * UL, UM, UR
    * ML, ML,
