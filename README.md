@@ -201,10 +201,10 @@ $ mvn exec:java -Dexec.mainClass="assignments.baseball.BaseballElimination" -Dex
 The first topic of the 4th week is about specialized algorithms for searching in symbol tables with string keys. The difference with symbol tables discussed
 in the first part of the course is that the algorithms don't use comparisons for searching and so they can be faster. The 2nd topic is substring search that has 
 application in many fields from search engines to genetics. The [programming assignment](https://coursera.cs.princeton.edu/algs4/assignments/boggle/specification.php) is about
-developing an application that can find all the valid words that can be found using random cubes, with letters on each face, in a board as in the word game Boggle. The main steps are first 
+developing an application to find all the valid words composed of random letters displayed on a board, as in the word game Boggle. The main steps are first 
 building the adjacency list of each cube and then searching for words, using letters in adjacent cubes, that are in a dictionary. The dictionary of valid word can be conveniently stored
-in a Trie, a symbol table with string keys while the search can be performed recursively using depth-first search. The Boggle solver can be tested using static board files as in the 
-example  
+in a Trie, a symbol table with string keys, while the search can be performed recursively using depth-first search. The Boggle solver can be tested using static board and dictionary files 
+as in the example  
 
 ```
 $ mvn exec:java -Dexec.mainClass="assignments.boggle.BoggleSolver" -Dexec.args="resources/assignments/boggle/dictionary-algs4.txt resources/assignments/boggle/board4x4.txt"
