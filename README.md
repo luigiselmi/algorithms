@@ -204,7 +204,7 @@ application in many fields, from search engines to genetics. The [programming as
 developing an application to find all the valid words composed of random letters displayed on cubes' faces and kept on a board, as in the word game Boggle. The longer the word found
 the higher is the score. The main steps are first building the adjacency list of each cube and then searching for words, using letters on adjacent cubes, that are contained in a 
 dictionary. The dictionary of valid words can be conveniently stored in a Trie, a symbol table with string keys, while the search can be performed recursively using depth-first search 
-on the graph of cubes with their adjacent cubes. The Boggle solver can be tested using static board and dictionary files as in the example  
+on the graph of cubes with their adjacent neighbors. The Boggle solver can be tested using static board and dictionary files as in the example  
 
 ```
 $ mvn exec:java -Dexec.mainClass="assignments.boggle.BoggleSolver" -Dexec.args="resources/assignments/boggle/dictionary-algs4.txt resources/assignments/boggle/board4x4.txt"
