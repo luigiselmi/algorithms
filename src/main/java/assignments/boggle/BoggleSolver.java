@@ -8,20 +8,16 @@ import edu.princeton.cs.algs4.TST;
 
 public class BoggleSolver {
   
-  private TST<Integer> dictionaryTrie;
-  private String [] dictionaryDefensiveCopy;
+  private TST<Integer> dictionary;
   private boolean[] marked; // visited board's cubes
   
   // Initializes the data structure using the given array of strings as the dictionary.
   // (You can assume each word in the dictionary contains only the upper case letters A through Z.)
   public BoggleSolver(String[] dictionary) {
-    dictionaryDefensiveCopy = new String[dictionary.length];
-    for (int i = 0; i < dictionaryDefensiveCopy.length; i++)
-      dictionaryDefensiveCopy[i] = dictionary[i];
-    
-    dictionaryTrie = new TST<Integer>();
-    for (int i = 0; i < dictionaryDefensiveCopy.length; i++)
-      dictionaryTrie.put(dictionaryDefensiveCopy[i], dictionaryDefensiveCopy[i].length());
+ 
+    this.dictionary = new TST<Integer>();
+    for (int i = 0; i < dictionary.length; i++)
+      this.dictionary.put(dictionary[i], dictionary[i].length());
     
   }  
 
@@ -57,11 +53,11 @@ public class BoggleSolver {
     char letter = board.getLetter(row, col);
     word.append(letter);
     
-    boolean validString = dictionaryTrie.keysWithPrefix(word.toString()).iterator().hasNext();
+    boolean validString = dictionary.keysWithPrefix(word.toString()).iterator().hasNext();
     if (validString) {
       if (letter == 'Q')
         word.append('U');
-      boolean matchString = dictionaryTrie.keysThatMatch(word.toString()).iterator().hasNext();
+      boolean matchString = dictionary.keysThatMatch(word.toString()).iterator().hasNext();
       if (word.length() >= 3 && matchString) 
         matchedWords.add(word.toString());
       
@@ -147,7 +143,7 @@ public class BoggleSolver {
   public int scoreOf(String word) {
     int length = word.length();
     int score = 0;
-    if (dictionaryTrie.contains(word)) {
+    if (dictionary.contains(word)) {
       if (length == 3 || length == 4)
         score = 1;
       else if (length == 5)
