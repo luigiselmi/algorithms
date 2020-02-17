@@ -84,6 +84,8 @@ collinear folder. You can execute the code using Maven
 $ mvn exec:java -Dexec.mainClass="assignments.collinear.FastCollinearPoints" -Dexec.args="resources/assignments/collinear/input8.txt" 
 ```
 
+![linear patterns](resources/assignments/collinear/collinear.jpg)
+
 ### Week 4
 The main topics are priority queues and the heap sort algorithm. A Priority queue is a data structure  that provides two
 main APIs:
