@@ -7,7 +7,7 @@ on Coursera. The online lessons are based on the book Algorithms, 4th Edition, b
 the [book's website](https://algs4.cs.princeton.edu/home/). This repository contains also my submissions to the programming assignments. This 
 is a work in progress, see the assessments to know whether the code passes all the tests for correctness, memory, timing and other metrics. 
 Maven is used to compile and execute the code. **The Java files that have been developed as solutions to the assignments are encrypted in order 
-to comply with the Coursera Honor’s Code**.
+to comply with the Coursera Honor’s Code** (see Source Code Encryption section).
 
 ## Compile and execute
 You can compile and execute the code using Java or Maven.
@@ -246,6 +246,22 @@ YET, score = 1
 YOU, score = 1
 Number of words found = 29, Score = 33, Timing = 0.039000 (seconds)
 ```
+### Week 5
+
+## Source Code Encryption
+The Java source code of the solution of the assignments has been encrypted to comply with the Coursera Honor's Code using [OpenSSL](https://www.openssl.org/)
+and the Advanced Encryption Standard (AES) cipher with a 256 bits long key in CBC mode. The command for the encryption is like in the example
+
+```
+$ openssl enc -e -aes-256-cbc -in SeamCarver.java -out SeamCarver.java.enc -pass file:secret -p
+```
+
+where "secret" is the name of the file containing the pass-phrase. Use the next command for decryption 
+  
+```
+$  openssl enc -d -aes-256-cbc -in SeamCarver.java.enc -out SeamCarver.java -pass file:secret -p
+```
+
 ## Performances
 ### Sorting
 |Algorithm|Running Time|Space|
