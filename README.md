@@ -250,7 +250,7 @@ Number of words found = 29, Score = 33, Timing = 0.039000 (seconds)
 
 ## Source Code Encryption
 The Java source code of the solution of the assignments has been encrypted to comply with the Coursera Honor's Code using [OpenSSL](https://www.openssl.org/)
-and the Advanced Encryption Standard (AES) cipher with a 256 bits long key in CBC mode. The command for the encryption is like in the example
+and the Advanced Encryption Standard (AES) symmetric cipher with a 256 bits long key in CBC mode. The command for the encryption is like in the example
 
 ```
 $ openssl enc -e -aes-256-cbc -in SeamCarver.java -out SeamCarver.java.enc -pass file:secret -p
