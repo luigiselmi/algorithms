@@ -259,7 +259,7 @@ $ openssl enc -e -aes-256-cbc -in SeamCarver.java -out SeamCarver.java.enc -pass
 where "secret" is the name of the file containing the pass-phrase. Use the next command for decryption 
   
 ```
-$  openssl enc -d -aes-256-cbc -in SeamCarver.java.enc -out SeamCarver.java -pass file:secret -p
+$ openssl enc -d -aes-256-cbc -in SeamCarver.java.enc -out SeamCarver.java -pass file:secret -p
 ```
 
 ## Performances
