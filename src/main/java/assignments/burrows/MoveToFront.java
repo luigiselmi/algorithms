@@ -15,6 +15,8 @@ public class MoveToFront {
   // if args[0] is "-", apply move-to-front encoding
   // if args[0] is "+", apply move-to-front decoding
   public static void main(String[] args) {
-    
+    if      (args[0].equals("-")) encode();
+    else if (args[0].equals("+")) decode();
+    else throw new IllegalArgumentException("Illegal command line argument");
   }
 }
