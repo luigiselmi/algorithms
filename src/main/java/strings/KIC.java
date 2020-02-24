@@ -1,6 +1,6 @@
 /**
  * Key-indexed counting.
- * This class can be used to read an array of records and order them by a key.
+ * This class can be used to read an array of records and order them by an integer key.
  * Execution:
  * 
  * $ java -cp "lib/algs4.jar;target/classes" strings.KIC < resources/strings/students_by_section.txt
@@ -65,5 +65,6 @@ public class KIC {
       StdOut.printf("%-10s %-4d   %-10s %d \n", a[j].name, a[j].key, sorted[j].name, sorted[j].key);
     StdOut.println();
   }
+ 
 }
 
