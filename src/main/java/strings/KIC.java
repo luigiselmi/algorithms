@@ -37,7 +37,7 @@ public class KIC {
     return counts;
   }
   
-  // Distribute the records and copy back
+  // Distribute the records
   private Record [] distribute(Record [] records, int [] counts) {
     int N = records.length;
     Record [] sorted = new Record[N]; 
