@@ -52,8 +52,8 @@ public class CircularSuffixArray {
   /*
    *  Performs key-indexed counting of all the circular suffixes
    *  of the input string using as keys the characters in the dth 
-   *  position in each suffix from d == 0 to d = length of input 
-   *  string.
+   *  position in each suffix from d == 0 to d = N, length of input 
+   *  string, so that the suffixes are sorted N times.
    */
   private String [] sortAll(String [] suffixes) {
     String [] temp = suffixes;
@@ -97,7 +97,7 @@ public class CircularSuffixArray {
     sb.append(first);
     return sb.toString();
   }
-
+  
   // Compute frequency counts, i.e. number of suffixes 
   // starting with the same character
   private int [] countByChar(String [] suffixes, int d) {
