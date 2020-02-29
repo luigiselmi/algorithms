@@ -101,19 +101,7 @@ public class BurrowsWheeler {
         return i;
     return -1;
   }
-  // Returns the last character of all the ordered suffixes
-  /*
-  private static char [] getLastColumn(CircularSuffixArray csa, String [] suffixes) {
-    int N = suffixes.length;
-    char t[] = new char[N]; 
-    for (int i = 0; i < N; i++) {
-      int index = csa.index(i);
-      char c = suffixes[index].charAt(N - 1);
-      t[i] = c;
-    }
-    return t;
-  }
-  */
+  
   /*
    * Creates an array of N circular suffixes from the input string 
    * by shifting the characters 1 position to the left N times,
