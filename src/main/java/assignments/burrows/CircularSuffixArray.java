@@ -14,17 +14,6 @@ public class CircularSuffixArray {
   private String [] sortedSuffixes; // suffix array
   private final int R = 256;   // size of the extended ASCII code
  
-  /*
-  private class CircularSuffix {
-    private String suffix;
-    private char firstChar;
-    CircularSuffix(String s) {
-      suffix = s;
-      firstChar = s.charAt(0);
-    }
-  }
-  */
- 
   // circular suffix array of the input string
   public CircularSuffixArray(String s) {
     if (s == null)
@@ -34,7 +23,7 @@ public class CircularSuffixArray {
     index = new int [N];
     for (int i = 0; i < N; i++) 
       index[i] = i;
-    sortedSuffixes = sortAll(createCircularSuffixes(s));
+    sortAll(createCircularSuffixes(s));
   }
   
   //length of the input string
@@ -55,11 +44,10 @@ public class CircularSuffixArray {
    *  position in each suffix from d == 0 to d = N, length of input 
    *  string, so that the suffixes are sorted N times.
    */
-  private String [] sortAll(String [] suffixes) {
+  private void sortAll(String [] suffixes) {
     String [] temp = suffixes;
     for (int d = N - 1; d >= 0; d--) 
       temp = sortSuffixesByChar(temp, d);
-    return temp;
   }
   
   /*
