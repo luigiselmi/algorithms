@@ -1,6 +1,8 @@
 /**
  * This class creates a circular suffix array, a sorted array 
  * of the n circular suffixes of the input string.
+ * Execution:
+ * $ java -cp "lib/algs4.jar;target/classes" assignments.burrows.CircularSuffixArray resources/strings/abra.txt
  */
 package assignments.burrows;
 
@@ -127,6 +129,9 @@ public class CircularSuffixArray {
     In in = new In(args[0]);
     String s = in.readString();
     CircularSuffixArray csa = new CircularSuffixArray(s);
+    
+    StdOut.printf("Length of the suffix array: %d", csa.length());
+    
     for (int i = 0; i < s.length(); i++)
       StdOut.printf("index[%d] = %d\n", i, csa.index(i));
   }
