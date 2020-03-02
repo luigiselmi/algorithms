@@ -248,6 +248,18 @@ Number of words found = 29, Score = 33, Timing = 0.039000 (seconds)
 ```
 ### Week 5
 
+Compression:
+
+```
+$ java -cp "lib/algs4.jar;target/classes" assignments.burrows.BurrowsWheeler - < resources/assignments/burrows/abra.txt | java -cp "lib/algs4.jar;target/classes" assignments.burrows.MoveToFront - | java -cp "lib/algs4.jar" edu.princeton.cs.algs4.Huffman - | java -cp "lib/algs4.jar" edu.princeton.cs.algs4.HexDump 16
+```
+
+Expansion:
+
+```
+$ java -cp "lib/algs4.jar" edu.princeton.cs.algs4.Huffman + < resources/assignments/burrows/abra.txt.bwt.mtf.huf | java -cp "lib/algs4.jar;target/classes" assignments.burrows.MoveToFront + | java -cp "lib/algs4.jar;target/classes" assignments.burrows.BurrowsWheeler + 
+```
+
 ## Source Code Encryption
 The Java source code of the solution of the assignments has been encrypted to comply with the Coursera Honor's Code using [OpenSSL](https://www.openssl.org/)
 and the Advanced Encryption Standard (AES) symmetric cipher with a 256 bits long key in CBC mode. The command for the encryption is like in the example
