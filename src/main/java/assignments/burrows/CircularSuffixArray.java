@@ -28,7 +28,7 @@ public class CircularSuffixArray {
     if (s == null)
       throw new IllegalArgumentException("The suffix cannot be null.");
     for (int i = 0; i < s.length(); i++)
-      if ( ! alphabet.contains(s.charAt(i)) )
+      if (!alphabet.contains(s.charAt(i)))
         throw new IllegalArgumentException("The input string contains non valid characters.");
     
     R = alphabet.radix();
@@ -42,14 +42,14 @@ public class CircularSuffixArray {
     sortSuffixes(s);
   }
   
-  //length of the input string
+  // length of the input string
   public int length() {
     return N;
   }
   
    // returns index of ith sorted suffix
   public int index(int i) {
-    if ( i < 0 || i > N )
+    if (i < 0 || i > N)
       throw new IllegalArgumentException("The index i = " + i + " is outside the interval 0 <= i < " + N );
     return index[i];
   }
@@ -97,8 +97,8 @@ public class CircularSuffixArray {
   private int [] countCharOccurrences(String s) {
     int [] counts = new int[R + 1];
     for (int i = 0; i < s.length(); i++) { 
-      int index = alphabet.toIndex(s.charAt(i)); 
-      counts[index + 1]++;
+      int charIndex = alphabet.toIndex(s.charAt(i)); 
+      counts[charIndex + 1]++;
     }
     return counts;
   }

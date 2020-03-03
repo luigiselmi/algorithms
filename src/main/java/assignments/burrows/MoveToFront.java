@@ -29,7 +29,7 @@ public class MoveToFront {
       orderedSequence[i] = alphabet.toChar(i); 
     
     int indexInputChar = 0; // index of the input char in the ordered sequence
-    while ( ! BinaryStdIn.isEmpty() ) {
+    while (!BinaryStdIn.isEmpty()) {
       // read a character 
       char c = BinaryStdIn.readChar();  
       // find the character in the ordered sequence
@@ -43,7 +43,7 @@ public class MoveToFront {
       BinaryStdOut.write(indexInputChar, 8);
       
       // move the character to front of ordered sequence
-      for (int j = indexInputChar; j > 0 ; j--)
+      for (int j = indexInputChar; j > 0; j--)
         orderedSequence[j] = orderedSequence[j - 1];
       orderedSequence[0] = c;
       
@@ -63,7 +63,7 @@ public class MoveToFront {
     for (int i = 0; i < R; i++)
       orderedSequence[i] = alphabet.toChar(i); 
     
-    while ( ! BinaryStdIn.isEmpty() ) {
+    while (!BinaryStdIn.isEmpty()) {
       
       int index = BinaryStdIn.readChar(); // read input character index
       
@@ -72,7 +72,7 @@ public class MoveToFront {
       BinaryStdOut.write(output);
       
       // move the character to front of ordered characters' sequence
-      for (int j = index; j > 0 ; j--)
+      for (int j = index; j > 0; j--)
         orderedSequence[j] = orderedSequence[j - 1];
       orderedSequence[0] = output;
       

@@ -11,7 +11,7 @@ public class BurrowsWheeler {
   
   private static final int R = 256; // size of the Extended ASCII characters set
 
-  //Do not instantiate.
+  // Do not instantiate.
   private BurrowsWheeler() {}
 
   // apply Burrows-Wheeler transform,
@@ -60,7 +60,6 @@ public class BurrowsWheeler {
   private static char [] lexicalOrder(char [] t, int [] next) {
     // the first column of the sorted suffixes can be easily inferred from the last column t[]
     // since it must contain the same characters in lexical order.
-    int N = t.length;
     char [] firstColumn = distribute(t, index(count(t)), next);
     return firstColumn;
   }
