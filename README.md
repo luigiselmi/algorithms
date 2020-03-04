@@ -265,13 +265,13 @@ The Java source code of the solution of the assignments has been encrypted to co
 and the Advanced Encryption Standard (AES) symmetric cipher with a 256 bits long key in CBC mode. The command for the encryption is like in the example
 
 ```
-$ openssl enc -e -aes-256-cbc -in SeamCarver.java -out SeamCarver.java.enc -pass file:secret -p
+$ openssl enc -e -aes-256-cbc -in SeamCarver.java -out SeamCarver.java.enc -pass file:secret
 ```
 
 where "secret" is the name of the file containing the pass-phrase. Use the next command for decryption 
   
 ```
-$ openssl enc -d -aes-256-cbc -in SeamCarver.java.enc -out SeamCarver.java -pass file:secret -p
+$ openssl enc -d -aes-256-cbc -in SeamCarver.java.enc -out SeamCarver.java -pass file:secret
 ```
 
 ## Performances
