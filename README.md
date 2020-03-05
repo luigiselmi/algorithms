@@ -7,7 +7,7 @@ on Coursera. The online lessons are based on the book Algorithms, 4th Edition, b
 the [book's website](https://algs4.cs.princeton.edu/home/). This repository contains also my submissions to the programming assignments. This 
 is a work in progress, see the assessments to know whether the code passes all the tests for correctness, memory, timing and other metrics. 
 Maven is used to compile and execute the code. **The Java files that have been developed as solutions to the assignments are encrypted in order 
-to comply with the [Coursera Honor’s Code](https://learner.coursera.help/hc/en-us/articles/209818863-Coursera-Honor-Code)** (see [Source Code Encryption](#Source-Code-Encryption) section).
+to comply with the Coursera Honor’s Code** (see [Source Code Encryption](#Source-Code-Encryption) section).
 
 ## Compile and execute
 You can compile and execute the code using Java or Maven.
@@ -247,7 +247,20 @@ YOU, score = 1
 Number of words found = 29, Score = 33, Timing = 0.039000 (seconds)
 ```
 ### Week 5
+The topics of the 5th week are **regular expressions** and **data compression**. A regular expressions, by definition, is a pattern that describes a set of strings. They are used in substring search when the pattern to be found is not completely specified. For example 
+we might want to search for a substring in a genomic sequence that stretches 5 bases, starting with adenine A and cytosine C and ending with thymine T, without specifying exactly which bases are in between. Regular expressions allows the use of operators to define the set of strings
+to be searched, the fundamental ones being concatenation, closure, and the logic or operator. An application that can interpret regular expressions, parses the expression and builds a nondeterministic finite-state automaton that will be able to find the pattern in the text. The
+most famous such application is **grep** that is available in any unix-like operating system and can be used as in our simple use case in which only the concatenation operator is used.  
 
+```
+$ echo "ACAGCATACTATCGGGAACTATCCTACGAT" | grep --color -o -e "AC..T"
+```
+that prints out the list of occurrences of the substrings found in the sequence that follow the pattern
+```
+ACTAT
+ACTAT
+ACGAT
+```
 Compression:
 
 ```
@@ -261,7 +274,7 @@ $ java -cp "lib/algs4.jar" edu.princeton.cs.algs4.Huffman + < resources/assignme
 ```
 
 ## Source Code Encryption
-The Java source code of the solution of the assignments has been encrypted to comply with the Coursera Honor's Code using [OpenSSL](https://www.openssl.org/)
+The Java source code of the solution of the assignments has been encrypted to comply with the [Coursera Honor's Code](https://learner.coursera.help/hc/en-us/articles/209818863-Coursera-Honor-Code) using [OpenSSL](https://www.openssl.org/)
 and the Advanced Encryption Standard (AES) symmetric cipher with a 256 bits long key in CBC mode. The command for the encryption is like in the example
 
 ```
