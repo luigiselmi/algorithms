@@ -264,7 +264,7 @@ ACTAT
 ACGAT
 ```
 
-Data compression is still an important topic since it enables to save space for data storage and reduce the amount of time to transfer data. It is also the topic of this week's assignment. The chapter in the book and the assignment covers only lossless compression for which no information 
+Data compression is still an important topic since it enables to save space for data storage and reduce the amount of time to transfer data. It is also the topic of this week's assignment. The [assignment](https://coursera.cs.princeton.edu/algs4/assignments/burrows/specification.php) covers only lossless compression for which no information 
 is lost and the data after compression and expansion is exactly the same as the original one. The measure of the ability of an algorithm to compress a data set is called compression ratio, that is ratio between the size of the compressed data and the size of the original one. A lossless
 compression algorithm exploits three characteristics of a data set, binary data or text: the alphabet used to represent to data, the presence of long sequences of identical bits/characters and the frequency in which different characters are used. These three characteristics of the data are 
 exploited in the Java classes that must be implemented for the Burrows-Wheeler data compression algorithm in order to prepare the data for compression using the Huffman algorithm. The Java classes must be used in sequence for compression and in the reverse order for expansion.
