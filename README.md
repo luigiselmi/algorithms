@@ -250,24 +250,32 @@ Number of words found = 29, Score = 33, Timing = 0.039000 (seconds)
 The topics of the 5th week are **regular expressions** and **data compression**. A regular expressions, by definition, is a pattern that describes a set of strings. They are used in substring search when the pattern to be found is not completely specified. For example 
 we might want to search for a substring in a genomic sequence that stretches 5 bases, starting with adenine A and cytosine C and ending with thymine T, without specifying exactly which bases are in between. Regular expressions allows the use of operators to define the set of strings
 to be searched, the fundamental ones being concatenation, closure, and the logic or operator. An application that can interpret regular expressions, parses the expression and builds a nondeterministic finite-state automaton that will be able to find the pattern in the text. The
-most famous such application is **grep** that is available in any unix-like operating system and can be used as in our simple use case in which only the concatenation operator is used.  
+most famous such application is **grep** that is available in any unix-like operating system and can be used, as in our simple use case in which only the concatenation operator is used  
 
 ```
-$ echo "ACAGCATACTATCGGGAACTATCCTACGAT" | grep --color -o -e "AC..T"
+$ echo "ACAGCATACTATCGGGAACTATCCTACGAT" | grep -o -e "AC..T"
 ```
+
 that prints out the list of occurrences of the substrings found in the sequence that follow the pattern
+
 ```
 ACTAT
 ACTAT
 ACGAT
 ```
-Compression:
+
+Data compression is still an important topic since it enables to save space for data storage and reduce the amount of time to transfer data. It is also the topic of this week's assignment. The chapter in the book and the assignment covers only lossless compression for which no information 
+is lost and the data after compression and expansion is exactly the same as the original one. The measure of the ability of an algorithm to compress a data set is called compression ratio, that is ratio between the size of the compressed data and the size of the original one. A lossless
+compression algorithm exploits three characteristics of a data set, binary data or text: the alphabet used to represent to data, the presence of long sequences of identical bits/characters and the frequency in which different characters are used. These three characteristics of the data are 
+exploited in the Java classes that must be implemented for the Burrows-Wheeler data compression algorithm in order to prepare the data for compression using the Huffman algorithm. The Java classes must be used in sequence for compression and in the reverse order for expansion.
+ 
+For compression use the Java classes as in the following command:
 
 ```
 $ java -cp "lib/algs4.jar;target/classes" assignments.burrows.BurrowsWheeler - < resources/assignments/burrows/abra.txt | java -cp "lib/algs4.jar;target/classes" assignments.burrows.MoveToFront - | java -cp "lib/algs4.jar" edu.princeton.cs.algs4.Huffman - | java -cp "lib/algs4.jar" edu.princeton.cs.algs4.HexDump 16
 ```
 
-Expansion:
+For expansion, follow the next example:
 
 ```
 $ java -cp "lib/algs4.jar" edu.princeton.cs.algs4.Huffman + < resources/assignments/burrows/abra.txt.bwt.mtf.huf | java -cp "lib/algs4.jar;target/classes" assignments.burrows.MoveToFront + | java -cp "lib/algs4.jar;target/classes" assignments.burrows.BurrowsWheeler + 
