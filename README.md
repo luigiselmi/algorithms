@@ -7,7 +7,7 @@ on Coursera. The online lessons are based on the book Algorithms, 4th Edition, b
 the [book's website](https://algs4.cs.princeton.edu/home/). This repository contains also my submissions to the programming assignments. This 
 is a work in progress, see the assessments to know whether the code passes all the tests for correctness, memory, timing and other metrics. 
 Maven is used to compile and execute the code. **The Java files that have been developed as solutions to the assignments are encrypted in order 
-to comply with the Coursera Honor’s Code** (see [Source Code Encryption](#Source-Code-Encryption) section).
+to comply with the [Coursera Honor’s Code](https://learner.coursera.help/hc/en-us/articles/209818863-Coursera-Honor-Code)** (see [Source Code Encryption](#Source-Code-Encryption) section).
 
 ## Compile and execute
 You can compile and execute the code using Java or Maven.
