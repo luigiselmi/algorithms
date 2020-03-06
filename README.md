@@ -192,12 +192,32 @@ edge's capacity is a number that specifies the maximum value that can be moved b
 The algorithm is also called **maxflow algorithm** because it solves the problem of finding the best way to distribute a flow from a source through a network to a
 sink so that the flow is maximal given the capacities of the edges. In order to showcase the applicability of the scheme to many different applications, 
 it will be used in the [programming assignment](https://coursera.cs.princeton.edu/algs4/assignments/baseball/specification.php) to solve the [baseball elimination problem](https://en.wikipedia.org/wiki/Maximum_flow_problem#Baseball_elimination).
-As an example, the following command finds which team is mathematically eliminated in a baseball division with 5 teams. 
+As an example, the following command finds which team is mathematically eliminated in a baseball division with 5 teams. Given the scenario in resources/assignments/baseball/teams5.txt
+```
+Team        wins loss left  NY Bal Bos Tor Det
+----------------------------------------------
+New_York     75   59   28    0   3   8   7   3
+Baltimore    71   63   28    3   0   2   7   7
+Boston       69   66   27    8   2   0   0   3
+Toronto      63   72   27    7   7   0   0   3
+Detroit      49   86   27    3   7   3   3   0
+```   
 
-   
+Executing baseball elimination
+
 ```
 $ mvn exec:java -Dexec.mainClass="assignments.baseball.BaseballElimination" -Dexec.args="resources/assignments/baseball/teams5.txt"
+```
+
+produces the desired output
+
 ```   
+Baltimore is not eliminated
+Boston is not eliminated
+Detroit is eliminated by the subset R = { Toronto Boston Baltimore New_York }
+New_York is not eliminated
+Toronto is not eliminated
+```
 
 ### Week 4
 The first topic of the 4th week is about specialized algorithms for searching in symbol tables with string keys. The difference with symbol tables discussed
