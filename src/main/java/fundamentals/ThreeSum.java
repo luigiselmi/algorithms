@@ -34,11 +34,11 @@ public class ThreeSum {
 	 */
 	public static int fastCount(int [] a) {
 		int n = a.length;
-        Arrays.sort(a); // mergesort
+        Arrays.sort(a); // mergesort, running time N*log(N)
         int count = 0;
         for (int i = 0; i < n; i++) {
             for (int j = i+1; j < n; j++) {
-                int k = Arrays.binarySearch(a, -(a[i] + a[j]));
+                int k = Arrays.binarySearch(a, -(a[i] + a[j])); // running time log(N)
                 if (k > j) count++;
             }
         }
@@ -46,7 +46,7 @@ public class ThreeSum {
 	}
 
 	public static void main(String[] args) throws IOException {
-		String filePath = "resources/4Kints.txt";
+		String filePath = "resources/fundamentals/8Kints.txt";
 		int [] a = readNumbersFromFile(filePath);
 		
 		// uses count() 
@@ -54,14 +54,14 @@ public class ThreeSum {
 		int triples = count(a); // number of triples of integers whose sum is 0
 	    long stop = System.currentTimeMillis();
 		double elapsedTime = (stop - start)/1000.0;
-		System.out.println("Number of triples: " + triples + "\nTime elapsed (s): " + elapsedTime);
+		System.out.println("Number of triples (count): " + triples + "\nTime elapsed (s): " + elapsedTime);
 		
 		// uses fastCount()
 		long start1 = System.currentTimeMillis();
 		int triples1 = fastCount(a); // number of triples of integers whose sum is 0
 	    long stop1 = System.currentTimeMillis();
 		double elapsedTime1 = (stop1 - start1)/1000.0;
-		System.out.println("Number of triples: " + triples1 + "\nTime elapsed (s): " + elapsedTime1);
+		System.out.println("Number of triples (fast count): " + triples1 + "\nTime elapsed (s): " + elapsedTime1);
 	}
 	
 	private static int [] readNumbersFromFile(String filePath) throws IOException {
