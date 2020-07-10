@@ -61,13 +61,15 @@ classes. Examples of how to execute a Java class using Maven are provided in the
 Part I covers elementary data structures, sorting, and searching algorithms. 
 
 ### Week 1
+The main topics of the 1st week are analysis of algorithms and union-find.
 The Java code for the [programming assignment](https://coursera.cs.princeton.edu/algs4/assignments/percolation/specification.php) is in the 
 percolation folder. You can execute the code using Maven
 
 ```
-$ mvn exec:java -Dexec.mainClass="assignments.percolation.PercolationVisualizer" -Dexec.args="resources/assignments/percolation/input20.txt"
+$ mvn exec:java -Dexec.mainClass="assignments.percolation.PercolationVisualizer" -Dexec.args="resources/assignments/percolation/luigi_selmi.txt"
 ```
 
+![Luigi Selmi](resources/assignments/percolation/luigi_selmi.png)
 ### Week 2 
 The Java code for the [programming assignment](https://coursera.cs.princeton.edu/algs4/assignments/queues/specification.php) is in the queues 
 folder. You can execute the code using Maven
