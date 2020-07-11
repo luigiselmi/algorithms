@@ -75,7 +75,9 @@ we want to know the amount of time that is required by our algorithm to sort N s
 |exponential|2^N|
  
 Polynomial times do not scale, let alone exponential times, so our goal is to discover algorithms that solve our problems in less than polynomial 
-time. The Java code for the [programming assignment](https://coursera.cs.princeton.edu/algs4/assignments/percolation/specification.php) is in the 
+time. A first example of the relevance of the performances of an algorithm to being able to solve problems in the real world is union-find or finding
+whether two nodes in a graph are connected. This abstract problem arises in many applications, one of them is percolation in which the goal is to 
+determine a threshold for the number of open sites in a system to percolate. The Java code for the [programming assignment](https://coursera.cs.princeton.edu/algs4/assignments/percolation/specification.php) is in the 
 percolation folder. You can execute the code using Maven
 
 ```
