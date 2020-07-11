@@ -61,7 +61,19 @@ classes. Examples of how to execute a Java class using Maven are provided in the
 Part I covers elementary data structures, sorting, and searching algorithms. 
 
 ### Week 1
-The main topics of the 1st week are analysis of algorithms and union-find.
+The main topics of the 1st week are analysis of algorithms and union-find. An algorithm should not only be correct, that is, provide the expected 
+result, it should do so in a reasonable amount of time. The performance of an algorithm is measured in terms of the size of the input. Algorithms 
+are commonly classified by their order-of-growth
+
+|Class|Order-of-growth|
+|-----|--------------:| 
+|constant|1|
+|logarithmic|log(N)| 
+|linear|N|
+|linearithmic|Nlog(N)|
+|polynomial|N^2, N^3|
+|exponential|2^N|
+ 
 The Java code for the [programming assignment](https://coursera.cs.princeton.edu/algs4/assignments/percolation/specification.php) is in the 
 percolation folder. You can execute the code using Maven
 
