@@ -77,10 +77,24 @@ we want to know the amount of time that is required by our algorithm to sort N s
 Polynomial times do not scale, let alone exponential times, so our goal is to discover algorithms that solve our problems in less than polynomial 
 time. A first example of the relevance of the performances of an algorithm to being able to solve problems in the real world is union-find or finding
 whether two nodes in a graph are connected. This abstract problem arises in many applications, one of them is percolation, [this week assignment](https://coursera.cs.princeton.edu/algs4/assignments/percolation/specification.php), 
-in which the goal is to determine a threshold for the number of open sites in a system to percolate. The Java code for the assignment is in the 
-percolation folder. 
+in which the goal is to determine the number of sites that have to be opened for a square lattice to percolate. The ratio between the number of open sites
+and the total number of sites N is called percolation threshold and it is a constant that represents a phase transition of the system. No analytical solution
+has been found so far to determine this threshold. The square lattice is made up of N^2 blocked site that are opened randomly one by one till the system 
+percolates. A Java class is available to execute many tests so that the result is statistically significant. It can be executed with the command
 
-![quadratic equation1](resources/assignments/percolation/equation1.gif) 
+```
+$ java -cp "lib/algs4.jar;target/classes" assignments.percolation.PercolationStats 200 10000
+```
+
+where the first argument is the number N that is used to build the N^2 square lattice and the 2nd argument is the number of tests. The results are printed out 
+
+```
+mean                    = 0.592671
+stddev                  = 0.009708
+95% confidence interval = [0.592480, 0.592861]
+```
+
+Three algorithms are discussed as possible solution: quick-find, quick-union and weighted quick-union.    
 
 You can execute the code using Maven
 
