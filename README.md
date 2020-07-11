@@ -80,7 +80,7 @@ whether two nodes in a graph are connected. This abstract problem arises in many
 in which the goal is to determine a threshold for the number of open sites in a system to percolate. The Java code for the assignment is in the 
 percolation folder. 
 
-$$ y = \alpha + \beta x + \gamma x^2 $$ 
+![quadratic equation1](resources/assignments/percolation/equation1.gif) 
 
 You can execute the code using Maven
 
