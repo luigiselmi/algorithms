@@ -80,7 +80,8 @@ whether two nodes in a graph are connected. This abstract problem arises in many
 in which the goal is to determine the number of sites that have to be opened for a square lattice to percolate. The ratio between the number of open sites
 and the total number of sites N is called percolation threshold and it is a constant that represents a phase transition of the system. No analytical solution
 has been found so far to determine this threshold. The square lattice is made up of N^2 blocked site that are opened randomly one by one till the system 
-percolates. A Java class is available to execute many tests so that the result is statistically significant. It can be executed with the command
+percolates. A Java class is available to execute many tests so that the result is statistically significant. It can be executed from the root folder with 
+the command
 
 ```
 $ java -cp "lib/algs4.jar;target/classes" assignments.percolation.PercolationStats 200 10000
@@ -94,9 +95,10 @@ stddev                  = 0.009708
 95% confidence interval = [0.592480, 0.592861]
 ```
 
-Three algorithms are discussed as possible solution: quick-find, quick-union and weighted quick-union.    
+Three algorithms are discussed as possible solution: quick-find, quick-union and weighted quick-union. The first two algorithms are quadratic-time while weighted
+quick-union is logarithmic and so can be used for real world applications.   
 
-You can execute the code using Maven
+A lattice can be visualized using a Java application provided in the assignment and executing the command as in the example below
 
 ```
 $ mvn exec:java -Dexec.mainClass="assignments.percolation.PercolationVisualizer" -Dexec.args="resources/assignments/percolation/luigi_selmi.txt"
