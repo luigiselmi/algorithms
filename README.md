@@ -78,7 +78,11 @@ Polynomial times do not scale, let alone exponential times, so our goal is to di
 time. A first example of the relevance of the performances of an algorithm to being able to solve problems in the real world is union-find or finding
 whether two nodes in a graph are connected. This abstract problem arises in many applications, one of them is percolation, [this week assignment](https://coursera.cs.princeton.edu/algs4/assignments/percolation/specification.php), 
 in which the goal is to determine a threshold for the number of open sites in a system to percolate. The Java code for the assignment is in the 
-percolation folder. You can execute the code using Maven
+percolation folder. 
+
+$$ y = \alpha + \beta x + \gamma x^2 $$ 
+
+You can execute the code using Maven
 
 ```
 $ mvn exec:java -Dexec.mainClass="assignments.percolation.PercolationVisualizer" -Dexec.args="resources/assignments/percolation/luigi_selmi.txt"
