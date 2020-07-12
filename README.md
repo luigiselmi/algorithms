@@ -79,7 +79,7 @@ time. A first example of the relevance of the performances of an algorithm to be
 whether two nodes in a graph are connected. This abstract problem arises in many applications, one of them is percolation, [this week assignment](https://coursera.cs.princeton.edu/algs4/assignments/percolation/specification.php), 
 in which the goal is to determine the number of sites that have to be opened for a square lattice to percolate. A 2 dimensional lattice percolates if any open site
 in the top row can be connected through a path of open sites to an open site in the bottom row. The ratio between the number of open sites
-and the total number of sites is called percolation threshold and it is a constant that represents a phase transition of the system. No analytical solution
+and the total number of sites is called [percolation threshold](https://en.wikipedia.org/wiki/Percolation_threshold) and it is a constant that represents a phase transition of the system. No analytical solution
 has been found so far to determine this threshold. The square lattice is made up of N^2 blocked site that are opened randomly one by one till the system 
 percolates. A Java class is available to execute many tests so that the result is statistically significant. It can be executed from the root folder with 
 the command
