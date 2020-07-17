@@ -106,7 +106,11 @@ $ mvn exec:java -Dexec.mainClass="assignments.percolation.PercolationVisualizer"
 ```
 
 ![Luigi Selmi](resources/assignments/percolation/luigi_selmi.png)
-### Week 2 
+### Week 2
+The topics of this week are collections, queues and stacks. Items in a queue follow the first-in-first-out (FIFO) rule while items in stacks follow
+the last-in-first-out (LIFO) rule. They can be implemented using linked list or arrays. Since arrays have to be declared with a size they may need to
+be resized. The assignment is about building a collection that supports adding and removing items from either the front or the back of the data structure. 
+A second task is to create a randomized queue in which the item removed is chosen uniformly at random among items in the data structure.
 The Java code for the [programming assignment](https://coursera.cs.princeton.edu/algs4/assignments/queues/specification.php) is in the queues 
 folder. You can execute the code using Maven
 
