@@ -7,22 +7,22 @@ API:          PASSED
 
 Spotbugs:     PASSED
 PMD:          FAILED (3 warnings)
-Checkstyle:   FAILED (0 errors, 10 warnings)
+Checkstyle:   FAILED (0 errors, 11 warnings)
 
-Correctness:  36/43 tests passed
-Memory:       104/125 tests passed
-Timing:       90/193 tests passed
+Correctness:  38/45 tests passed
+Memory:       113/134 tests passed
+Timing:       193/193 tests passed
 
-Aggregate score: 77.88%
+Aggregate score: 89.10%
 [Compilation: 5%, API: 5%, Spotbugs: 0%, PMD: 0%, Checkstyle: 0%, Correctness: 60%, Memory: 10%, Timing: 20%]
 
 ASSESSMENT DETAILS
 
 The following files were submitted:
 ----------------------------------
-3.8K Aug  5 08:19 Deque.java
- 576 Aug  5 08:19 Permutation.java
-3.7K Aug  5 08:19 RandomizedQueue.java
+4.1K Jul 16 09:41 Deque.java
+ 505 Jul 16 09:41 Permutation.java
+3.4K Jul 16 09:41 RandomizedQueue.java
 
 
 ********************************************************************************
@@ -30,28 +30,28 @@ The following files were submitted:
 ********************************************************************************
 
 
-% javac11 Deque.java
+% javac Deque.java
 *-----------------------------------------------------------
 
-% javac11 RandomizedQueue.java
+% javac RandomizedQueue.java
 *-----------------------------------------------------------
-RandomizedQueue.java:18: warning: [unchecked] unchecked cast
-    	q = (Item[]) new Object[2];
-    	             ^
+RandomizedQueue.java:17: warning: [unchecked] unchecked cast
+    q = (Item[]) new Object[2];
+                 ^
   required: Item[]
   found:    Object[]
   where Item is a type-variable:
     Item extends Object declared in class RandomizedQueue
-RandomizedQueue.java:37: warning: [unchecked] unchecked cast
-		Item[] temp = (Item[]) new Object[capacity];
-		                       ^
+RandomizedQueue.java:36: warning: [unchecked] unchecked cast
+    Item[] temp = (Item[]) new Object[capacity];
+                           ^
   required: Item[]
   found:    Object[]
   where Item is a type-variable:
     Item extends Object declared in class RandomizedQueue
 2 warnings
 
-% javac11 Permutation.java
+% javac Permutation.java
 *-----------------------------------------------------------
 
 
@@ -83,9 +83,9 @@ Permutation:
 
 % pmd .
 *-----------------------------------------------------------
-Deque.java:123: Avoid using assignment statements in expressions; this can make code harder to read. [AssignmentInOperand]
-Deque.java:128: Avoid using assignment statements in expressions; this can make code harder to read. [AssignmentInOperand]
-RandomizedQueue.java:103: Avoid using assignment statements in expressions; this can make code harder to read. [AssignmentInOperand]
+Deque.java:131: Avoid using assignment statements in expressions; this can make code harder to read. [AssignmentInOperand]
+Deque.java:136: Avoid using assignment statements in expressions; this can make code harder to read. [AssignmentInOperand]
+RandomizedQueue.java:102: Avoid using assignment statements in expressions; this can make code harder to read. [AssignmentInOperand]
 PMD ends with 3 warnings.
 
 
@@ -94,20 +94,22 @@ PMD ends with 3 warnings.
 
 % checkstyle *.java
 *-----------------------------------------------------------
-[WARN] Deque.java:9:1: File contains tab characters (this is the first occurrence). Configure your editor to replace tabs with spaces. [FileTabCharacter]
-[WARN] Deque.java:123:20: Inner assignments should be avoided. [InnerAssignment]
-[WARN] Deque.java:128:20: Inner assignments should be avoided. [InnerAssignment]
-[WARN] Deque.java:136:9: 'for' is not followed by whitespace. [WhitespaceAround]
-[WARN] Permutation.java:11:1: File contains tab characters (this is the first occurrence). Configure your editor to replace tabs with spaces. [FileTabCharacter]
-[WARN] Permutation.java:12:18: '!' is followed by whitespace. [NoWhitespaceAfter]
-[WARN] Permutation.java:12:36: ')' is preceded with whitespace. [ParenPad]
-[WARN] Permutation.java:18:9: 'while' is not followed by whitespace. [WhitespaceAround]
-[WARN] RandomizedQueue.java:11:1: File contains tab characters (this is the first occurrence). Configure your editor to replace tabs with spaces. [FileTabCharacter]
-[WARN] RandomizedQueue.java:103:20: Inner assignments should be avoided. [InnerAssignment]
-Checkstyle ends with 0 errors and 10 warnings.
+[WARN] Deque.java:11:1: File contains tab characters (this is the first occurrence). Configure your editor to replace tabs with spaces. [FileTabCharacter]
+[WARN] Deque.java:131:16: Inner assignments should be avoided. [InnerAssignment]
+[WARN] Deque.java:136:16: Inner assignments should be avoided. [InnerAssignment]
+[WARN] Deque.java:147:5: 'for' is not followed by whitespace. [WhitespaceAround]
+[WARN] Permutation.java:8:1: File contains tab characters (this is the first occurrence). Configure your editor to replace tabs with spaces. [FileTabCharacter]
+[WARN] Permutation.java:15:5: 'while' is not followed by whitespace. [WhitespaceAround]
+[WARN] RandomizedQueue.java:10:1: File contains tab characters (this is the first occurrence). Configure your editor to replace tabs with spaces. [FileTabCharacter]
+[WARN] RandomizedQueue.java:102:16: Inner assignments should be avoided. [InnerAssignment]
+Checkstyle ends with 0 errors and 8 warnings.
 
 % custom checkstyle checks for Deque.java
 *-----------------------------------------------------------
+[WARN] Deque.java:170:19: The numeric literal '5' appears to be unnecessary. [NumericLiteral]
+[WARN] Deque.java:171:20: The numeric literal '6' appears to be unnecessary. [NumericLiteral]
+[WARN] Deque.java:172:20: The numeric literal '7' appears to be unnecessary. [NumericLiteral]
+Checkstyle ends with 0 errors and 3 warnings.
 
 % custom checkstyle checks for RandomizedQueue.java
 *-----------------------------------------------------------
@@ -125,7 +127,7 @@ Checkstyle ends with 0 errors and 10 warnings.
 
 Testing correctness of Deque
 *-----------------------------------------------------------
-Running 16 total tests.
+Running 17 total tests.
 
 Tests 1-6 make random calls to addFirst(), addLast(), removeFirst(),
 removeLast(), isEmpty(), and size(). The probabilities of each
@@ -212,50 +214,56 @@ Test 9: check iterator() after n calls to addFirst()
 Test 10: check iterator() after each of m intermixed calls to
          addFirst(), addLast(), removeFirst(), and removeLast()
   * m = 20
-    - number of student   entries = 5
-    - number of reference entries = 4
-    - iterator() failed after applying operation 8
-    - sequence of operations was:
-         Deque deque<Integer> = new Deque<Integer>()
-         deque.addLast(1)
-         deque.removeFirst()   ==> 1
-         deque.addFirst(3)
-         deque.addLast(4)
-         deque.addLast(5)
-         deque.addFirst(6)
-         deque.addFirst(7)
-         deque.removeLast()    ==> 5
-
-  * m = 50
-    - number of student   entries = 2
-    - number of reference entries = 1
-    - iterator() failed after applying operation 3
-    - sequence of operations was:
-         Deque deque<Integer> = new Deque<Integer>()
-         deque.addLast(1)
-         deque.addFirst(2)
-         deque.removeLast()    ==> 1
-
-  * m = 100
-    - number of student   entries = 1
-    - number of reference entries = 0
-    - iterator() failed after applying operation 4
-    - sequence of operations was:
-         Deque deque<Integer> = new Deque<Integer>()
-         deque.addFirst(1)
-         deque.removeFirst()   ==> 1
-         deque.addFirst(3)
-         deque.removeLast()    ==> 3
-
-  * m = 1000
-    - number of student   entries = 2
-    - number of reference entries = 1
-    - iterator() failed after applying operation 3
+    - number of student   entries = 4
+    - number of reference entries = 3
+    - iterator() yields wrong entries after applying operation 7
     - sequence of operations was:
          Deque deque<Integer> = new Deque<Integer>()
          deque.addLast(1)
          deque.addLast(2)
-         deque.removeLast()    ==> 2
+         deque.addFirst(3)
+         deque.addLast(4)
+         deque.addFirst(5)
+         deque.removeFirst()   ==> 5
+         deque.removeLast()    ==> 4
+
+  * m = 50
+    - number of student   entries = 5
+    - number of reference entries = 4
+    - iterator() yields wrong entries after applying operation 10
+    - sequence of operations was:
+         Deque deque<Integer> = new Deque<Integer>()
+         deque.addLast(1)
+         deque.removeFirst()   ==> 1
+         deque.addLast(3)
+         deque.addFirst(4)
+         deque.addFirst(5)
+         deque.addFirst(6)
+         deque.removeFirst()   ==> 6
+         deque.addLast(8)
+         deque.addLast(9)
+         deque.removeLast()    ==> 9
+
+  * m = 100
+    - number of student   entries = 4
+    - number of reference entries = 3
+    - iterator() yields wrong entries after applying operation 5
+    - sequence of operations was:
+         Deque deque<Integer> = new Deque<Integer>()
+         deque.addFirst(1)
+         deque.addFirst(2)
+         deque.addLast(3)
+         deque.addFirst(4)
+         deque.removeLast()    ==> 3
+
+  * m = 1000
+    - number of student   entries = 1
+    - number of reference entries = 0
+    - iterator() yields wrong entries after applying operation 2
+    - sequence of operations was:
+         Deque deque<Integer> = new Deque<Integer>()
+         deque.addFirst(1)
+         deque.removeLast()    ==> 1
 
 ==> FAILED
 
@@ -267,26 +275,33 @@ Test 11: create two nested iterators to same deque
 Test 12: create two parallel iterators to same deque
 ==> passed
 
-Test 13: create Deque objects of different parameterized types
+Test 13: create an iterator and check calls to next() and hasNext()
+  * 10 consecutive calls to hasNext() on a deque of size 10
+  * 10 consecutive calls to next() on a deque of size 10
+  * 50 random intermixed calls to next() and hasNext() on a deque of size 10
+  * 1000 random intermixed calls to next() and hasNext() on a deque of size 100
 ==> passed
 
-Test 14: call addFirst() and addLast() with null argument
+Test 14: create Deque objects of different parameterized types
 ==> passed
 
-Test 15: check that remove() and next() throw the specified exceptions in iterator()
+Test 15: call addFirst() and addLast() with null argument
 ==> passed
 
-Test 16: call iterator() when the deque is empty
+Test 16: check that remove() and next() throw the specified exceptions in iterator()
+==> passed
+
+Test 17: call iterator() when the deque is empty
 ==> passed
 
 
-Total: 15/16 tests passed!
+Total: 16/17 tests passed!
 
 
 ================================================================
 Testing correctness of RandomizedQueue
 *-----------------------------------------------------------
-Running 18 total tests.
+Running 19 total tests.
 
 Tests 1-4 make random calls to enqueue(), dequeue(), sample(),
 isEmpty(), and size(). The probabilities of each operation are
@@ -324,25 +339,25 @@ Test 3: check random calls to enqueue(), sample(), and size()
 Test 4: check random calls to enqueue(), dequeue(), sample(), isEmpty(), and size()
   *    5 random calls (0.6, 0.1, 0.1, 0.1, 0.1)
   *   50 random calls (0.6, 0.1, 0.1, 0.1, 0.1)
+    - failed on operation 38 of 50
+    - sample() returned null
+
   *  500 random calls (0.6, 0.1, 0.1, 0.1, 0.1)
-    - failed on operation 74 of 500
+    - failed on operation 330 of 500
     - sample() returned null
 
   * 1000 random calls (0.6, 0.1, 0.1, 0.1, 0.1)
-    - failed on operation 44 of 1000
+    - failed on operation 360 of 1000
     - sample() returned null
 
   *    5 random calls (0.1, 0.6, 0.1, 0.1, 0.1)
   *   50 random calls (0.1, 0.6, 0.1, 0.1, 0.1)
-    - failed on operation 16 of 50
-    - sample() returned null
-
   *  500 random calls (0.1, 0.6, 0.1, 0.1, 0.1)
-    - failed on operation 157 of 500
+    - failed on operation 15 of 500
     - sample() returned null
 
   * 1000 random calls (0.1, 0.6, 0.1, 0.1, 0.1)
-    - failed on operation 95 of 1000
+    - failed on operation 83 of 1000
     - sample() returned null
 
 ==> FAILED
@@ -366,13 +381,21 @@ Test 7: check that iterator() returns correct items after a sequence
 Test 8: check that iterator() returns correct items after sequence
         of m enqueue() and dequeue() operations
   * m = 10
-  * m = 1000
-    - number of non-null entries in student   solution: 520
-    - number of non-null entries in reference solution: 524
-    - number of null     entries in student   solution: 4
+    - number of non-null entries in student   solution: 8
+    - number of non-null entries in reference solution: 9
+    - number of null     entries in student   solution: 1
     - number of null     entries in reference solution: 0
-    - 4 missing entries in student solution, including:
-      '987'
+    - 1 missing entry in student solution:
+      '8'
+
+
+  * m = 1000
+    - number of non-null entries in student   solution: 511
+    - number of non-null entries in reference solution: 513
+    - number of null     entries in student   solution: 2
+    - number of null     entries in reference solution: 0
+    - 2 missing entries in student solution, including:
+      '990'
 
 
 ==> FAILED
@@ -404,10 +427,17 @@ Test 10: create two parallel iterators over the same randomized queue
 Test 11: create two iterators over different randomized queues
 ==> passed
 
-Test 12: create RandomizedQueue objects of different parameterized types
+Test 12: create an iterator and check calls to next() and hasNext()
+  * 10 consecutive calls to hasNext() on a deque of size 10
+  * 10 consecutive calls to next() on a deque of size 10
+  * 50 random intermixed calls to next() and hasNext() on a deque of size 10
+  * 1000 random intermixed calls to next() and hasNext() on a deque of size 100
 ==> passed
 
-Test 13: check randomness of sample() by enqueueing n items, repeatedly calling
+Test 13: create RandomizedQueue objects of different parameterized types
+==> passed
+
+Test 14: check randomness of sample() by enqueueing n items, repeatedly calling
          sample(), and counting the frequency of each item
   * n = 3, trials = 12000
   * n = 5, trials = 12000
@@ -415,7 +445,7 @@ Test 13: check randomness of sample() by enqueueing n items, repeatedly calling
   * n = 10, trials = 12000
 ==> passed
 
-Test 14: check randomness of dequeue() by enqueueing n items, dequeueing n items,
+Test 15: check randomness of dequeue() by enqueueing n items, dequeueing n items,
          and seeing whether each of the n! permutations is equally likely
   * n = 2, trials = 12000
 
@@ -483,7 +513,7 @@ Test 14: check randomness of dequeue() by enqueueing n items, dequeueing n items
 
 ==> FAILED
 
-Test 15: check randomness of iterator() by enqueueing n items, iterating over those
+Test 16: check randomness of iterator() by enqueueing n items, iterating over those
          n items, and seeing whether each of the n! permutations is equally likely
   * n = 2, trials = 12000
   * n = 3, trials = 12000
@@ -491,19 +521,19 @@ Test 15: check randomness of iterator() by enqueueing n items, iterating over th
   * n = 5, trials = 12000
 ==> passed
 
-Test 16: call enqueue() with a null argument
+Test 17: call enqueue() with a null argument
     - fails to throw an exception when calling enqueue() with a null argument
 
 ==> FAILED
 
-Test 17: check that remove() and next() throw the specified exceptions in iterator()
+Test 18: check that remove() and next() throw the specified exceptions in iterator()
 ==> passed
 
-Test 18: call iterator() when randomized queue is empty
+Test 19: call iterator() when randomized queue is empty
 ==> passed
 
 
-Total: 12/18 tests passed!
+Total: 13/19 tests passed!
 
 
 ================================================================
@@ -520,37 +550,37 @@ Running 9 total tests.
 
 Test 1a: check formatting for sample inputs from assignment specification
   % java Permutation 3 < distinct.txt
-  B
+  H
   A
-  F
+  C
 
   % java Permutation 3 < distinct.txt
-  G
+  E
   F
-  B
+  A
 
   % java Permutation 8 < duplicates.txt
-  CC
-  BB
   AA
+  BB
+  BB
+  BB
   CC
   BB
   BB
-  BB
-  BB
+  CC
 
 ==> passed
 
 Test 1b: check formatting for other inputs
   % java Permutation 8 < mediumTale.txt
+  it
+  of
+  wisdom
   the
   it
-  was
-  foolishness
-  times
   age
-  the
-  of
+  was
+  was
 
   % java Permutation 0 < distinct.txt
   [no output]
@@ -661,11 +691,11 @@ Test 4: Time main() with k = 5, for inputs containing n random strings
 => passed        4000     0.00
 => passed        8000     0.01
 => passed       16000     0.01
-=> passed       32000     0.03
-=> passed       64000     0.04
-=> passed      128000     0.06
-=> passed      256000     0.08
-=> passed      512000     0.17
+=> passed       32000     0.02
+=> passed       64000     0.03
+=> passed      128000     0.07
+=> passed      256000     0.11
+=> passed      512000     0.23
 ==> 10/10 tests passed
 
 
@@ -676,13 +706,13 @@ Test 5: Time main() with k = 1000, for inputs containing n random strings
 => passed        1000     0.00
 => passed        2000     0.00
 => passed        4000     0.00
-=> passed        8000     0.00
+=> passed        8000     0.01
 => passed       16000     0.01
-=> passed       32000     0.01
-=> passed       64000     0.02
-=> passed      128000     0.04
+=> passed       32000     0.02
+=> passed       64000     0.03
+=> passed      128000     0.05
 => passed      256000     0.09
-=> passed      512000     0.34
+=> passed      512000     0.60
 ==> 10/10 tests passed
 
 
@@ -886,69 +916,67 @@ Test 6b: Perform random operations, checking for loitering after
          removeFirst(), and removeLast() are (p1, p2, p3, p4),
          respectively.
   * 100 random operations (0.8, 0.0, 0.2, 0.0)
-    - loitering detected after operation 10 of 100
-    - sequence of operations was:
-         deque.addFirst("LLMOPGQPJI")
-         deque.addFirst("NTZNMQGCFR")
-         deque.addFirst("IFRFGRQCQS")
-         deque.addFirst("QDGJTBBFMO")
-         deque.addFirst("IZWGUSEDDN")
-         deque.addFirst("WROIDJHEWD")
-         deque.addFirst("BBSGELVLXP")
-         deque.addFirst("MXYDQVVVGA")
-         deque.addFirst("YZKAQUNEOK")
-         deque.removeFirst()     ==> YZKAQUNEOK
-    - loitered object(s):
-      YZKAQUNEOK
-
-  * 100 random operations (0.8, 0.0, 0.0, 0.2)
     - loitering detected after operation 5 of 100
     - sequence of operations was:
-         deque.addFirst("VDKWSMYEVD")
-         deque.addFirst("UKRERSLTFS")
-         deque.addFirst("OKHPDGZBAC")
-         deque.addFirst("NMXPXMEWYD")
-         deque.removeLast()      ==> VDKWSMYEVD
+         deque.addFirst("IDVFUMKFQW")
+         deque.addFirst("CBZGADEOKC")
+         deque.addFirst("YEKFKRHCZB")
+         deque.addFirst("DABRPBJDCN")
+         deque.removeFirst()     ==> DABRPBJDCN
     - loitered object(s):
-      VDKWSMYEVD
+      DABRPBJDCN
 
-  * 100 random operations (0.0, 0.8, 0.2, 0.0)
+  * 100 random operations (0.8, 0.0, 0.0, 0.2)
     - loitering detected after operation 3 of 100
     - sequence of operations was:
-         deque.addLast("RQUHKYPTOF")
-         deque.addLast("KKKNEVTNCN")
-         deque.removeFirst()     ==> RQUHKYPTOF
+         deque.addFirst("IBWBFYWOZI")
+         deque.addFirst("KLVSNJKMVI")
+         deque.removeLast()      ==> IBWBFYWOZI
     - loitered object(s):
-      RQUHKYPTOF
+      IBWBFYWOZI
+
+
+    - loitering detected after operation 2 of 100
+    - sequence of operations was:
+         deque.addLast("BMZGYLFDWX")
+         deque.removeFirst()     ==> BMZGYLFDWX
+    - loitered object(s):
+      BMZGYLFDWX
 
   * 100 random operations (0.0, 0.8, 0.0, 0.2)
-    - loitering detected after operation 2 of 100
+    - loitering detected after operation 5 of 100
     - sequence of operations was:
-         deque.addLast("MXGLHDAANE")
-         deque.removeLast()      ==> MXGLHDAANE
+         deque.addLast("WNAWBWIXTB")
+         deque.addLast("MVTFSOBHYW")
+         deque.addLast("IMXQKLISUP")
+         deque.addLast("ZYDLJCFZIG")
+         deque.removeLast()      ==> ZYDLJCFZIG
     - loitered object(s):
-      MXGLHDAANE
+      ZYDLJCFZIG
 
   * 100 random operations (0.4, 0.4, 0.1, 0.1)
-    - loitering detected after operation 7 of 100
+    - loitering detected after operation 9 of 100
     - sequence of operations was:
-         deque.addFirst("GPHODVZIRI")
-         deque.addFirst("IAUGSFWDDC")
-         deque.addFirst("AERPCHJDQD")
-         deque.addFirst("LJHLHFIFLB")
-         deque.addFirst("KNTPDLYIIC")
-         deque.addLast("HXYIYJMDEH")
-         deque.removeLast()      ==> HXYIYJMDEH
+         deque.addLast("UKQOPSWGYR")
+         deque.addFirst("IOJYAXGLMT")
+         deque.addFirst("MAVYRYUCSJ")
+         deque.addLast("FTZVHXSLXJ")
+         deque.addLast("GPZSYYWWLP")
+         deque.addLast("SBGUVTGHWX")
+         deque.addFirst("HWXDHQDLWC")
+         deque.addLast("NGOBCXCZPI")
+         deque.removeFirst()     ==> HWXDHQDLWC
     - loitered object(s):
-      HXYIYJMDEH
+      HWXDHQDLWC
 
   * 100 random operations (0.2, 0.2, 0.3, 0.3)
-    - loitering detected after operation 2 of 100
+    - loitering detected after operation 3 of 100
     - sequence of operations was:
-         deque.addFirst("FDRIWYSPLL")
-         deque.removeFirst()     ==> FDRIWYSPLL
+         deque.addFirst("FLCMBTSDGJ")
+         deque.addFirst("LSCYETTPKC")
+         deque.removeFirst()     ==> LSCYETTPKC
     - loitered object(s):
-      FDRIWYSPLL
+      LSCYETTPKC
 
 ==> FAILED
 
@@ -957,9 +985,9 @@ Test 7: worst-case constant memory allocated or de-allocated
   * 128 random operations
   * 256 random operations
   * 512 random operations
-    - failed on trial 80 of 512
-    - when current size of Deque was 45 objects;
-    - the call to addFirst() caused a change in memory of -144 bytes
+    - failed on trial 500 of 512
+    - when current size of Deque was 314 objects;
+    - the call to addLast() caused a change in memory of -144 bytes
     - any change of more than 96 bytes fails the test
 
 ==> FAILED
@@ -977,8 +1005,11 @@ Total: 27/48 tests passed!
 
 Analyzing memory of RandomizedQueue
 *-----------------------------------------------------------
-For tests 1-5, the maximum amount of memory allowed for
+For Tests 1-5, the maximum amount of memory allowed for
 a RandomizedQueue containing n items is 48n + 192.
+
+For Test 6, the maximum amount of memory allowed for
+a RandomizedQueue iterator over n items is 8n + 72.
 
 Test 1a-1i: Total memory usage after inserting n items
             when n is a power of 2.
@@ -1075,7 +1106,7 @@ Test 5a-5i: Total memory usage after inserting n items,
 Memory: 80.00   (R^2 = 1.000)
 
 
-Test 6a-6d: Total memory usage of iterator after inserting n items.
+Test 6a-6i: Total memory usage of iterator after inserting n items.
 
                  n        bytes
 ----------------------------------------------------------
@@ -1128,7 +1159,16 @@ Test 9: Total memory usage after inserting n items, seeking to identify
 => passed      512         4160         
 => passed     1024         8256         
 => passed     2048        16448         
-==> 9/9 tests passed
+=> passed        8          128         
+=> passed       16          192         
+=> passed       32          320         
+=> passed       64          576         
+=> passed      128         1088         
+=> passed      256         2112         
+=> passed      512         4160         
+=> passed     1024         8256         
+=> passed     2048        16448         
+==> 18/18 tests passed
 
 Memory: 8.00 n + 64.00   (R^2 = 1.000)
 
@@ -1156,9 +1196,9 @@ Memory: 32.00 n + 32.00   (R^2 = 1.000)
 Min observed memory for RandomizedQueue: 8.00 n + 64.00   (R^2 = 1.000)
 Max observed memory for RandomizedQueue: 32.00 n + 32.00   (R^2 = 1.000)
 
-Running 75 total tests.
+Running 84 total tests.
 
-Total: 75/75 tests passed!
+Total: 84/84 tests passed!
 
 
 ================================================================
@@ -1184,7 +1224,7 @@ Test 1a-1k: make n calls to addFirst() followed by n calls to removeFirst()
 => passed       32768     0.00
 => passed       65536     0.00
 => passed      128000     0.00
-=> passed      256000     0.00
+=> passed      256000     0.01
 => passed      512000     0.01
 => passed     1024000     0.02
 ==> 11/11 tests passed
@@ -1218,9 +1258,9 @@ Test 3a-3k: make n calls to addFirst() followed by n calls to removeLast()
 => passed       32768     0.00
 => passed       65536     0.00
 => passed      128000     0.00
-=> passed      256000     0.00
+=> passed      256000     0.01
 => passed      512000     0.01
-=> passed     1024000     0.07
+=> passed     1024000     0.02
 ==> 11/11 tests passed
 
 
@@ -1235,7 +1275,7 @@ Test 4a-4k: make n calls to addLast() followed by n calls to removeFirst()
 => passed       32768     0.00
 => passed       65536     0.00
 => passed      128000     0.00
-=> passed      256000     0.00
+=> passed      256000     0.01
 => passed      512000     0.01
 => passed     1024000     0.02
 ==> 11/11 tests passed
@@ -1253,10 +1293,10 @@ Test 5a-5g: make n random calls to addFirst(), removeFirst(), isEmpty(), and siz
 => passed       16384     0.00
 => passed       32768     0.00
 => passed       65536     0.00
-=> passed      128000     0.00
+=> passed      128000     0.01
 => passed      256000     0.01
-=> passed      512000     0.02
-=> passed     1024000     0.03
+=> passed      512000     0.03
+=> passed     1024000     0.04
 => passed     2048000     0.07
 ==> 12/12 tests passed
 
@@ -1274,8 +1314,8 @@ Test 6a-6g: make n random calls to addLast(), removeLast(), isEmpty(), and size(
 => passed       32768     0.00
 => passed       65536     0.00
 => passed      128000     0.01
-=> passed      256000     0.01
-=> passed      512000     0.10
+=> passed      256000     0.11
+=> passed      512000     0.02
 => passed     1024000     0.04
 => passed     2048000     0.07
 ==> 12/12 tests passed
@@ -1296,8 +1336,8 @@ Test 7a-7g: make n random calls to addFirst(), addLast(), removeFirst(), removeL
 => passed      128000     0.00
 => passed      256000     0.01
 => passed      512000     0.02
-=> passed     1024000     0.05
-=> passed     2048000     0.08
+=> passed     1024000     0.04
+=> passed     2048000     0.09
 ==> 12/12 tests passed
 
 
@@ -1314,10 +1354,10 @@ Test 8a-8g: make n calls to addFirst(); iterate over the n items by calling
 => passed       32768     0.00
 => passed       65536     0.00
 => passed      128000     0.00
-=> passed      256000     0.00
-=> passed      512000     0.02
-=> passed     1024000     0.02
-=> passed     2048000     0.03
+=> passed      256000     0.01
+=> passed      512000     0.01
+=> passed     1024000     0.03
+=> passed     2048000     0.07
 ==> 12/12 tests passed
 
 
@@ -1331,13 +1371,17 @@ Test 9a-9k: make n calls to addFirst()/addLast(); interleave n calls each to
 => passed        4097     0.00
 => passed        8193     0.00
 => passed       16385     0.00
-=> passed       32769     0.01
+=> passed       32769     0.00
 => passed       65537     0.01
 => passed      128001     0.02
-=> passed      256001     0.01
+=> passed      256001     0.02
+=> passed      512001     0.07
+=> passed     1024001     0.07
+==> 11/11 tests passed
+
+Total: 103/103 tests passed!
 
 
-Total: 0/103 tests passed: Could not complete tests, which results in a reported score of 0.
 ================================================================
 
 
@@ -1378,7 +1422,7 @@ Test 4a-k: make n calls to enqueue() followed by n calls to dequeue()
 => passed       16384     0.00
 => passed       32768     0.00
 => passed       65536     0.00
-=> passed      128000     0.01
+=> passed      128000     0.00
 => passed      256000     0.01
 => passed      512000     0.02
 => passed     1024000     0.04
@@ -1398,10 +1442,10 @@ Test 5a-k: make n calls to enqueue() followed by n random calls to
 => passed       16384     0.00
 => passed       32768     0.00
 => passed       65536     0.01
-=> passed      128000     0.01
-=> passed      256000     0.02
-=> passed      512000     0.05
-=> passed     1024000     0.09
+=> passed      128000     0.02
+=> passed      256000     0.03
+=> passed      512000     0.08
+=> passed     1024000     0.11
 ==> 11/11 tests passed
 
 
@@ -1417,11 +1461,11 @@ Test 6a-k: make n calls to enqueue() followed by n random calls to
 => passed        8192     0.00
 => passed       16384     0.00
 => passed       32768     0.00
-=> passed       65536     0.00
+=> passed       65536     0.01
 => passed      128000     0.01
 => passed      256000     0.02
 => passed      512000     0.05
-=> passed     1024000     0.09
+=> passed     1024000     0.11
 ==> 11/11 tests passed
 
 
@@ -1437,11 +1481,11 @@ Test 7a-k: make n calls to enqueue() followed by n random calls to
 => passed        8192     0.00
 => passed       16384     0.00
 => passed       32768     0.00
-=> passed       65536     0.00
+=> passed       65536     0.01
 => passed      128000     0.01
-=> passed      256000     0.02
-=> passed      512000     0.05
-=> passed     1024000     0.13
+=> passed      256000     0.03
+=> passed      512000     0.08
+=> passed     1024000     0.28
 ==> 11/11 tests passed
 
 
@@ -1456,28 +1500,29 @@ Test 8a-k: make n calls to enqueue() followed by n calls each to
 => passed        8192     0.00
 => passed       16384     0.00
 => passed       32768     0.00
-=> passed       65536     0.00
-=> passed      128000     0.01
+=> passed       65536     0.01
+=> passed      128000     0.07
 => passed      256000     0.02
-=> passed      512000     0.03
+=> passed      512000     0.05
 => passed     1024000     0.08
 ==> 11/11 tests passed
 
 
-Test 9a-i: make n calls to enqueue(); then call dequeue() twice,
-           followed by enqueue() twice and repeat n times.
+Test 9a-i: make 100 calls to enqueue; 99 calls to dequeue;
+           n calls to enqueue(); then call dequeue() three times,
+           followed by enqueue() three times, and repeat n times.
 
                     n  seconds
 ----------------------------------
-=> passed        1025     0.00
-=> passed        2049     0.00
-=> passed        4097     0.00
-=> passed        8193     0.00
-=> passed       16385     0.00
-=> passed       32769     0.00
-=> passed       65537     0.01
-=> passed      128001     0.01
-=> passed      256001     0.02
+=> passed        1024     0.00
+=> passed        2048     0.00
+=> passed        4096     0.00
+=> passed        8192     0.00
+=> passed       16384     0.00
+=> passed       32768     0.00
+=> passed       65536     0.01
+=> passed      128000     0.02
+=> passed      256000     0.02
 ==> 9/9 tests passed
 
 
