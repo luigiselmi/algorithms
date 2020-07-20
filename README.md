@@ -362,7 +362,7 @@ where "secret" is the name of the file containing the pass-phrase. Use the next 
 $ openssl enc -d -aes-256-cbc -in SeamCarver.java.enc -out SeamCarver.java -pass file:secret
 ```
 
-## Performances
+## Computational Complexity of Algorithms
 ### Sorting
 |Algorithm|Running Time|Space|Notes|
 |---------|------------|-----|-----|
