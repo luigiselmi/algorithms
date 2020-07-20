@@ -107,7 +107,7 @@ $ mvn exec:java -Dexec.mainClass="assignments.percolation.PercolationVisualizer"
 
 ![Luigi Selmi](resources/assignments/percolation/luigi_selmi.png)
 ### Week 2
-The topics of this week are collections, queues and stacks. Items in a queue follow the first-in-first-out (FIFO) rule while items in stacks follow
+The topics of this week are collections, queues and stacks, and elementary sorting methods. Items in a queue follow the first-in-first-out (FIFO) rule while items in stacks follow
 the last-in-first-out (LIFO) rule. They can be implemented using linked list or arrays. Since arrays have to be declared with a size they may need to
 be resized. The assignment is about building a collection that supports adding and removing items from either the front or the back of the data structure. 
 A second task is to create a randomized queue in which the item removed is chosen uniformly at random among items in the data structure.
@@ -117,6 +117,11 @@ folder. You can execute the code using Maven
 ```
 $ mvn exec:java -Dexec.mainClass="assignments.queues.Permutation" -Dexec.args="8" < resources/assignments/queues/distinct.txt
 ```
+
+The sorting methods introduced in this week lecture are selection sort, insertion sort and shellsort. They can be used to sort arrays of objects but since 
+their time complexity is N^2 for the first two and N^(3/2) for shellsort they are best used with small arrays. A useful property of some sorting methods is stability.
+Insertion sort is stable so that it can be used to sort an array of objects using different keys preserving the order of each sorting. Selection sort and shellsort
+are not stable.
 
 ### Week 3
 The Java code for the [programming assignment](https://coursera.cs.princeton.edu/algs4/assignments/collinear/specification.php) is in the 
