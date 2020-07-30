@@ -126,9 +126,9 @@ are not stable.
 ### Week 3
 This week lecture is about two sorting algorithms: mergesort and quicksort. Mergesort is an example of the divide and conquer paradigm. It first divides an array into two
 halves, then recursively sorts each halves, and finally merge the two halves. Mergesort is used in Java to sort objects. A nice property of mergesort is that it takes a time
-proportional to N*log(N) to sort an array of size N. Mergesort is also stable. The disadvantage is that it needs an extra space proportional to N. 
+proportional to Nlog(N) to sort an array of size N. Mergesort is also stable. The disadvantage is that it needs an extra space proportional to N. 
 Quicksort is also a recursive algorithm. The algorithm begins with a partition phase in which for each entry in an array it moves larger entries to the right and smaller entries 
-to the left and finally it recursively sorts the parts. Quicksort takes a time proportional to N*log(N) to sort an array of N entries and it does not require extra space. Quicksort
+to the left and finally it recursively sorts the parts. Quicksort takes a time proportional to Nlog(N) to sort an array of N entries and it does not require extra space. Quicksort
 is faster than mergesort but the disadvantage is that quicksort is not stable. Quicksort can take quadratic time if the input array is already sorted or partially sorted so usually
 the input array is randomly shuffled to improve the performances. Sorting algorithms are used in many obvious and non obvious applications from sorting a list of string or a search result
 to enabling binary search, finding duplicates and also in computational biology and physics. One task of this week assignment is to write an algorithm based on sorting that can 
@@ -381,7 +381,7 @@ $ openssl enc -d -aes-256-cbc -in SeamCarver.java.enc -out SeamCarver.java -pass
 |Insertion sort|N^2||Stable|
 |Shellsort|N^(3/2)||Not stable|
 |Mergesort|N*log(N)|N|Stable|
-|Quicksort|N*log(N)|No extraspace|Not stable|
+|Quicksort|N*log(N)|No extra space|Not stable|
 ### Searching
 |Algorithm|Running Time|Space|
 |---------|------------|-----|
