@@ -124,14 +124,28 @@ Insertion sort is stable so that it can be used to sort an array of objects usin
 are not stable.
 
 ### Week 3
+This week lecture is about two sorting algorithms: mergesort and quicksort. Mergesort is an example of the divide and conquer paradigm. It first divides an array into two
+halves, then recursively sorts each halves, and finally merge the two halves. Mergesort is used in Java to sort objects. A nice property of mergesort is that it takes a time
+proportional to N*log(N) to sort an array of size N. Mergesort is also stable. The disadvantage is that it needs an extra space proportional to N. 
+Quicksort is also a recursive algorithm. The algorithm begins with a partition phase in which for each entry in an array it moves larger entries to the right and smaller entries 
+to the left and finally it recursively sorts the parts. Quicksort takes a time proportional to N*log(N) to sort an array of N entries and it does not require extra space. Quicksort
+is faster than mergesort but the disadvantage is that quicksort is not stable. Quicksort can take quadratic time if the input array is already sorted or partially sorted so usually
+the input array is randomly shuffled to improve the performances. Sorting algorithms are used in many obvious and non obvious applications from sorting a list of string or a search result
+to enabling binary search, finding duplicates and also in computational biology and physics. One task of this week assignment is to write an algorithm based on sorting that can 
+find line patterns in a given set of point in a plane. The algorithm based on sorting can be compared with one that follows a brute force approach to solve the same problem and it can be seen
+that is faster than the brute force algorithm when the number of points is more than one thousand. The fast algorithm finds the line segments that contain 4 or more points. Given one point p 
+the algorithm computes the slopes of the segments that join p to all the other points and sorts the points according to the slopes they make with p. When there are four or more adjacent points 
+that have the same slope with p they belong to the same (maximal) segment.
+
+is that      
 The Java code for the [programming assignment](https://coursera.cs.princeton.edu/algs4/assignments/collinear/specification.php) is in the 
 collinear folder. You can execute the code using Maven
 
 ```
-$ mvn exec:java -Dexec.mainClass="assignments.collinear.FastCollinearPoints" -Dexec.args="resources/assignments/collinear/input8.txt" 
+$ mvn exec:java -Dexec.mainClass="assignments.collinear.FastCollinearPoints" -Dexec.args="resources/assignments/collinear/mystery10089.txt" 
 ```
 
-![linear patterns](resources/assignments/collinear/collinear.jpg)
+![linear patterns](resources/assignments/collinear/mystery10089.png)
 
 ### Week 4
 The main topics are priority queues and the heap sort algorithm. A Priority queue is a data structure  that provides two
@@ -369,7 +383,8 @@ $ openssl enc -d -aes-256-cbc -in SeamCarver.java.enc -out SeamCarver.java -pass
 |Selection sort|N^2||Not stable|
 |Insertion sort|N^2||Stable|
 |Shellsort|N^(3/2)||Not stable|
-|Mergesort|N*log(N)||Stable|
+|Mergesort|N*log(N)|N|Stable|
+|Quicksort|N*log(N)|No extraspace|Not stable|
 ### Searching
 |Algorithm|Running Time|Space|
 |---------|------------|-----|
