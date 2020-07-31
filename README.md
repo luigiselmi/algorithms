@@ -143,7 +143,7 @@ $ mvn exec:java -Dexec.mainClass="assignments.collinear.FastCollinearPoints" -De
 ```
 
 As an example of the difference in performance between the two algorithms we use a data set that contains more than 10000 points. The fast algorithm based on sorting completes the task in
-30 seconds on average, while the brute force algorithm needs more than half an hour. Clearly the message that emerges from the segments is a suggestion for those who uses the brute force 
+30 seconds on average, while the brute force algorithm needs more than one hour and a half. Clearly the message that emerges from the segments is a suggestion for those who use the brute force 
 approach.
 
 ```
