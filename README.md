@@ -455,8 +455,9 @@ $ openssl enc -d -aes-256-cbc -in SeamCarver.java.enc -out SeamCarver.java -pass
 |Mergesort|N*log(N)|N|Stable|
 |Quicksort|N*log(N)|No extra space|Not stable|
 ### Searching
-|Algorithm|Running Time|Space|
-|---------|------------|-----|
+|Algorithm|Running Time|Space|Notes|
+|---------|------------|-----|-----|
+|Binary search|log(N)||search in a sorted array|
 ### Graphs
 |Algorithm|Running Time|Space|
 |---------|------------|-----|
