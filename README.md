@@ -202,7 +202,36 @@ set of tile moves to reach the goal with all the tiles ordered. The Java code fo
 and solver of the puzzles is in the puzzle folder. As usual you can execute the code using Maven
 
 ```
-$ mvn exec:java -Dexec.mainClass="assignments.puzzle.Solver" -Dexec.args="resources/assignments/puzzle/puzzle04.txt"
+$ mvn exec:java -Dexec.mainClass="assignments.puzzle.Solver" -Dexec.args="resources/assignments/puzzle/puzzle05.txt"
+```
+As an example we use the Java code to solve a 8-tiles puzzle in 5 moves.
+ 
+```
+Minimum number of moves = 5
+3
+4 1 3
+0 2 6
+7 5 8
+
+0 1 3
+4 2 6
+7 5 8
+
+1 0 3
+4 2 6
+7 5 8
+
+1 2 3
+4 0 6
+7 5 8
+
+1 2 3
+4 5 6
+7 0 8
+
+1 2 3
+4 5 6
+7 8 0
 ```
 
 ### Week 5
