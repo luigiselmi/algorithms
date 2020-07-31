@@ -132,7 +132,7 @@ to the left and finally it recursively sorts the parts. Quicksort takes a time p
 is faster than mergesort but the disadvantage is that quicksort is not stable. Quicksort can take quadratic time if the input array is already sorted or partially sorted so usually
 the input array is randomly shuffled to improve the performances. Sorting algorithms are used in many obvious and non obvious applications from sorting a list of strings or a search result
 to enabling binary search, finding duplicates and also in computational biology and physics. One task of this week's assignment is to write an algorithm based on sorting that can 
-find line patterns in a given set of point in a plane. The algorithm based on sorting can be compared with one that follows a brute force approach to solve the same problem and it can be seen
+find line patterns in a given set of points in a plane. The algorithm based on sorting can be compared with one that follows a brute force approach to solve the same problem and it can be seen
 that is faster than the brute force algorithm when the number of points is more than one thousand. The plan of the fast algorithm is as follows: given one point p the algorithm computes the 
 slopes of the segments that join p to all the other points and sorts the points according to the slopes they make with p. When there are four or more adjacent points that have the same slope 
 with p they belong to the same (maximal) segment. The Java code for the [programming assignment](https://coursera.cs.princeton.edu/algs4/assignments/collinear/specification.php) is in the 
