@@ -142,6 +142,49 @@ collinear folder. You can execute the code using Maven
 $ mvn exec:java -Dexec.mainClass="assignments.collinear.FastCollinearPoints" -Dexec.args="resources/assignments/collinear/mystery10089.txt" 
 ```
 
+As an example of the difference in performance between the two algorithms we use a data set that contains more than 10000 points. The fast algorithm based on sorting completes the task in
+30 seconds on average, while the brute force algorithm needs more than half an hour. Clearly the message that emerges from the segments is a suggestion for those who uses the brute force 
+approach.
+
+```
+Elapsed time (seconds): 29.558000
+Number of segments: 34
+(1500, 30001) -> (3499, 30001)
+(1500, 26001) -> (1500, 30001)
+(1500, 26001) -> (3500, 26001)
+(3500, 26001) -> (3500, 28001)
+(2500, 28001) -> (3500, 28001)
+(4501, 29999) -> (6501, 29999)
+(4501, 25999) -> (4501, 29999)
+(4501, 25999) -> (6501, 25999)
+(6501, 25999) -> (6501, 29999)
+(8000, 22000) -> (10000, 22000)
+(9000, 18003) -> (9000, 22000)
+(11000, 21995) -> (13000, 21995)
+(11000, 17995) -> (11000, 21995)
+(11000, 17995) -> (13000, 17995)
+(13000, 17995) -> (13000, 21995)
+(14500, 14000) -> (16499, 14000)
+(14500, 12001) -> (14500, 14000)
+(14500, 12001) -> (16500, 12001)
+(16500, 10000) -> (16500, 12001)
+(14499, 10000) -> (16500, 10000)
+(17501, 9998) -> (17501, 13998)
+(17501, 9998) -> (19501, 9998)
+(20500, 13999) -> (22500, 13999)
+(20500, 9999) -> (20500, 13999)
+(20500, 11994) -> (22000, 11994)
+(20500, 9999) -> (22500, 9999)
+(23500, 13997) -> (25500, 13997)
+(23500, 9997) -> (23500, 13997)
+(23500, 11997) -> (25000, 11997)
+(23500, 9997) -> (25500, 9997)
+(26500, 13996) -> (28500, 13996)
+(26500, 9996) -> (26500, 13996)
+(26500, 11996) -> (28500, 11996)
+(28500, 11996) -> (28500, 13996)
+```
+ 
 ![linear patterns](resources/assignments/collinear/mystery10089.png)
 
 ### Week 4
