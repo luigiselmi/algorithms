@@ -235,9 +235,25 @@ Minimum number of moves = 5
 ```
 
 ### Week 5
-The topics of week 5 are balanced search trees and their applications. The [programming assignment](https://coursera.cs.princeton.edu/algs4/assignments/kdtree/specification.php) 
-is about kd-trees and in particular 2d-trees. The Java class KdTreeVisualizer.java computes and draws the 2d-tree that results from the sequence 
-of points clicked by the user in the standard drawing window.
+This is the culminating section of the 1st part of the course, where all what we learned before about linked list, arrays, sorting algorithms 
+and recursion are put in use to address the problem of building and using symbol tables to store and search key-value pairs. Symbol 
+tables are known under different names such as dictionaries, indices and associative arrays. Unordered symbol tables can be implemented using 
+linked lists or arrays in which strings can be used as keys instead of integers. Accessing an unordered symbol table requires a time proportional 
+to its size and the insertion of N key-value pairs requires a time proportional to N^2. Ordered symbol tables in which the keys are ordered have 
+better performances and can support numerous useful methods. Binary search trees (BST) are an implementation of symbol tables in which the data
+is structured in nodes that contain a value, a key and two links, the left link and the right link. The left link connects the given node to a 
+subtree whose nodes have smaller keys than the given node, while the right link connects to subtree whose nodes have larger keys. Search and 
+insert operations in BST require a time proportional to log(N) on average. Since with BST the shape of the tree depends on the order in which the
+nodes are added to the BST, in the worst case the tree that results from an insertion of N key-value pairs in a BST can be unbalanced and look 
+like a chain of left links so that accessing a node can require a time proportional to its size. In order avoid such situations and keep the tree 
+balanced other BST have been developed that allow more than one key and more than two links that guarantee a height proportional to log(N) even 
+in the worst case scenario. A 2-node is node with one key and two links as in BST, a 3-node is a node with two keys and three links. The data 
+structure that is built with these two types of nodes is called 2-3 tree. A red-black BST is a 2-3 tree in which a 3-node is represented as two 
+2-nodes connected by a left "red" link. The color of the link is represented by a flag in the code. Symbol tables are behind many important 
+applications such as databases and search engines. 
+The [programming assignment](https://coursera.cs.princeton.edu/algs4/assignments/kdtree/specification.php) is about kd-trees 
+and in particular 2d-trees. The Java class KdTreeVisualizer.java computes and draws the 2d-tree that results from the sequence of points clicked by the user in 
+the standard drawing window.
 
 ```
 $ mvn exec:java -Dexec.mainClass="assignments.kdtree.KdTreeVisualizer"
@@ -458,6 +474,7 @@ $ openssl enc -d -aes-256-cbc -in SeamCarver.java.enc -out SeamCarver.java -pass
 |Algorithm|Running Time|Space|Notes|
 |---------|------------|-----|-----|
 |Binary search|log(N)||search in a sorted array|
+|Binary search tree|log(N)|||
 ### Graphs
 |Algorithm|Running Time|Space|
 |---------|------------|-----|
