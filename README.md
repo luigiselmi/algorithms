@@ -239,7 +239,7 @@ This is the culminating section of the 1st part of the course, where all what we
 and recursion are put in use to address the problem of building and using symbol tables to store and search key-value pairs. Symbol 
 tables are known under different names such as dictionaries, indices and associative arrays. Unordered symbol tables can be implemented using 
 linked lists or arrays in which strings can be used as keys instead of integers. Accessing an unordered symbol table requires a time proportional 
-to its size and the insertion of N key-value pairs requires a time proportional to N^2. Ordered symbol tables in which the keys are ordered have 
+to its size and the insertion of N key-value pairs requires a time proportional to N^2. Symbol tables in which the keys are ordered have 
 better performances and can support numerous useful methods. Binary search trees (BST) are an implementation of symbol tables in which the data
 is structured in nodes that contain a value, a key and two links, the left link and the right link. The left link connects the given node to a 
 subtree whose nodes have smaller keys than the given node, while the right link connects to subtree whose nodes have larger keys. Search and 
