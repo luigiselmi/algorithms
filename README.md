@@ -250,7 +250,10 @@ balanced other BST have been developed that allow more than one key and more tha
 in the worst case scenario. A 2-node is node with one key and two links as in BST, a 3-node is a node with two keys and three links. The data 
 structure that is built with these two types of nodes is called 2-3 tree. A red-black BST is a 2-3 tree in which a 3-node is represented as two 
 2-nodes connected by a left "red" link. The color of the link is represented by a flag in the code. Symbol tables are behind many important 
-applications such as databases and search engines. 
+applications such as databases and search engines. One other remarkable application of BST is computational geometry in which geometric properties
+of objects, such as point coordinates, are used as keys in a BST, enabling the implementation of useful methods such as range search and nearest-neighbor
+search.
+    
 The [programming assignment](https://coursera.cs.princeton.edu/algs4/assignments/kdtree/specification.php) is about kd-trees 
 and in particular 2d-trees. The Java class KdTreeVisualizer.java computes and draws the 2d-tree that results from the sequence of points clicked by the user in 
 the standard drawing window.
