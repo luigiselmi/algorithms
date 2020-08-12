@@ -270,9 +270,15 @@ a circle with a query point connected to the nearest point in the circle
 
 ![nearest neighbor search](resources/assignments/kdtree/circle100.png)
  
+The figure can be created by executing the command
+
+```
+$ mvn exec:java -Dexec.mainClass="assignments.kdtree.KdTree" -Dexec.args="resources/assignments/kdtree/circle100.txt"
+```
+
 We use the same data set to show the 2d-tree solution of the range search problem in which our two solutions are used to search the points that lie within 
-a rectangle drawn at run time. The red color depicts the points that have been found by the algorithm based on the Java TreeSet and the blue color
-depicts the points that have been found using our 2d-tree implementation. The fact that both algorithms have found the same points guarantee that
+a rectangle drawn at run time. The red color represents the points that have been found by the algorithm based on the Java TreeSet and the blue color
+represents the points that have been found using our 2d-tree implementation. The fact that both algorithms have found the same points guarantees that
 our 2d-tree implementation is correct.
 
 ![range search](resources/assignments/kdtree/range_search_circle100.png)
