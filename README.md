@@ -265,11 +265,17 @@ can be seen with the Java class KdTreeVisualizer.java that draws the points clic
 $ mvn exec:java -Dexec.mainClass="assignments.kdtree.KdTreeVisualizer"
 ```
 
-An example of the partition of the plane is shown in the figure below where 100 points are distributed in a circle with a query point connected
-to the nearest point in the circle
+An example of the partition of the plane to address the nearest neighbor search is shown in the figure below where 100 points are distributed in 
+a circle with a query point connected to the nearest point in the circle
 
-![circle 100 points](resources/assignments/kdtree/circle100.png)
+![nearest neighbor search](resources/assignments/kdtree/circle100.png)
  
+We use the same data set to show the 2d-tree solution of the range search problem in which our two solutions are used to search the points that lie within 
+a rectangle that is drawn at run time. The red color depicts the points that have been found by the algorithm based on the Java TreeSet and the blue color
+depicts the points that have been found using our 2d-tree implementation.
+
+![range search](resources/assignments/kdtree/range_search_circle100.png)
+
 The Java class NearestNeighborVisualizer.java reads a sequence of points from a file (specified as a command-line argument) and inserts those 
 points into a 2d-tree. Then, it performs nearest-neighbor queries on the point corresponding to the location of the mouse in the standard drawing 
 window.
