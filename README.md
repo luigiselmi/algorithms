@@ -258,13 +258,18 @@ and one that requires the implementation of a 2d-tree, that is a binary tree tha
 of the tree the plane is divided alternatively by a horizontal or vertical line that passes through each node in that level of the tree. The 2d-tree
 adapts gracefully to the distribution of the points in the plane and it is often a better solution than the grid approach in which the plane is divided
 into equally sized squares, particularly when the points are not evenly distributed such as in geographic applications. As an example of how the 2d-tree
-split the space into two rectangles every time a point is created in the plane and its corresponding node is added to the 2d-tree can be seen with the 
-Java class KdTreeVisualizer.java that draws the points clicked by the user in the standard drawing window and the splitting lines.
+recursively splits the space into two rectangles every time a point is created in the plane, and its corresponding node is added to the 2d-tree, 
+can be seen with the Java class KdTreeVisualizer.java that draws the points clicked by the user in the standard drawing window and the splitting lines.
 
 ```
 $ mvn exec:java -Dexec.mainClass="assignments.kdtree.KdTreeVisualizer"
 ```
 
+An example of the partition of the plane is shown in the figure below where 100 points are distributed in a circle with a query point connected
+to the nearest point in the circle
+
+![circle 100 points](resources/assignments/kdtree/circle100.png)
+ 
 The Java class NearestNeighborVisualizer.java reads a sequence of points from a file (specified as a command-line argument) and inserts those 
 points into a 2d-tree. Then, it performs nearest-neighbor queries on the point corresponding to the location of the mouse in the standard drawing 
 window.
