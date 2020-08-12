@@ -252,11 +252,14 @@ structure that is built with these two types of nodes is called 2-3 tree. A red-
 2-nodes connected by a left "red" link. The color of the link is represented by a flag in the code. Symbol tables are behind many important 
 applications such as databases and search engines. One other remarkable application of BST is computational geometry in which geometric properties
 of objects, such as point coordinates, are used as keys in a BST, enabling the implementation of useful methods such as range search and nearest-neighbor
-search.
-    
-The [programming assignment](https://coursera.cs.princeton.edu/algs4/assignments/kdtree/specification.php) is about kd-trees 
-and in particular 2d-trees. The Java class KdTreeVisualizer.java computes and draws the 2d-tree that results from the sequence of points clicked by the user in 
-the standard drawing window.
+search. The [programming assignment](https://coursera.cs.princeton.edu/algs4/assignments/kdtree/specification.php) requires the development of two Java
+classes to implement such two methods in two different ways, one based on the use of a balanced BST implementation that is available in the java.util package,
+and one that requires the implementation of a 2d-tree, that is a binary tree that corresponds to a recursive partition of the plane so that at each level 
+of the tree the plane is divided alternatively by a horizontal or vertical line that passes through each node in that level of the tree. The 2d-tree
+adapts gracefully to the distribution of the points in the plane and it is often a better solution than the grid approach in which the plane is divided
+into equally sized squares, particularly when the points are not evenly distributed such as in geographic applications. As an example of how the 2d-tree
+split the space into two rectangles every time a point is created in the plane and its corresponding node is added to the 2d-tree can be seen with the 
+Java class KdTreeVisualizer.java that draws the points clicked by the user in the standard drawing window and the splitting lines.
 
 ```
 $ mvn exec:java -Dexec.mainClass="assignments.kdtree.KdTreeVisualizer"
