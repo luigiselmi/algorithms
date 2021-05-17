@@ -1,15 +1,23 @@
+/**
+ * Implements a Last-In-First-Out (LIFO) collection.
+ * It is based on a linked list.
+ */
 package fundamentals;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-
-/**
- * Implements a Last-In-First-Out (LIFO) collection.
- * It is based on a linked list.
- */
 public class Stack<Item> implements Iterable<Item> {
 
+  private Node<Item> first;     // top of stack
+  private int numberOfItems;
+  
+  // Linked list class
+  private class Node<Item> {
+    private Item item;
+    private Node<Item> next;
+  }
+  
   public Stack() {
     first = null;
     numberOfItems = 0;
@@ -44,15 +52,6 @@ public class Stack<Item> implements Iterable<Item> {
 	public Iterator<Item> iterator() {
 		return new ListIterator<Item>(first);
 	}
-    
-  private Node<Item> first;     // top of stack
-	private int numberOfItems;
-	
-  // Linked list class
-  private class Node<Item> {
-    private Item item;
-    private Node<Item> next;
-  }
     
   private class ListIterator<Item> implements Iterator<Item> {
     private Node<Item> current;
