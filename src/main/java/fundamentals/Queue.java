@@ -1,13 +1,12 @@
+/**
+ * Implements a FIFO collection.
+ * The order is preserved. It is based on a linked list.
+ */
 package fundamentals;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-
-/**
- * Implements a FIFO collection.
- * The order is preserved. It is based on a linked list.
- */
 public class Queue<Item> implements Iterable<Item> {
 
 	private Node<Item> first;
@@ -15,10 +14,10 @@ public class Queue<Item> implements Iterable<Item> {
 	private int numberOfItems;
 	
 	// Linked list class
-    private class Node<Item> {
-        private Item item;
-        private Node<Item> next;
-    }
+  private class Node<Item> {
+    private Item item;
+    private Node<Item> next;
+  }
     
 	public Queue() {
 		first = null;
@@ -42,8 +41,8 @@ public class Queue<Item> implements Iterable<Item> {
 		last.next = null;
 		if (isEmpty()) 
 			first = last;
-        else 
-        	oldlast.next = last;
+    else 
+      oldlast.next = last;
 		numberOfItems++;
 	}
 	
