@@ -322,6 +322,20 @@ contains the relationships (hypernyms) between the vertices. You can test the co
 $ mvn exec:java -Dexec.mainClass="assignments.wordnet.WordNet" -Dexec.args="resources/assignments/wordnet/synsets.txt resources/assignments/wordnet/hypernyms.txt"
 ```
 
+```
+Is "yellowlegs" a noun ? true
+synset id for noun "zone" is 82150
+synset id for noun "zone" is 82151
+synset id for noun "zone" is 82152
+synset id for noun "zone" is 82153
+The SAP for "worm" and "bird" is animal animate_being beast brute creature fauna .
+The distance between the nouns "worm" and "bird" is 5.
+The distance between the nouns "white_marlin" and "mileage" is 23.
+The distance between the nouns "Black_Plague" and "black_marlin" is 33.
+The distance between the nouns "American_water_spaniel" and "histology" is 27.
+The distance between the nouns "Brown_Swiss" and "barrel_roll" is 29.
+```
+
 Finally the 3rd class, Outcast.java, can be used to measure the semantic distance between words, provided in a file, to return the word that is 
 the least related to the other ones, as in the example where outcast5.txt contains the words "horse", "zebra", "cat", "bear", "table", and Outcast 
 returns correctly the word "table".
