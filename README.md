@@ -501,6 +501,9 @@ $ openssl enc -d -aes-256-cbc -in SeamCarver.java.enc -out SeamCarver.java -pass
 
 ## Computational Complexity of Algorithms
 ### Abstract Data Types
+Here we present the most used data types that are used in many applications. Each data type provides a set of APIs to add, 
+look up or remove items. The APIs can be implemented with algorithms that may have different performances.
+
 #### Stack
 A stack is a data type that implements a Last-In-First-Out data access policy. It can be based on a linked list and must 
 implement two APIs: push() to insert a new element on the top of the stack, and pop() to remove one element from the top.
