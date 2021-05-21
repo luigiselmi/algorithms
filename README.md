@@ -500,7 +500,7 @@ $ openssl enc -d -aes-256-cbc -in SeamCarver.java.enc -out SeamCarver.java -pass
 ```
 
 ## Computational Complexity of Algorithms
-### Abstarct Data Types
+### Abstract Data Types
 #### Stack
 |API|Running Time|
 |---|------------|
