@@ -502,17 +502,25 @@ $ openssl enc -d -aes-256-cbc -in SeamCarver.java.enc -out SeamCarver.java -pass
 ## Computational Complexity of Algorithms
 ### Abstract Data Types
 #### Stack
+A stack is a data type that implements a Last-In-First-Out data access policy. It can be based on a linked list and must 
+implement two APIs: push() to insert a new element on the top of the stack, and pop() to remove one element from the top.
 |API|Running Time|
 |---|------------|
 |push()|constant|
 |pop()|constant|
 #### Queue
+A queue is a data type that implements a First-In-First-Out data access policy. It can be based on a linked list and must 
+implement two APIs: enqueue() to add an element to the tail of the queue and dequeue() to remove the first element from the head of the queue.
 |API|Running Time|
 |---|------------|
 |enqueue()|constant|
 |dequeue()|constant|
 
 #### Priority Queue
+A priority queue is a data type that provides an API to insert an element, similarly to a queue or a stack, but instead of implementing a 
+method to remove the oldest element like in a queue, or the newest one like in a stack, a priority queue implements a method to remove the 
+element with the maximum value. The priority queue is based on a heap-ordered complete binary tree that can be implemented on top of an array. 
+A binary tree is heap-ordered when the key in each node is equal or larger than its children’s keys.
 |API|Running Time|
 |---|------------|
 |insert()|log(N)|
