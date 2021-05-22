@@ -1,3 +1,8 @@
+/**
+ * This class reads strings from files and outputs the string in alphabetical order.
+ * It uses an index priority queue.
+ * java -cp "lib/algs4.jar;target/classes" sorting.Multiway resources/sorting/stream1.txt resources/sorting/stream2.txt resources/sorting/stream3.txt
+ */
 package sorting;
 
 import edu.princeton.cs.algs4.In;
