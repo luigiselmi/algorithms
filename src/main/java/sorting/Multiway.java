@@ -1,6 +1,7 @@
 package sorting;
 
 import edu.princeton.cs.algs4.In;
+import edu.princeton.cs.algs4.IndexMinPQ;
 import edu.princeton.cs.algs4.StdOut;
 
 public class Multiway {
@@ -10,15 +11,17 @@ public class Multiway {
   
   public static void merge(In[] streams) {
     int N = streams.length;
-    IndexMaxPQ<String> pq = new IndexMaxPQ<String>(N);
+    IndexMinPQ<String> pq = new IndexMinPQ<String>(N);
     
     for (int i = 0; i < N; i++)
-      if (!streams[i].isEmpty())
-        pq.insert(i, streams[i].readString());
+      if (!streams[i].isEmpty()) {
+        String str = streams[i].readString();
+        pq.insert(i, str);
+      }
     
     while (!pq.isEmpty()) {
-      StdOut.print(pq.max() + " ");
-      int i = pq.delMax();
+      StdOut.print(pq.minKey() + " ");
+      int i = pq.delMin();
       if (!streams[i].isEmpty())
         pq.insert(i, streams[i].readString());
       
