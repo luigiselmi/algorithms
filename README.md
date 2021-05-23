@@ -529,14 +529,17 @@ A binary tree is heap-ordered when the key in each node is equal or larger than 
 |insert()|log(N)|
 |delMax()|log(N)|
 
-### Sorting
-|Algorithm|Running Time|Space|Notes|
+### Sorting algorithms
+The table presents the running time of the main sorting algorithms in the worst, average and best case. An algorithm that does not need any 
+additional space is said to be in-place. A sorting algorithm is said stable if it preserves the relative of equal keys.  
+|Algorithm|in-place|stable| worst|average|Notes|
 |---------|------------|-----|-----|
-|Selection sort|N^2||Not stable|
-|Insertion sort|N^2||Stable|
-|Shellsort|N^(3/2)||Not stable|
-|Mergesort|N*log(N)|N|Stable|
-|Quicksort|N*log(N)|No extra space|Not stable|
+|Selection sort|Yes|No|N^2 / 2|N^2 / 2|N^2 / 2|N exchanges|
+|Insertion sort|Yes|Yes|N^2 / 2|N^2 / 4|N|Use for small N or partially ordered|
+|Shellsort|Yes|No|N^(3/2)|Subquadratic|Subquadratic||
+|Mergesort|No|Yes|N*log(N)|N*log(N)|N*log(N)|NlogN guarantee|
+|Quicksort|Yes|No|N^2 / 2|2N*log(N)|N*log(N)|NlogN probabilistic guarantee, fastest in practice extra space|
+|Heapsort|Yes|No|N*log(N)|N*log(N)|N*log(N)|NlogN guarantee|
 ### Searching
 |Algorithm|Running Time|Space|Notes|
 |---------|------------|-----|-----|
