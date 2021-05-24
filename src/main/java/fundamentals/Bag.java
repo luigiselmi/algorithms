@@ -44,10 +44,10 @@ public class Bag<Item> implements Iterable<Item> {
 	@Override
 	public Iterator<Item> iterator() {
 		
-		return new ListIterator<Item>(first);
+		return new ListIterator(first);
 	}
 	
-	private class ListIterator<Item> implements Iterator<Item> {
+	private class ListIterator implements Iterator<Item> {
 
 		private Node<Item> current;
 		
@@ -73,6 +73,16 @@ public class Bag<Item> implements Iterable<Item> {
 			throw new UnsupportedOperationException();  
 		}
 		
+	}
+	
+	public static void main(String[] args) {
+	  Bag<String> mybag = new Bag<String>();
+	  mybag.add("Rome");
+	  mybag.add("Paris");
+	  mybag.add("New York");
+	  System.out.println(mybag.isEmpty());
+	  for (String city: mybag)
+	    System.out.println(city);
 	}
 
 }
