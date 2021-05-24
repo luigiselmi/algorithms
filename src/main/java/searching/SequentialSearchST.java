@@ -38,6 +38,11 @@ public class SequentialSearchST<Key, Value> {
     first = new Node(key, val, first); // Search miss: add new node
     numItems++;  
   }
+  
+  public boolean contains(Key key) {
+    if (key == null) throw new IllegalArgumentException("argument to contains() is null");
+    return get(key) != null;
+  }
   /*
    * returns a bag with all the unique keys
    * used in the symbol table.
