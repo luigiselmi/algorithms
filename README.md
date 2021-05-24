@@ -538,7 +538,7 @@ additional space is said to be in-place. A sorting algorithm is said stable if i
 |Insertion sort|Yes|Yes|N^2 / 2|N^2 / 4|N|Use for small N or partially ordered|
 |Shellsort|Yes|No|N^(3/2)|Subquadratic|Subquadratic||
 |Mergesort|No|Yes|N*log(N)|N*log(N)|N*log(N)|NlogN guarantee|
-|Quicksort|Yes|No|N^2 / 2|2N*log(N)|N*log(N)|NlogN probabilistic guarantee, fastest in practice extra space|
+|Quicksort|Yes|No|N^2 / 2|2N*log(N)|N*log(N)|NlogN probabilistic guarantee, fastest in practice|
 |Heapsort|Yes|No|N*log(N)|N*log(N)|N*log(N)|NlogN guarantee|
 ### Searching
 |Algorithm|Running Time|Space|Notes|
