@@ -6,12 +6,12 @@ import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 
-public class BinarySearch {
+public class BinarySearchST {
 
 	/**
      * This class should not be instantiated.
      */
-    private BinarySearch() { }
+    private BinarySearchST() { }
 
     /**
      * Returns the index of the specified key in the specified array.
@@ -43,7 +43,7 @@ public class BinarySearch {
         // read integer key from standard input; print if not in whitelist
         while (!StdIn.isEmpty()) {
             int key = StdIn.readInt();
-            if (BinarySearch.indexOf(whitelist, key) == -1)
+            if (BinarySearchST.indexOf(whitelist, key) == -1)
                 StdOut.println(key);
         }
 
