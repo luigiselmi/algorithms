@@ -8,7 +8,7 @@
  *  each line contains a String and a long value, this MinPQ client
  *  prints the m lines whose numbers are the highest.
  * 
- *  % java TopM 5 < tinyBatch.txt 
+ *  java -cp "lib/algs4.jar;target/classes" sorting.TopM 5 < resources/sorting/tinyBatch.txt
  *  Thompson    2/27/2000  4747.08
  *  vonNeumann  2/12/1994  4732.35
  *  vonNeumann  1/11/1999  4409.74
