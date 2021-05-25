@@ -540,7 +540,8 @@ additional space is said to be in-place. A sorting algorithm is said stable if i
 |Mergesort|No|Yes|N*log(N)|N*log(N)|N*log(N)|NlogN guarantee|
 |Quicksort|Yes|No|N^2 / 2|2N*log(N)|N*log(N)|NlogN probabilistic guarantee, fastest in practice|
 |Heapsort|Yes|No|N*log(N)|N*log(N)|N*log(N)|NlogN guarantee|
-### Searching
+
+### Searching algorithms
 A symbol table is an abstract data type that provides mechanisms to store information as a key-value pair so that once it is saved it can be 
 searched by its key. Symbol tables are also known as dictionaries, indices, or associative arrays. A symbol table with keys that have a natural 
 order is called ordered symbol table.
