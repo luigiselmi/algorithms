@@ -532,8 +532,8 @@ A binary tree is heap-ordered when the key in each node is equal or larger than 
 ### Sorting algorithms
 The table presents the running time of the main sorting algorithms in the worst, average and best case. An algorithm that does not need any 
 additional space is said to be in-place. A sorting algorithm is said stable if it preserves the relative order of equal keys.  
-|Algorithm|in-place|stable| worst|average|best|Notes|
-|---------|--------|------|------|-------|----|-----|
+|Algorithm|in-place|stable| worst case|average case|best case|Notes|
+|---------|--------|------|-----------|------------|---------|-----|
 |Selection sort|Yes|No|N^2 / 2|N^2 / 2|N^2 / 2|N exchanges|
 |Insertion sort|Yes|Yes|N^2 / 2|N^2 / 4|N|Use for small N or partially ordered|
 |Shellsort|Yes|No|N^(3/2)|Subquadratic|Subquadratic||
@@ -544,15 +544,11 @@ additional space is said to be in-place. A sorting algorithm is said stable if i
 A symbol table is an abstract data type that provides mechanisms to store information as a key-value pair so that once it is saved it can be 
 searched by its key. Symbol tables are also known as dictionaries, indices, or associative arrays. A symbol table with keys that have a natural 
 order is called ordered symbol table.
-|Algorithm|    worst     |   average   |Notes|
-|---------|------|-------|------|------|-----|
-|         |search|insert |search|insert|     |
-|---------|------|-------|------|------|-----|
+|Algorithm|search (worst case)|insert (worst case) |search (average case)|insert (average case)|Notes|
+|---------|-------------------|--------------------|---------------------|---------------------|-----|
 |sequential search|N|N|N / 2|N|unordered list|
 |binary search|log(N)|N|log(N)|N / 2|ordered array|
 
-|Binary search|log(N)||search in a sorted array|
-|Binary search tree|log(N)|||
 ### Graphs
 |Algorithm|Running Time|Space|
 |---------|------------|-----|
