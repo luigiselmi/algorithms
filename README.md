@@ -519,7 +519,7 @@ implement two APIs: enqueue() to add an element to the tail of the queue and deq
 |enqueue()|constant|
 |dequeue()|constant|
 
-#### Priority Queue
+#### Priority Queue and heap-ordered binary tree
 A priority queue is a data type that provides an API to insert an element, similarly to a queue or a stack, but instead of implementing a 
 method to remove the oldest element like in a queue, or the newest one like in a stack, a priority queue implements a method to remove the 
 element with the maximum value. The priority queue is based on a heap-ordered complete binary tree that can be implemented on top of an array. 
@@ -528,6 +528,14 @@ A binary tree is heap-ordered when the key in each node is equal or larger than 
 |---|------------|
 |insert()|log(N)|
 |delMax()|log(N)|
+
+#### Binary Search Tree
+A binary search tree is an abstract data type whith an explicit tree data strucure in which each node has a natural ordered key 
+and an associated value. The key in a node is smaller than any key in its right subtree and larger than any key in its left subtree.  
+|API|Running Time|
+|---|------------|
+|put()|log(N)|
+|get()|log(N)|
 
 ### Sorting algorithms
 The table presents the running time of the main sorting algorithms in the worst, average and best case. An algorithm that does not need any 
@@ -547,8 +555,9 @@ searched by its key. Symbol tables are also known as dictionaries, indices, or a
 order is called ordered symbol table.
 |Algorithm|search (worst case)|insert (worst case) |search (average case)|insert (average case)|Notes|
 |---------|-------------------|--------------------|---------------------|---------------------|-----|
-|sequential search|N|N|N / 2|N|unordered list|
-|binary search|log(N)|N|log(N)|N / 2|ordered array|
+|Sequential search|N|N|N / 2|N|unordered list|
+|Binary search|log(N)|N|log(N)|N / 2|supports ordered operations|
+|Binary search tree|N|N|log(N)|log(N)|supports ordered operations|
 
 ### Graphs
 |Algorithm|Running Time|Space|
