@@ -1,5 +1,5 @@
 /**
- * A binary search tree is a symbol table that keep the keeps the
+ * A binary search tree is a symbol table that keeps the
  * keys in order at insertion time. The key in a node is smaller 
  * than any key in its right subtree and larger than any key in
  * its left subtree. 
