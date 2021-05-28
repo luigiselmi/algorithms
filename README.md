@@ -560,7 +560,7 @@ order is called ordered symbol table.
 |Sequential search|N|N|N / 2|N|unordered list|
 |Binary search|log(N)|N|log(N)|N / 2|supports ordered operations|
 |Binary search tree|N|N|log(N)|log(N)|supports ordered operations|
-|Red-Black BST|2*log(N)|2*log(N)|log(N)|2*log(N)|logN performance guaranteed for search insert and ordered operations|
+|Red-Black BST|2*log(N)|2*log(N)|log(N)|log(N)|logN performance guaranteed for search insert and ordered operations|
 
 ### Graphs
 |Algorithm|Running Time|Space|
