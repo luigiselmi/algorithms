@@ -102,7 +102,7 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value> {
      return minNode;
    }
   
-  // The minimum is on the left so the method 
+  // The minimum key is on the left so the method 
   // only needs to return the reference to right child
   // (if it exists)
   public void deleteMin() {
