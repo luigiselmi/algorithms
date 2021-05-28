@@ -531,7 +531,9 @@ A binary tree is heap-ordered when the key in each node is equal or larger than 
 
 #### Binary Search Tree
 A binary search tree is an abstract data type whith an explicit tree data strucure in which each node has a natural ordered key 
-and an associated value. The key in a node is smaller than any key in its right subtree and larger than any key in its left subtree.  
+and an associated value. The key in a node is smaller than any key in its right subtree and larger than any key in its left subtree.
+A Red-Black binary search tree is a nearly perfectly balanced symbol table with guaranteed log(N) time for insertion and search. 
+Guaranteed means the cost will not exceed the logarithmic time even in the worst case (e.g. when the input keys are ordered).  
 |API|Running Time|
 |---|------------|
 |put()|log(N)|
@@ -558,6 +560,7 @@ order is called ordered symbol table.
 |Sequential search|N|N|N / 2|N|unordered list|
 |Binary search|log(N)|N|log(N)|N / 2|supports ordered operations|
 |Binary search tree|N|N|log(N)|log(N)|supports ordered operations|
+|Red-Black BST|2*log(N)|2*log(N)|log(N)|2*log(N)|logN performance guaranteed for search insert and ordered operations|
 
 ### Graphs
 |Algorithm|Running Time|Space|
