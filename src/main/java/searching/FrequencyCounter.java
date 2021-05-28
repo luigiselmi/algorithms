@@ -40,49 +40,101 @@ import edu.princeton.cs.algs4.StdOut;
  */
 public class FrequencyCounter {
 
-    // Do not instantiate.
-    private FrequencyCounter() { }
-
-    /**
-     * Reads in a command-line integer and sequence of words from
-     * standard input and prints out a word (whose length exceeds
-     * the threshold) that occurs most frequently to standard output.
-     * It also prints out the number of words whose length exceeds
-     * the threshold and the number of distinct such words.
-     *
-     * @param args the command-line arguments
-     */
-    public static void main(String[] args) {
-        int distinct = 0, words = 0;
-        int minlen = Integer.parseInt(args[0]);
-        SequentialSearchST<String, Integer> st = new SequentialSearchST<String, Integer>();
-
-        // compute frequency counts
-        while (!StdIn.isEmpty()) {
-            String key = StdIn.readString();
-            if (key.length() < minlen) continue;
-            words++;
-            if (st.contains(key)) {
-                st.put(key, st.get(key) + 1);
-            }
-            else {
-                st.put(key, 1);
-                distinct++;
-            }
-        }
-
-        // find a key with the highest frequency count
-        String max = "";
-        st.put(max, 0);
-        for (String word : st.keys()) {
-            if (st.get(word) > st.get(max))
-                max = word;
-        }
-
-        StdOut.println(max + " " + st.get(max));
-        StdOut.println("distinct = " + distinct);
-        StdOut.println("words    = " + words);
+  // Do not instantiate.
+  private FrequencyCounter() { }
+  
+  /**
+   * Reads in a command-line integer and sequence of words from
+   * standard input and prints out a word (whose length exceeds
+   * the threshold) that occurs most frequently to standard output.
+   * It also prints out the number of words whose length exceeds
+   * the threshold and the number of distinct such words.
+   *
+   * @param args the command-line arguments
+   */
+  public static void main(String[] args) {
+    
+    int minWordLen = Integer.parseInt(args[0]);
+    testBST(minWordLen);
+    //testRedBlackBST(minWordLen);
+  }
+  private static void testBST(int minWordLen) {
+    int distinct = 0, words = 0;
+    BinarySearchTree<String, Integer> st = new BinarySearchTree<String, Integer>();
+    // compute frequency counts
+    System.out.println("Test Binary Search Tree");
+    long start = System.currentTimeMillis();
+    while (!StdIn.isEmpty()) {
+      String key = StdIn.readString();
+      if (key.length() < minWordLen) continue;
+      words++;
+      if (st.contains(key)) {
+        st.put(key, st.get(key) + 1);
+      }
+      else {
+        st.put(key, 1);
+        distinct++;
+      }
     }
+    long stop = System.currentTimeMillis();
+    double runningTime = (stop - start)/1000.0;
+    StdOut.println("Total number of words = " + words);
+    StdOut.println("Distinct words = " + distinct);
+    System.out.println("Running time for insertion in symbol table (sec.): " + runningTime);
+    
+    // find a key with the highest frequency count
+    String max = "";
+    st.put(max, 0);
+    start = System.currentTimeMillis();
+    for (String word : st.keys()) {
+      if (st.get(word) > st.get(max))
+        max = word;
+    }
+    stop = System.currentTimeMillis();
+    runningTime = (stop - start)/1000.0;
+    StdOut.println("Most frequent word of length " + minWordLen + ": \"" + max + "\", found " + st.get(max) + " times.");
+    System.out.println("Running time for most frequent word search (sec.): " + runningTime);
+    
+    
+  }
+  private static void testRedBlackBST(int minWordLen) {
+    int distinct = 0, words = 0;
+    BinarySearchTree<String, Integer> st = new BinarySearchTree<String, Integer>();
+    System.out.println("Test Red-Black BST");
+    // compute frequency counts
+    long start = System.currentTimeMillis();
+    while (!StdIn.isEmpty()) {
+      String key = StdIn.readString();
+      if (key.length() < minWordLen) continue;
+      words++;
+      if (st.contains(key)) {
+        st.put(key, st.get(key) + 1);
+      }
+      else {
+        st.put(key, 1);
+        distinct++;
+      }
+    }
+    long stop = System.currentTimeMillis();
+    double runningTime = (stop - start)/1000.0;
+    StdOut.println("Total number of words = " + words);
+    StdOut.println("Distinct words = " + distinct);
+    System.out.println("Running time for insertion in symbol table (sec.): " + runningTime);
+    
+    // find a key with the highest frequency count
+    String max = "";
+    st.put(max, 0);
+    start = System.currentTimeMillis();
+    for (String word : st.keys()) {
+      if (st.get(word) > st.get(max))
+        max = word;
+    }
+    stop = System.currentTimeMillis();
+    runningTime = (stop - start)/1000.0;
+    StdOut.println("Most frequent word of length " + minWordLen + ": \"" + max + "\", found " + st.get(max) + " times.");
+    System.out.println("Running time for most frequent word search (sec.): " + runningTime);
+    
+  }
 }
 
 /******************************************************************************
