@@ -580,7 +580,7 @@ order is called ordered symbol table.
 |Binary search|log(N)|N|log(N)|N / 2|supports ordered operations|
 |Binary search tree|N|N|log(N)|log(N)|supports ordered operations|
 |Red-Black BST|2*log(N)|2*log(N)|log(N)|log(N)|logN performance guaranteed for search insert and ordered operations|
-|Hash table|< log(N)|< log(N)|N / (2M)|N / M|separate chaining, N keys, M index size|
+|Hash table|< log(N)|< log(N)|N / (2M)|N / M|separate chaining, N keys, M index size, no ordered operations|
 
 ### Graphs
 
