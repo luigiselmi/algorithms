@@ -507,13 +507,16 @@ look up or remove items. The APIs can be implemented with algorithms that may ha
 #### Stack
 A stack is a data type that implements a Last-In-First-Out data access policy. It can be based on a linked list and must 
 implement two APIs: push() to insert a new element on the top of the stack, and pop() to remove one element from the top.
+
 |API|Running Time|
 |---|------------|
 |push()|constant|
 |pop()|constant|
+
 #### Queue
 A queue is a data type that implements a First-In-First-Out data access policy. It can be based on a linked list and must 
 implement two APIs: enqueue() to add an element to the tail of the queue and dequeue() to remove the first element from the head of the queue.
+
 |API|Running Time|
 |---|------------|
 |enqueue()|constant|
@@ -524,6 +527,7 @@ A priority queue is a data type that provides an API to insert an element, simil
 method to remove the oldest element like in a queue, or the newest one like in a stack, a priority queue implements a method to remove the 
 element with the maximum value. The priority queue is based on a heap-ordered complete binary tree that can be implemented on top of an array. 
 A binary tree is heap-ordered when the key in each node is equal or larger than its children’s keys.
+
 |API|Running Time|
 |---|------------|
 |insert()|log(N)|
@@ -534,14 +538,28 @@ A binary search tree is an abstract data type whith an explicit tree data strucu
 and an associated value. The key in a node is smaller than any key in its right subtree and larger than any key in its left subtree.
 A Red-Black binary search tree is a nearly perfectly balanced symbol table with guaranteed log(N) time for insertion and search. 
 Guaranteed means the cost will not exceed the logarithmic time even in the worst case (e.g. when the input keys are ordered).  
+
 |API|Running Time|
 |---|------------|
 |put()|log(N)|
 |get()|log(N)|
 
+#### Hash Table
+A hash table is a symbol table in which the keys are mapped to an integer value to be used as index in an array. The mapping from a key 
+(e.g. a string) and an integer is done with a function that must be provided with the data type. Since the size of the array that stores
+the hash values is finite there might be collisions. One collision resolution strategy is called separate chaining. It consists of putting
+the keys that have the same hash value into a list. This way, if N is the number of keys and M is the size of the array, the number of 
+compares for insert and search is N/M.
+
+|API|Running Time|
+|---|------------|
+|put()|constant|
+|get()|constant|
+
 ### Sorting algorithms
 The table presents the running time of the main sorting algorithms in the worst, average and best case. An algorithm that does not need any 
 additional space is said to be in-place. A sorting algorithm is said stable if it preserves the relative order of equal keys.  
+
 |Algorithm|in-place|stable| worst case|average case|best case|Notes|
 |---------|--------|------|-----------|------------|---------|-----|
 |Selection sort|Yes|No|N^2 / 2|N^2 / 2|N^2 / 2|N exchanges|
@@ -555,16 +573,21 @@ additional space is said to be in-place. A sorting algorithm is said stable if i
 A symbol table is an abstract data type that provides mechanisms to store information as a key-value pair so that once it is saved it can be 
 searched by its key. Symbol tables are also known as dictionaries, indices, or associative arrays. A symbol table with keys that have a natural 
 order is called ordered symbol table.
+
 |Algorithm|search (worst case)|insert (worst case) |search (average case)|insert (average case)|Notes|
 |---------|-------------------|--------------------|---------------------|---------------------|-----|
 |Sequential search|N|N|N / 2|N|unordered list|
 |Binary search|log(N)|N|log(N)|N / 2|supports ordered operations|
 |Binary search tree|N|N|log(N)|log(N)|supports ordered operations|
 |Red-Black BST|2*log(N)|2*log(N)|log(N)|log(N)|logN performance guaranteed for search insert and ordered operations|
+|Hash table|< log(N)|< log(N)|N / (2M)|N / M|separate chaining, N keys, M index size|
 
 ### Graphs
+
 |Algorithm|Running Time|Space|
 |---------|------------|-----|
+
 ### Strings
+
 |Algorithm|Running Time|Space|
 |---------|------------|-----|

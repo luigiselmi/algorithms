@@ -3,11 +3,11 @@
  * based on a linked list. An hash function is used to compute
  * an integer value to be used as an index in an array of
  * lists of key-value pairs, one list for each index. This 
- * solution solves the problem of the collisions, when the 
+ * solution solves the problem of the collisions. When the 
  * same hash value is returned from two or more different 
- * keys. If N is the number of keys and M is the size of 
- * the array, the number of compares for insert and search 
- * is N/M.  
+ * keys they are added to the same list. If N is the number 
+ * of keys and M is the size of the array, the number of 
+ * compares for insert and search is N/M.  
  */
 package searching;
 
