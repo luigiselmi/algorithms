@@ -533,6 +533,11 @@ A binary tree is heap-ordered when the key in each node is equal or larger than 
 |insert()|log(N)|
 |delMax()|log(N)|
 
+#### Symbol Table
+Symbol table is an abstract data type that is used to store key-value pairs. Three types of symbol tables are presented in the course:
+two that support ordered keys, the binary search tree and the red-black binary search tree, and one that uses a hash function to map
+the key to an integer value that is used as an index. Hash tables do not support ordered operations.
+
 #### Binary Search Tree
 A binary search tree is an abstract data type whith an explicit tree data strucure in which each node has a natural ordered key 
 and an associated value. The key in a node is smaller than any key in its right subtree and larger than any key in its left subtree.
@@ -571,8 +576,9 @@ additional space is said to be in-place. A sorting algorithm is said stable if i
 
 ### Searching algorithms
 A symbol table is an abstract data type that provides mechanisms to store information as a key-value pair so that once it is saved it can be 
-searched by its key. Symbol tables are also known as dictionaries, indices, or associative arrays. A symbol table with keys that have a natural 
-order is called ordered symbol table.
+searched by its key. A symbol table with keys that have a natural order is called ordered symbol table and can support ordered operation such
+as min(), max() and rank(). Symbol tables are used to build dictionaries, associative arrays, indeces, inverted indices, sparse vectors and 
+matrices.
 
 |Algorithm|search (worst case)|insert (worst case) |search (average case)|insert (average case)|Notes|
 |---------|-------------------|--------------------|---------------------|---------------------|-----|
