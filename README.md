@@ -592,7 +592,7 @@ matrices.
 A graph is an object consisting of a set of vertices and a collection of edges that are sets of a pair of vertices. This definition allows 
 self-loops, i.e. edges that connect a vertex to itself, and parallel edges, i.e. edges that connect the same pair of vertices. There are two
 categories of graphs: undirected and directed. In undirected graphs two edges with the same vertices in different order are the same. In 
-directed graph two edges with the same vertices in different order are different.
+directed graphs two edges with the same vertices in different order are different.
  
 
 |Algorithm|Running Time|Space|
