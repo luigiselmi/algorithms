@@ -1,5 +1,12 @@
 /**
  * This class implements depth-first search on a graph.
+ * It can be used to search for all vertices connected
+ * to a vertex passed as argument. For example to search
+ * for all vertices connected to a source vertex 3 in a 
+ * graph given in an input file tinyG.txt run the command
+ * 
+ * $ java -cp "lib/algs4.jar;target/classes"  graphs.DepthFirstSearch resources/graphs/tinyG.txt 3
+ * 
  */
 package graphs;
 
@@ -33,11 +40,11 @@ public class DepthFirstSearch {
   }
   
   /**
-   * This method finds if a vertex is connected to the source vertex
-   * given in the constructor.
+   * This method finds if a vertex is connected to the 
+   * source vertex given in the constructor.
    * @param v the vertex for which we want to know if it 
    * is connected to the source vertex.
-   * @return
+   * @return true if connected, false otherwise.
    */
   public boolean marked(int v) {
     return marked[v];
@@ -69,13 +76,17 @@ public class DepthFirstSearch {
     DepthFirstSearch search = new DepthFirstSearch(G, s);
     
     // Are all the vertices in the graph connected ?
+    StdOut.print("The graph is ");
+    if (search.count() != G.V())
+      StdOut.print("NOT ");
+    StdOut.println("connected.");
+    
+    // print the list of vertices connected to the source vertex.
+    StdOut.print("The source vertex " + s + " is connected to vertices: ");
     for (int v = 0; v < G.V(); v++)
       if (search.marked(v))
         StdOut.print(v + " ");
     StdOut.println();
-    if (search.count() != G.V())
-      StdOut.print("NOT ");
-    StdOut.println("connected");
     
     // Find paths from the source vertex to all the connected vertices
     for (int v = 0; v < G.V(); v++) {
