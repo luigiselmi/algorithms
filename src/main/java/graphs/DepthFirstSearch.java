@@ -8,14 +8,14 @@ import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.Stack;
 import edu.princeton.cs.algs4.StdOut;
 
-public class Search {
+public class DepthFirstSearch {
   
   private boolean[] marked; // array of vertices connected to the source
   private int count; // number of vertices connected to the source
   private int[] edgeTo; // each element contains the last vertex connected to the current one
   private final int source; // source vertex
   
-  public Search(Graph G, int s) {
+  public DepthFirstSearch(Graph G, int s) {
     marked = new boolean [G.V()];
     edgeTo = new int[G.V()];
     source = s;
@@ -66,7 +66,7 @@ public class Search {
   public static void main(String[] args) {
     Graph G = new Graph(new In(args[0]));
     int s = Integer.parseInt(args[1]);
-    Search search = new Search(G, s);
+    DepthFirstSearch search = new DepthFirstSearch(G, s);
     
     // Are all the vertices in the graph connected ?
     for (int v = 0; v < G.V(); v++)
