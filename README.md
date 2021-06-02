@@ -589,14 +589,17 @@ matrices.
 |Hash table|< log(N)|< log(N)|N / (2M)|N / M|separate chaining, N keys, M index size, no ordered operations|
 
 ### Graphs
-A graph is an object consisting of a set of vertices and a collection of edges that are sets of a pair of vertices. This definition allows 
+A graph is an object consisting of a set of vertices and a collection of edges that are sets of pairs of vertices. This definition allows 
 self-loops, i.e. edges that connect a vertex to itself, and parallel edges, i.e. edges that connect the same pair of vertices. There are two
 categories of graphs: undirected and directed. In undirected graphs two edges with the same vertices in different order are the same. In 
-directed graphs two edges with the same vertices in different order are different.
+directed graphs two edges with the same vertices in different order are different. A graph can be efficiently built as an adjacency list, i.e.
+an array of linked lists where each index represent a vertex and the associated linked list contains its adjacent vertices. A vertex is
+characterized by its degree that represents the number of edges incident to it.
  
-
-|Algorithm|Running Time|Space|
+|Algorithm|Running Time|Use|
 |---------|------------|-----|
+|Depth-first search||find all the vertices connected to a source vertex, connected components|
+|Breadth-first search||shortest path between two vertices|
 
 ### Strings
 
