@@ -603,9 +603,7 @@ a base to easily implement higher level graph processing algorithms.
  
 |Algorithm|Running Time|Use|
 |---------|------------|-----|
-|Depth-first search|proportional to the sum of the degrees of each vertex reachable from the source|
-recursive algorithm, finds all the vertices connected to a source vertex, finds connected components, cycle detection, determines if graph 
-is bipartite|
+|Depth-first search|proportional to the sum of the degrees of each vertex reachable from the source|recursive algorithm, finds all the vertices connected to a source vertex, finds connected components, cycle detection, determines if graph is bipartite|
 |Breadth-first search||shortest path between two vertices, degrees of separation|
 
 #### Directed Graphs
