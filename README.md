@@ -589,22 +589,31 @@ matrices.
 |Hash table|< log(N)|< log(N)|N / (2M)|N / M|separate chaining, N keys, M index size, no ordered operations|
 
 ### Graphs
-A graph is an object consisting of a set of vertices and a collection of edges that are sets of pairs of vertices. This definition allows 
-self-loops, i.e. edges that connect a vertex to itself, and parallel edges, i.e. edges that connect the same pair of vertices. There are two
-categories of graphs: undirected and directed. 
+A graph is an abstract data type consisting of a set of vertices and a collection of edges that are sets of pairs of vertices. This definition 
+allows self-loops, i.e. edges that connect a vertex to itself, and parallel edges, i.e. edges that connect the same pair of vertices. There are 
+two categories of graphs: undirected and directed. 
 
 #### Undirected Graphs
-In undirected graphs two edges with the same vertices in different order are the same. In 
-directed graphs two edges with the same vertices in different order are different. A graph can be efficiently built as an adjacency list, i.e.
-an array of linked lists where each index represents a vertex and the associated linked list contains its adjacent vertices. A vertex is
-characterized by its degree that represents the number of edges incident to it.
+In undirected graphs two edges with the same vertices in different order are the same. An undirected graph can be efficiently built as an 
+adjacency list, i.e. an array of linked lists where each index represents a vertex and the associated linked list contains its adjacent vertices.
+When an edge v-w is added to an undirected graph to connect two vertices v and w, the vertex w must be added to the list of adjacent vertices of v 
+and the vertex v must be added to the list of adjacent vertices of w. A vertex is characterized by its degree that represents the number of edges 
+incident to it. Two main algorithms are used to process undirected graphs, depth-first search and breadth-first search. These algorithms provide 
+a base to easily implement higher level graph processing algorithms. 
  
 |Algorithm|Running Time|Use|
 |---------|------------|-----|
-|Depth-first search||find all the vertices connected to a source vertex, connected components|
-|Breadth-first search||shortest path between two vertices|
+|Depth-first search|proportional to the sum of the degrees of each vertex reachable from the source|
+recursive algorithm, finds all the vertices connected to a source vertex, finds connected components, cycle detection, determines if graph 
+is bipartite|
+|Breadth-first search||shortest path between two vertices, degrees of separation|
 
 #### Directed Graphs
+In directed graphs two edges with the same vertices in different order are different. The order of vertices implies a one way adjacency. Directed
+graphs are used to represent systems such as social networks, the WWW, chemical reactions, road networks and many others. The first vertex in the
+pair that represents and edge is called its head, the second vertex is called its tail. A directed graph can be built as an adjacency list like an
+undirected graph. Adding an edge to connect two vertices in a directed graph is easier than in an undirected one. When an edge v->w is added to a 
+directed graph, only the vertex w must be added to the adjacency list of v.
 
 ### Strings
 
