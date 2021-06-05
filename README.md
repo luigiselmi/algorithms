@@ -591,7 +591,8 @@ matrices.
 ### Graphs
 A graph is an abstract data type consisting of a set of vertices and a collection of edges that are sets of pairs of vertices. This definition 
 allows self-loops, i.e. edges that connect a vertex to itself, and parallel edges, i.e. edges that connect the same pair of vertices. There are 
-two categories of graphs: undirected and directed. 
+two categories of graphs: undirected and directed. Graphs whose edges are associated to a value are called edge-weighted graphs and are used in 
+many applications such as finding the shortest path between two geographical locations. 
 
 #### Undirected Graphs
 In undirected graphs two edges with the same vertices in different order are the same. An undirected graph can be efficiently built as an 
@@ -602,12 +603,13 @@ represents the number of edges incident to it. Two main algorithms are used to p
 search. These algorithms provide a base to easily implement higher level graph processing algorithms. 
  
 |Algorithm|Running Time|Use|
-|---------|------------|-----|
+|---------|------------|---|
 |Depth-first search (DFS)|proportional to the sum of the degrees of each vertex connected to the source vertex|recursive algorithm, cycle detection, determines if graph is bipartite|
 |Breadth-first search (BFS)||shortest path between two vertices|
 |Single-source paths||based on DFS, finds paths to all vertices connected to a source vertex|
 |Connected components||based on DFS|
 |Degrees of separation||based on BFS|
+
 
 #### Directed Graphs
 In directed graphs, two edges with the same vertices in different order are different. The order of vertices implies a one way adjacency. 
@@ -617,7 +619,7 @@ an array of adjacency lists like an undirected graph. Adding an edge to connect 
 one. When an edge v->w is added to a directed graph, only the vertex w must be added to the adjacency list of v.
 
 |Algorithm|Running Time|Use|
-|---------|------------|-----|
+|---------|------------|---|
 |Depth-first search|proportional to the sum of the degrees of the outgoing edges of each vertex reachable from the source vertex|recursive algorithm, same implementation as for the undirected graphs, direct cycles detection|
 |Breadth-first search||same implementation as for the undirected graphs, shortest path between two vertices in a directed path|
 |Topological sort|E + V| sorts the vertices of a directed acyclic graph according to constraints, scheduling problems|
@@ -625,6 +627,13 @@ one. When an edge v->w is added to a directed graph, only the vertex w must be a
 |Transitive closure|||
 
 A direct acyclic graph (DAG) is a digraph with no directed cycles.
+
+#### Edge-weighted Graphs
+An edge-weighted graph can be represented as an array of adjacency lists of edges where each edge object contains two vertices and a weight. 
+|Algorithm|Running Time|Use|
+|---------|------------|---|
+|Prism||computes the minimum spanning tree (MST) of an edge-weighted graph|
+|Kruskal||computes the minimum spanning tree (MST) of an edge-weighted graph|
 
 ### Strings
 
