@@ -603,12 +603,15 @@ search. These algorithms provide a base to easily implement higher level graph p
  
 |Algorithm|Running Time|Use|
 |---------|------------|-----|
-|Depth-first search|proportional to the sum of the degrees of each vertex connected to the source vertex|recursive algorithm, finds all the vertices connected to a source vertex, finds connected components, cycle detection, determines if graph is bipartite|
-|Breadth-first search||shortest path between two vertices, degrees of separation|
+|Depth-first search (DFS)|proportional to the sum of the degrees of each vertex connected to the source vertex|recursive algorithm, cycle detection, determines if graph is bipartite|
+|Breadth-first search (BFS)||shortest path between two vertices|
+|Single-source paths||based on DFS, finds paths to all vertices connected to a source vertex|
+|Connected components||based on DFS|
+|Degrees of separation||based on BFS|
 
 #### Directed Graphs
 In directed graphs, two edges with the same vertices in different order are different. The order of vertices implies a one way adjacency. 
-Directed graphs, or digraphs, are used to represent systems such as social networks, the WWW, chemical reactions, road networks and many others. 
+Directed graphs, or digraphs, are used to model systems such as social networks, the WWW, chemical reactions, road networks and many others. 
 The first vertex in the pair that represents and edge is called its head, the second vertex is called its tail. A directed graph can be built as 
 an array of adjacency lists like an undirected graph. Adding an edge to connect two vertices in a directed graph is easier than in an undirected 
 one. When an edge v->w is added to a directed graph, only the vertex w must be added to the adjacency list of v.
@@ -617,9 +620,11 @@ one. When an edge v->w is added to a directed graph, only the vertex w must be a
 |---------|------------|-----|
 |Depth-first search|proportional to the sum of the degrees of the outgoing edges of each vertex reachable from the source vertex|recursive algorithm, same implementation as for the undirected graphs, direct cycles detection|
 |Breadth-first search||same implementation as for the undirected graphs, shortest path between two vertices in a directed path|
-|Topological sort|E + V| sorts the vertices of a directed acyclic graph according to constraints|
+|Topological sort|E + V| sorts the vertices of a directed acyclic graph according to constraints, scheduling problems|
+|Strong connectivity|||
+|Transitive closure|||
 
-A direct acyclic graph (DAG) is a digraph with no dircted cycles.
+A direct acyclic graph (DAG) is a digraph with no directed cycles.
 
 ### Strings
 
