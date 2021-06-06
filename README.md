@@ -650,7 +650,7 @@ paths.
 
 |Algorithm|Running Time|Extra space|Use|
 |---------|------------|-----------|---|
-|Dijkstra's single-source shortest paths|||finds the shortest paths from a source vertex to any other vertex|
+|Dijkstra's single-source shortest paths|E*log(V)||finds the shortest paths from a source vertex to any other vertex|
 
 ### Strings
 
