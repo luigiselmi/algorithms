@@ -610,6 +610,17 @@ search. These algorithms provide a base to easily implement higher level graph p
 |Connected components||based on DFS|
 |Degrees of separation||based on BFS|
 
+#### Edge-weighted Graphs
+An edge-weighted graph can be represented as an array of adjacency lists of edges where each edge object contains two vertices and a weight.
+Many important applications are based on finding the minimum spanning tree (MST) of an edge-weighted graph. A spanning tree is any subgraph 
+of a graph that is connected and has no cycles (i.e. it's a tree). A MST is a spanning tree that has minimum weight.  
+ 
+|Algorithm|Running Time|Extra space|Use|
+|---------|------------|-----------|---|
+|Prim|E*log(E) lazy implementation, E*log(V) eager implementation|E (lazy implementation), V (eager implementation)|greedy algorithm, computes the minimum spanning tree (MST) of an edge-weighted graph|
+|Kruskal|E*log(E)|E|greedy algorithm, computes the minimum spanning tree (MST) of an edge-weighted graph|
+
+E represents the number of edges and V represents the number of vertices in a graph.
 
 #### Directed Graphs
 In directed graphs, two edges with the same vertices in different order are different. The order of vertices implies a one way adjacency. 
@@ -628,12 +639,18 @@ one. When an edge v->w is added to a directed graph, only the vertex w must be a
 
 A direct acyclic graph (DAG) is a digraph with no directed cycles.
 
-#### Edge-weighted Graphs
-An edge-weighted graph can be represented as an array of adjacency lists of edges where each edge object contains two vertices and a weight. 
-|Algorithm|Running Time|Use|
-|---------|------------|---|
-|Prism||computes the minimum spanning tree (MST) of an edge-weighted graph|
-|Kruskal||computes the minimum spanning tree (MST) of an edge-weighted graph|
+#### Edge-weighted Directed Graphs
+An edge-weighted directed graph can be represented as a vertex-indexed array of adjacency lists of directed edges where each directed edge object 
+contains an ordered pair of vertices, a source vertex and a destination vertex, and a weight. The main problem that we want to solve is finding the
+shortest paths from one source vertex to any other vertex. It can be shown that the shortest paths from a source vertex to any other vertex is a 
+(spanning) tree and we can represent that tree with a vertex-indexed array of directed edges. Each index represents a vertex and the associated edge 
+contains the vertex itself and the edge's source vertex so that we can go back from any vertex in the tree to the source. An additional vertex-indexed 
+array contains the distance from a vertex in tree to the source. Different algorithms use these data structures to compute the single-source shortest 
+paths.   
+
+|Algorithm|Running Time|Extra space|Use|
+|---------|------------|-----------|---|
+|Dijkstra's single-source shortest paths|||finds the shortest paths from a source vertex to any other vertex|
 
 ### Strings
 
