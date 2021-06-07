@@ -629,15 +629,15 @@ The first vertex in the pair that represents and edge is called its head, the se
 an array of adjacency lists like an undirected graph. Adding an edge to connect two vertices in a directed graph is easier than in an undirected 
 one. When an edge v->w is added to a directed graph, only the vertex w must be added to the adjacency list of v.
 
-|Algorithm|Running Time|Use|
-|---------|------------|---|
-|Depth-first search|proportional to the sum of the degrees of the outgoing edges of each vertex reachable from the source vertex|recursive algorithm, same implementation as for the undirected graphs, direct cycles detection|
-|Breadth-first search||same implementation as for the undirected graphs, shortest path between two vertices in a directed path|
-|Topological sort|E + V| sorts the vertices of a directed acyclic graph according to constraints, scheduling problems|
-|Strong connectivity|||
-|Transitive closure|||
+|Algorithm|Running Time|Extra space|Use|
+|---------|------------|-----------|---|
+|Depth-first search|proportional to the sum of the degrees of the outgoing edges of each vertex reachable from the source vertex||recursive algorithm, same implementation as for the undirected graphs, direct cycles detection|
+|Breadth-first search|||same implementation as for the undirected graphs, shortest path between two vertices in a directed path|
+|Topological sort|E + V| | returns the vertices of a directed acyclic graph in topological order, used in scheduling problems|
+|Strong connectivity||||
+|Transitive closure|||computes all the directed edges between directed connected vertices |
 
-A direct acyclic graph (DAG) is a digraph with no directed cycles.
+A direct acyclic graph (DAG) is a digraph with no directed cycles. A DAG has a topological order.
 
 #### Edge-weighted Directed Graphs
 An edge-weighted directed graph can be represented as a vertex-indexed array of adjacency lists of directed edges where each directed edge object 
@@ -650,7 +650,7 @@ paths.
 
 |Algorithm|Running Time|Extra space|Use|
 |---------|------------|-----------|---|
-|Dijkstra's single-source shortest paths|E*log(V)||finds the shortest paths from a source vertex to any other vertex|
+|Dijkstra's single-source shortest paths|E*log(V)|V|finds the shortest directed paths (shortest paths tree) from a source vertex to any other vertex (nonnegative weights)|
 
 ### Strings
 
