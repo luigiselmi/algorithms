@@ -628,7 +628,7 @@ In directed graphs, two edges with the same vertices in different order are diff
 Directed graphs, or digraphs, are used to model systems such as social networks, the WWW, chemical reactions, road networks and many others. 
 The first vertex in the pair that represents and edge is called its head, the second vertex is called its tail. A directed graph can be built as 
 an array of adjacency lists like an undirected graph. Adding an edge to connect two vertices in a directed graph is easier than in an undirected 
-one. When an edge v->w is added to a directed graph, only the vertex w must be added to the adjacency list of v.
+one. When an edge v->w is added to a directed graph, only the tail vertex w must be added to the adjacency list of v.
 
 |Algorithm|Running Time|Extra space|Use|
 |---------|------------|-----------|---|
@@ -654,6 +654,7 @@ paths.
 |Dijkstra's single-source shortest paths|E*log(V)|V|finds the shortest directed paths (shortest paths tree) from a source vertex to any other vertex (nonnegative weights)|
 |Edge-weighted DAG single-source shortest paths| E + V||similar to Dijkstra's algorithm but based on the DAG's topological order, also with negative weights|
 |Bellman-Ford single-source shortest paths|EV|V|shortest paths for directed edge-weighted graphs with no negative cycles reachable from the source vertex, negative cycles detection|
+|Ford-Fulkerson (max-flow/min-cut)|||finds the maximum flow that can be established between a source vertex and a sink vertex, given the capacities (weights) of the edges|
 
 Many problems can be represented as edge-weighted DAG and addressed like a shortest-paths problem, one of the most relevant being parallel job 
 scheduling where each job has a completion time (its weight) and precedence constraints. The Bellman-Ford algorithm allows us to address the 
