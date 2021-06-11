@@ -9,30 +9,60 @@
  * are sorted by key.
  * Execution:
  * 
- * $ java -cp "lib/algs4.jar;target/classes" strings.KIC < resources/strings/students_by_section.txt
+ * $ java -cp "lib/algs4.jar;target/classes" strings.KIC resources/strings/students.txt
  *  
  */
 package strings;
 
+import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 
-class Record {
-  int key;
-  String name;
-}
 
 public class KIC {
+  
+  int N = 0; // number of students
+  int R = 0; // key space size (classes)
+  Student [] students;
+  
+  private class Student {
+    int key;
+    String name;
+  }
+  
+  public KIC(In is) {
+    students = new Student[10]; // default array capacity
+    while (is.hasNextLine()) {
+      int key = is.readInt();
+      String name = is.readString();
+      Student s = new Student();
+      s.key = key;
+      s.name = name;
+      students[N] = s;
+      N++;
+      if (students.length == N) resize(2 * N); // doubles the array's capacity
+    }
+    if (students.length > N) resize(N); // resize to correct number of items
+  }
+  
+  public int size() {
+    return N;
+  }
+  
+  public Student [] getStudents() {
+    return students;
+  }
+  
   //sort by key-indexed counting
-  public Record [] sort(Record [] records, int R) {
-    return distribute(records, index(count(records, R)));
+  public Student [] sort(Student [] s, int R) {
+    return distribute(s, index(count(s, R)));
   }
   
   // Compute frequency counts, i.e. number of occurrences of a key
-  private int [] count(Record [] records, int R) {
+  private int [] count(Student [] s, int R) {
     int [] counts = new int[R + 1];
-    for (int i = 0; i < records.length; i++)
-      counts[records[i].key + 1]++;
+    for (int i = 0; i < s.length; i++)
+      counts[s[i].key + 1]++;
     return counts;
   }
  
@@ -45,32 +75,31 @@ public class KIC {
   }
   
   // Distribute the records
-  private Record [] distribute(Record [] records, int [] counts) {
+  private Student [] distribute(Student [] records, int [] counts) {
     int N = records.length;
-    Record [] sorted = new Record[N]; 
+    Student [] sorted = new Student[N]; 
     for (int i = 0; i < N; i++)
       sorted[counts[records[i].key]++] = records[i];
     return sorted;
   }
   
+  //changes the size of the array
+  private void resize(int capacity) { 
+    Student[] temp = new Student[capacity];
+    for (int i = 0; i < N; i++)
+      temp[i] = students[i];
+    students = temp;
+  }
+  
   public static void main(String[] args) {
-    int N = StdIn.readInt(); // number of records 
-    int R = StdIn.readInt(); // key space size
-    Record [] a = new Record[N];
-    for (int i = 0; i < N; i++) {
-      String name = StdIn.readString();
-      int key = StdIn.readInt();
-      Record rec = new Record();
-      rec.key = key;
-      rec.name = name;
-      a[i] = rec;
-    }
+    In is = new In(args[0]);
+    KIC kic = new KIC(is);
     
-    KIC counter = new KIC();
-    Record [] sorted  = counter.sort(a, R);
-    for (int j = 0; j < N; j++)
-      StdOut.printf("%-10s %-4d   %-10s %d \n", a[j].name, a[j].key, sorted[j].name, sorted[j].key);
-    StdOut.println();
+    System.out.println(kic.size());
+    
+    for (int i = 0; i < kic.size(); i++)
+      System.out.println(kic.getStudents()[i].name);
+    
   }
  
 }
