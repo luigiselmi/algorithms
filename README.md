@@ -34,8 +34,8 @@ As an example the command
 $ java -cp "lib/algs4.jar;target/classes" searching.WordCounter < resources/searching/tinyTale.txt
 ```
 
-executes the *WordCounter* Java class, in the *searching* package, that takes in input a stream from a file (not the file name !) containing 
-text and writes, in the standard output, the number of distinct words and the complete words list. 
+executes the *WordCounter* Java class, in the *searching* package, that reads a file from standard input containing some text and writes, to 
+standard output, the number of distinct words and the complete words list. 
 
 It can be useful to execute some of the classes that are provided in the algs4.jar library. As an example
 
@@ -43,9 +43,9 @@ It can be useful to execute some of the classes that are provided in the algs4.j
 $ java -cp "lib/algs4.jar" edu.princeton.cs.algs4.FrequencyCounter 8 < resources/searching/tinyTale.txt
 ```
 
-executes the Java class FrequencyCounter, in the edu.princeton.cs.algs4 package in the algs4.jar library, that takes as an argument the minimum 
-length of a word to be counted, a list of words from the input stream fed by a text file, and prints the most frequent word with at least that 
-length.     
+executes the Java class FrequencyCounter, in the edu.princeton.cs.algs4 package of the algs4.jar library. The Java class reads from input 
+stream the minimum length of a word to be counted, then reads from standard input a file containing a list of words and writes to standard 
+output the most frequent word of at least that length.     
 
 ### Compile and execute using Maven
 You can compile all the Java classes using Maven
