@@ -654,7 +654,7 @@ paths.
 |Dijkstra's single-source shortest paths|E*log(V)|V|finds the shortest directed paths (shortest paths tree) from a source vertex to any other vertex (nonnegative weights)|
 |Edge-weighted DAG single-source shortest paths| E + V||similar to Dijkstra's algorithm but based on the DAG's topological order, also with negative weights|
 |Bellman-Ford single-source shortest paths|EV|V|shortest paths for directed edge-weighted graphs with no negative cycles reachable from the source vertex, negative cycles detection|
-|Ford-Fulkerson (max-flow/min-cut)|||finds the maximum flow that can be established between a source vertex and a sink vertex, given the capacities (weights) of the edges|
+|Ford-Fulkerson (max-flow/min-cut)|V*E^2||finds the maximum flow that can be established between a source vertex and a sink vertex, given the capacities (weights) of the edges|
 
 Many problems can be represented as edge-weighted DAG and addressed like a shortest-paths problem, one of the most relevant being parallel job 
 scheduling where each job has a completion time (its weight) and precedence constraints. The Bellman-Ford algorithm allows us to address the 
@@ -663,5 +663,6 @@ whose total weight is negative.
 
 ### Strings
 
-|Algorithm|Running Time|Space|
-|---------|------------|-----|
+|Algorithm|Running Time|Extra space|Use|
+|---------|------------|-----------|---|
+|Key-indexed counting|8*N + R + 1|N + R|sorts strings using integers from 0 to R - 1, stable|
