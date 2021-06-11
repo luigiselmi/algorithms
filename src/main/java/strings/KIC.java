@@ -9,7 +9,7 @@
  * are sorted by key.
  * Execution:
  * 
- * $ java -cp "lib/algs4.jar;target/classes" strings.KIC resources/strings/students.txt
+ * $ java -cp "lib/algs4.jar;target/classes" strings.KIC resources/strings/students_sections.txt
  *  
  */
 package strings;
@@ -33,16 +33,18 @@ public class KIC {
   public KIC(In is) {
     students = new Student[10]; // default array capacity
     while (is.hasNextLine()) {
-      int key = is.readInt();
       String name = is.readString();
+      int key = is.readInt();
       Student s = new Student();
       s.key = key;
+      if (key > R) R = key;
       s.name = name;
       students[N] = s;
       N++;
       if (students.length == N) resize(2 * N); // doubles the array's capacity
     }
     if (students.length > N) resize(N); // resize to correct number of items
+    R++;
   }
   
   public int size() {
@@ -54,8 +56,8 @@ public class KIC {
   }
   
   //sort by key-indexed counting
-  public Student [] sort(Student [] s, int R) {
-    return distribute(s, index(count(s, R)));
+  public Student [] sort() {
+    return distribute(students, index(count(students, R)));
   }
   
   // Compute frequency counts, i.e. number of occurrences of a key
@@ -95,10 +97,10 @@ public class KIC {
     In is = new In(args[0]);
     KIC kic = new KIC(is);
     
-    System.out.println(kic.size());
+    Student [] s = kic.sort();
     
     for (int i = 0; i < kic.size(); i++)
-      System.out.println(kic.getStudents()[i].name);
+      System.out.println(s[i].name + ", " + s[i].key);
     
   }
  
