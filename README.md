@@ -509,7 +509,7 @@ look up or remove items. The APIs can be implemented with algorithms that may ha
 A stack is a data type that implements a Last-In-First-Out data access policy. It can be based on a linked list and must 
 implement two APIs: push() to insert a new element on the top of the stack, and pop() to remove one element from the top.
 
-|API|Running Time|
+|API|Running time|
 |---|------------|
 |push()|constant|
 |pop()|constant|
@@ -518,7 +518,7 @@ implement two APIs: push() to insert a new element on the top of the stack, and 
 A queue is a data type that implements a First-In-First-Out data access policy. It can be based on a linked list and must 
 implement two APIs: enqueue() to add an element to the tail of the queue and dequeue() to remove the first element from the head of the queue.
 
-|API|Running Time|
+|API|Running time|
 |---|------------|
 |enqueue()|constant|
 |dequeue()|constant|
@@ -529,7 +529,7 @@ method to remove the oldest element like in a queue, or the newest one like in a
 element with the maximum value. The priority queue is based on a heap-ordered complete binary tree that can be implemented on top of an array. 
 A binary tree is heap-ordered when the key in each node is equal or larger than its children’s keys.
 
-|API|Running Time|
+|API|Running time|
 |---|------------|
 |insert()|log(N)|
 |delMax()|log(N)|
@@ -545,7 +545,7 @@ and an associated value. The key in a node is smaller than any key in its right 
 A Red-Black binary search tree is a nearly perfectly balanced symbol table with guaranteed log(N) time for insertion and search. 
 Guaranteed means the cost will not exceed the logarithmic time even in the worst case (e.g. when the input keys are ordered).  
 
-|API|Running Time|
+|API|Running time|
 |---|------------|
 |put()|log(N)|
 |get()|log(N)|
@@ -557,7 +557,7 @@ the hash values is finite there might be collisions. One collision resolution st
 the keys that have the same hash value into a list. This way, if N is the number of keys and M is the size of the array, the number of 
 compares for insert and search is N/M.
 
-|API|Running Time|
+|API|Running time|
 |---|------------|
 |put()|constant|
 |get()|constant|
@@ -566,7 +566,7 @@ compares for insert and search is N/M.
 The table presents the running time of the main sorting algorithms in the worst, average and best case. An algorithm that does not need any 
 additional space is said to be in-place. A sorting algorithm is said stable if it preserves the relative order of equal keys.  
 
-|Algorithm|in-place|stable| worst case|average case|best case|Notes|
+|Algorithm|In-place|Stable| Worst case|Average case|Best case|Notes|
 |---------|--------|------|-----------|------------|---------|-----|
 |Selection sort|Yes|No|N^2 / 2|N^2 / 2|N^2 / 2|N exchanges|
 |Insertion sort|Yes|Yes|N^2 / 2|N^2 / 4|N|Use for small N or partially ordered|
@@ -581,13 +581,13 @@ searched by its key. A symbol table with keys that have a natural order is calle
 as min(), max() and rank(). Symbol tables are used to build dictionaries, associative arrays, indeces, inverted indices, sparse vectors and 
 matrices.
 
-|Algorithm|search (worst case)|insert (worst case) |search (average case)|insert (average case)|Notes|
+|Algorithm|Search (worst case)|Insert (worst case) |Search (average case)|Insert (average case)|Notes|
 |---------|-------------------|--------------------|---------------------|---------------------|-----|
-|Sequential search|N|N|N / 2|N|unordered list|
-|Binary search|log(N)|N|log(N)|N / 2|supports ordered operations|
-|Binary search tree|N|N|log(N)|log(N)|supports ordered operations|
+|Sequential search|N|N|N / 2|N|Unordered list|
+|Binary search|log(N)|N|log(N)|N / 2|Supports ordered operations|
+|Binary search tree|N|N|log(N)|log(N)|Supports ordered operations|
 |Red-Black BST|2*log(N)|2*log(N)|log(N)|log(N)|logN performance guaranteed for search insert and ordered operations|
-|Hash table|< log(N)|< log(N)|N / (2M)|N / M|separate chaining, N keys, M index size, no ordered operations|
+|Hash table|< log(N)|< log(N)|N / (2M)|N / M|Separate chaining, N keys, M index size, no ordered operations|
 
 ### Graphs
 A graph is an abstract data type consisting of a set of vertices and a collection of edges that are sets of pairs of vertices. This definition 
@@ -603,22 +603,22 @@ of adjacent vertices of v and the vertex v must be added to the list of adjacent
 represents the number of edges incident to it. Two main algorithms are used to process undirected graphs, depth-first search and breadth-first 
 search. These algorithms provide a base to easily implement higher level graph processing algorithms. 
  
-|Algorithm|Running Time|Use|
+|Algorithm|Running time|Use|
 |---------|------------|---|
-|Depth-first search (DFS)|proportional to the sum of the degrees of each vertex connected to the source vertex|recursive algorithm, cycle detection, determines if graph is bipartite|
-|Breadth-first search (BFS)||shortest path between two vertices|
-|Single-source paths||based on DFS, finds paths to all vertices connected to a source vertex|
-|Connected components||based on DFS|
-|Degrees of separation||based on BFS|
+|Depth-first search (DFS)|Proportional to the sum of the degrees of each vertex connected to the source vertex|recursive algorithm, cycle detection, determines if graph is bipartite|
+|Breadth-first search (BFS)||Shortest path between two vertices|
+|Single-source paths||Based on DFS, finds paths to all vertices connected to a source vertex|
+|Connected components||Based on DFS|
+|Degrees of separation||Based on BFS|
 
 #### Edge-weighted Graphs
 An edge-weighted graph can be represented as an array of adjacency lists of edges where each edge object contains two vertices and a weight.
 Many important applications are based on finding the minimum spanning tree (MST) of an edge-weighted graph. A spanning tree is any subgraph 
 of a graph that is connected and has no cycles (i.e. it's a tree). A MST is a spanning tree that has minimum weight.  
  
-|Algorithm|Running Time|Extra space|Use|
+|Algorithm|Running time|Extra space|Use|
 |---------|------------|-----------|---|
-|Prim|E*log(E) lazy implementation, E*log(V) eager implementation|E (lazy implementation), V (eager implementation)|greedy algorithm, computes the minimum spanning tree (MST) of an edge-weighted graph|
+|Prim|E*log(E) lazy implementation, E*log(V) eager implementation|E (lazy implementation), V (eager implementation)|Greedy algorithm, computes the minimum spanning tree (MST) of an edge-weighted graph|
 |Kruskal|E*log(E)|E|greedy algorithm, computes the minimum spanning tree (MST) of an edge-weighted graph|
 
 E represents the number of edges and V represents the number of vertices in a graph.
@@ -630,13 +630,13 @@ The first vertex in the pair that represents and edge is called its head, the se
 an array of adjacency lists like an undirected graph. Adding an edge to connect two vertices in a directed graph is easier than in an undirected 
 one. When an edge v->w is added to a directed graph, only the tail vertex w must be added to the adjacency list of v.
 
-|Algorithm|Running Time|Extra space|Use|
+|Algorithm|Running time|Extra space|Use|
 |---------|------------|-----------|---|
-|Depth-first search|proportional to the sum of the degrees of the outgoing edges of each vertex reachable from the source vertex||recursive algorithm, same implementation as for the undirected graphs, direct cycles detection|
-|Breadth-first search|||same implementation as for the undirected graphs, shortest path between two vertices in a directed path|
-|Topological sort|E + V| | returns the vertices of a directed acyclic graph in topological order, used in scheduling problems|
+|Depth-first search|Proportional to the sum of the degrees of the outgoing edges of each vertex reachable from the source vertex||Recursive algorithm, same implementation as for the undirected graphs, direct cycles detection|
+|Breadth-first search|||Same implementation as for the undirected graphs, shortest path between two vertices in a directed path|
+|Topological sort|E + V| |Returns the vertices of a directed acyclic graph in topological order, used in scheduling problems|
 |Strong connectivity||||
-|Transitive closure|||computes all the directed edges between directed connected vertices |
+|Transitive closure|||Computes all the directed edges between directed connected vertices |
 
 A direct acyclic graph (DAG) is a digraph with no directed cycles. A DAG has a topological order.
 
@@ -649,12 +649,12 @@ contains the vertex itself and the edge's source vertex so that we can go back f
 array contains the distance from a vertex in tree to the source. Different algorithms use these data structures to compute the single-source shortest 
 paths.   
 
-|Algorithm|Running Time|Extra space|Use|
+|Algorithm|Running time|Extra space|Use|
 |---------|------------|-----------|---|
-|Dijkstra's single-source shortest paths|E*log(V)|V|finds the shortest directed paths (shortest paths tree) from a source vertex to any other vertex (nonnegative weights)|
-|Edge-weighted DAG single-source shortest paths| E + V||similar to Dijkstra's algorithm but based on the DAG's topological order, also with negative weights|
-|Bellman-Ford single-source shortest paths|EV|V|shortest paths for directed edge-weighted graphs with no negative cycles reachable from the source vertex, negative cycles detection|
-|Ford-Fulkerson (max-flow/min-cut)|V*E^2||finds the maximum flow that can be established between a source vertex and a sink vertex, given the capacities (weights) of the edges|
+|Dijkstra's single-source shortest paths|E*log(V)|V|Finds the shortest directed paths (shortest paths tree) from a source vertex to any other vertex (nonnegative weights)|
+|Edge-weighted DAG single-source shortest paths| E + V||Similar to Dijkstra's algorithm but based on the DAG's topological order, also with negative weights|
+|Bellman-Ford single-source shortest paths|EV|V|Shortest paths for directed edge-weighted graphs with no negative cycles reachable from the source vertex, negative cycles detection|
+|Ford-Fulkerson (max-flow/min-cut)|V*E^2||Finds the maximum flow that can be established between a source vertex and a sink vertex, given the capacities (weights) of the edges|
 
 Many problems can be represented as edge-weighted DAG and addressed like a shortest-paths problem, one of the most relevant being parallel job 
 scheduling where each job has a completion time (its weight) and precedence constraints. The Bellman-Ford algorithm allows us to address the 
@@ -663,6 +663,7 @@ whose total weight is negative.
 
 ### Strings
 
-|Algorithm|Running Time|Extra space|Use|
+|Algorithm|Running time|Extra space|Use|
 |---------|------------|-----------|---|
-|Key-indexed counting|8*N + R + 1|N + R|sorts strings using integers from 0 to R - 1, stable|
+|Key-indexed counting|8*N + R + 1|N + R|Sorts stably records using small integers as keys. If the records are sorted, e.g. by name, the sort by key-indexed counting keeps the names relativ order|
+|Least-significant-digit-first (LSD)|2*W*N (W string length)||Sorts stably fixed-length strings. Based on key-indexed counting|
