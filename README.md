@@ -665,7 +665,7 @@ whose total weight is negative.
 Sequences of characters from an alphabet are used not only in all types of communications but also in scientific fields such as Genomics where the 
 structure of the genes and proteins can be represented by sequences of characters from an alphabet of 4 or 20 characters respectively. When dealing 
 with strings we are interested in algorithms to sort collections of strings, or to search a particular sequence in a given string, filter strings
-using a pattern, or reduce the size of a text to a smaller size for storage or before sending it through a network.    
+using a pattern, or reduce the size of a text for storage or before sending it through a network.    
 
 |Algorithm|Running time|Extra space|Use|
 |---------|------------|-----------|---|
