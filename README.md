@@ -662,8 +662,12 @@ shortest-paths problem even on egdge-weighted directed graphs that have negative
 whose total weight is negative. 
 
 ### Strings
+Sequences of characters from an alphabet are used not only in all types of communications but also in scientific fields such as Genomics where the 
+structure of the genes and proteins can be represented by sequences of characters from an alphabet of 4 or 20 characters respectively. When dealing 
+with strings we are interested in algorithms to sort collections of strings, or to search a particular sequence in a given string, filter strings
+using a pattern, or reduce the size of a text to a smaller size for storage or before sending it through a network.    
 
 |Algorithm|Running time|Extra space|Use|
 |---------|------------|-----------|---|
-|Key-indexed counting|8*N + R + 1|N + R|Sorts stably records using small integers as keys. If the records are sorted, e.g. by name, the sort by key-indexed counting keeps the names relativ order|
-|Least-significant-digit-first (LSD)|2*W*N (W string length)||Sorts stably fixed-length strings. Based on key-indexed counting|
+|Key-indexed counting|8*N + R + 1|N + R|Sorts stably records using small integers as keys. If the records are sorted, e.g. by name, the sort by key-indexed counting keeps the names in relative order|
+|Least-significant-digit-first (LSD)|WN (W string length)|N + R (R size of the characters set)|Sorts stably fixed-length strings. Based on key-indexed counting|
