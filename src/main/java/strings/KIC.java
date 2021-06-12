@@ -15,8 +15,6 @@
 package strings;
 
 import edu.princeton.cs.algs4.In;
-import edu.princeton.cs.algs4.StdIn;
-import edu.princeton.cs.algs4.StdOut;
 
 
 public class KIC {
@@ -60,7 +58,7 @@ public class KIC {
     return distribute(students, index(count(students, R)));
   }
   
-  // Compute frequency counts, i.e. number of occurrences of a key
+  // 1) computes frequency counts, i.e. number of occurrences of a key
   private int [] count(Student [] s, int R) {
     int [] counts = new int[R + 1];
     for (int i = 0; i < s.length; i++)
@@ -68,7 +66,7 @@ public class KIC {
     return counts;
   }
  
-  // Transform counts to indices, i.e. computes the starting value of the 
+  // 2) transforms counts to indices, i.e. computes the starting value of the 
   // index for each key.
   private int [] index(int [] counts) {
     for (int r = 0; r < counts.length - 1; r++)
@@ -76,7 +74,7 @@ public class KIC {
     return counts;
   }
   
-  // Distribute the records
+  // 3) distributes the records
   private Student [] distribute(Student [] records, int [] counts) {
     int N = records.length;
     Student [] sorted = new Student[N]; 
