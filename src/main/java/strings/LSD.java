@@ -1,6 +1,7 @@
 /**
- * Sorts stably fixed-length strings. The algorithm is 
- * based on key-indexed counting.
+ * Least-significant-digit-first algorithm. It sorts stably 
+ * fixed-length strings. The algorithm is based on key-indexed 
+ * counting.
  * 
  * $ java -cp "lib/algs4.jar;target/classes" strings.LSD resources/strings/lsd_example.txt
  */
