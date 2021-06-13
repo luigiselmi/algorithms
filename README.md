@@ -670,4 +670,6 @@ using a pattern, or reduce the size of a text for storage or before sending it t
 |Algorithm|Running time|Extra space|Use|
 |---------|------------|-----------|---|
 |Key-indexed counting|8*N + R + 1|N + R|Sorts stably records using small integers as keys. If the records are sorted, e.g. by name, the sort by key-indexed counting keeps the names in relative order|
-|Least-significant-digit-first (LSD)|WN (W string length)|N + R (R size of the characters set)|Sorts stably fixed-length strings. Based on key-indexed counting|
+|Least-significant-digit-first (LSD string sort)|WN (W string length)|N + R (R, or radix, is the size of the characters set)|Sorts stably fixed-length strings. Based on key-indexed counting to sort the strings by character from right to left|
+|Most-significant-digit-first (MSD string sort)|8N + 3R (R radix, size of ther characters set)|N + DR (radix R, size of the characters set, D length of the longest string)|Sorts strings of different length. It is a recursive algorithm based on key-indexed counting to sort the strings by character from left to right |
+|3-way string quicksort|WNlog(N) (W string length |log(N) + W|It is a recursive, not stable, string sort algorithm. It can be used to sort strings of different length|
