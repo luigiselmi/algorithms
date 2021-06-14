@@ -2,7 +2,7 @@
  * This class provides two methods to find the
  * longest repeated substring. One method uses
  * the brute force approach that has a complexity
- * of (N^2)/2 where N is the lenght of the input 
+ * of (N^2)/2 where N is the length of the input 
  * string. The 2nd method uses the sorted array 
  * of the input string suffixes. The longest
  * repeated substring can be found by comparing 
@@ -33,6 +33,8 @@ public class SuffixArray {
     return suffixes[i];
   }
   
+  // finds the longest repeated substring in
+  // the sorted suffixes array of the input string
   public String lrs() {
     String longest = "";
     for (int i = 0; i < N - 1; i++) {
