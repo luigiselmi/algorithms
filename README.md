@@ -1,9 +1,9 @@
 Algorithms
 ==========
 
-This repository contains Java code examples based on the online course Algorithms, [Part 1](https://www.coursera.org/learn/algorithms-part1) 
+This repository contains Java code examples based on the online courses Algorithms, [Part 1](https://www.coursera.org/learn/algorithms-part1) 
 and [Part 2](https://www.coursera.org/learn/algorithms-part2), taught by Kevin Wayne and Robert Sedgewick and offered by Princeton University 
-on Coursera. The online lessons are based on the book Algorithms, 4th Edition, by the same authors. Additional material is also available from 
+on Coursera. The online lessons are based on the book Algorithms, 4th Edition, by the same authors. Additional material is also available on 
 the [book's website](https://algs4.cs.princeton.edu/home/). This repository contains also my submissions to the programming assignments. This 
 is a work in progress, see the assessments to know whether the code passes all the tests for correctness, memory, timing and other metrics. 
 Maven is used to compile and execute the code. **The Java files that have been developed as solutions to the assignments are encrypted in order 
