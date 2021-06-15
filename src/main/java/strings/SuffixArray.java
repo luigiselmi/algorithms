@@ -26,11 +26,36 @@ public class SuffixArray {
     suffixes = new String[N];
     for (int i = 0; i < N; i++)
       suffixes[i] = txt.substring(i);
-    Arrays.sort(suffixes);
+    Arrays.sort(suffixes); // we can use other sorting algorithms
   }
-  
+
+  // returns the suffix in the sorted array 
+  // at the specified position
   public String select(int i) {
     return suffixes[i];
+  }
+  
+  // returns the index in the original text 
+  // where the suffix at the given position 
+  // (rank) i begins 
+  public int index(int i) { 
+    return N - suffixes[i].length(); 
+  }
+  
+  // Returns the rank (position) of the key
+  // in the sorted suffix array (binary search).
+  // Any search for suffixes that begin with 
+  // the key are found from here. 
+  public int rank(String key) { 
+    int lo = 0, hi = N - 1;
+    while (lo <= hi) {
+      int mid = lo + (hi - lo) / 2;
+      int cmp = key.compareTo(suffixes[mid]);
+      if (cmp < 0) hi = mid - 1;
+      else if (cmp > 0) lo = mid + 1;
+      else return mid;
+    }
+    return lo;
   }
   
   // finds the longest repeated substring in
@@ -46,7 +71,7 @@ public class SuffixArray {
   }
   
   // finds the longest repeated substring using 
-  // the brute force approach
+  // a brute force approach
   public String bruteForceLRS(String txt) {
     int N = txt.length();
     String longest = "";
@@ -61,6 +86,7 @@ public class SuffixArray {
     }
     return longest;    
   }
+  
   // finds the longest common prefix of two strings
   private static int lcp(String s, String t) {
     int N = Math.min(s.length(), t.length());
@@ -74,9 +100,9 @@ public class SuffixArray {
     String txt = is.readAll().replaceAll("\\s+", " ");
     SuffixArray sa = new SuffixArray(txt);
     String bflrs = sa.bruteForceLRS(txt); // try the brute force approach for comparison
-    System.out.println(bflrs);
+    System.out.println("Longest repeated string (brute force): " + bflrs);
     String lrs = sa.lrs();
-    System.out.println(lrs);
+    System.out.println("Longest repeated string (suffix array): " + lrs);
   }
 
 }
