@@ -3,7 +3,7 @@ package strings;
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 
-public class BruteForce {
+public class SubstringSearch {
 
   /*
    * Brute-force algorithm for substring search. Given
@@ -74,11 +74,11 @@ public class BruteForce {
       StringBuffer sb = new StringBuffer(); // replacement for the pattern
       for (int k = 0; k < pat.length(); k++)
         sb.append("-");
-      int index = BruteForce.search2(pat, txt);
+      int index = SubstringSearch.search2(pat, txt);
       boolean patternFound = index < txt.length(); // pattern found in text at least once
       if (patternFound) {
         StdOut.printf("Pattern \"%s\" found in \"%s\" at %d \n", pat, txt, index);
-        String modifiedStr = BruteForce.replace(txt, pat, sb.toString(), 0);
+        String modifiedStr = SubstringSearch.replace(txt, pat, sb.toString(), 0);
         StdOut.printf("Removed pattern \"%s\" from text \"%s\": \"%s\" \n", pat, txt, modifiedStr);
       }
       else
