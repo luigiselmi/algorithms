@@ -1,28 +1,37 @@
+/**
+ * This class provides two implementation of a substring
+ * search using a brute-force approach.
+ * 
+ * $ java -cp "lib/algs4.jar;target/classes" strings.SubstringSearch ABR resources/strings/substring_search.txt
+ */
 package strings;
 
-import edu.princeton.cs.algs4.StdIn;
+import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdOut;
+import fundamentals.Queue;
 
 public class SubstringSearch {
 
   /*
    * Brute-force algorithm for substring search. Given
    * a text string of length N and a pattern string of length M
-   * the algorithm looks for an occurrence of the pattern in the 
-   * text. The cost is proportional to NM.
-   * From Sedgewick's Book p.760
+   * the algorithm looks for occurrences of the pattern in the 
+   * text. It returns the position of all occurrences in the text.
+   * The cost is proportional to NM.
    */
-  public static int search(String pat, String txt) {
+  public static Queue<Integer> search(String pat, String txt) {
     int M = pat.length();
     int N = txt.length();
+    Queue<Integer> index = new Queue<Integer>();
     for (int i = 0; i <= N - M; i++) {
-      int j;
-      for (j = 0; j < M; j++)
+      for (int j = 0; j < M; j++) {
         if (txt.charAt(i+j) != pat.charAt(j))
           break;
-      if (j == M) return i; // found
+        if (j == M - 1)  // pattern found
+          index.enqueue(i);
+      }
     }
-    return N; // not found
+    return index; // pattern not found
   }
   
   /*
@@ -30,60 +39,35 @@ public class SubstringSearch {
    * The cost is the same as the other algorithm: NM.
    * From Sedgewick's Book p.761
    */
-  public static int search2(String pat, String txt) {
+  public static Queue<Integer> altsearch(String pat, String txt) {
     int j, M = pat.length();
     int i, N = txt.length();
-    for (i = 0, j = 0; i < N && j < M; i++) {
-      if (txt.charAt(i) == pat.charAt(j)) j++;
+    Queue<Integer> index = new Queue<Integer>();
+    for (i = 0, j = 0; i < N; i++) {
+      if (txt.charAt(i) == pat.charAt(j)) {
+        j++;
+        if (j == M) { // found
+          index.enqueue(i - M + 1); 
+          j = 0;
+        }
+      }
       else { i -= j; j = 0; }
     }
-    if (j == M) return i - M; // found
-    else return N; // not found
-  }
-  
-  /* Replaces string subout with string subin in txt.
-   * One issue of this function is that it cannot find the 
-   * pattern when it is repeated without any letter in the 
-   * middle, for example in the string "toratoratora" it cannot find 
-   * and replace the last occurrence of the pattern "tora". (to be fixed)
-   */
-  public static String replace(String txt, 
-                                 String subout,
-                                 String subin,
-                                 int start) {
-    String rightstring = txt;
-    int indexofapice = start;
-    int lastindexapice = rightstring.lastIndexOf(subout);
-    String strLeft;
-    String strRight;
-    indexofapice = rightstring.indexOf(subout,start);
-    if(indexofapice != -1) {
-      strLeft = rightstring.substring(0,indexofapice);
-      strRight = rightstring.substring(indexofapice + subout.length(),rightstring.length());
-      rightstring = strLeft + subin + strRight;
-      if(indexofapice + subin.length() < lastindexapice) 
-        rightstring = replace(rightstring,subout,subin,indexofapice + subin.length());
-    }
-    return rightstring;
+    return index;
   }
   
   public static void main(String[] args) {
-    for (int i = 0; !StdIn.isEmpty(); i++) {
-      String pat = StdIn.readString();
-      String txt = StdIn.readString();
-      StringBuffer sb = new StringBuffer(); // replacement for the pattern
-      for (int k = 0; k < pat.length(); k++)
-        sb.append("-");
-      int index = SubstringSearch.search2(pat, txt);
-      boolean patternFound = index < txt.length(); // pattern found in text at least once
-      if (patternFound) {
-        StdOut.printf("Pattern \"%s\" found in \"%s\" at %d \n", pat, txt, index);
-        String modifiedStr = SubstringSearch.replace(txt, pat, sb.toString(), 0);
-        StdOut.printf("Removed pattern \"%s\" from text \"%s\": \"%s\" \n", pat, txt, modifiedStr);
+      String pat = args[0];
+      In is = new In(args[1]);
+      String txt = is.readAll().replaceAll("\\s+", " ");
+      Queue<Integer> index = SubstringSearch.search(pat, txt);
+      if (! index.isEmpty()) {
+        StdOut.printf("Pattern \"%s\" found %d times in \"%s\" by brute-force search.\n", pat, index.size(), args[1]);
+        for (int i: index)
+          StdOut.printf("Pattern \"%s\" found at position %d\n", pat, i);
       }
       else
-        StdOut.printf("Pattern \"%s\" not found in \"%s\"", pat, txt);
+        StdOut.printf("Pattern \"%s\" not found in \"%s\"", pat, args[1]);
     }
-  }
 
 }
