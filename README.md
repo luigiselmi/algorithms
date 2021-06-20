@@ -451,6 +451,17 @@ YET, score = 1
 YOU, score = 1
 Number of words found = 29, Score = 33, Timing = 0.039000 (seconds)
 ```
+The Boggle solver is used by the Boggle game to play against the computer. You can start the Boggle game by executing the command
+
+```
+$ java -cp "lib/algs4.jar;target/classes" assignments.boggle.BoggleGame 4 4
+```
+The player can compare the number of valid words found with those found by the solver (opponent). Only the words that can be found
+in the selected dictionary are valid. At the end of a game the interface shows the valid words found by the user. It's not that easy 
+to beat the solver !
+
+![Boggle game](resources/assignments/boggle/boggle_game.png)  
+
 ### Week 5
 The topics of the 5th week are **regular expressions** and **data compression**. A regular expressions, by definition, is a pattern that describes a set of strings. They are used in substring search when the pattern to be found is not completely specified. For example 
 we might want to search for a substring in a genomic sequence that stretches 5 bases, starting with adenine A and cytosine C and ending with thymine T, without specifying exactly which bases are in between. Regular expressions allows the use of operators to define the set of strings
