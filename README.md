@@ -417,7 +417,7 @@ on the graph of cubes with their adjacent neighbors. The Boggle solver can be te
 $ mvn exec:java -Dexec.mainClass="assignments.boggle.BoggleSolver" -Dexec.args="resources/assignments/boggle/dictionary-algs4.txt resources/assignments/boggle/board4x4.txt"
 ```
 
-that outputs the valid words that have been found using the letters in the given board with their score
+that outputs the valid words that have been found in the dictionary using the letters in the given board with their score
 
 ```
 AID, score = 1
@@ -677,3 +677,5 @@ using a pattern, or reduce the size of a text for storage or before sending it t
 |R-way Tries|search hit: W (key length), search miss: sublinear (less than the length of the key)|RNw (R size of the characters set, W average key length)|It is a symbol table with a tree data structure built from the characters of the string keys. Each node may have as many children as the size R of the characters set used. It supports ordered symbol table operations and character-based operations such as prefix and wildcard match.|
 |Ternary search tries (TST)|log(N)|log(N)|It is a symbol table with a binary tree data structure built from the characters in the string keys. Each node has a character, a value and links to three children: left for character's key less than the parent's, right for character's key greater than the parent's and center for a match. It supports ordered symbol table operations and character-based operations such as prefix and wildcard match.|
 |Knuth-Morris-Pratt (KMP) substring search|N + M (N length of text, M length of pattern)||It is used to search for a pattern string in a text. The core of the algorithm is a state machine that is built from the pattern string and prescribes the transition from one state to another for any character that is read from the text. The KMP algorithm does not need to back up, that is to go back in the text after a mismatch, for this reason it is mostly used to search for a pattern in a stream.|
+|Boyer-Moore substring substring search|N / M (sublinear, M is the length of the pattern)||This algorithm compares the pattern with the text from right to left. The algorithm builds an array of the rightmost occurence of each character in the pattern to drive the search in the text. Contrary to the KMP algorithm, the full must be available at once for the search.|
+|Rabin-Karp (fingerprint) substring search|7N||The algorithm compares the hash value of a pattern of length M with the hash values of all the substrings of the same length in the text. The hash function is built using the Horner's method. Being based on a hash function the algorithm belongs to the randomized, Monte Carlo algorithms class. |
