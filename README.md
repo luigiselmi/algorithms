@@ -521,7 +521,15 @@ To expand the compressed file and get the same input file, execute the command:
 $ java -cp "lib/algs4.jar" edu.princeton.cs.algs4.Huffman + < resources/assignments/burrows/aesop.bw | java -cp "lib/algs4.jar;target/classes" assignments.burrows.MoveToFront + | java -cp "lib/algs4.jar;target/classes" assignments.burrows.BurrowsWheeler + 
 ```
 
-The size of the expanded file is exactly the same of the input file. The expansion is much faster than the compression.
+The size of the expanded file is exactly the same of the input file. The expansion is much faster than the compression. Finally we compute the compression 
+ratio of the Huffman coding for the same input file, aesop.txt
+
+```
+java -cp "lib/algs4.jar" edu.princeton.cs.algs4.Huffman - < resources/assignments/burrows/aesop.txt > aesop.huf
+```
+
+The size of the compressed file, aesop.huf, is 106k and the compression ratio is 0.563. We can say that the Burrows-Wheeler algorithm achieves a significantly
+better result, more than 1.5 times better for that specific file.
 
 ## Source Code Encryption
 The Java source code of the solution of the assignments has been encrypted to comply with the [Coursera Honor's Code](https://learner.coursera.help/hc/en-us/articles/209818863-Coursera-Honor-Code) 
