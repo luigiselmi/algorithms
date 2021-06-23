@@ -522,7 +522,7 @@ $ java -cp "lib/algs4.jar" edu.princeton.cs.algs4.Huffman + < resources/assignme
 ```
 
 The size of the expanded file is exactly the same of the input file. The expansion is much faster than the compression. Finally we compute the compression 
-ratio of the Huffman coding for the same input file, aesop.txt
+ratio of the Huffman coding alone for the same input file, aesop.txt
 
 ```
 java -cp "lib/algs4.jar" edu.princeton.cs.algs4.Huffman - < resources/assignments/burrows/aesop.txt > aesop.huf
