@@ -507,15 +507,15 @@ The Move-to-Front encoding changes the order of the characters in the alphabet d
 set so that the output will contain many equal integers. Finally the Huffman compression will be able to achieve a better compression ratio using the data 
 from the two previous steps.
  
-For compression use the Java classes as in the following command:
+For compression use the Java classes as in the following example:
 
 ```
 $ java -cp "lib/algs4.jar;target/classes" assignments.burrows.BurrowsWheeler - < resources/assignments/burrows/aesop.txt | java -cp "lib/algs4.jar;target/classes" assignments.burrows.MoveToFront - | java -cp "lib/algs4.jar" edu.princeton.cs.algs4.Huffman - > aesop.bw
 ```
 
-The size of the input data used in the example, aesop.txt is 188k, the size if the compressed file, aesop.bw is 65k and the compression ratio is 0.345.
+The size of the input data used in the example, aesop.txt is 188k, the size of the compressed file, aesop.bw is 65k and the compression ratio is 0.345.
 
-To exand the compressed file and get the same input file execute the command:
+To expand the compressed file and get the same input file, execute the command:
 
 ```
 $ java -cp "lib/algs4.jar" edu.princeton.cs.algs4.Huffman + < resources/assignments/burrows/aesop.bw | java -cp "lib/algs4.jar;target/classes" assignments.burrows.MoveToFront + | java -cp "lib/algs4.jar;target/classes" assignments.burrows.BurrowsWheeler + 
