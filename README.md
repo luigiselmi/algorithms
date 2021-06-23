@@ -405,13 +405,14 @@ Toronto is not eliminated
 ```
 
 ### Week 4
-The first topic of the 4th week is about specialized algorithms for searching in symbol tables with string keys. The difference with symbol tables discussed
-in the first part of the course is that the algorithms don't use comparisons for searching and so they can be faster. The 2nd topic is substring search that has 
-application in many fields, from search engines to genetics. The [programming assignment](https://coursera.cs.princeton.edu/algs4/assignments/boggle/specification.php) is about
-developing an application to find all the valid words composed of random letters displayed on cubes' faces and kept on a board, as in the word game Boggle. The longer the word found
-the higher is the score. The main steps are first building the adjacency list of each cube and then searching for words, using letters on adjacent cubes, that are contained in a 
-dictionary. The dictionary of valid words can be conveniently stored in a Trie, a symbol table with string keys, while the search can be performed recursively using depth-first search 
-on the graph of cubes with their adjacent neighbors. The Boggle solver can be tested using static board and dictionary files as in the example  
+The first topic of the 4th week is about specialized algorithms for searching in symbol tables with string keys. The difference with symbol tables 
+discussed in the first part of the course is that the algorithms don't use comparisons for searching and so they can be faster. The 2nd topic is 
+substring search that has application in many fields, from search engines to genetics. The [programming assignment](https://coursera.cs.princeton.edu/algs4/assignments/boggle/specification.php) 
+is about developing an application to find all the valid words composed of random letters displayed on cubes' faces and kept on a board, as in the 
+word game Boggle. The longer the word found the higher is the score. The main steps are first building the adjacency list of each cube and then 
+searching for words, using letters on adjacent cubes, that are contained in a dictionary. The dictionary of valid words can be conveniently stored 
+in a Trie, a symbol table with string keys, while the search can be performed recursively using depth-first search on the graph of cubes with their 
+adjacent neighbors. The Boggle solver can be tested using static board and dictionary files as in the example  
 
 ```
 $ mvn exec:java -Dexec.mainClass="assignments.boggle.BoggleSolver" -Dexec.args="resources/assignments/boggle/dictionary-algs4.txt resources/assignments/boggle/board4x4.txt"
@@ -463,10 +464,13 @@ to beat the solver !
 ![Boggle game](resources/assignments/boggle/boggle_game.png)  
 
 ### Week 5
-The topics of the 5th week are **regular expressions** and **data compression**. A regular expressions, by definition, is a pattern that describes a set of strings. They are used in substring search when the pattern to be found is not completely specified. For example 
-we might want to search for a substring in a genomic sequence that stretches 5 bases, starting with adenine A and cytosine C and ending with thymine T, without specifying exactly which bases are in between. Regular expressions allows the use of operators to define the set of strings
-to be searched, the fundamental ones being concatenation, closure, and the logic or operator. An application that can interpret regular expressions, parses the expression and builds a nondeterministic finite-state automaton that will be able to find the pattern in the text. The
-most famous such application is **grep** that is available in any unix-like operating system and can be used, as in our simple use case in which only the concatenation operator is used  
+The topics of the 5th week are **regular expressions** and **data compression**. A regular expressions, by definition, is a pattern that describes a 
+set of strings. They are used in substring search when the pattern to be found is not completely specified. For example we might want to search for 
+a substring in a genomic sequence that stretches 5 bases, starting with adenine A and cytosine C and ending with thymine T, without specifying exactly 
+which bases are in between. Regular expressions allows the use of operators to define the set of strings to be searched, the fundamental ones being 
+concatenation, closure, and the logic or operator. An application that can interpret regular expressions, parses the expression and builds a 
+nondeterministic finite-state automaton that will be able to find the pattern in the text. The most famous such application is **grep** that is available 
+in any unix-like operating system and can be used, as in our simple use case in which only the concatenation operator is used  
 
 ```
 $ echo "ACAGCATACTATCGGGAACTATCCTACGAT" | grep -o -e "AC..T"
@@ -480,26 +484,49 @@ ACTAT
 ACGAT
 ```
 
-Data compression is still an important topic since it enables to save space for data storage and reduce the amount of time to transfer data. It is also the topic of this week's assignment. The [assignment](https://coursera.cs.princeton.edu/algs4/assignments/burrows/specification.php) covers only lossless compression for which no information 
-is lost and the data after compression and expansion is exactly the same as the original one. The measure of the ability of an algorithm to compress a data set is called compression ratio, that is the ratio between the size of the compressed data and the size of the original one. A lossless
-compression algorithm exploits three characteristics of a data set, binary data or text: the alphabet used to represent the data, the presence of long sequences of identical bits/characters, and the frequency in which different characters are used. These three characteristics of the data are 
-exploited in the Java classes that must be implemented for the Burrows-Wheeler data compression algorithm in order to prepare the data for compression using the Huffman algorithm. The Java classes must be used in sequence for compression and in the reverse order for expansion.
+Data compression is still an important topic since it enables to save space for data storage and reduce the amount of time to transfer data. It is also 
+the topic of this week's assignment. The [assignment](https://coursera.cs.princeton.edu/algs4/assignments/burrows/specification.php) covers only lossless 
+compression for which no information is lost and the data after compression and expansion is exactly the same as the original one. The measure of the 
+ability of an algorithm to compress a data set is called compression ratio, that is the ratio between the size of the compressed data and the size of the 
+original one. A lossless compression algorithm exploits three characteristics of a data set: the alphabet used to represent the data, 
+the presence of long sequences of identical bits/characters, and the frequency in which different characters are used in the data set. For instance, instead 
+of using 7 bits to represent each character in the ASCII code we can use two bits to represent the 4 most common characters and additional bits for the less 
+common characters. The code of each character must not be a prefix of any other character's code (prefix-free code). This idea is implemented in the 
+**Huffman encoding**. For encoding, the Huffman algorithms first reads the input data, computes the frequencies of each character and builds a binary tree 
+(trie) by merging pairs of nodes with the smallest frequency values. Each character appears as a leaf in the tree at the end of a path of nodes 
+connected to their parents through a '0' or a '1' link. The output of the Huffman algorithm contains the binary tree and the encoding of the input string.
+Both are required for the decoding phase. 
+The Burrows-Wheeler data compression algorithm, the assignment of this week, consists of three components: 
+
+1. Burrows-Wheeler transform
+2. Move-To-Front encoding
+3. Huffman compression
+ 
+These components are used to process the input data in that same sequence. The Barrow-Wheeler transform moves equal characters close together. 
+The Move-to-Front encoding changes the order of the characters in the alphabet depending on the frequency and the order in which they appear in the data 
+set so that the output will contain many equal integers. Finally the Huffman compression will be able to achieve a better compression ratio using the data 
+from the two previous steps.
  
 For compression use the Java classes as in the following command:
 
 ```
-$ java -cp "lib/algs4.jar;target/classes" assignments.burrows.BurrowsWheeler - < resources/assignments/burrows/abra.txt | java -cp "lib/algs4.jar;target/classes" assignments.burrows.MoveToFront - | java -cp "lib/algs4.jar" edu.princeton.cs.algs4.Huffman - | java -cp "lib/algs4.jar" edu.princeton.cs.algs4.HexDump 16
+$ java -cp "lib/algs4.jar;target/classes" assignments.burrows.BurrowsWheeler - < resources/assignments/burrows/aesop.txt | java -cp "lib/algs4.jar;target/classes" assignments.burrows.MoveToFront - | java -cp "lib/algs4.jar" edu.princeton.cs.algs4.Huffman - > aesop.bw
 ```
 
-For expansion, follow the next example:
+The size of the input data used in the example, aesop.txt is 188k, the size if the compressed file, aesop.bw is 65k and the compression ratio is 0.345.
+
+To exand the compressed file and get the same input file execute the command:
 
 ```
-$ java -cp "lib/algs4.jar" edu.princeton.cs.algs4.Huffman + < resources/assignments/burrows/abra.txt.bwt.mtf.huf | java -cp "lib/algs4.jar;target/classes" assignments.burrows.MoveToFront + | java -cp "lib/algs4.jar;target/classes" assignments.burrows.BurrowsWheeler + 
+$ java -cp "lib/algs4.jar" edu.princeton.cs.algs4.Huffman + < resources/assignments/burrows/aesop.bw | java -cp "lib/algs4.jar;target/classes" assignments.burrows.MoveToFront + | java -cp "lib/algs4.jar;target/classes" assignments.burrows.BurrowsWheeler + 
 ```
+
+The size of the expanded file is exactly the same of the input file. The expansion is much faster than the compression.
 
 ## Source Code Encryption
-The Java source code of the solution of the assignments has been encrypted to comply with the [Coursera Honor's Code](https://learner.coursera.help/hc/en-us/articles/209818863-Coursera-Honor-Code) using [OpenSSL](https://www.openssl.org/)
-and the Advanced Encryption Standard (AES) symmetric cipher with a 256 bits long key in CBC mode. The command for the encryption is like in the example
+The Java source code of the solution of the assignments has been encrypted to comply with the [Coursera Honor's Code](https://learner.coursera.help/hc/en-us/articles/209818863-Coursera-Honor-Code) 
+using [OpenSSL](https://www.openssl.org/) and the Advanced Encryption Standard (AES) symmetric cipher with a 256 bits long key in CBC mode. The command 
+for the encryption is like in the example
 
 ```
 $ openssl enc -e -aes-256-cbc -in SeamCarver.java -out SeamCarver.java.enc -pass file:secret
