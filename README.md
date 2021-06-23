@@ -496,7 +496,7 @@ common characters. The code of each character must not be a prefix of any other 
 (trie) by merging pairs of nodes with the smallest frequency values. Each character appears as a leaf in the tree at the end of a path of nodes 
 connected to their parents through a '0' or a '1' link. The output of the Huffman algorithm contains the binary tree and the encoding of the input string.
 Both are required for the decoding phase. 
-The Burrows-Wheeler data compression algorithm, the assignment of this week, consists of three components: 
+The **Burrows-Wheeler** data compression algorithm, the assignment of this week, consists of three components: 
 
 1. Burrows-Wheeler transform
 2. Move-To-Front encoding
