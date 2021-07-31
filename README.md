@@ -353,10 +353,10 @@ vertices in a directed edge-weighted graph with nonnegative weights. One importa
 directed acyclic graphs and modeled as shortest-paths problems, is job scheduling. The [programming assignment](https://coursera.cs.princeton.edu/algs4/assignments/seam/specification.php) 
 is about **seam-carving**, a content-aware image resizing technique that is an application of the shortest paths algorithm on a direct acyclic graph. 
 The code in SeamCarver.java provides the API to find horizontal and vertical seams. A vertical seam is a path, from the top border of the image to 
-the bottom one, in which each pixel is chosen to have the minimum energy among the adjacent pixels. The same applies for horizontal seams that go 
-from the left border of the image to the right one. The Java class can be used by a client application such as ResizeDemo. As an example the 
-following command removes 200 vertical seams and 100 horizontal seams from an image of 600x300 pixels of a chameleon so that the image size will be 
-reduced to 400x200 preserving its main characteristics.   
+the bottom one, in which each pixel is chosen to have the minimum energy among the adjacent pixels. The energy of a pixel represents the change in 
+color in one direction (e.g. top-bottom or left-right). The same applies for horizontal seams that go from the left border of the image to the right 
+one. The Java class can be used by a client application such as ResizeDemo. As an example the following command removes 200 vertical seams and 100 
+horizontal seams from an image of 600x300 pixels of a chameleon so that the image size will be reduced to 400x200 preserving its main characteristics.   
    
 ```
 $ mvn exec:java -Dexec.mainClass="assignments.seam.ResizeDemo" -Dexec.args="resources/assignments/seam/chameleon.png 200 100"
