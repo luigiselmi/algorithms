@@ -1,41 +1,40 @@
 Algorithms
 ==========
 
-This repository contains Java code examples based on the online courses Algorithms, [Part 1](https://www.coursera.org/learn/algorithms-part1) 
-and [Part 2](https://www.coursera.org/learn/algorithms-part2), taught by Kevin Wayne and Robert Sedgewick and offered by Princeton University 
-on Coursera. The online lessons are based on the book Algorithms, 4th Edition, by the same authors. Additional material is also available on 
-the [book's website](https://algs4.cs.princeton.edu/home/). This repository contains also my submissions to the programming assignments. This 
-is a work in progress, see the assessments to know whether the code passes all the tests for correctness, memory, timing and other metrics. 
-Maven is used to compile and execute the code. **The Java files that have been developed as solutions to the assignments are encrypted in order 
+This repository contains Java code examples based on the online courses Algorithms, [Part 1](https://www.coursera.org/learn/algorithms-part1)
+and [Part 2](https://www.coursera.org/learn/algorithms-part2), taught by Kevin Wayne and Robert Sedgewick and offered by Princeton University
+on Coursera. The online lessons are based on the book Algorithms, 4th Edition, by the same authors. Additional material is also available on
+the [book's website](https://algs4.cs.princeton.edu/home/). This repository contains also my submissions to the programming assignments. All the assignments for both Part 1 and Part 2 have been successfully completed, passing the tests for correctness, memory, timing and other metrics. 
+Maven is used to compile and execute the code. **The Java files that have been developed as solutions to the assignments are encrypted in order
 to comply with the Coursera Honor’s Code** (see [Source Code Encryption](#Source-Code-Encryption) section).
 
 ## Compile and execute
 You can compile and execute the code using Java or Maven.
 
 ### Compile and execute with Java
-In order to compile the java source files you have first to create a folder that will contain all the compiled classes. You 
+In order to compile the java source files you have first to create a folder that will contain all the compiled classes. You
 can organize the folder as with Maven, with a *target* folder and a *classes* sub-folder. From the project root folder execute
 
 ```
-$ mkdir -p target/classes 
+$ mkdir -p target/classes
 ```
-In order to compile the Java code you need the [algs4.jar](https://algs4.cs.princeton.edu/code/) Java library to be added to the classpath. In 
-the example the library is in the *lib* folder. Since the Java compiler cannot find recursively all the Java files by itself, you need to add a 
+In order to compile the Java code you need the [algs4.jar](https://algs4.cs.princeton.edu/code/) Java library to be added to the classpath. In
+the example the library is in the *lib* folder. Since the Java compiler cannot find recursively all the Java files by itself, you need to add a
 bash *find* command
 
 ```
 $ javac -cp "lib/algs4.jar" -d target/classes $(find src/main/java -name '*.java')
 ```
 
-In order to execute a Java class, from the project root folder, you need to add the compiled classes and the algs4.jar library to the classpath. 
-As an example the command 
+In order to execute a Java class, from the project root folder, you need to add the compiled classes and the algs4.jar library to the classpath.
+As an example the command
 
 ```
 $ java -cp "lib/algs4.jar;target/classes" searching.WordCounter < resources/searching/tinyTale.txt
 ```
 
-executes the *WordCounter* Java class, in the *searching* package, that reads a file from standard input containing some text and writes, to 
-standard output, the number of distinct words and the complete words list. 
+executes the *WordCounter* Java class, in the *searching* package, that reads a file from standard input containing some text and writes, to
+standard output, the number of distinct words and the complete words list.
 
 It can be useful to execute some of the classes that are provided in the algs4.jar library. As an example
 
@@ -43,8 +42,8 @@ It can be useful to execute some of the classes that are provided in the algs4.j
 $ java -cp "lib/algs4.jar" edu.princeton.cs.algs4.FrequencyCounter 8 < resources/searching/tinyTale.txt
 ```
 
-executes the Java class FrequencyCounter, in the edu.princeton.cs.algs4 package of the algs4.jar library. The Java class reads from input 
-stream the minimum length of a word to be counted, then reads from standard input a file containing a list of words and writes to standard 
+executes the Java class FrequencyCounter, in the edu.princeton.cs.algs4 package of the algs4.jar library. The Java class reads from input
+stream the minimum length of a word to be counted, then reads from standard input a file containing a list of words and writes to standard
 output the most frequent word of at least that length.     
 
 ### Compile and execute using Maven
@@ -54,41 +53,41 @@ You can compile all the Java classes using Maven
 $ mvn compile
 ```
 
-When the command returns, a new *target* folder is created, as Maven's convention, with a sub-folder *classes* containing all the compiled java 
-classes. Examples of how to execute a Java class using Maven are provided in the following sections. 
+When the command returns, a new *target* folder is created, as Maven's convention, with a sub-folder *classes* containing all the compiled java
+classes. Examples of how to execute a Java class using Maven are provided in the following sections.
 
 ## Part I
-Part I covers elementary data structures, sorting, and searching algorithms. 
+Part I covers elementary data structures, sorting, and searching algorithms.
 
 ### Week 1
-The main topics of the 1st week are analysis of algorithms and union-find. An algorithm should not only be correct, that is, provide the expected 
+The main topics of the 1st week are analysis of algorithms and union-find. An algorithm should not only be correct, that is, provide the expected
 result, it should do so in a reasonable amount of time. The performance of an algorithm is measured in terms of the size of its input N. For example
 we want to know the amount of time that is required by our algorithm to sort N strings. Algorithms are commonly classified by their order-of-growth
 
 |Class|Order-of-growth|
-|-----|--------------:| 
+|-----|--------------:|
 |constant|1|
-|logarithmic|log(N)| 
+|logarithmic|log(N)|
 |linear|N|
 |linearithmic|N*log(N)|
 |polynomial|N^2, N^3|
 |exponential|2^N|
- 
-Algorithms that needs polynomial time to process do not scale, let alone exponential times, so our goal is to discover algorithms that solve our problems in less than polynomial 
+
+Algorithms that needs polynomial time to process do not scale, let alone exponential times, so our goal is to discover algorithms that solve our problems in less than polynomial
 time. A first example of the relevance of the performances of an algorithm to being able to solve problems in the real world is union-find or finding
-whether two nodes in a graph are connected. This abstract problem arises in many applications, one of them is percolation, [this week assignment](https://coursera.cs.princeton.edu/algs4/assignments/percolation/specification.php), 
+whether two nodes in a graph are connected. This abstract problem arises in many applications, one of them is percolation, [this week assignment](https://coursera.cs.princeton.edu/algs4/assignments/percolation/specification.php),
 in which the goal is to determine the number of sites that have to be opened for a square lattice to percolate. A 2 dimensional lattice percolates if any open site
 in the top row can be connected through a path of open sites to an open site in the bottom row. The ratio between the number of open sites
 and the total number of sites is called [percolation threshold](https://en.wikipedia.org/wiki/Percolation_threshold) and it is a constant that represents a phase transition of the system. No analytical solution
-has been found so far to determine this threshold. The square lattice is made up of N^2 blocked site that are opened randomly one by one till the system 
-percolates. A Java class is available to execute many tests so that the result is statistically significant. It can be executed from the root folder with 
+has been found so far to determine this threshold. The square lattice is made up of N^2 blocked site that are opened randomly one by one till the system
+percolates. A Java class is available to execute many tests so that the result is statistically significant. It can be executed from the root folder with
 the command
 
 ```
 $ java -cp "lib/algs4.jar;target/classes" assignments.percolation.PercolationStats 200 10000
 ```
 
-where the first argument is the number N that is used to build the N^2 square lattice and the 2nd argument is the number of tests. The results are printed out 
+where the first argument is the number N that is used to build the N^2 square lattice and the 2nd argument is the number of tests. The results are printed out
 
 ```
 mean                    = 0.592671
@@ -109,16 +108,16 @@ $ mvn exec:java -Dexec.mainClass="assignments.percolation.PercolationVisualizer"
 ### Week 2
 The topics of this week are collections, queues and stacks, and elementary sorting methods. Items in a queue follow the first-in-first-out (FIFO) rule while items in stacks follow
 the last-in-first-out (LIFO) rule. They can be implemented using linked list or arrays. Since arrays have to be declared with a size they may need to
-be resized. The assignment is about building a collection that supports adding and removing items from either the front or the back of the data structure. 
+be resized. The assignment is about building a collection that supports adding and removing items from either the front or the back of the data structure.
 A second task is to create a randomized queue in which the item removed is chosen uniformly at random among items in the data structure.
-The Java code for the [programming assignment](https://coursera.cs.princeton.edu/algs4/assignments/queues/specification.php) is in the queues 
+The Java code for the [programming assignment](https://coursera.cs.princeton.edu/algs4/assignments/queues/specification.php) is in the queues
 folder. You can execute the code using Maven
 
 ```
 $ mvn exec:java -Dexec.mainClass="assignments.queues.Permutation" -Dexec.args="8" < resources/assignments/queues/distinct.txt
 ```
 
-The sorting methods introduced in this week lecture are selection sort, insertion sort and shellsort. They can be used to sort arrays of objects but since 
+The sorting methods introduced in this week lecture are selection sort, insertion sort and shellsort. They can be used to sort arrays of objects but since
 their time complexity is N^2 for the first two and N^(3/2) for shellsort they are best used with small arrays. A useful property of some sorting methods is stability.
 Insertion sort is stable so that it can be used to sort an array of objects using different keys preserving the order of each sorting. Selection sort and shellsort
 are not stable.
@@ -126,24 +125,24 @@ are not stable.
 ### Week 3
 This week's lecture is about two sorting algorithms: mergesort and quicksort. Mergesort is an example of the divide and conquer paradigm. It first divides an array into two
 halves, then recursively sorts each half, and finally merge the two halves. Mergesort is used in Java to sort objects. A nice property of mergesort is that it takes a time
-proportional to Nlog(N) to sort an array of size N. Mergesort is also stable. The disadvantage is that it needs an extra space proportional to N. 
-Quicksort is also a recursive algorithm. The algorithm begins with a partition phase in which for each entry in an array it moves larger entries to the right and smaller entries 
+proportional to Nlog(N) to sort an array of size N. Mergesort is also stable. The disadvantage is that it needs an extra space proportional to N.
+Quicksort is also a recursive algorithm. The algorithm begins with a partition phase in which for each entry in an array it moves larger entries to the right and smaller entries
 to the left and finally it recursively sorts the parts. Quicksort takes a time proportional to Nlog(N) to sort an array of N entries and it does not require extra space. Quicksort
 is faster than mergesort but the disadvantage is that quicksort is not stable. Quicksort can take quadratic time if the input array is already sorted or partially sorted so usually
 the input array is randomly shuffled to improve the performances. Sorting algorithms are used in many obvious and non obvious applications from sorting a list of strings or a search result
-to enabling binary search, finding duplicates and also in computational biology and physics. One task of this week's assignment is to write an algorithm based on sorting that can 
+to enabling binary search, finding duplicates and also in computational biology and physics. One task of this week's assignment is to write an algorithm based on sorting that can
 find line patterns in a given set of points in a plane. The algorithm based on sorting can be compared with one that follows a brute force approach to solve the same problem and it can be seen
-that is faster than the brute force algorithm when the number of points is more than one thousand. The plan of the fast algorithm is as follows: given one point p the algorithm computes the 
-slopes of the segments that join p to all the other points and sorts the points according to the slopes they make with p. When there are four or more adjacent points that have the same slope 
-with p they belong to the same (maximal) segment. The Java code for the [programming assignment](https://coursera.cs.princeton.edu/algs4/assignments/collinear/specification.php) is in the 
+that is faster than the brute force algorithm when the number of points is more than one thousand. The plan of the fast algorithm is as follows: given one point p the algorithm computes the
+slopes of the segments that join p to all the other points and sorts the points according to the slopes they make with p. When there are four or more adjacent points that have the same slope
+with p they belong to the same (maximal) segment. The Java code for the [programming assignment](https://coursera.cs.princeton.edu/algs4/assignments/collinear/specification.php) is in the
 collinear folder. You can execute the code using Maven
 
 ```
-$ mvn exec:java -Dexec.mainClass="assignments.collinear.FastCollinearPoints" -Dexec.args="resources/assignments/collinear/mystery10089.txt" 
+$ mvn exec:java -Dexec.mainClass="assignments.collinear.FastCollinearPoints" -Dexec.args="resources/assignments/collinear/mystery10089.txt"
 ```
 
 As an example of the difference in performance between the two algorithms we use a data set that contains more than 10000 points. The fast algorithm based on sorting completes the task in
-30 seconds on average, while the brute force algorithm needs more than one hour and a half. Clearly the message that emerges from the segments is a suggestion for those who use the brute force 
+30 seconds on average, while the brute force algorithm needs more than one hour and a half. Clearly the message that emerges from the segments is a suggestion for those who use the brute force
 approach.
 
 ```
@@ -184,7 +183,7 @@ Number of segments: 34
 (26500, 11996) -> (28500, 11996)
 (28500, 11996) -> (28500, 13996)
 ```
- 
+
 ![linear patterns](resources/assignments/collinear/mystery10089.png)
 
 ### Week 4
@@ -194,18 +193,18 @@ main APIs:
 * insert
 * remove the maximum
 
-It can be implemented using a stack or a queue but it's more convenient to use a heap-ordered binary tree on top of an array. The heapsort 
-algorithm is an optimal sorting algorithm that can be divided in two phases. In the 1st phase the algorithm builds an heap-ordered binary tree 
-with the maximum value at its root. In the 2nd phase, the root element is repeatedly exchanged with the last one and removed in order to produce 
-a list of ordered elements. A priority queue can be used to implement the A* algorithm and solve the 8-puzzle and the 15-puzzle finding the least 
-set of tile moves to reach the goal with all the tiles ordered. The Java code for the [programming assignment](https://coursera.cs.princeton.edu/algs4/assignments/8puzzle/specification.php) 
+It can be implemented using a stack or a queue but it's more convenient to use a heap-ordered binary tree on top of an array. The heapsort
+algorithm is an optimal sorting algorithm that can be divided in two phases. In the 1st phase the algorithm builds an heap-ordered binary tree
+with the maximum value at its root. In the 2nd phase, the root element is repeatedly exchanged with the last one and removed in order to produce
+a list of ordered elements. A priority queue can be used to implement the A* algorithm and solve the 8-puzzle and the 15-puzzle finding the least
+set of tile moves to reach the goal with all the tiles ordered. The Java code for the [programming assignment](https://coursera.cs.princeton.edu/algs4/assignments/8puzzle/specification.php)
 and solver of the puzzles is in the puzzle folder. As usual you can execute the code using Maven
 
 ```
 $ mvn exec:java -Dexec.mainClass="assignments.puzzle.Solver" -Dexec.args="resources/assignments/puzzle/puzzle05.txt"
 ```
 As an example we use the Java code to solve a 8-tiles puzzle in 5 moves.
- 
+
 ```
 Minimum number of moves = 5
 3
@@ -235,63 +234,63 @@ Minimum number of moves = 5
 ```
 
 ### Week 5
-This is the culminating section of the 1st part of the course, where all what we learned before about linked list, arrays, sorting algorithms 
-and recursion are put in use to address the problem of building and using symbol tables to store and search key-value pairs. Symbol 
-tables are known under different names such as dictionaries, indices and associative arrays. Unordered symbol tables can be implemented using 
-linked lists or arrays in which strings can be used as keys instead of integers. Accessing an unordered symbol table requires a time proportional 
-to its size and the insertion of N key-value pairs requires a time proportional to N^2. Symbol tables in which the keys are ordered have 
+This is the culminating section of the 1st part of the course, where all what we learned before about linked list, arrays, sorting algorithms
+and recursion are put in use to address the problem of building and using symbol tables to store and search key-value pairs. Symbol
+tables are known under different names such as dictionaries, indices and associative arrays. Unordered symbol tables can be implemented using
+linked lists or arrays in which strings can be used as keys instead of integers. Accessing an unordered symbol table requires a time proportional
+to its size and the insertion of N key-value pairs requires a time proportional to N^2. Symbol tables in which the keys are ordered have
 better performances and can support numerous useful methods. Binary search trees (BST) are an implementation of symbol tables in which the data
-is structured in nodes that contain a value, a key and two links, the left link and the right link. The left link connects the given node to a 
-subtree whose nodes have smaller keys than the given node, while the right link connects to subtree whose nodes have larger keys. Search and 
+is structured in nodes that contain a value, a key and two links, the left link and the right link. The left link connects the given node to a
+subtree whose nodes have smaller keys than the given node, while the right link connects to subtree whose nodes have larger keys. Search and
 insert operations in BST require a time proportional to log(N) on average. Since with BST the shape of the tree depends on the order in which the
-nodes are added to the BST, in the worst case the tree that results from an insertion of N key-value pairs in a BST can be unbalanced and look 
-like a chain of left links so that accessing a node can require a time proportional to its size. In order avoid such situations and keep the tree 
-balanced other BST have been developed that allow more than one key and more than two links that guarantee a height proportional to log(N) even 
-in the worst case scenario. A 2-node is node with one key and two links as in BST, a 3-node is a node with two keys and three links. The data 
-structure that is built with these two types of nodes is called 2-3 tree. A red-black BST is a 2-3 tree in which a 3-node is represented as two 
-2-nodes connected by a left "red" link. The color of the link is represented by a flag in the code. Symbol tables are behind many important 
+nodes are added to the BST, in the worst case the tree that results from an insertion of N key-value pairs in a BST can be unbalanced and look
+like a chain of left links so that accessing a node can require a time proportional to its size. In order avoid such situations and keep the tree
+balanced other BST have been developed that allow more than one key and more than two links that guarantee a height proportional to log(N) even
+in the worst case scenario. A 2-node is node with one key and two links as in BST, a 3-node is a node with two keys and three links. The data
+structure that is built with these two types of nodes is called 2-3 tree. A red-black BST is a 2-3 tree in which a 3-node is represented as two
+2-nodes connected by a left "red" link. The color of the link is represented by a flag in the code. Symbol tables are behind many important
 applications such as databases and search engines. One other remarkable application of BST is computational geometry in which geometric properties
 of objects, such as point coordinates, are used as keys in a BST, enabling the implementation of useful methods such as range search and nearest-neighbor
 search. The [programming assignment](https://coursera.cs.princeton.edu/algs4/assignments/kdtree/specification.php) requires the development of two Java
 classes to implement such two methods in two different ways, one based on the use of a balanced BST implementation that is available in the java.util package,
-and one that requires the implementation of a 2d-tree, that is a binary tree that corresponds to a recursive partition of the plane so that at each level 
+and one that requires the implementation of a 2d-tree, that is a binary tree that corresponds to a recursive partition of the plane so that at each level
 of the tree the plane is divided alternatively by a horizontal or vertical line that passes through each node in that level of the tree. The 2d-tree
 adapts gracefully to the distribution of the points in the plane and it is often a better solution than the grid approach in which the plane is divided
 into equally sized squares, particularly when the points are not evenly distributed such as in geographic applications. As an example of how the 2d-tree
-recursively splits the space into two rectangles every time a point is created in the plane, and its corresponding node is added to the 2d-tree, 
+recursively splits the space into two rectangles every time a point is created in the plane, and its corresponding node is added to the 2d-tree,
 can be seen with the Java class KdTreeVisualizer.java that draws the points clicked by the user in the standard drawing window and the splitting lines.
 
 ```
 $ mvn exec:java -Dexec.mainClass="assignments.kdtree.KdTreeVisualizer"
 ```
 
-An example of the partition of the plane to address the nearest neighbor search is shown in the figure below where 100 points are distributed in 
+An example of the partition of the plane to address the nearest neighbor search is shown in the figure below where 100 points are distributed in
 a circle with a query point connected to the nearest point in the circle
 
 ![nearest neighbor search](resources/assignments/kdtree/circle100.png)
- 
+
 The figure can be created by executing the command
 
 ```
 $ mvn exec:java -Dexec.mainClass="assignments.kdtree.KdTree" -Dexec.args="resources/assignments/kdtree/circle100.txt"
 ```
 
-We use the same data set to show the 2d-tree solution of the range search problem in which our two solutions are used to search the points that lie within 
+We use the same data set to show the 2d-tree solution of the range search problem in which our two solutions are used to search the points that lie within
 a rectangle drawn at run time. The red color represents the points that have been found by the algorithm based on the Java TreeSet and the blue color
 represents the points that have been found using our 2d-tree implementation. The fact that both algorithms have found the same points guarantees that
 our 2d-tree implementation is correct.
 
 ![range search](resources/assignments/kdtree/range_search_circle100.png)
 
-The Java class NearestNeighborVisualizer.java reads a sequence of points from a file (specified as a command-line argument) and inserts those 
-points into a 2d-tree. Then, it performs nearest-neighbor queries on the point corresponding to the location of the mouse in the standard drawing 
+The Java class NearestNeighborVisualizer.java reads a sequence of points from a file (specified as a command-line argument) and inserts those
+points into a 2d-tree. Then, it performs nearest-neighbor queries on the point corresponding to the location of the mouse in the standard drawing
 window.
 
 ```
 $ mvn exec:java -Dexec.mainClass="assignments.kdtree.NearestNeighborVisualizer" -Dexec.args="resources/assignments/kdtree/circle100.txt"
 ```
 
-The Java class RangeSearchVisualizer.java reads a sequence of points from a file (specified as a command-line argument) and inserts those points 
+The Java class RangeSearchVisualizer.java reads a sequence of points from a file (specified as a command-line argument) and inserts those points
 into a 2d-tree. Then, it performs range searches on the axis-aligned rectangles dragged by the user in the standard drawing window.
 
 ```
@@ -299,23 +298,23 @@ $ mvn exec:java -Dexec.mainClass="assignments.kdtree.RangeSearchVisualizer" -Dex
 ```
 
 ### Week 6
-This week is about hash tables. There is no programming assignment. 
+This week is about hash tables. There is no programming assignment.
 
 ## Part II
 Part II focuses on graph and string-processing algorithms.
 
 ### Week 1
-This week is about undirected and directed graph (aka digraphs). The [programming assignment](https://coursera.cs.princeton.edu/algs4/assignments/wordnet/specification.php) 
-is about creating a digraph from the **WordNet semantic lexicon** and finding specific paths between the synsets (vertices) and computing the relatedness 
-of two nouns. Three Java classes must be implemented for this assignment. The 1st one to be implemented is SAP.java that is used to compute the 
-shortest ancestral path between two vertices. You can use SAP.java, with some test files, executing the Java class and entering pair of integers, 
+This week is about undirected and directed graph (aka digraphs). The [programming assignment](https://coursera.cs.princeton.edu/algs4/assignments/wordnet/specification.php)
+is about creating a digraph from the **WordNet semantic lexicon** and finding specific paths between the synsets (vertices) and computing the relatedness
+of two nouns. Three Java classes must be implemented for this assignment. The 1st one to be implemented is SAP.java that is used to compute the
+shortest ancestral path between two vertices. You can use SAP.java, with some test files, executing the Java class and entering pair of integers,
 that represent two vertices, from the command line
 
 ```
 $ mvn exec:java -Dexec.mainClass="assignments.wordnet.SAP" -Dexec.args="resources/assignments/wordnet/digraph1.txt"
  ```
- 
-The 2nd Java class to be implemented is WordNet.java that reads two files. The 1st file contains a set of synsets from WordNet, and the 2nd file 
+
+The 2nd Java class to be implemented is WordNet.java that reads two files. The 1st file contains a set of synsets from WordNet, and the 2nd file
 contains the relationships (hypernyms) between the vertices. You can test the correctness of the implementation by executing its main method.
 
 ```
@@ -336,8 +335,8 @@ The distance between the nouns "American_water_spaniel" and "histology" is 27.
 The distance between the nouns "Brown_Swiss" and "barrel_roll" is 29.
 ```
 
-Finally the 3rd class, Outcast.java, can be used to measure the semantic distance between words, provided in a file, to return the word that is 
-the least related to the other ones, as in the example where outcast5.txt contains the words "horse", "zebra", "cat", "bear", "table", and Outcast 
+Finally the 3rd class, Outcast.java, can be used to measure the semantic distance between words, provided in a file, to return the word that is
+the least related to the other ones, as in the example where outcast5.txt contains the words "horse", "zebra", "cat", "bear", "table", and Outcast
 returns correctly the word "table".
 
 ```
@@ -345,19 +344,19 @@ $ mvn exec:java -Dexec.mainClass="assignments.wordnet.Outcast" -Dexec.args="reso
 ```
 
 ### Week 2
-This week is about undirected and directed edge-weighted graphs in which a weight, or cost, is associated to each edge. The addition of a weight 
-to edges enables the representation of many practical problems where a weight can represent the distance between two locations, a job completion 
-time from start to finish or some other parameter. The main algorithms discussed are Prim's algorithm and Kruskal's algorithm to find the minimum 
-spanning tree in an edge-weighted undirected graph, and the Dijkstra's algorithm to find the shortest paths from a source vertex to all the other 
-vertices in a directed edge-weighted graph with nonnegative weights. One important class of problems, that can be represented by edge-weighted 
-directed acyclic graphs and modeled as shortest-paths problems, is job scheduling. The [programming assignment](https://coursera.cs.princeton.edu/algs4/assignments/seam/specification.php) 
-is about **seam-carving**, a content-aware image resizing technique that is an application of the shortest paths algorithm on a direct acyclic graph. 
-The code in SeamCarver.java provides the API to find horizontal and vertical seams. A vertical seam is a path, from the top border of the image to 
-the bottom one, in which each pixel is chosen to have the minimum energy among the adjacent pixels. The energy of a pixel represents the change in 
-color in one direction (e.g. top-bottom or left-right). The same applies for horizontal seams that go from the left border of the image to the right 
-one. The Java class can be used by a client application such as ResizeDemo. As an example the following command removes 200 vertical seams and 100 
+This week is about undirected and directed edge-weighted graphs in which a weight, or cost, is associated to each edge. The addition of a weight
+to edges enables the representation of many practical problems where a weight can represent the distance between two locations, a job completion
+time from start to finish or some other parameter. The main algorithms discussed are Prim's algorithm and Kruskal's algorithm to find the minimum
+spanning tree in an edge-weighted undirected graph, and the Dijkstra's algorithm to find the shortest paths from a source vertex to all the other
+vertices in a directed edge-weighted graph with nonnegative weights. One important class of problems, that can be represented by edge-weighted
+directed acyclic graphs and modeled as shortest-paths problems, is job scheduling. The [programming assignment](https://coursera.cs.princeton.edu/algs4/assignments/seam/specification.php)
+is about **seam-carving**, a content-aware image resizing technique that is an application of the shortest paths algorithm on a direct acyclic graph.
+The code in SeamCarver.java provides the API to find horizontal and vertical seams. A vertical seam is a path, from the top border of the image to
+the bottom one, in which each pixel is chosen to have the minimum energy among the adjacent pixels. The energy of a pixel represents the change in
+color in one direction (e.g. top-bottom or left-right). The same applies for horizontal seams that go from the left border of the image to the right
+one. The Java class can be used by a client application such as ResizeDemo. As an example the following command removes 200 vertical seams and 100
 horizontal seams from an image of 600x300 pixels of a chameleon so that the image size will be reduced to 400x200 preserving its main characteristics.   
-   
+
 ```
 $ mvn exec:java -Dexec.mainClass="assignments.seam.ResizeDemo" -Dexec.args="resources/assignments/seam/chameleon.png 200 100"
 ```
@@ -368,14 +367,14 @@ The original image:
 The image resized using seam-carving
 
 ![resized image](resources/assignments/seam/chameleon-400x200.png)
-  
+
 ### Week 3
 The material of the 3rd week is about network-flow algorithms. These algorithms are of great interest because they can be used to solve optimization
-problems in many different contexts, for instance to find the optimal way to distribute oil through a pipeline network from the oil field to a refinery. 
+problems in many different contexts, for instance to find the optimal way to distribute oil through a pipeline network from the oil field to a refinery.
 A common network-flow algorithm is the Ford-Fulkerson scheme. It is based on a graph whose edges can have two attributes: a capacity and a flow. The
 edge's capacity is a number that specifies the maximum value that can be moved between its vertices, and the flow is the value that is actually used.
 The algorithm is also called **maxflow algorithm** because it solves the problem of finding the best way to distribute a flow from a source through a network to a
-sink so that the flow is maximal given the capacities of the edges. In order to showcase the applicability of the scheme to many different applications, 
+sink so that the flow is maximal given the capacities of the edges. In order to showcase the applicability of the scheme to many different applications,
 it will be used in the [programming assignment](https://coursera.cs.princeton.edu/algs4/assignments/baseball/specification.php) to solve the [baseball elimination problem](https://en.wikipedia.org/wiki/Maximum_flow_problem#Baseball_elimination).
 As an example, the following command finds which team is mathematically eliminated in a baseball division with 5 teams. Given the scenario in resources/assignments/baseball/teams5.txt
 ```
@@ -405,13 +404,13 @@ Toronto is not eliminated
 ```
 
 ### Week 4
-The first topic of the 4th week is about specialized algorithms for searching in symbol tables with string keys. The difference with symbol tables 
-discussed in the first part of the course is that the algorithms don't use comparisons for searching and so they can be faster. The 2nd topic is 
-substring search that has application in many fields, from search engines to genetics. The [programming assignment](https://coursera.cs.princeton.edu/algs4/assignments/boggle/specification.php) 
-is about developing an application to find all the valid words composed of random letters displayed on cubes' faces and kept on a board, as in the 
-word game Boggle. The longer the word found the higher is the score. The main steps are first building the adjacency list of each cube and then 
-searching for words, using letters on adjacent cubes, that are contained in a dictionary. The dictionary of valid words can be conveniently stored 
-in a Trie, a symbol table with string keys, while the search can be performed recursively using depth-first search on the graph of cubes with their 
+The first topic of the 4th week is about specialized algorithms for searching in symbol tables with string keys. The difference with symbol tables
+discussed in the first part of the course is that the algorithms don't use comparisons for searching and so they can be faster. The 2nd topic is
+substring search that has application in many fields, from search engines to genetics. The [programming assignment](https://coursera.cs.princeton.edu/algs4/assignments/boggle/specification.php)
+is about developing an application to find all the valid words composed of random letters displayed on cubes' faces and kept on a board, as in the
+word game Boggle. The longer the word found the higher is the score. The main steps are first building the adjacency list of each cube and then
+searching for words, using letters on adjacent cubes, that are contained in a dictionary. The dictionary of valid words can be conveniently stored
+in a Trie, a symbol table with string keys, while the search can be performed recursively using depth-first search on the graph of cubes with their
 adjacent neighbors. The Boggle solver can be tested using static board and dictionary files as in the example  
 
 ```
@@ -458,18 +457,18 @@ The Boggle solver is used by the Boggle game to play against the computer. You c
 $ java -cp "lib/algs4.jar;target/classes" assignments.boggle.BoggleGame 4 4
 ```
 The player can compare the number of valid words found with those found by the solver (opponent). Only the words that can be found
-in the selected dictionary are valid. At the end of a game the interface shows the valid words found by the user. It's not that easy 
+in the selected dictionary are valid. At the end of a game the interface shows the valid words found by the user. It's not that easy
 to beat the solver !
 
 ![Boggle game](resources/assignments/boggle/boggle_game.png)  
 
 ### Week 5
-The topics of the 5th week are **regular expressions** and **data compression**. A regular expressions, by definition, is a pattern that describes a 
-set of strings. They are used in substring search when the pattern to be found is not completely specified. For example we might want to search for 
-a substring in a genomic sequence that stretches 5 bases, starting with adenine A and cytosine C and ending with thymine T, without specifying exactly 
-which bases are in between. Regular expressions allows the use of operators to define the set of strings to be searched, the fundamental ones being 
-concatenation, closure, and the logic or operator. An application that can interpret regular expressions, parses the expression and builds a 
-nondeterministic finite-state automaton that will be able to find the pattern in the text. The most famous such application is **grep** that is available 
+The topics of the 5th week are **regular expressions** and **data compression**. A regular expressions, by definition, is a pattern that describes a
+set of strings. They are used in substring search when the pattern to be found is not completely specified. For example we might want to search for
+a substring in a genomic sequence that stretches 5 bases, starting with adenine A and cytosine C and ending with thymine T, without specifying exactly
+which bases are in between. Regular expressions allows the use of operators to define the set of strings to be searched, the fundamental ones being
+concatenation, closure, and the logic or operator. An application that can interpret regular expressions, parses the expression and builds a
+nondeterministic finite-state automaton that will be able to find the pattern in the text. The most famous such application is **grep** that is available
 in any unix-like operating system and can be used, as in our simple use case in which only the concatenation operator is used  
 
 ```
@@ -484,29 +483,29 @@ ACTAT
 ACGAT
 ```
 
-Data compression is still an important topic since it enables to save space for data storage and reduce the amount of time to transfer data. It is also 
-the topic of this week's assignment. The [assignment](https://coursera.cs.princeton.edu/algs4/assignments/burrows/specification.php) covers only lossless 
-compression for which no information is lost and the data after compression and expansion is exactly the same as the original one. The measure of the 
-ability of an algorithm to compress a data set is called compression ratio, that is the ratio between the size of the compressed data and the size of the 
-original one. A lossless compression algorithm exploits three characteristics of a data set: the alphabet used to represent the data, 
-the presence of long sequences of identical bits/characters, and the frequency in which different characters are used in the data set. For instance, instead 
-of using 7 bits to represent each character in the ASCII code we can use two bits to represent the 4 most common characters and additional bits for the less 
-common characters. The code of each character must not be a prefix of any other character's code (prefix-free code). This idea is implemented in the 
-**Huffman encoding**. For encoding, the Huffman algorithms first reads the input data, computes the frequencies of each character and builds a binary tree 
-(trie) by merging pairs of nodes with the smallest frequency values. Each character appears as a leaf in the tree at the end of a path of nodes 
+Data compression is still an important topic since it enables to save space for data storage and reduce the amount of time to transfer data. It is also
+the topic of this week's assignment. The [assignment](https://coursera.cs.princeton.edu/algs4/assignments/burrows/specification.php) covers only lossless
+compression for which no information is lost and the data after compression and expansion is exactly the same as the original one. The measure of the
+ability of an algorithm to compress a data set is called compression ratio, that is the ratio between the size of the compressed data and the size of the
+original one. A lossless compression algorithm exploits three characteristics of a data set: the alphabet used to represent the data,
+the presence of long sequences of identical bits/characters, and the frequency in which different characters are used in the data set. For instance, instead
+of using 7 bits to represent each character in the ASCII code we can use two bits to represent the 4 most common characters and additional bits for the less
+common characters. The code of each character must not be a prefix of any other character's code (prefix-free code). This idea is implemented in the
+**Huffman encoding**. For encoding, the Huffman algorithms first reads the input data, computes the frequencies of each character and builds a binary tree
+(trie) by merging pairs of nodes with the smallest frequency values. Each character appears as a leaf in the tree at the end of a path of nodes
 connected to their parents through a '0' or a '1' link. The output of the Huffman algorithm contains the binary tree and the encoding of the input string.
-Both are required for the decoding phase. 
-The **Burrows-Wheeler** data compression algorithm, the assignment of this week, consists of three components: 
+Both are required for the decoding phase.
+The **Burrows-Wheeler** data compression algorithm, the assignment of this week, consists of three components:
 
 1. Burrows-Wheeler transform
 2. Move-To-Front encoding
 3. Huffman compression
- 
-These components are used to process the input data in that same sequence. The Barrow-Wheeler transform moves equal characters close together. 
-The Move-to-Front encoding changes the order of the characters in the alphabet depending on the frequency and the order in which they appear in the data 
-set so that the output will contain many equal integers. Finally the Huffman compression will be able to achieve a better compression ratio using the data 
+
+These components are used to process the input data in that same sequence. The Barrow-Wheeler transform moves equal characters close together.
+The Move-to-Front encoding changes the order of the characters in the alphabet depending on the frequency and the order in which they appear in the data
+set so that the output will contain many equal integers. Finally the Huffman compression will be able to achieve a better compression ratio using the data
 from the two previous steps.
- 
+
 For compression use the Java classes as in the following example:
 
 ```
@@ -518,10 +517,10 @@ The size of the input data used in the example, aesop.txt is 188k, the size of t
 To expand the compressed file and get the same input file, execute the command:
 
 ```
-$ java -cp "lib/algs4.jar" edu.princeton.cs.algs4.Huffman + < resources/assignments/burrows/aesop.bw | java -cp "lib/algs4.jar;target/classes" assignments.burrows.MoveToFront + | java -cp "lib/algs4.jar;target/classes" assignments.burrows.BurrowsWheeler + 
+$ java -cp "lib/algs4.jar" edu.princeton.cs.algs4.Huffman + < resources/assignments/burrows/aesop.bw | java -cp "lib/algs4.jar;target/classes" assignments.burrows.MoveToFront + | java -cp "lib/algs4.jar;target/classes" assignments.burrows.BurrowsWheeler +
 ```
 
-The size of the expanded file is exactly the same of the input file. The expansion is much faster than the compression. Finally we compute the compression 
+The size of the expanded file is exactly the same of the input file. The expansion is much faster than the compression. Finally we compute the compression
 ratio of the Huffman coding alone for the same input file, aesop.txt
 
 ```
@@ -532,27 +531,27 @@ The size of the compressed file, aesop.huf, is 106k and the compression ratio is
 better result, more than 1.5 times better for that specific file.
 
 ## Source Code Encryption
-The Java source code of the solution of the assignments has been encrypted to comply with the [Coursera Honor's Code](https://learner.coursera.help/hc/en-us/articles/209818863-Coursera-Honor-Code) 
-using [OpenSSL](https://www.openssl.org/) and the Advanced Encryption Standard (AES) symmetric cipher with a 256 bits long key in CBC mode. The command 
+The Java source code of the solution of the assignments has been encrypted to comply with the [Coursera Honor's Code](https://learner.coursera.help/hc/en-us/articles/209818863-Coursera-Honor-Code)
+using [OpenSSL](https://www.openssl.org/) and the Advanced Encryption Standard (AES) symmetric cipher with a 256 bits long key in CBC mode. The command
 for the encryption is like in the example
 
 ```
 $ openssl enc -e -aes-256-cbc -in SeamCarver.java -out SeamCarver.java.enc -pass file:secret
 ```
 
-where "secret" is the name of the file containing the pass-phrase. Use the next command for decryption 
-  
+where "secret" is the name of the file containing the pass-phrase. Use the next command for decryption
+
 ```
 $ openssl enc -d -aes-256-cbc -in SeamCarver.java.enc -out SeamCarver.java -pass file:secret
 ```
 
 ## Computational Complexity of Algorithms
 ### Abstract Data Types
-Here we present the most used data types that are used in many applications. Each data type provides a set of APIs to add, 
+Here we present the most used data types that are used in many applications. Each data type provides a set of APIs to add,
 look up or remove items. The APIs can be implemented with algorithms that may have different performances.
 
 #### Stack
-A stack is a data type that implements a Last-In-First-Out data access policy. It can be based on a linked list and must 
+A stack is a data type that implements a Last-In-First-Out data access policy. It can be based on a linked list and must
 implement two APIs: push() to insert a new element on the top of the stack, and pop() to remove one element from the top.
 
 |API|Running time|
@@ -561,7 +560,7 @@ implement two APIs: push() to insert a new element on the top of the stack, and 
 |pop()|constant|
 
 #### Queue
-A queue is a data type that implements a First-In-First-Out data access policy. It can be based on a linked list and must 
+A queue is a data type that implements a First-In-First-Out data access policy. It can be based on a linked list and must
 implement two APIs: enqueue() to add an element to the tail of the queue and dequeue() to remove the first element from the head of the queue.
 
 |API|Running time|
@@ -570,9 +569,9 @@ implement two APIs: enqueue() to add an element to the tail of the queue and deq
 |dequeue()|constant|
 
 #### Priority Queue and heap-ordered binary tree
-A priority queue is a data type that provides an API to insert an element, similarly to a queue or a stack, but instead of implementing a 
-method to remove the oldest element like in a queue, or the newest one like in a stack, a priority queue implements a method to remove the 
-element with the maximum value. The priority queue is based on a heap-ordered complete binary tree that can be implemented on top of an array. 
+A priority queue is a data type that provides an API to insert an element, similarly to a queue or a stack, but instead of implementing a
+method to remove the oldest element like in a queue, or the newest one like in a stack, a priority queue implements a method to remove the
+element with the maximum value. The priority queue is based on a heap-ordered complete binary tree that can be implemented on top of an array.
 A binary tree is heap-ordered when the key in each node is equal or larger than its children’s keys.
 
 |API|Running time|
@@ -586,9 +585,9 @@ two that support ordered keys, the binary search tree and the red-black binary s
 the key to an integer value that is used as an index. Hash tables do not support ordered operations.
 
 #### Binary Search Tree
-A binary search tree is an abstract data type whith an explicit tree data strucure in which each node has a natural ordered key 
+A binary search tree is an abstract data type whith an explicit tree data strucure in which each node has a natural ordered key
 and an associated value. The key in a node is smaller than any key in its right subtree and larger than any key in its left subtree.
-A Red-Black binary search tree is a nearly perfectly balanced symbol table with guaranteed log(N) time for insertion and search. 
+A Red-Black binary search tree is a nearly perfectly balanced symbol table with guaranteed log(N) time for insertion and search.
 Guaranteed means the cost will not exceed the logarithmic time even in the worst case (e.g. when the input keys are ordered).  
 
 |API|Running time|
@@ -597,10 +596,10 @@ Guaranteed means the cost will not exceed the logarithmic time even in the worst
 |get()|log(N)|
 
 #### Hash Table
-A hash table is a symbol table in which the keys are mapped to an integer value to be used as index in an array. The mapping from a key 
+A hash table is a symbol table in which the keys are mapped to an integer value to be used as index in an array. The mapping from a key
 (e.g. a string) and an integer is done with a function that must be provided with the data type. Since the size of the array that stores
 the hash values is finite there might be collisions. One collision resolution strategy is called separate chaining. It consists of putting
-the keys that have the same hash value into a list. This way, if N is the number of keys and M is the size of the array, the number of 
+the keys that have the same hash value into a list. This way, if N is the number of keys and M is the size of the array, the number of
 compares for insert and search is N/M.
 
 |API|Running time|
@@ -609,7 +608,7 @@ compares for insert and search is N/M.
 |get()|constant|
 
 ### Sorting algorithms
-The table presents the running time of the main sorting algorithms in the worst, average and best case. An algorithm that does not need any 
+The table presents the running time of the main sorting algorithms in the worst, average and best case. An algorithm that does not need any
 additional space is said to be in-place. A sorting algorithm is said stable if it preserves the relative order of equal keys.  
 
 |Algorithm|In-place|Stable| Worst case|Average case|Best case|Notes|
@@ -622,9 +621,9 @@ additional space is said to be in-place. A sorting algorithm is said stable if i
 |Heapsort|Yes|No|N*log(N)|N*log(N)|N*log(N)|NlogN guarantee|
 
 ### Searching algorithms
-A symbol table is an abstract data type that provides mechanisms to store information as a key-value pair so that once it is saved it can be 
+A symbol table is an abstract data type that provides mechanisms to store information as a key-value pair so that once it is saved it can be
 searched by its key. A symbol table with keys that have a natural order is called ordered symbol table and can support ordered operation such
-as min(), max() and rank(). Symbol tables are used to build dictionaries, associative arrays, indeces, inverted indices, sparse vectors and 
+as min(), max() and rank(). Symbol tables are used to build dictionaries, associative arrays, indeces, inverted indices, sparse vectors and
 matrices.
 
 |Algorithm|Search (worst case)|Insert (worst case) |Search (average case)|Insert (average case)|Notes|
@@ -636,19 +635,19 @@ matrices.
 |Hash table|< log(N)|< log(N)|N / (2M)|N / M|Separate chaining, N keys, M index size, no ordered operations|
 
 ### Graphs
-A graph is an abstract data type consisting of a set of vertices and a collection of edges that are sets of pairs of vertices. This definition 
-allows self-loops, i.e. edges that connect a vertex to itself, and parallel edges, i.e. edges that connect the same pair of vertices. There are 
-two categories of graphs: undirected and directed. Graphs whose edges are associated to a value are called edge-weighted graphs and are used in 
-many applications such as finding the shortest path between two geographical locations. 
+A graph is an abstract data type consisting of a set of vertices and a collection of edges that are sets of pairs of vertices. This definition
+allows self-loops, i.e. edges that connect a vertex to itself, and parallel edges, i.e. edges that connect the same pair of vertices. There are
+two categories of graphs: undirected and directed. Graphs whose edges are associated to a value are called edge-weighted graphs and are used in
+many applications such as finding the shortest path between two geographical locations.
 
 #### Undirected Graphs
-In undirected graphs two edges with the same vertices in different order are the same. An undirected graph can be efficiently built as an 
-array of adjacency lists, i.e. an array of linked lists where each index represents a vertex and the associated linked list contains its 
-adjacent vertices. When an edge v-w is added to an undirected graph to connect two vertices v and w, the vertex w must be added to the list 
-of adjacent vertices of v and the vertex v must be added to the list of adjacent vertices of w. A vertex is characterized by its degree that 
-represents the number of edges incident to it. Two main algorithms are used to process undirected graphs, depth-first search and breadth-first 
-search. These algorithms provide a base to easily implement higher level graph processing algorithms. 
- 
+In undirected graphs two edges with the same vertices in different order are the same. An undirected graph can be efficiently built as an
+array of adjacency lists, i.e. an array of linked lists where each index represents a vertex and the associated linked list contains its
+adjacent vertices. When an edge v-w is added to an undirected graph to connect two vertices v and w, the vertex w must be added to the list
+of adjacent vertices of v and the vertex v must be added to the list of adjacent vertices of w. A vertex is characterized by its degree that
+represents the number of edges incident to it. Two main algorithms are used to process undirected graphs, depth-first search and breadth-first
+search. These algorithms provide a base to easily implement higher level graph processing algorithms.
+
 |Algorithm|Running time|Use|
 |---------|------------|---|
 |Depth-first search (DFS)|Proportional to the sum of the degrees of each vertex connected to the source vertex|recursive algorithm, cycle detection, determines if graph is bipartite|
@@ -659,9 +658,9 @@ search. These algorithms provide a base to easily implement higher level graph p
 
 #### Edge-weighted Graphs
 An edge-weighted graph can be represented as an array of adjacency lists of edges where each edge object contains two vertices and a weight.
-Many important applications are based on finding the minimum spanning tree (MST) of an edge-weighted graph. A spanning tree is any subgraph 
+Many important applications are based on finding the minimum spanning tree (MST) of an edge-weighted graph. A spanning tree is any subgraph
 of a graph that is connected and has no cycles (i.e. it's a tree). A MST is a spanning tree that has minimum weight.  
- 
+
 |Algorithm|Running time|Extra space|Use|
 |---------|------------|-----------|---|
 |Prim|E*log(E) lazy implementation, E*log(V) eager implementation|E (lazy implementation), V (eager implementation)|Greedy algorithm, computes the minimum spanning tree (MST) of an edge-weighted graph|
@@ -670,10 +669,10 @@ of a graph that is connected and has no cycles (i.e. it's a tree). A MST is a sp
 E represents the number of edges and V represents the number of vertices in a graph.
 
 #### Directed Graphs
-In directed graphs, two edges with the same vertices in different order are different. The order of vertices implies a one way adjacency. 
-Directed graphs, or digraphs, are used to model systems such as social networks, the WWW, chemical reactions, road networks and many others. 
-The first vertex in the pair that represents and edge is called its head, the second vertex is called its tail. A directed graph can be built as 
-an array of adjacency lists like an undirected graph. Adding an edge to connect two vertices in a directed graph is easier than in an undirected 
+In directed graphs, two edges with the same vertices in different order are different. The order of vertices implies a one way adjacency.
+Directed graphs, or digraphs, are used to model systems such as social networks, the WWW, chemical reactions, road networks and many others.
+The first vertex in the pair that represents and edge is called its head, the second vertex is called its tail. A directed graph can be built as
+an array of adjacency lists like an undirected graph. Adding an edge to connect two vertices in a directed graph is easier than in an undirected
 one. When an edge v->w is added to a directed graph, only the tail vertex w must be added to the adjacency list of v.
 
 |Algorithm|Running time|Extra space|Use|
@@ -687,12 +686,12 @@ one. When an edge v->w is added to a directed graph, only the tail vertex w must
 A direct acyclic graph (DAG) is a digraph with no directed cycles. A DAG has a topological order.
 
 #### Edge-weighted Directed Graphs
-An edge-weighted directed graph can be represented as a vertex-indexed array of adjacency lists of directed edges where each directed edge object 
+An edge-weighted directed graph can be represented as a vertex-indexed array of adjacency lists of directed edges where each directed edge object
 contains an ordered pair of vertices, a source vertex and a destination vertex, and a weight. The main problem that we want to solve is finding the
-shortest paths from one source vertex to any other vertex. It can be shown that the shortest paths from a source vertex to any other vertex is a 
-(spanning) tree and we can represent that tree with a vertex-indexed array of directed edges. Each index represents a vertex and the associated edge 
-contains the vertex itself and the edge's source vertex so that we can go back from any vertex in the tree to the source. An additional vertex-indexed 
-array contains the distance from a vertex in tree to the source. Different algorithms use these data structures to compute the single-source shortest 
+shortest paths from one source vertex to any other vertex. It can be shown that the shortest paths from a source vertex to any other vertex is a
+(spanning) tree and we can represent that tree with a vertex-indexed array of directed edges. Each index represents a vertex and the associated edge
+contains the vertex itself and the edge's source vertex so that we can go back from any vertex in the tree to the source. An additional vertex-indexed
+array contains the distance from a vertex in tree to the source. Different algorithms use these data structures to compute the single-source shortest
 paths.   
 
 |Algorithm|Running time|Extra space|Use|
@@ -702,14 +701,14 @@ paths.
 |Bellman-Ford single-source shortest paths|EV|V|Shortest paths for directed edge-weighted graphs with no negative cycles reachable from the source vertex, negative cycles detection|
 |Ford-Fulkerson (max-flow/min-cut)|V*E^2||Finds the maximum flow that can be established between a source vertex and a sink vertex, given the capacities (weights) of the edges|
 
-Many problems can be represented as edge-weighted DAG and addressed like a shortest-paths problem, one of the most relevant being parallel job 
-scheduling where each job has a completion time (its weight) and precedence constraints. The Bellman-Ford algorithm allows us to address the 
-shortest-paths problem even on egdge-weighted directed graphs that have negative weights and cycles if there are no negative cycles, i.e. cycles 
-whose total weight is negative. 
+Many problems can be represented as edge-weighted DAG and addressed like a shortest-paths problem, one of the most relevant being parallel job
+scheduling where each job has a completion time (its weight) and precedence constraints. The Bellman-Ford algorithm allows us to address the
+shortest-paths problem even on egdge-weighted directed graphs that have negative weights and cycles if there are no negative cycles, i.e. cycles
+whose total weight is negative.
 
 ### Strings
-Sequences of characters from an alphabet are used not only in all types of communications but also in scientific fields such as Genomics where the 
-structure of the genes and proteins can be represented by sequences of characters from an alphabet of 4 or 20 characters respectively. When dealing 
+Sequences of characters from an alphabet are used not only in all types of communications but also in scientific fields such as Genomics where the
+structure of the genes and proteins can be represented by sequences of characters from an alphabet of 4 or 20 characters respectively. When dealing
 with strings we are interested in algorithms to sort collections of strings, or to search for a particular string in a text, or to search for a set of
 strings that follow a pattern in a text. Finally we may be interested in reducing the size of a text for storage or before sending it through a network.    
 
