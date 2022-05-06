@@ -1,3 +1,4 @@
+
 Algorithms
 ==========
 
@@ -725,3 +726,5 @@ strings that follow a pattern in a text. Finally we may be interested in reducin
 |Boyer-Moore substring substring search|N / M (sublinear, M is the length of the pattern)||This algorithm compares the pattern with the text from right to left. The algorithm builds an array of the rightmost occurence of each character in the pattern to drive the search in the text. Contrary to the KMP algorithm, the full must be available at once for the search.|
 |Rabin-Karp (fingerprint) substring search|7N||The algorithm compares the hash value of a pattern of length M with the hash values of all the substrings of the same length in the text. The hash function is built using the Horner's method. Being based on a hash function the algorithm belongs to the randomized, Monte Carlo algorithms class. |
 |Regular Expression (RE) for pattern matching|NM (M length of the RE)||REs are used in many applications such as checking the validity of input strings or whether a certain pattern occurrs in a genome sequence. A RE is generalization of the finite-state machine used in the KMP algorithm to drive the search for a substring in a text. The non-deterministic finite-state automaton (NFA) that implements a RE defines the set of strings that are searched for in the text. The difference between a DFA and a NFA is that a state in a NFA can have more than one possible transitions to other states for the same character read from the text, so the choice is non-deteministic and all the possible transitions must be evaluated. The NFA uses a digraph to represent the transitions allowed by the operators used in the RE.|
+
+## Data Structures, Data Types and Java interfaces and implementation
