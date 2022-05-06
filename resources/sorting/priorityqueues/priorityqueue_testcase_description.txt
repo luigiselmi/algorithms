@@ -1,5 +1,5 @@
 Challenge: Java Priority Queue
-===================
+==============================
 A challenge from HackerRank about priority queues.
 
 Description
