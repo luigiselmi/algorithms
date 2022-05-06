@@ -728,7 +728,8 @@ strings that follow a pattern in a text. Finally we may be interested in reducin
 |Regular Expression (RE) for pattern matching|NM (M length of the RE)||REs are used in many applications such as checking the validity of input strings or whether a certain pattern occurs in a genome sequence. A RE is generalization of the finite-state machine used in the KMP algorithm to drive the search for a substring in a text. The non-deterministic finite-state automaton (NFA) that implements a RE defines the set of strings that are searched for in the text. The difference between a DFA and a NFA is that a state in a NFA can have more than one possible transitions to other states for the same character read from the text, so the choice is non-deteministic and all the possible transitions must be evaluated. The NFA uses a digraph to represent the transitions allowed by the operators used in the RE.|
 
 ## Data Structures, Data Types, Java interfaces and implementations
-Units of data are physically stored in memory in two ways: contiguous memory locations or non-contiguous memory locations. 
+Units of data hat belong to a collection are physically stored in the computer memory in two ways: contiguous memory locations or 
+non-contiguous memory locations. 
 
 ### Data Structure 
 It is way to organize the data units in the computer's memory. There are two main kind of data structures: contiguous memory locations and linked memory locations where each data element has a reference to the next element in the collection. An array is a data structure of the 1st type. A linked list, a tree or a graph are data structures of the 2nd type. The main difference between the two types that is a consequence of the way in which the elements of the structure are stored in memory is that an array must be declared with its number of elements to allow the computer to allocate a contiguous amount of space in memory. This problem can be addressed by resizing 
