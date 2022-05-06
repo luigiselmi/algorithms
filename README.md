@@ -735,8 +735,8 @@ It is way to organize the data units in the computer's memory. There are two mai
 the array when the number of its elements are close to the size of the array.
 
 ### Data Type 
-We consider data types that represent collections of objects and provide a set of operations on those objects to add or remove items
-in the collection and algorithms such as sorting and searching. A data type is based on a data structure and implements some 
+We consider data types that represent collections of objects and provide a set of operations on those objects to add or remove items,
+to traverse the collection, and algorithms for sorting or searching. A data type is based on a data structure and implements some 
 operations that allows easy access to the elements of the data according to a pattern. Java, as other programming languages, provides basic data types for collections. Since the same data type can be implemented in Java using different data structures and operations implemented using different algorithms, for example for sorting, Java offers an interface for each collection data type and one or more concrete implementations. The most common Java collection data types are: stack, queue, priority queue, set, symbol tables.
 
 ### Java interfaces and implementations
