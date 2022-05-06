@@ -742,7 +742,7 @@ operations that allows easy access to the elements of the data according to a pa
 ### Java interfaces and implementations
  - array: int [] students = new int [N]
  - List<String> cities = new ArrayList<String>(); // or new LinkedList<String>();
- - stack: Deque<Integer> stack = new ArrayDeque<Integer>();
+ - stack: Deque\<Integer> stack = new ArrayDeque<Integer>();
  - queue, priority queue: PriorityQueue<Student> students = new PriorityQueue<Student>();
  - symbol table: TreeMap<String, Integer> populations = new TreeMap<String, Integer>();                      
 
